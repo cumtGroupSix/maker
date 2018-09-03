@@ -355,24 +355,71 @@
 				img2:'../img/u2020.jpg',
 				img3:'../img/u2022.jpg',
 				submithref:'',
-				gwcList:[],
+				gwcList:
+				[	
+				{	vf:true,
+					dm:'创客店1',
+					sp:[
+						{
+						vf:true,
+						tp:'../img/u34.png',
+						info:'猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子',
+						price:20,
+						num:1,
+						},
+						{
+						vf:true,
+						tp:'../img/u65.png',
+						info:'小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品桌面礼物品',
+						price:30,
+						num:1,
+						},
+						{
+						vf:true,
+						tp:'../img/u68.png',
+						info:'情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具',
+						price:40.5,
+						num:1,
+						},
+					]
+				},
+				{	vf:true,
+					dm:'创客店2',
+					sp:[
+						{
+						vf:true,
+						tp:'../img/u68.png',
+						info:'情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具六一礼物',
+						price:40.5,
+						num:1,
+						},
+						{
+						vf:true,
+						tp:'../img/u65.png',
+						info:'小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品',
+						price:30,
+						num:1,
+						},
+						]	
+				},	
+				],
 				spsum:0,
 				pricesum:(0).toFixed(2),
 			},
 			methods:{
-			setlist: function(){
-			qwest.setDefaultOptions({ cache: true });
-			qwest.get(
-			"http://fdk.coding.me/cklm/gwcjson.json"  
-			).then(
-			function(xhr, msg) {
-			console.log(msg.gwcList);
-			if (msg && msg.gwcList) {
-			app.gwcList=msg.gwcList;
-			}
-			}
-			); 
-			},
+			// setlist: function(){
+			// qwest.setDefaultOptions({ cache: true });
+			// qwest.get(
+			// "http://fdk.coding.me/cklm/gwcjson.json"  
+			// ).then(
+			// function(xhr, msg) {
+			// console.log(msg.gwcList);
+			// if (msg && msg.gwcList) {
+			// app.gwcList=msg.gwcList;
+			// }
+			// }
+			// ); 
+			// },
 			gwcggmo1(){
 				this.gwcgg1='gwc-mo';
 				this.gwcgg2='';
@@ -476,6 +523,6 @@
 			},
 			},
 			})
-	$(document).ready(function(){
-	app.setlist();
-	});
+	// $(document).ready(function(){
+	// app.setlist();
+	// });
