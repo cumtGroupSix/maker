@@ -422,7 +422,7 @@
                     this.makerManage.manageNumber = this.makerManages.length + 1;
                     this.makerManages.push(this.makerManage);
                     this.makerManage = {};
-                    
+                    $("#add-product").css("display","none");
                 },
 
                 addClose : function(){
@@ -454,7 +454,6 @@
                     
                     this.makerManage.manageNumber = manageNumber;
                     this.makerManages.splice(manageNumber-1,1,this.makerManage);
-                    $("#add-product").css("display","block");
                     $("#update-product").css("display","none");
                     this.makerManage = {};
                     
