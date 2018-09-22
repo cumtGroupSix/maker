@@ -31,7 +31,7 @@
 						<div class='col-12 text-left'>\
 						<a href='###'>收藏</a></div>\
 						<div class='col-12 text-left'>\
-						<deleteone :items='items' @co='checkone' @kong='kong' :spids='spids'></deleteone>\
+						<deleteone :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></deleteone>\
 						</div>\
 						<div class='col-12'>\
 						<a href='###'>类似商品</a>\
@@ -68,7 +68,7 @@
 						<div class='col-12 text-left'>\
 						<a href='###'>收藏</a></div>\
 						<div class='col-12 text-left'>\
-						<deleteone :items='items' @co='checkone' @kong='kong' :spids='spids'></deleteone>\
+						<deleteone :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></deleteone>\
 						</div>\
 						<div class='col-12'>\
 						<a href='###'>类似商品</a>\
@@ -112,7 +112,7 @@
 						<a href='###'>类似商品</a>\
 						</div>\
 						<div class='col-4 text-right d-block d-md-none'>\
-						<deleteone :items='items' @co='checkone' @kong='kong' :spids='spids'></deleteone>\
+						<deleteone :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></deleteone>\
 						</div>\
 						</div></div></div></div></div>\
 						</div></div>\
@@ -149,6 +149,13 @@
 					}
 					}
 				this.$emit('gwcko',1);
+				},
+				full(count){
+					if(!this.spckall){
+						if(this.spids.length==(this.item.sp.length-count)){
+							this.$options.methods.spcheckall.bind(this)();
+						}
+					}
 				},
 				deleteaone(){
 					for(e=0;e<=this.item.sp.length;e++){
@@ -258,15 +265,23 @@
 		Vue.component('deleteone',{
 		props:['items','spids'],
 		template:"<div><a href='#' @click='deleteone' style='color:blue'>删除</a></div>",
+		data(){
+			return{
+				count:0,
+			}
+		},
 		methods:{
 			deleteone(){
+				this.count=this.count+1;
 				if(this.spids.indexOf(this.items.info)>=0){
 					this.items.vf=false;
 					this.$emit('co',this.items.info);
 					this.$emit('kong',this.items.info);
+					this.$emit('full',this.count);
 					}else{
 					this.items.vf=false;
 					this.$emit('kong',this.items.info);
+					this.$emit('full',this.count);
 					}
 				},
 		}
@@ -363,7 +378,7 @@
 			setlist: function(){
 			qwest.setDefaultOptions({ cache: true });
 			qwest.get(
-			"https://fdk.coding.me/cklm/gwcjson.json"  
+			"https://cumtgroupsix.github.io/maker/js/gwcjson.json"  
 			).then(
 			function(xhr, msg) {
 			console.log(msg.gwcList);
