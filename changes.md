@@ -1,6 +1,5 @@
 1.	store.html img超链接
 2.	product.html 店铺图片高度
-3.	cart.html 字号*2
 4.	order_submit.html 金额右边距 提交订单右对齐 边距 圆角
 5.	payment.html背景颜色 边框 支付中心字体 按钮增大 支付成功圆角边距
 6.	用户登录  第三方登录 阴影
