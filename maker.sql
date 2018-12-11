@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 11/12/2018 17:04:54
+ Date: 11/12/2018 19:40:21
 */
 
 SET NAMES utf8mb4;
@@ -103,6 +103,8 @@ INSERT INTO `order_master` VALUES (1, 1, 1, 21.00);
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
   `product_id` int(55) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `group_id` int(55) NOT NULL,
   `product_stock` int(55) NOT NULL DEFAULT 0,
   `product_price` decimal(8, 2) NOT NULL DEFAULT 0.00,
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -113,17 +115,21 @@ CREATE TABLE `product`  (
   `color` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `size` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `date_manufacture` timestamp(0) NULL DEFAULT NULL COMMENT '生产日期',
-  `manufacturer` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '生产厂家',
+  `manufacturer` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '生产厂家',
   PRIMARY KEY (`product_id`) USING BTREE,
-  INDEX `product_price`(`product_price`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `product_price`(`product_price`) USING BTREE,
+  INDEX `fk[product]group_id`(`group_id`) USING BTREE,
+  CONSTRAINT `fk[product]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, 15, 2.00, '', '好好吃', 1, 0, '', '', '', NULL, '');
-INSERT INTO `product` VALUES (2, 111, 2.00, '', '好好吃', 1, 0, '', '', '', NULL, '');
-INSERT INTO `product` VALUES (3, 21, 2.50, '', '好好吃', 1, 0, '', '', '', NULL, '');
+INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, '', '好', 1, 0, '', '卡其色', 'L', NULL, '');
+INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, '', '好', 1, 0, '', '灰色', 'XL', NULL, '');
+INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '', '好', 1, 0, '', '白色', 'XXL', NULL, '');
+INSERT INTO `product` VALUES (4, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', 2, 211, 122.00, '', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
+INSERT INTO `product` VALUES (5, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', 3, 12, 222.00, '', 'nice', 1, 0, '', '', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for product_group
@@ -131,17 +137,18 @@ INSERT INTO `product` VALUES (3, 21, 2.50, '', '好好吃', 1, 0, '', '', '', NU
 DROP TABLE IF EXISTS `product_group`;
 CREATE TABLE `product_group`  (
   `group_id` int(55) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `catagory` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `category` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `representative_product_id` int(55) NOT NULL,
   PRIMARY KEY (`group_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_group
 -- ----------------------------
-INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', '男装');
-INSERT INTO `product_group` VALUES (2, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', '男装');
-INSERT INTO `product_group` VALUES (3, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', '男装');
+INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', '男装', 1);
+INSERT INTO `product_group` VALUES (2, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', '男装', 4);
+INSERT INTO `product_group` VALUES (3, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', '男装', 5);
 
 -- ----------------------------
 -- Table structure for role
@@ -190,11 +197,11 @@ INSERT INTO `store` VALUES (14, '好运来', '该品牌创立于yyyy年', '', 2,
 -- ----------------------------
 DROP TABLE IF EXISTS `store_product`;
 CREATE TABLE `store_product`  (
-  `product_id` int(55) NOT NULL,
   `store_id` int(55) NOT NULL,
-  PRIMARY KEY (`product_id`, `store_id`) USING BTREE,
-  INDEX `fk[store_product]store_id`(`store_id`) USING BTREE,
-  CONSTRAINT `fk[store_product]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  `group_id` int(55) NOT NULL,
+  PRIMARY KEY (`store_id`, `group_id`) USING BTREE,
+  INDEX `fk[store_product]group_id`(`group_id`) USING BTREE,
+  CONSTRAINT `fk[store_product]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk[store_product]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -202,7 +209,8 @@ CREATE TABLE `store_product`  (
 -- Records of store_product
 -- ----------------------------
 INSERT INTO `store_product` VALUES (1, 1);
-INSERT INTO `store_product` VALUES (2, 1);
+INSERT INTO `store_product` VALUES (1, 2);
+INSERT INTO `store_product` VALUES (2, 2);
 
 -- ----------------------------
 -- Table structure for user
