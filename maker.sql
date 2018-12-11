@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 11/12/2018 16:45:37
+ Date: 11/12/2018 17:04:54
 */
 
 SET NAMES utf8mb4;
@@ -103,10 +103,8 @@ INSERT INTO `order_master` VALUES (1, 1, 1, 21.00);
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
   `product_id` int(55) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `product_stock` int(55) NOT NULL DEFAULT 0,
   `product_price` decimal(8, 2) NOT NULL DEFAULT 0.00,
-  `category` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `product_description` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `product_status` tinyint(3) NOT NULL DEFAULT 1 COMMENT '产品是否上架，1.上架.2.下架',
@@ -123,19 +121,27 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '牛肉干', 15, 2.00, '零食', '', '好好吃', 1, 0, '', '', '', NULL, '');
-INSERT INTO `product` VALUES (2, '黄梨汁', 111, 2.00, '零食', '', '好好吃', 1, 0, '', '', '', NULL, '');
-INSERT INTO `product` VALUES (3, '肉松饼', 21, 2.50, 'DIY', '', '好好吃', 1, 0, '', '', '', NULL, '');
+INSERT INTO `product` VALUES (1, 15, 2.00, '', '好好吃', 1, 0, '', '', '', NULL, '');
+INSERT INTO `product` VALUES (2, 111, 2.00, '', '好好吃', 1, 0, '', '', '', NULL, '');
+INSERT INTO `product` VALUES (3, 21, 2.50, '', '好好吃', 1, 0, '', '', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for product_group
 -- ----------------------------
 DROP TABLE IF EXISTS `product_group`;
 CREATE TABLE `product_group`  (
-  `group_id` int(55) NOT NULL,
+  `group_id` int(55) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `catagory` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`group_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of product_group
+-- ----------------------------
+INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', '男装');
+INSERT INTO `product_group` VALUES (2, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', '男装');
+INSERT INTO `product_group` VALUES (3, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', '男装');
 
 -- ----------------------------
 -- Table structure for role
