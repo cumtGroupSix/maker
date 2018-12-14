@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 11/12/2018 19:40:21
+ Date: 14/12/2018 13:27:43
 */
 
 SET NAMES utf8mb4;
@@ -125,11 +125,11 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, '', '好', 1, 0, '', '卡其色', 'L', NULL, '');
-INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, '', '好', 1, 0, '', '灰色', 'XL', NULL, '');
-INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '', '好', 1, 0, '', '白色', 'XXL', NULL, '');
-INSERT INTO `product` VALUES (4, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', 2, 211, 122.00, '', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
-INSERT INTO `product` VALUES (5, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', 3, 12, 222.00, '', 'nice', 1, 0, '', '', '', NULL, '');
+INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, 'https://gd1.alicdn.com/imgextra/i1/3200146288/TB2I47ri8fH8KJjy1XbXXbLdXXa_!!3200146288.jpg_400x400.jpg', '好', 1, 0, '', '黑色', 'L', NULL, '');
+INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, 'https://gd4.alicdn.com/imgextra/i3/3200146288/TB2N5LdhQfb_uJjSsrbXXb6bVXa_!!3200146288.jpg_400x400.jpg', '好', 1, 0, '', '灰色', 'XL', NULL, '');
+INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '//gd4.alicdn.com/imgextra/i3/3200146288/TB2N5LdhQfb_uJjSsrbXXb6bVXa_!!3200146288.jpg', '好', 1, 0, '', '白色', 'XXL', NULL, '');
+INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, '//gw.alicdn.com/bao/uploaded/i3/276591537/O1CN011io6mn1NDzE5exQow_!!276591537.jpg_440x440q70.jpg', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
+INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, '//gd4.alicdn.com/imgextra/i2/738455795/O1CN011sg9fwhnsdWCoE6_!!738455795.jpg', 'nice', 1, 0, '', '黑色', 'XL', NULL, '');
 
 -- ----------------------------
 -- Table structure for product_group
@@ -147,8 +147,8 @@ CREATE TABLE `product_group`  (
 -- Records of product_group
 -- ----------------------------
 INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', '男装', 1);
-INSERT INTO `product_group` VALUES (2, '棉衣男士冬季青少年帅气韩版潮 新款短款外套港风学生银色ins棉服', '男装', 4);
-INSERT INTO `product_group` VALUES (3, '冬季复古工装棉衣男士外套韩版潮流加厚棉袄子chic多口袋连帽棉服', '男装', 5);
+INSERT INTO `product_group` VALUES (2, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', '男装', 4);
+INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', '男装', 5);
 
 -- ----------------------------
 -- Table structure for role
@@ -184,13 +184,13 @@ CREATE TABLE `store`  (
 -- ----------------------------
 -- Records of store
 -- ----------------------------
-INSERT INTO `store` VALUES (1, '优品阁', '优品阁创立于yyyy年mm月dd日，绝对正品，童叟无欺', '', 666, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (2, '小淘气童鞋店', '该品牌创立于yyyy年', '', 0, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (9, '凡奈诗韩版女鞋店', '该品牌创立于yyyy年', '', 222, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (10, '兄弟西服', '该品牌创立于yyyy年', '', 0, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (11, '矿大一号店', '百年老店', '', 78, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (13, '男人帮', '该品牌创立于yyyy年', '', 2, '2018-12-05 18:57:37');
-INSERT INTO `store` VALUES (14, '好运来', '该品牌创立于yyyy年', '', 2, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (1, '优品阁', '优品阁创立于yyyy年mm月dd日，绝对正品，童叟无欺', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544608736759&di=2b4dd592145830f2c1bd58b19b37cf95&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4a36acaf2edda3ccc3e322bd0be93901213f922c.jpg', 666, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (2, '小淘气童鞋店', '该品牌创立于yyyy年', 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2456054635,3769338752&fm=26&gp=0.jpg', 0, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (9, '凡奈诗韩版女鞋店', '该品牌创立于yyyy年', 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2456054635,3769338752&fm=26&gp=0.jpg', 222, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (10, '兄弟西服', '该品牌创立于yyyy年', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2135299834,1746253257&fm=26&gp=0.jpg', 0, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (11, '矿大一号店', '百年老店', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2135299834,1746253257&fm=26&gp=0.jpg', 78, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (13, '男人帮', '该品牌创立于yyyy年', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2135299834,1746253257&fm=26&gp=0.jpg', 2, '2018-12-05 18:57:37');
+INSERT INTO `store` VALUES (14, '好运来', '该品牌创立于yyyy年', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2135299834,1746253257&fm=26&gp=0.jpg', 2, '2018-12-05 18:57:37');
 
 -- ----------------------------
 -- Table structure for store_product
