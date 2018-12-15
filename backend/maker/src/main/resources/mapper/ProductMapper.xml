@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.ProductMapper">
+    <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.model.Product">
+        <id column="product_id" property="productId" jdbcType="INTEGER"></id>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"></result>
+        <result column="product_stock" property="productStock" jdbcType="INTEGER"></result>
+        <result column="product_price" property="productPrice" jdbcType="DECIMAL"></result>
+        <result column="category" property="category" jdbcType="VARCHAR"></result>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"></result>
+        <result column="product_description" property="productDescription" jdbcType="VARCHAR"></result>
+        <result column="product_status" property="productStatus" jdbcType="INTEGER"></result>
+        <result column="sales" property="sales" jdbcType="INTEGER"></result>
+    </resultMap>
+    <select id="selectByProductId" parameterType="INTEGER" resultMap="ModelResultMap">
+        select * from product
+        where product_id =#{productId}
+    </select>
+</mapper>
