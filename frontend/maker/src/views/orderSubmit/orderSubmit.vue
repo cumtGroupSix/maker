@@ -1,6 +1,5 @@
 <template>
     <!-- 提交订单 -->
-        <section>
         <div class="container-fluid" style="">
         	<section id="yetou">
         	<div class="querendingdan">
@@ -9,7 +8,9 @@
         </section>
         
         <section id="dingdanxiangqing">
-        <div class="biankuang">      
+        <div class="biankuang">
+	        
+	        
 	        <div class="daohangtiao">
 		        	<div class="row">
 			            <div class="col-12 col-md-4 col-sm-12" >
@@ -80,9 +81,7 @@
 	       </div>
 	        <div class="col-md-4"></div>
 	    </div>
-        </section>
-        </div>
-</template>
+	   
 
 <script>
     export default {
