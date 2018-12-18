@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 14/12/2018 13:27:43
+ Date: 18/12/2018 11:02:24
 */
 
 SET NAMES utf8mb4;
@@ -151,6 +151,24 @@ INSERT INTO `product_group` VALUES (2, '旋律风车chic羊羔毛外套男翻领
 INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', '男装', 5);
 
 -- ----------------------------
+-- Table structure for resource
+-- ----------------------------
+DROP TABLE IF EXISTS `resource`;
+CREATE TABLE `resource`  (
+  `resource_id` int(10) NOT NULL,
+  `resource_name` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `maker_login` bit(1) NULL DEFAULT NULL,
+  `user_login` bit(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`resource_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resource
+-- ----------------------------
+INSERT INTO `resource` VALUES (1, 'user', b'0', b'1');
+INSERT INTO `resource` VALUES (2, 'maker', b'1', b'0');
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -167,6 +185,25 @@ INSERT INTO `role` VALUES (1, 'USER');
 INSERT INTO `role` VALUES (2, 'MAKER');
 
 -- ----------------------------
+-- Table structure for role_resource
+-- ----------------------------
+DROP TABLE IF EXISTS `role_resource`;
+CREATE TABLE `role_resource`  (
+  `role_id` int(11) NOT NULL,
+  `resource_id` int(10) NOT NULL,
+  PRIMARY KEY (`role_id`, `resource_id`) USING BTREE,
+  INDEX `resourceid`(`resource_id`) USING BTREE,
+  CONSTRAINT `resourceid` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `roleid` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of role_resource
+-- ----------------------------
+INSERT INTO `role_resource` VALUES (1, 1);
+INSERT INTO `role_resource` VALUES (2, 2);
+
+-- ----------------------------
 -- Table structure for store
 -- ----------------------------
 DROP TABLE IF EXISTS `store`;
@@ -176,7 +213,7 @@ CREATE TABLE `store`  (
   `store_introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `browse_times` int(255) NOT NULL DEFAULT 0,
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`store_id`) USING BTREE,
   UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -224,7 +261,7 @@ CREATE TABLE `user`  (
   `enable` bit(1) NULL DEFAULT NULL,
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
