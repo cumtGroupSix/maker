@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 19/12/2018 08:31:36
+ Date: 19/12/2018 20:18:42
 */
 
 SET NAMES utf8mb4;
@@ -41,6 +41,7 @@ DROP TABLE IF EXISTS `cart_product`;
 CREATE TABLE `cart_product`  (
   `cart_id` int(55) NOT NULL COMMENT '用户ID',
   `product_id` int(55) NOT NULL COMMENT '产品ID',
+  `product_quantity` int(10) NOT NULL COMMENT '购买数量',
   PRIMARY KEY (`cart_id`, `product_id`) USING BTREE,
   INDEX `fk[cart_product]product_id`(`product_id`) USING BTREE,
   CONSTRAINT `fk[cart_product]cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -50,8 +51,24 @@ CREATE TABLE `cart_product`  (
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
-INSERT INTO `cart_product` VALUES (1, 1);
-INSERT INTO `cart_product` VALUES (1, 2);
+INSERT INTO `cart_product` VALUES (1, 1, 0);
+INSERT INTO `cart_product` VALUES (1, 2, 0);
+
+-- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment`  (
+  `user_id` int(55) NOT NULL COMMENT '用户ID',
+  `product_id` int(55) NOT NULL COMMENT '产品ID',
+  `comment_content` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '评论内容',
+  `comment_time` datetime(0) NULL DEFAULT NULL COMMENT '评论时间',
+  `star_level` int(1) NULL DEFAULT NULL COMMENT '评价星级',
+  PRIMARY KEY (`user_id`, `product_id`) USING BTREE,
+  INDEX `fk[product_id]`(`product_id`) USING BTREE,
+  CONSTRAINT `fk[user_id]` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for order_detail
@@ -63,6 +80,8 @@ CREATE TABLE `order_detail`  (
   `product_id` int(55) NOT NULL COMMENT '产品ID',
   `product_price` decimal(8, 2) NOT NULL COMMENT '产品价格',
   `product_quantity` int(20) NOT NULL COMMENT '产品数量',
+  `order_time` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
+  `order_status` int(2) NULL DEFAULT NULL COMMENT '订单状态',
   PRIMARY KEY (`detail_id`) USING BTREE,
   INDEX `fk[order_detail]order_id`(`order_id`) USING BTREE,
   INDEX `fk[order_detail]product_id`(`product_id`) USING BTREE,
@@ -75,8 +94,8 @@ CREATE TABLE `order_detail`  (
 -- ----------------------------
 -- Records of order_detail
 -- ----------------------------
-INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 2);
-INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3);
+INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 2, '2018-12-19 20:10:07', 0);
+INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3, '2018-12-13 20:10:11', NULL);
 
 -- ----------------------------
 -- Table structure for order_master
