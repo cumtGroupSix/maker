@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 19/12/2018 20:18:42
+ Date: 22/12/2018 21:17:59
 */
 
 SET NAMES utf8mb4;
@@ -66,8 +66,8 @@ CREATE TABLE `comment`  (
   `star_level` int(1) NULL DEFAULT NULL COMMENT '评价星级',
   PRIMARY KEY (`user_id`, `product_id`) USING BTREE,
   INDEX `fk[product_id]`(`product_id`) USING BTREE,
-  CONSTRAINT `fk[user_id]` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk[user_id]` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -95,7 +95,7 @@ CREATE TABLE `order_detail`  (
 -- Records of order_detail
 -- ----------------------------
 INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 2, '2018-12-19 20:10:07', 0);
-INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3, '2018-12-13 20:10:11', NULL);
+INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3, '2018-12-13 20:10:11', 0);
 
 -- ----------------------------
 -- Table structure for order_master
@@ -290,6 +290,22 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (1, 'username', '$2a$10$F8DJhuyZF.xt2elWxkZ0TezCjjQQA.DcOLReN9bGvc80Zu88OnGca', 'Tom', b'1', '11122223333', '中国矿业大学松苑', '2018-12-05 18:50:00', '中国矿业大学');
 INSERT INTO `user` VALUES (2, 'maker', '$2a$10$sT0tVlaWN/rZ5feB1jtRCef0FJLB0dDmK2c6ZmZONYhiAx35UzR3K', 'Jason', b'1', '44455556666', '中国矿业大学桃苑', '2018-12-05 18:47:15', '中国矿业大学（北京）');
+
+-- ----------------------------
+-- Table structure for user_collections
+-- ----------------------------
+DROP TABLE IF EXISTS `user_collections`;
+CREATE TABLE `user_collections`  (
+  `user_id` int(55) NOT NULL COMMENT '用户ID',
+  `collect_group_id` int(55) NOT NULL COMMENT '收藏商品ID',
+  `collect_store_id` int(55) NULL DEFAULT NULL COMMENT '收藏店铺ID',
+  PRIMARY KEY (`user_id`) USING BTREE,
+  INDEX `fk[user_collections]collect_group_id`(`collect_group_id`) USING BTREE,
+  INDEX `fk[user_collections]collect_store_id`(`collect_store_id`) USING BTREE,
+  CONSTRAINT `fk[user_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk[user_collections]collect_store_id` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk[user_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_role
