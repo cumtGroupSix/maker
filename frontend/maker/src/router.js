@@ -13,6 +13,7 @@ import Browse from './views/browse/browse'
 import Evaluate from './views/evaluate/evaluate'
 import MyProduct from './views/myProduct/myProduct'
 import MyStore from './views/myStore/myStore'
+import GoodsList from './views/goodslist/goodslist'
 
 Vue.use(Router)
 
@@ -84,7 +85,12 @@ export default new Router({
           path: '/user/myStore',
           name: 'myStore',
           component: MyStore
-        }
+        },
+        {
+          path: '/goodslist',
+          name: 'goodslist',
+          component: GoodsList
+        },
       ]
     }
   ]
