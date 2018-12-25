@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     hotStore:[],
-    checkedProduct:''
+    checkedProduct:'',
+    active:"1"
   },
   mutations: {
 
