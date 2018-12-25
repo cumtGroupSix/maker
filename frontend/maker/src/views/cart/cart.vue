@@ -2,7 +2,7 @@
 <div class="container" id='root'>
 		<div class="row " id='gwc-row1'>
 			<div class="col-6 text-left gwc-h3"><h3><b>购物车</b></h3></div>
-			<div class="col-6 text-right gwc-h6"><a class='text-right' href="order.html" style='color: #ff9966;'>已完成订单</a></div>
+			<div class="col-6 text-right gwc-h6"><router-link class='text-right' to="order" style='color: #ff9966;'>已完成订单</router-link></div>
 		</div>
 		<div class="row">
 			<div class="col-12" id='gwc-row2'><hr class="gwc-hr"></div>	
