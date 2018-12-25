@@ -18,7 +18,7 @@
 						<div class="form-group">
 							<label for="school">所在学校：</label>
 							<select class="form-control" id="school">
-								<option v-for="item of cusSchool">{{item.name}}</option>
+								<option v-for="(item,index) of cusSchool" :key="index">{{item.name}}</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -39,9 +39,8 @@
 
 <script>
     export default {
-        new Vue({
-			el:"#root",
-			data:{
+		data(){
+			return{
 				receiverName:"",
 				receiverNumber:"",
 				receiverDetail:"",
@@ -56,7 +55,7 @@
 					{name:"南京林业大学"},
 				]
 			}
-		})
+		}
     }
 </script>
 
