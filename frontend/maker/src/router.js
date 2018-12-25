@@ -7,6 +7,7 @@ import Product from './views/product/product'
 import Cart from './views/cart/cart'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
+import OrderDetail from './views/orderDetail/orderDetail'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/orderDetail',
+      name: 'orderDetail',
+      component: OrderDetail
     }
   ]
 })
