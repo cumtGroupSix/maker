@@ -301,14 +301,14 @@
 					"sp":[
 						{
 						"vf":true,
-						"tp":"../../assets/img/shuiguo.jpg",
+						"tp":"../../../assets/img/beizi1.jpg",
 						"info":"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
 						"price":20,
 						"num":1
 						},
 						{
 						"vf":true,
-						"tp":"../../assets/img/shuiguo.jpg",
+						"tp":"../../../assets/img/beizi1.jpg",
 						"info":"情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具",
 						"price":40.5,
 						"num":1
@@ -321,7 +321,7 @@
 					"sp":[
 						{
 						"vf":true,
-						"tp":"../../assets/img/shuiguo.jpg",
+						"tp":"../../../assets/img/beizi1.jpg",
 						"info":"小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品",
 						"price":30,
 						"num":1

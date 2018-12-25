@@ -8,12 +8,15 @@ import Cart from './views/cart/cart'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
+import Order from './views/order/order'
 import User from './views/user/user'
 import Browse from './views/browse/browse'
 import Evaluate from './views/evaluate/evaluate'
 import MyProduct from './views/myProduct/myProduct'
 import MyStore from './views/myStore/myStore'
 import GoodsList from './views/goodslist/goodslist'
+import Payment from './views/payment/payment'
+
 
 Vue.use(Router)
 
@@ -42,6 +45,11 @@ export default new Router({
       component: Product
     },
     {
+      path: '/order',
+      name: 'order',
+      component: Order
+    },
+    {
       path: '/cart',
       name: 'cart',
       component: Cart
@@ -65,6 +73,11 @@ export default new Router({
       path: '/goodslist',
       name: 'goodslist',
       component: GoodsList
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: Payment
     },
     {
       path: '/user',

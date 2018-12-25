@@ -7,7 +7,7 @@
 						{{item.dm}}
 						</div>
 						</div>
-						<div class='container' style='font-size:14px;' v-for='(items,index) in item.sp' :key='200' v-if='items.vf' :items='items' :index='index'>
+						<div class='container' style='font-size:14px;' v-for='(items,index) in item.sp' :key='index' v-if='items.vf' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-none d-lg-block'>
 						<div class='row gwc-main map-lg2'>
