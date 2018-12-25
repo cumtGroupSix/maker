@@ -8,6 +8,11 @@ import Cart from './views/cart/cart'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
+import User from './views/user/user'
+import Browse from './views/browse/browse'
+import Evaluate from './views/evaluate/evaluate'
+import MyProduct from './views/myProduct/myProduct'
+import MyStore from './views/myStore/myStore'
 
 Vue.use(Router)
 
@@ -54,6 +59,33 @@ export default new Router({
       path: '/orderDetail',
       name: 'orderDetail',
       component: OrderDetail
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User,
+      children: [
+        {
+          path: '/user/browse',
+          name: 'browse',
+          component: Browse
+        },
+        {
+          path: '/user/evaluate',
+          name: 'evaluate',
+          component: Evaluate
+        },
+        {
+          path: '/user/myProduct',
+          name: 'myProduct',
+          component: MyProduct
+        },
+        {
+          path: '/user/myStore',
+          name: 'myStore',
+          component: MyStore
+        }
+      ]
     }
   ]
 })
