@@ -62,6 +62,11 @@ export default new Router({
       component: OrderDetail
     },
     {
+      path: '/goodslist',
+      name: 'goodslist',
+      component: GoodsList
+    },
+    {
       path: '/user',
       name: 'user',
       component: User,
@@ -85,11 +90,6 @@ export default new Router({
           path: '/user/myStore',
           name: 'myStore',
           component: MyStore
-        },
-        {
-          path: '/goodslist',
-          name: 'goodslist',
-          component: GoodsList
         },
       ]
     }
