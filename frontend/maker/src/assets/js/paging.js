@@ -47,7 +47,7 @@ $(function () {
 	$(".list li").addClass("page-link");
 });
 
-;(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
 
   var Paging = function (elem, options) {
     var self = this;
