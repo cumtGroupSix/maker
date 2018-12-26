@@ -32,7 +32,7 @@
 					</form>
 					<button class="btn btn-warning float-right" @click="change">修改</button>
 					<div class="changed" v-if="changed">
-						<img class="img-fluid" src="../img/对勾.jpg">
+						<img class="img-fluid" src="../../assets/img/对勾.jpg">
 						<button class="btn btn-default btn-block font-weight-bold" @click="successful">修改成功</button>
 					</div>
 				</div>

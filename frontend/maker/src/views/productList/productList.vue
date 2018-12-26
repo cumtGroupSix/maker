@@ -58,7 +58,7 @@
 			return {
 				products:[
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -66,7 +66,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-5.jpg",
+						images:"../../assets/img/list-5.jpg",
 						price:"¥27.30",
 						over:"710人付款",
 						introduction:"小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品桌面礼物品",
@@ -74,7 +74,7 @@
 						destination:"浙江   温州"
 					},
 					{
-						images:"../img/list-2.jpg",
+						images:"../../assets/img/list-2.jpg",
 						price:"¥25.4",
 						over:"710人付款",
 						introduction:"情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具六一礼物",
@@ -82,7 +82,7 @@
 						destination:"浙江   杭州"
 					},
 					{
-						images:"../img/list-3.jpg",
+						images:"../../assets/img/list-3.jpg",
 						price:"¥14.8",
 						over:"710人付款",
 						introduction:"车饰车载摆件车内用品汽车子饰品摆件小物件个性创意可爱小工艺品",
@@ -90,7 +90,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -98,7 +98,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -106,7 +106,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -114,7 +114,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -122,7 +122,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -135,7 +135,7 @@
 					{
 						hotID:"hot-product1",
 						hotStoreID:"store1",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -143,7 +143,7 @@
 					{
 						hotID:"hot-product2",
 						hotStoreID:"store2",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -151,7 +151,7 @@
 					{
 						hotID:"hot-product3",
 						hotStoreID:"store3",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -159,7 +159,7 @@
 					{
 						hotID:"hot-product4",
 						hotStoreID:"store4",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
