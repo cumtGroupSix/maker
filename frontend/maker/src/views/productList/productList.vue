@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-12 col-md-9 " >
 				<div class="row justify-content-center">
-					<div class="card rounded float-left col-12 col-sm-4 col-lg-3" v-for="item of products">
+					<div class="card rounded float-left col-12 col-sm-4 col-lg-3" v-for="(item,index) of products" :key="index">
 						<img class="card-img-top" :src="item.images">
 						<div class="margin">
 							<div class="float-left text-danger text-center font-weight-bold">{{item.price}}
@@ -13,7 +13,7 @@
 							</div>
 						</div>
 						<div class="small text-dark margin">
-						<a class="productIntroduction" href="product.html">{{item.introduction}}</a>
+						<a class="productIntroduction" href="product">{{item.introduction}}</a>
 						</div>
 						<div class="margin">
 							<div class="float-left text-muted small"><u>{{item.name}}</u></div>
@@ -28,14 +28,14 @@
 					<div class="mx-auto text-danger float-left font-weight-bold">热卖！</div>
 					<div class="mx-auto float-right small text-muted">广告</div>
 				</div>				
-				<div class="card rounded hot-product" v-for="site of hot" :id="site.hotID">
+				<div class="card rounded hot-product" v-for="(site,index) of hot" :id="site.hotID" :key="index">
 					<img class="card-img-top" :src="site.hotImages" >
 					<div class="margin">
 						<div class="text-danger font-weight-bold float-left">{{site.hotPrice}}</div>
 						<div class="float-right text-dark">{{site.hotSales}}</div>
 						</div>
 					<div class="card-footer font-weight-bold text-dark" :id="site.hotStoreID">
-						<a class="hot" href="store.html">{{site.hotIntroduction}}</a>
+						<a class="hot" href="store">{{site.hotIntroduction}}</a>
 					</div>
 				</div>				
 			</div>
@@ -54,9 +54,8 @@
 
 <script>
     export default {
-        new Vue({
-			el:"#root",
-			data:{
+		data() {
+			return {
 				products:[
 					{
 						images:"../img/list-1.jpg",
@@ -166,8 +165,8 @@
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
 					},
 				],
-			},
-		})
+			}
+		},
     }
 </script>
 
@@ -177,11 +176,11 @@
 }
 
 .card{ 
-	border:1px solid pray; 
+	border:1px solid gray;
 	width:265px;
 	height:400px;
 	margin:15px; 
-	box-shadow:2px 2px 10px #909090
+	box-shadow:2px 2px 10px #909090;
 	padding:0px;
 }
 
