@@ -4,6 +4,7 @@ import Index from './views/index/index'
 import Stores from './views/stores/stores'
 import Store from './views/store/store'
 import Product from './views/product/product'
+import ProductList from './views/productList/productList'
 import Cart from './views/cart/cart'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
@@ -16,6 +17,7 @@ import MyProduct from './views/myProduct/myProduct'
 import MyStore from './views/myStore/myStore'
 import GoodsList from './views/goodslist/goodslist'
 import Payment from './views/payment/payment'
+import Chuangke from './views/chuangkeAdministration/chuangkeAdministration'
 
 
 Vue.use(Router)
@@ -44,6 +46,11 @@ export default new Router({
       name: 'product',
       component: Product
     },
+    {
+      path: '/productList',
+      name: 'productList',
+      component: ProductList
+     },
     {
       path: '/order',
       name: 'order',
@@ -78,6 +85,11 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: Payment
+    },
+    {
+      path: '/chuangkeAdministration',
+      name: 'chuangkeAdministration',
+      component: Chuangke
     },
     {
       path: '/user',
