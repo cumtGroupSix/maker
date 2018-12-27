@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 22/12/2018 21:32:38
+ Date: 27/12/2018 23:41:02
 */
 
 SET NAMES utf8mb4;
@@ -40,19 +40,21 @@ INSERT INTO `cart` VALUES (1, 1);
 DROP TABLE IF EXISTS `cart_product`;
 CREATE TABLE `cart_product`  (
   `cart_id` int(55) NOT NULL COMMENT '用户ID',
+  `store_id` int(55) NOT NULL COMMENT '商品所在创客店ID',
   `product_id` int(55) NOT NULL COMMENT '产品ID',
-  `product_quantity` int(10) NOT NULL COMMENT '购买数量',
-  PRIMARY KEY (`cart_id`, `product_id`) USING BTREE,
+  `product_quantity` int(10) NOT NULL DEFAULT 1 COMMENT '购买数量',
+  PRIMARY KEY (`cart_id`, `store_id`, `product_id`) USING BTREE,
   INDEX `fk[cart_product]product_id`(`product_id`) USING BTREE,
+  INDEX `fk[cart_product]store_id`(`store_id`) USING BTREE,
   CONSTRAINT `fk[cart_product]cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk[cart_product]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[cart_product]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[cart_product]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
-INSERT INTO `cart_product` VALUES (1, 1, 0);
-INSERT INTO `cart_product` VALUES (1, 2, 0);
+INSERT INTO `cart_product` VALUES (1, 2, 1, 1);
 
 -- ----------------------------
 -- Table structure for comment
@@ -252,8 +254,9 @@ CREATE TABLE `store`  (
   `browse_times` int(255) NOT NULL DEFAULT 0 COMMENT '浏览次数',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创立时间',
   PRIMARY KEY (`store_id`) USING BTREE,
-  UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE,
+  INDEX `store_name`(`store_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of store
@@ -275,14 +278,14 @@ CREATE TABLE `store_collections`  (
   `collect_store_id` int(55) NOT NULL COMMENT '收藏店铺ID',
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `fk[store_collections]collect_store_id`(`collect_store_id`) USING BTREE,
-  CONSTRAINT `fk[store_collections]collect_store_id` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[store_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk[store_collections]collect_store_id` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[store_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of store_collections
 -- ----------------------------
-INSERT INTO `store_collections` VALUES (1, 2);
+INSERT INTO `store_collections` VALUES (1, 9);
 
 -- ----------------------------
 -- Table structure for store_product
