@@ -2,7 +2,7 @@
 <div class="container" id='root'>
 		<div class="row " id='gwc-row1'>
 			<div class="col-6 text-left gwc-h3"><h3><b>购物车</b></h3></div>
-			<div class="col-6 text-right gwc-h6"><router-link class='text-right' to="order" style='color: #ff9966;'>已完成订单</router-link></div>
+			<div class="col-6 text-right gwc-h6"><a class='text-right' href="order.html" style='color: #ff9966;'>已完成订单</a></div>
 		</div>
 		<div class="row">
 			<div class="col-12" id='gwc-row2'><hr class="gwc-hr"></div>	
@@ -29,19 +29,19 @@
 			<div class="col-2 d-none d-md-block d-lg-none" style='padding-left: 40px;'>操作</div>
 		</div>
 		</div>
-		<div class="container" v-if="gwck" style='margin-top:45px;margin-bottom:15px;'>
+		<div class="container" v-if='this.$store.state.cartmain=={}' style='margin-top:45px;margin-bottom:15px;'>
 			<div class="row kmain">
 				<div class="col-12 text-center align-self-center">
 					<div class='kong'>购物车为空</div>
 				</div>
 			</div>
 		</div>
-		<gwc-component v-for='(item,index) in gwcList' :key='100' :item='item' @gkk='gkm' @gwcko='gwckong' @aallck='allck' ref="one" @ns='nums' @ps='prices' @cg='changes'></gwc-component>
+		<gwc-component v-for='(item,index) in cartarr' :key='100' :item='item' @gwcko='gwckong' @aallck='allck' ref="one" @ns='nums' @ps='prices'></gwc-component>
 		<div class="container" style='margin-top:15px;'> 
 			<div class="row">
 			<div class="col-12 d-none d-lg-block">
 			<div class="row gwc-bar" style='font-size:12px;'>
-			<div class="col-1 d-none d-lg-block text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
+			<div class="col-1 d-none d-lg-block text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='this.$store.state.cartmain=={}' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
 			<div class="col-3">
 			<div class="row">
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
@@ -278,6 +278,18 @@
     		},
     		data(){
     			return{
+				namerepeat:false,
+				objindex:0,
+				cartobj:{
+				storename:'',
+				goods:[],
+				},
+				cartobj2:{
+				productname:'',
+				img:'',
+				price:0,
+				quantity:0,
+				},
 				gk:true,
 				idslen:0,
 				sum:0,
@@ -294,45 +306,43 @@
 				img2:'../../assets/img/beizi1.jpg',
 				img3:'../../assets/img/beizi1.jpg',
 				submithref:'',
-				gwcList:[
-				{
-					"vf":true,
-					"dm":"创客店1",
-					"sp":[
-						{
-						"vf":true,
-						"tp":"../../../assets/img/beizi1.jpg",
-						"info":"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
-						"price":20,
-						"num":1
-						},
-						{
-						"vf":true,
-						"tp":"../../../assets/img/beizi1.jpg",
-						"info":"情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具",
-						"price":40.5,
-						"num":1
-						}
-					]
-				},
-				{	
-					"vf":true,
-					"dm":"创客店2",
-					"sp":[
-						{
-						"vf":true,
-						"tp":"../../../assets/img/beizi1.jpg",
-						"info":"小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品",
-						"price":30,
-						"num":1
-						}
-						]	
-				}],
 				spsum:0,
 				pricesum:(0).toFixed(2),
 			}
 			},
+			mounted() {
+			this.axiosgetcart()
+			},
 			methods:{
+			axiosgetcart(){
+			this.axios.get('/api/cart/get',{
+				params:{
+					id:1
+				}
+			})
+			.then((response)=>{this.$store.state.cartmain=response.data})
+			.catch((error)=>{console.log(error);});
+			},
+			addobjdata(index){
+				this.cartobj2.productname=this.$store.state.cartmain.cartproduct[index].product.productName,
+				this.cartobj2.img=this.$store.state.cartmain.cartproduct[index].product.imgUrl,
+				this.cartobj2.price=this.$store.state.cartmain.cartproduct[index].product.productPrice,
+				this.cartobj2.quantity=this.$store.state.cartmain.cartproduct[index].productQuantity
+			},
+			resetcartobj1(){
+				this.cartobj={
+				storename:'',
+				goods:[],
+			}
+			},
+			resetcartobj2(){
+				this.cartobj2={
+				productname:'',
+				img:'',
+				price:0,
+				quantity:0,
+				}
+			},
 			gwcggmo1(){
 				this.gwcgg1='gwc-mo';
 				this.gwcgg2='';
@@ -361,13 +371,13 @@
 			checkall(){
 				this.ckall=!this.ckall;
 				if(this.ckall==true){
-				for(var b=0;b<this.gwcList.length;b++){
+				for(var b=0;b<this.cartarr.length;b++){
 				this.$refs.one[b].checkall();
 				this.$refs.one[b].spisallcheck=true;	
 				}
-				this.idslen=this.gwcList.length;
+				this.idslen=this.cartarr.length;
 				}else{
-				for(var c=0;c<this.gwcList.length;c++){
+				for(var c=0;c<this.cartarr.length;c++){
 				this.$refs.one[c].uncheckall();
 				this.$refs.one[c].spisallcheck=false;	
 				}
@@ -378,7 +388,7 @@
 			},
 			allck(ids){
 				this.idslen=this.idslen+ids;
-				if(this.idslen==this.gwcList.length){
+				if(this.idslen==this.cartarr.length){
 					this.ckall=true;
 					this.isallcheck=true;
 				}else{
@@ -388,27 +398,20 @@
 			},
 			nums(){
 				this.spsum=0;
-				for(var i=0;i<this.gwcList.length;i++){
+				for(var i=0;i<this.cartarr.length;i++){
 				this.spsum=this.spsum+this.$refs.one[i].nsum;
 				}
 			},
 			prices(){
 				this.pricesum=parseFloat(0);
-				for(var a=0;a<this.gwcList.length;a++){
+				for(var a=0;a<this.cartarr.length;a++){
 				this.pricesum=parseFloat(this.pricesum)+parseFloat(this.$refs.one[a].psum);
 				this.pricesum=parseFloat(this.pricesum).toFixed(2);
 	
 				}
 			},
-			changes(){
-			for(var m=0;m<this.gwcList.length;m++){
-				this.$refs.one[m].sum();
-				this.$refs.one[m].pricesum();
-				}
-			},
 			deletea(){
-			for(var d=0;d<this.gwcList.length;d++){
-				this.$refs.one[d].vfk();
+			for(var d=0;d<this.cartarr.length;d++){
 				if(this.gk){
 				if(this.$refs.one[d].spckall==true){
 				this.$refs.one[d].deleteall=false;
@@ -420,21 +423,43 @@
 				}
 				}
 				},
-			gkm(f){
-				this.gk=f;
 			},
-			gwckong(){
-				for(var z=0;z<this.gwcList.length;z++){
-				this.$refs.one[z].vfk();
-				if(this.gk==true){
-				this.gwck=false;
-				break;
-				}else{
-				this.gwck=true;
-				}
-				}
+		computed: {
+			cartmain(){
+				return this.$store.state.cartmain;
 			},
-			},
+			cartarr(){
+				return this.$store.state.cartarr;
+			}
+		},
+		watch: {
+			cartmain: function(newcartmain, old) {
+				this.$store.commit('resetCartarr',1);
+				for(var a=0;a<newcartmain.cartproduct.length;a++){
+					this.namerepeat=false;
+					this.objindex=0;
+					this.resetcartobj1();
+					this.resetcartobj2();
+					for(var b=0;b<this.cartarr.length;b++){
+						if(this.cartarr[b].storename==newcartmain.cartproduct[a].store.storeName){
+							this.namerepeat=true;
+							this.objindex=b;
+							break;
+						}
+					};
+					if(this.namerepeat){						
+						this.addobjdata(a);
+						this.cartarr[this.objindex].goods.push(this.cartobj2);
+					}else {
+						this.addobjdata(a);	
+						this.cartobj.storename=newcartmain.cartproduct[a].store.storeName;	
+						this.cartobj.goods=[];	
+						this.cartobj.goods.push(this.cartobj2);
+						this.cartarr.push(this.cartobj);
+					};
+				};
+			}
+		}
 				    
     }
 </script>

@@ -1,29 +1,29 @@
 <template>
 						<div id='root'>
-						<div v-if='item.vf' style='margin-bottom:20px;margin-top:40px;'>
+						<div style='margin-bottom:20px;margin-top:40px;'>
 						<div class='row map-lg1' style='font-size:14px;'>
 						<div class='col-12 d-none d-lg-block text-left'>
-						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.dm'>
-						{{item.dm}}
+						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.storename'>
+						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:14px;' v-for='(items,index) in item.sp' :key='index' v-if='items.vf' :items='items' :index='index'>
+						<div class='container' style='font-size:14px;' v-for='(items,index) in item.goods' :key='200' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-none d-lg-block'>
 						<div class='row gwc-main map-lg2'>
 						<div class='col-2 d-none d-lg-block'>
-						<input type='checkbox' :checked='spids.indexOf(items.info) > -1' @click='checkone(items.info)' style='vertical-align: top'>
-						<img :src='items.tp' id='gwc-lg-img'>
+						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<img :src='items.img' id='gwc-lg-img'>
 						</div>
 						<div class='col-2 d-none d-lg-block text-left align-self-center'>
-						<a href='###'>{{items.info}}</a>
+						<a href='###'>{{items.productname}}</a>
 						</div>
 						<div class='col-1 d-none d-lg-block offset-3 text-center align-self-center'>
 						￥{{items.price}}
 						</div>
-						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two' @kong='kong' @cgkk='cgkong' @co='checkone'></gwc-component2>
+						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two'></gwc-component2>
 						<div class='col-1 d-none d-lg-block align-self-center'>
-						￥{{(items.num*items.price)}}
+						￥{{(items.quantity*items.price)}}
 						</div>
 						<div class='col-1  d-none d-lg-block align-self-center'>
 						<div class='row'>
@@ -37,30 +37,30 @@
 						</div></div></div></div></div></div>
 						</div></div>
 						
-						<div v-if='item.vf' style='margin-bottom:10px;margin-top:-20px;'>
+						<div style='margin-bottom:10px;margin-top:-20px;'>
 						<div class='row map-md1' style='font-size:13px;'>
 						<div class='col-12 d-none d-md-block d-lg-none text-left'>
-						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.dm'>
-						{{item.dm}}
+						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.storename'>
+						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:12px;' v-for='(items,index) in item.sp' :key='300' v-if='items.vf' :items='items' :index='index'>
+						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='300' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-none d-md-block d-lg-none'>
 						<div class='row gwc-main map-md2'>
 						<div class='col-2 d-none d-md-block d-lg-none'>
-						<input type='checkbox' :checked='spids.indexOf(items.info) > -1' @click='checkone(items.info)' style='vertical-align: top'>
-						<img :src='items.tp' id='gwc-md-img'>
+						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<img :src='items.img' id='gwc-md-img'>
 						</div>
 						<div class='col-3 d-none d-md-block d-lg-none text-left align-self-center'>
-						<a href='###'>{{items.info}}</a>
+						<a href='###'>{{items.productname}}</a>
 						</div>
 						<div class='col-1 d-none d-md-block d-lg-none offset-1 text-center align-self-center'>
 						￥{{items.price}}
 						</div>
-						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two' @kong='kong' @cgkk='cgkong' @co='checkone'></gwc-component2>
+						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two'></gwc-component2>
 						<div class='col-1 d-none d-md-block d-lg-none align-self-center' style='padding-left: 15px;'>
-						￥{{(items.num*items.price)}}
+						￥{{(items.quantity*items.price)}}
 						</div>
 						<div class='col-2 d-none d-md-block d-lg-none align-self-center' style='padding-left: 40px;'>
 						<div class='row'>
@@ -74,25 +74,25 @@
 						</div></div></div></div></div></div>
 						</div></div>
 						
-						<div v-if='item.vf' style='margin-bottom:10px;margin-top:-20px;'>
+						<div style='margin-bottom:10px;margin-top:-20px;'>
 						<div class='row map-md1' style='font-size:13px;'>
 						<div class='col-12 d-block d-md-none text-left'>
-						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.dm'>
-						{{item.dm}}
+						<input type='checkbox' @click='spcheckall' :checked='spckall' style='vertical-align: middle' :class='item.storename'>
+						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:12px;' v-for='(items,index) in item.sp' :key='400' v-if='items.vf' :items='items' :index='index'>
+						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='400' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-block d-md-none'>
 						<div class='row gwc-main map-md2'>
 						<div class='col-12 d-block d-md-none'>
 						<div class='row'>
 						<div class='col-5 d-block d-md-none' style='margin-top: 3px;'>
-						<input type='checkbox' :checked='spids.indexOf(items.info) > -1' @click='checkone(items.info)' style='vertical-align: top'>
-						<img :src='items.tp' id='gwc-xs-img'>
+						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<img :src='items.img' id='gwc-xs-img'>
 						</div>
 						<div class='col-7 d-block d-md-none text-left' style='margin-left: -25px;'>
-						<a href='###'>{{items.info}}</a>
+						<a href='###'>{{items.productname}}</a>
 						</div>
 						</div>
 						</div>
@@ -100,9 +100,9 @@
 						单价:&nbsp;￥{{items.price}}
 						</div>
 						<div class='col-5 d-block d-md-none' style='font-size:13px;'>
-						金额:&nbsp;￥{{(items.num*items.price)}}
+						金额:&nbsp;￥{{(items.quantity*items.price)}}
 						</div>
-						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two' @kong='kong' @cgkk='cgkong' @co='checkone'></gwc-component2>
+						<gwc-component2 :items='items' @incg='inchange' :spids='spids' ref='two'></gwc-component2>
 						<div class='col-12 d-block d-md-none'>
 						<div class='row'>
 						<div class='col-4 text-left d-block d-md-none'>
@@ -136,70 +136,46 @@
 				nsum:0,
 				psum:0,
 				deleteall:true,
-				kk:true,
 				}
 			},
 			methods:{
-				vfk(){
-				this.$emit('gkk',this.item.vf);
-				},
-				cgkong(){
-				this.kk=false;
-				},
-				kong(){
-				for(var f=0;f<=this.item.sp.length;f++){
-					this.$refs.two[f].kongg();
-					if(this.kk){
-					this.item.vf=false;	
-					}
-					else{
-					this.kk=true;
-					this.item.vf=true;	
-					break;
-					}
-					}
-				this.$emit('gwcko',1);
-				},
 				full(count){
 					if(!this.spckall){
-						if(this.spids.length==(this.item.sp.length-count)){
+						if(this.spids.length==(this.item.goods.length-count)){
 							this.$options.methods.spcheckall.bind(this)();
 						}
 					}
 				},
 				deleteaone(){
-					for(var e=0;e<=this.item.sp.length;e++){
+					for(var e=0;e<=this.item.goods.length;e++){
 					this.$refs.two[e].onevf();
 					}
 					this.$emit('gwcko',1);
 				},
-				deleteaa(){
-					this.item.vf=this.deleteall;
-					this.$emit('gwcko',1);
-				},
 				sum(){
 					this.nsum=0;
-					this.item.sp.forEach(function (items) {
-					if(this.spids.indexOf(items.info)>=0&&items.vf==true){
-					this.nsum=this.nsum+parseInt(items.num);}
+					this.item.goods.forEach(function (items) {
+					if(this.spids.indexOf(items.productname)>=0){
+					this.nsum=this.nsum+parseInt(items.quantity);}
 					},this);
 					this.$emit('ns',this.nsum);
 				},
 				pricesum(){
 					this.psum=parseFloat(0);
-					this.item.sp.forEach(function (items) {
-					if(this.spids.indexOf(items.info)>=0&&items.vf==true){
-					this.psum=parseFloat(this.psum)+parseFloat(items.num*parseFloat(items.price));}
+					this.item.goods.forEach(function (items) {
+					if(this.spids.indexOf(items.productname)>=0){
+					this.psum=parseFloat(this.psum)+parseFloat(items.quantity*parseFloat(items.price));}
 					},this);
 					this.$emit('ps',this.psum);
 				},
 				checkall(){
 					this.spckall=true;
 					this.spids = [];
-					this.item.sp.forEach(function (items) {
-					this.spids.push(items.info)
+					this.item.goods.forEach(function (items) {
+					this.spids.push(items.productname)
 					},this);
-					this.$emit('cg',0);
+					this.sum();
+					this.pricesum();
 				},
 				uncheckall(){
 					this.spids = [];
@@ -209,14 +185,15 @@
 					let idindex=this.spids.indexOf(info);
 					if(idindex<0){
 					this.spids.push(info);
-					if(this.item.sp.length==this.spids.length){
-						this.ids.push(this.item.dm);
+					if(this.item.goods.length==this.spids.length){
+						this.ids.push(this.item.storename);
 						this.spckall=true;
 						this.$emit('aallck',1);
 						this.spisallcheck=true;					
 					}
 					}
-					this.$emit('cg',0);
+					this.sum();
+					this.pricesum();
 				},
 				checkone(id){
 					let idindex=this.spids.indexOf(id);
@@ -227,47 +204,47 @@
 					}
 					if(this.spckall==false){
 					var i=0;
-					this.item.sp.forEach(function (items) {
-					if(items.vf==true){
+					this.item.goods.forEach(function (items) {
 					i++;
-					}
 					},this);
 						if(i==this.spids.length){
-						this.ids.push(this.item.dm);
+						this.ids.push(this.item.storename);
 						this.spckall=true;
 						this.$emit('aallck',1);
 						this.spisallcheck=true;
 					}else{
-						this.ids.splice(this.ids.indexOf(this.item.dm),1);
+						this.ids.splice(this.ids.indexOf(this.item.storename),1);
 						this.spckall=false;
 						this.$emit('aallck',0);
 						this.spisallcheck=false;
 					}
 					}else{
-						this.ids.splice(this.ids.indexOf(this.item.dm),1);
+						this.ids.splice(this.ids.indexOf(this.item.storename),1);
 						this.spckall=false;
 						this.$emit('aallck',-1);
 						this.spisallcheck=false;
 					}
-					this.$emit('cg',0);
+					this.sum();
+					this.pricesum();
 					},
 				spcheckall(){
 					this.spisallcheck=!this.spisallcheck;
 					if (this.spisallcheck) {
 					this.spids = [];
-					this.item.sp.forEach(function (items) {
-					this.spids.push(items.info)
+					this.item.goods.forEach(function (items) {
+					this.spids.push(items.productname)
 					},this);
-					this.ids.push(this.item.dm);
+					this.ids.push(this.item.storename);
 					this.spckall=true;
 					this.$emit('aallck',1);
 					} else {
 					this.spids = [];
-					this.ids.splice(this.ids.indexOf(this.item.dm),1);
+					this.ids.splice(this.ids.indexOf(this.item.storename),1);
 					this.spckall=false;
 					this.$emit('aallck',-1);
 					}
-					this.$emit('cg',0);
+					this.sum();
+					this.pricesum();
 				},
 			},
     }
