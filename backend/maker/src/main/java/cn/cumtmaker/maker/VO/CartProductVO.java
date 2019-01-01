@@ -3,8 +3,6 @@ package cn.cumtmaker.maker.VO;
 import cn.cumtmaker.maker.model.Product;
 import org.apache.ibatis.type.Alias;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 
 public class CartProductVO {
     private Integer storeId;
