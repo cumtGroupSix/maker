@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.CartProductMapper" >
+  <resultMap id="BaseResultMap" type="cn.cumtmaker.maker.model.CartProduct" >
+    <id column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <id column="store_id" property="storeId" jdbcType="INTEGER" />
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_quantity" property="productQuantity" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.VO.CartProductVO" >
+    <id column="store_id" property="storeId" jdbcType="INTEGER" />
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_quantity" property="productQuantity" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="StoreResultMap" extends="ModelResultMap" type="cn.cumtmaker.maker.VO.CartProductVO">
+    <association property="store" column="store_id" javaType="cn.cumtmaker.maker.VO.CartStoreVO" select="cn.cumtmaker.maker.mapper.StoreMapper.selectByCartId"/>
+  </resultMap>
+  <resultMap id="CartProductResultMap" extends="StoreResultMap" type="cn.cumtmaker.maker.VO.CartProductVO">
+    <association property="product" column="product_id" javaType="cn.cumtmaker.maker.model.Product" select="cn.cumtmaker.maker.mapper.ProductMapper.selectByProductId"/>
+  </resultMap>
+  <select id="getCartByCartId" resultMap="CartProductResultMap">
+    select store_id,product_id,product_quantity
+    from cart_product
+    where cart_id=#{cartId}
+  </select>
+</mapper>
