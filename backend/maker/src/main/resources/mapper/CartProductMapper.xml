@@ -23,4 +23,23 @@
     from cart_product
     where cart_id=#{cartId}
   </select>
+  <update id="updateQuantity">
+    update cart_product
+    <set>
+      product_quantity=#{productQuantity}
+    </set>
+    where
+    cart_id=#{cartId} and
+    store_id=#{storeId} and
+    product_id=#{productId}
+  </update>
+
+  <delete id="deleteCartProduct">
+    delete
+    from cart_product
+    where
+    cart_id=#{cartId} and
+    store_id=#{storeId} and
+    product_id=#{productId}
+  </delete>
 </mapper>
