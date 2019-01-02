@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-12 col-md-9 " >
 				<div class="row justify-content-center">
-					<div class="card rounded float-left col-12 col-sm-4 col-lg-3" v-for="item of products">
+					<div class="card rounded float-left col-12 col-sm-4 col-lg-3" v-for="(item,index) of products" :key="index">
 						<img class="card-img-top" :src="item.images">
 						<div class="margin">
 							<div class="float-left text-danger text-center font-weight-bold">{{item.price}}
@@ -13,7 +13,7 @@
 							</div>
 						</div>
 						<div class="small text-dark margin">
-						<a class="productIntroduction" href="product.html">{{item.introduction}}</a>
+						<a class="productIntroduction" href="product">{{item.introduction}}</a>
 						</div>
 						<div class="margin">
 							<div class="float-left text-muted small"><u>{{item.name}}</u></div>
@@ -28,14 +28,14 @@
 					<div class="mx-auto text-danger float-left font-weight-bold">热卖！</div>
 					<div class="mx-auto float-right small text-muted">广告</div>
 				</div>				
-				<div class="card rounded hot-product" v-for="site of hot" :id="site.hotID">
+				<div class="card rounded hot-product" v-for="(site,index) of hot" :id="site.hotID" :key="index">
 					<img class="card-img-top" :src="site.hotImages" >
 					<div class="margin">
 						<div class="text-danger font-weight-bold float-left">{{site.hotPrice}}</div>
 						<div class="float-right text-dark">{{site.hotSales}}</div>
 						</div>
 					<div class="card-footer font-weight-bold text-dark" :id="site.hotStoreID">
-						<a class="hot" href="store.html">{{site.hotIntroduction}}</a>
+						<a class="hot" href="store">{{site.hotIntroduction}}</a>
 					</div>
 				</div>				
 			</div>
@@ -54,12 +54,11 @@
 
 <script>
     export default {
-        new Vue({
-			el:"#root",
-			data:{
+		data() {
+			return {
 				products:[
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -67,7 +66,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-5.jpg",
+						images:"../../assets/img/list-5.jpg",
 						price:"¥27.30",
 						over:"710人付款",
 						introduction:"小马可爱树脂摆件设客厅居家装饰品北欧风格创意工艺品桌面礼物品",
@@ -75,7 +74,7 @@
 						destination:"浙江   温州"
 					},
 					{
-						images:"../img/list-2.jpg",
+						images:"../../assets/img/list-2.jpg",
 						price:"¥25.4",
 						over:"710人付款",
 						introduction:"情侣网红花生鼠公仔生日送小礼物男女生创意儿童毛绒玩具六一礼物",
@@ -83,7 +82,7 @@
 						destination:"浙江   杭州"
 					},
 					{
-						images:"../img/list-3.jpg",
+						images:"../../assets/img/list-3.jpg",
 						price:"¥14.8",
 						over:"710人付款",
 						introduction:"车饰车载摆件车内用品汽车子饰品摆件小物件个性创意可爱小工艺品",
@@ -91,7 +90,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -99,7 +98,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -107,7 +106,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -115,7 +114,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -123,7 +122,7 @@
 						destination:"江苏   徐州"
 					},
 					{
-						images:"../img/list-1.jpg",
+						images:"../../assets/img/list-1.jpg",
 						price:"¥20.00",
 						over:"710人付款",
 						introduction:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
@@ -136,7 +135,7 @@
 					{
 						hotID:"hot-product1",
 						hotStoreID:"store1",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -144,7 +143,7 @@
 					{
 						hotID:"hot-product2",
 						hotStoreID:"store2",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -152,7 +151,7 @@
 					{
 						hotID:"hot-product3",
 						hotStoreID:"store3",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
@@ -160,14 +159,14 @@
 					{
 						hotID:"hot-product4",
 						hotStoreID:"store4",
-						hotImages:"../img/5.jpg",
+						hotImages:"../../assets/img/5.jpg",
 						hotPrice:"¥42.00",
 						hotSales:"销量：777",
 						hotIntroduction:"啦啦啦旗舰店襄阳特产卧龙手工锅巴",
 					},
 				],
-			},
-		})
+			}
+		},
     }
 </script>
 
@@ -177,11 +176,11 @@
 }
 
 .card{ 
-	border:1px solid pray; 
+	border:1px solid gray;
 	width:265px;
 	height:400px;
 	margin:15px; 
-	box-shadow:2px 2px 10px #909090
+	box-shadow:2px 2px 10px #909090;
 	padding:0px;
 }
 

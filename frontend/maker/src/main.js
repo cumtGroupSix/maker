@@ -10,11 +10,14 @@ import './assets/js/qwest.min.js'
 import './assets/js/main.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
 Vue.config.productionTip = false
 // import $ from 'jquery'
 
+Vue.use(VueAxios, axios)
 Vue.use(iView);
 new Vue({
   router,

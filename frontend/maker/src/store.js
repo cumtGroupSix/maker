@@ -7,10 +7,14 @@ export default new Vuex.Store({
   state: {
     hotStore:[],
     checkedProduct:'',
-    active:"1"
+    active:"1",
+    cartmain:{},
+  	cartarr:[]
   },
   mutations: {
-
+  	resetCartarr(state,msg){
+  		state.cartarr=[];
+  	}
   },
   actions: {
 

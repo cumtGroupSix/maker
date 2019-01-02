@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.CartMapper" >
+  <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.model.Cart" >
+    <id column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="CartProductResultMap" extends="ModelResultMap" type="cn.cumtmaker.maker.model.Cart" >
+    <collection property="cartproduct" column="cart_id" javaType="ArrayList" ofType="cn.cumtmaker.maker.model.CartProduct" select="cn.cumtmaker.maker.mapper.CartProductMapper.getCartByCartId">
+    </collection>
+  </resultMap>
+  <select id="selectCartByUserId" parameterType="INTEGER" resultMap="CartProductResultMap">
+    select *
+    from cart
+    where user_id=#{userId};
+  </select>
+</mapper>

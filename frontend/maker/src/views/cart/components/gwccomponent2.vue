@@ -4,18 +4,18 @@
 			<div class='col-7 offset-3 d-none d-lg-block' style='padding-left: 7px;'>
 			<div class='gw-num'>
 			<div class='jian gwc-unselect' @click='jian'><b>-</b></div>
-			<input @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.num' class='num'/>
+			<input @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.quantity' class='num'/>
 			<div class='add gwc-unselect' @click='add'><b>+</b></div></div></div>
 			
 			<div class='col-7 offset-3 d-none d-md-block d-lg-none' style='padding-left: 12px;'>
 			<div class='gw-nummd'>
 			<div class='jianmd gwc-unselect' @click='jian'><b>-</b></div>
-			<input @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.num' class='nummd'/>
+			<input @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.quantity' class='nummd'/>
 			<div class='addmd gwc-unselect' @click='add'><b>+</b></div></div></div>
 			<div class='col-12 d-block d-md-none'>
 			<div class='gw-num'>
 			<div class='jian gwc-unselect' @click='jian'><b>-</b></div>
-			<input style='font-size:20px;' @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.num' class='num'/>
+			<input style='font-size:20px;' @input='submitg' @change='inchange' @blur='blur1' v-model.number:value='items.quantity' class='num'/>
 			<div class='add gwc-unselect' @click='add'><b>+</b></div></div></div>
 			</div></div>
 </template>
@@ -28,40 +28,28 @@
 				}
 			},
 			methods:{
-					kongg(){
-					if(this.items.vf){
-					this.$emit('cgkk',this.items.info);
-					}
-					},
-					onevf(){
-					if(this.spids.indexOf(this.items.info)>=0){
-					this.items.vf=false;
-					this.$emit('co',this.items.info);
-					this.$emit('kong',this.items.info);
-					}
-					},
 					add(){
-					this.items.num=parseInt(this.items.num)+1;
-					this.$emit('incg',this.items.info);
+					this.items.quantity=parseInt(this.items.quantity)+1;
+					this.$emit('incg',this.items.productname);
 					},
 					jian(){
-					if (this.items.num>1){
-					this.items.num=this.items.num-1;
-					this.$emit('incg',this.items.info);	
+					if (this.items.quantity>1){
+					this.items.quantity=this.items.quantity-1;
+					this.$emit('incg',this.items.productname);	
 					}
 					},
 					blur1(){
-					if(this.items.num==''){
-						this.items.num=1;
+					if(this.items.quantity==''){
+						this.items.quantity=1;
 					}
-					this.$emit('incg',this.items.info);
+					this.$emit('incg',this.items.productname);
 					},
 					submitg(){
-					this.items.num=this.items.num.replace(/^[0]+[0-9]*$/gi,"");
-					this.items.num=this.items.num.replace(/[^d]/g,'');
+					this.items.quantity=this.items.quantity.replace(/^[0]+[0-9]*$/gi,"");
+					this.items.quantity=this.items.quantity.replace(/[^d]/g,'');
 					},
 					inchange(){
-					this.$emit('incg',this.items.info);
+					this.$emit('incg',this.items.productname);
 					}
 				},
     }

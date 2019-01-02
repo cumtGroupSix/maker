@@ -9,8 +9,17 @@
         <result column="browse_times" property="browseTimes" jdbcType="INTEGER"></result>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"></result>
     </resultMap>
+    <resultMap id="CartStoreVoResultMap" type="cn.cumtmaker.maker.VO.CartStoreVO">
+        <id column="store_id" property="storeId" jdbcType="INTEGER"></id>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"></result>
+    </resultMap>
     <select id="selectById" resultMap="ModelResultMap">
         select *
+        from store
+        where store_id=#{storeId}
+    </select>
+    <select id="selectByCartId" resultMap="CartStoreVoResultMap">
+        select store_id,store_name
         from store
         where store_id=#{storeId}
     </select>

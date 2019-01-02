@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface StoreMapper {
     Store selectById(Integer storeId);
+    Store selectByCartId(Integer storeId);
 
     List<Store> getHotStores();
 }

@@ -19,17 +19,17 @@
 	</div>
 	<div class='col-3 text-center ywc-va d-none d-lg-block'>
 	<div style='position:absolute;top:10%;left:5%;' class='text-left'>{{item.dz}}</div></div><div class='col-2 d-none d-lg-block'>
-	<div class='row ywc-btn'>
-	<a href='order_details.html' class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;padding-left:8px;'>
+	<div  class='row ywc-btn'>
+	<a @mouseover='ahover1' @mouseout='ohover1' :style='{background:abgc1}' href='/orderDetail' class='col-6 offset-4 btn'  style='background-color:#ff9966;color:white;padding-left:8px;'>
 	<b>订单详情</b></a></div>
 	<div class='row ywc-btn'>
-	<button class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;padding-left:8px;'>
-	<b>物流跟踪</b></button>
+	<a @mouseover='ahover2' @mouseout='ohover2' :style='{background:abgc2}'  class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;padding-left:8px;'>
+	<b>物流跟踪</b></a>
 	</div>
 	<div class='row ywc-btn'>
-	<button class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;padding-left:8px;'>
+	<a @mouseover='ahover3' @mouseout='ohover3' :style='{background:abgc3}' class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;padding-left:8px;'>
 	<b>确认收货</b>
-	</button>
+	</a>
 	</div>
 	</div>
 	<div class='col-4 d-none d-md-block d-lg-none' style='margin-left:0px;'>
@@ -50,16 +50,16 @@
 	</div>
 	<div class='col-2 d-none d-md-block d-lg-none'>
 	<div class='row ywc-btn'>
-	<a href='order_details.html' class='col-6 offset-4 text-center btn' style='background-color:#ff9966;color:white;fontSize:10px;padding-left:6px;'>
+	<a @mouseover='ahover1' @mouseout='ohover1' :style='{background:abgc1}' href='/orderDetail' class='col-6 offset-4 text-center btn' style='background-color:#ff9966;color:white;fontSize:10px;padding-left:6px;'>
 	<b>订单详情</b>
 	</a>
 	</div>
 	<div class='row ywc-btn'>
-	<button class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;fontSize:10px;padding-left:6px;'><b>物流跟踪</b>
-	</button></div><div class='row ywc-btn'>
-	<button class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;margin-right:0px;fontSize:10px;padding-left:6px;'>
+	<a @mouseover='ahover2' @mouseout='ohover2' :style='{background:abgc2}' class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;fontSize:10px;padding-left:6px;'><b>物流跟踪</b>
+	</a></div><div class='row ywc-btn'>
+	<a @mouseover='ahover3' @mouseout='ohover3' :style='{background:abgc3}' class='col-6 offset-4 btn' style='background-color:#ff9966;color:white;margin-right:0px;fontSize:10px;padding-left:6px;'>
 	<b>确认收货</b>
-	</button></div></div>
+	</a></div></div>
 	<div class ='col-12 d-block d-md-none' style='margin-left:auto;margin-right:auto;margin-top: 10px;'>
 	<div class ='row'>
 	<div class='col-12 d-block d-md-none'>
@@ -80,15 +80,15 @@
 	<div style='font-size: 12px;margin-left: 5px' class='text-left'><span>收货地址：</span>&nbsp;{{item.dz}}</div></div></div>
 	<div class='row'>
 	<div class ='col-4 ywc-btn'>
-	<a href='order_details.html' class='btn btn-sm' style='background-color:#ff9966;color:white;'>
+	<a @mouseover='ahover1' @mouseout='ohover1' :style='{background:abgc1}' href='/orderDetail' class='btn btn-sm' style='background-color:#ff9966;color:white;'>
 	<b>订单详情</b></a>
 	</div>
 	<div class ='col-4 ywc-btn'>
-	<button class='btn btn-sm' style='background-color:#ff9966;color:white;'>
-	<b>物流跟踪</b></button>
+	<a @mouseover='ahover2' @mouseout='ohover2' :style='{background:abgc2}' class='btn btn-sm' style='background-color:#ff9966;color:white;'>
+	<b>物流跟踪</b></a>
 	</div>
 	<div class ='col-4 ywc-btn'>
-	<button class='btn btn-sm' style='background-color:#ff9966;color:white;'><b>确认收货</b></button>
+	<a @mouseover='ahover3' @mouseout='ohover3' :style='{background:abgc3}' class='btn btn-sm' style='background-color:#ff9966;color:white;'><b>确认收货</b></a>
 	</div></div></div></div>
 </div>
 </template>
@@ -98,10 +98,9 @@
     props:['item','index'],
     data(){
 			return{
-				bgc:{
-				backgroungColor:'#ff9966',
-				color:'white',
-				},
+				abgc1:'#ff9966',
+				abgc2:'#ff9966',
+				abgc3:'#ff9966',
 			}
 		},
 		methods:{
@@ -112,7 +111,25 @@
 				else{
 					return true;
 				}
-			}
+			},
+			ahover1(){
+				this.abgc1='rgba(255,0,0,0.9)';
+			},
+			ohover1(){
+				this.abgc1='#ff9966';
+			},
+			ahover2(){
+				this.abgc2='rgba(255,0,0,0.9)';
+			},
+			ohover2(){
+				this.abgc2='#ff9966';
+			},
+			ahover3(){
+				this.abgc3='rgba(255,0,0,0.9)';
+			},
+			ohover3(){
+				this.abgc3='#ff9966';
+			},
 		}
     }
 </script>
