@@ -4,7 +4,6 @@
 	<section id="dianpuming"  v-for="(item,index) in dianpuming" :key="index">
 		<div class="dianpumingcheng"><strong>{{item.name}}</strong><img src="@/assets/img/erweima.png" style="margin-left:30px;width:50px"></div>
 	</section>
-	<div class="dianpumingcheng"></div>
 
 	<!-- 商品展示 -->
 	<div class="card">
