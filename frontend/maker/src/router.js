@@ -9,6 +9,7 @@ import Cart from './views/cart/cart'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
+import OrderSubmit from './views/orderSubmit/orderSubmit'
 import Order from './views/order/order'
 import User from './views/user/user'
 import Browse from './views/browse/browse'
@@ -75,6 +76,11 @@ export default new Router({
       path: '/orderDetail',
       name: 'orderDetail',
       component: OrderDetail
+    },
+    {
+      path: '/orderSubmit',
+      name: 'orderSubmit',
+      component: OrderSubmit
     },
     {
       path: '/goodslist',
