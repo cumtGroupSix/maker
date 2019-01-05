@@ -2,7 +2,7 @@
 <div class="container" id='root'>
 		<div class="row " id='gwc-row1'>
 			<div class="col-6 text-left gwc-h3"><h3><b>购物车</b></h3></div>
-			<div class="col-6 text-right gwc-h6"><a class='text-right' href="order.html" style='color: #ff9966;'>已完成订单</a></div>
+			<div class="col-6 text-right gwc-h6"><router-link  to="/order" class='text-right' style='color: #ff9966;'>已完成订单</router-link></div>
 		</div>
 		<div class="row">
 			<div class="col-12" id='gwc-row2'><hr class="gwc-hr"></div>	
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<gwc-component v-for='(item,index) in cartarr' :key='100' :item='item' @gwcko='gwckong' @aallck='allck' ref="one" @ns='nums' @ps='prices'></gwc-component>
+		<gwc-component v-for='(item,index) in cartarr' :key='index' :item='item' @aallck='allck' ref="one" @ns='nums' @ps='prices' @updatequantity='axiosupdate' @deleteone='axiosdelete'></gwc-component>
 		<div class="container" style='margin-top:15px;'> 
 			<div class="row">
 			<div class="col-12 d-none d-lg-block">
@@ -281,16 +281,17 @@
 				namerepeat:false,
 				objindex:0,
 				cartobj:{
-				storename:'',
-				goods:[],
+					storename:'',
+					storeid:'',
+					goods:[],
 				},
 				cartobj2:{
-				productname:'',
-				img:'',
-				price:0,
-				quantity:0,
+					productid:0,
+					productname:'',
+					img:'',
+					price:0,
+					quantity:0,
 				},
-				gk:true,
 				idslen:0,
 				sum:0,
 				ckall:false,
@@ -302,9 +303,11 @@
 				ggxs2:false,
 				ggxs3:false,
 				gwck:false,
-				img1:'../../assets/img/beizi1.jpg',
-				img2:'../../assets/img/beizi1.jpg',
-				img3:'../../assets/img/beizi1.jpg',
+				updatestatus:0,
+				deletestatus:0,
+				img1:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
+				img2:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
+				img3:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
 				submithref:'',
 				spsum:0,
 				pricesum:(0).toFixed(2),
@@ -323,7 +326,24 @@
 			.then((response)=>{this.$store.state.cartmain=response.data})
 			.catch((error)=>{console.log(error);});
 			},
+			axiosupdate(msg){
+			this.axios.post('/api/cart/updateQuantity?cartId='+ this.$store.state.cartid + '&storeId='+ msg.storeid+'&productId='+msg.productid+'&productQuantity='+msg.quantity)
+			.then((response)=>{this.updatestatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
+			axiosdelete(msg){
+			this.axios.get('/api/cart/deleteCartProduct',{
+				params:{
+					cartId:this.$store.state.cartid,
+					storeId:msg.storeid,
+					productId:msg.productid
+				}
+			})
+			.then((response)=>{this.deletestatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
 			addobjdata(index){
+				this.cartobj2.productid=this.$store.state.cartmain.cartproduct[index].productId,
 				this.cartobj2.productname=this.$store.state.cartmain.cartproduct[index].product.productName,
 				this.cartobj2.img=this.$store.state.cartmain.cartproduct[index].product.imgUrl,
 				this.cartobj2.price=this.$store.state.cartmain.cartproduct[index].product.productPrice,
@@ -332,11 +352,13 @@
 			resetcartobj1(){
 				this.cartobj={
 				storename:'',
+				storeid:'',
 				goods:[],
 			}
 			},
 			resetcartobj2(){
 				this.cartobj2={
+				productid:0,
 				productname:'',
 				img:'',
 				price:0,
@@ -411,19 +433,16 @@
 				}
 			},
 			deletea(){
-			for(var d=0;d<this.cartarr.length;d++){
-				if(this.gk){
-				if(this.$refs.one[d].spckall==true){
-				this.$refs.one[d].deleteall=false;
-				this.$refs.one[d].deleteaa();
-				this.$refs.one[d].spcheckall();
+				if(this.$store.state.cartchecked.length==0){
+					this.$router.push({path: '/cart'});
 				}else{
-				this.$refs.one[d].deleteaone();
-				}	
+					this.$store.state.cartchecked.forEach(function(msg){
+					this.axiosdelete(msg);	
+					},this);
+					this.$store.state.cartchecked=[];		
 				}
-				}
-				},
-			},
+			}
+		},
 		computed: {
 			cartmain(){
 				return this.$store.state.cartmain;
@@ -434,7 +453,8 @@
 		},
 		watch: {
 			cartmain: function(newcartmain, old) {
-				this.$store.commit('resetCartarr',1);
+				this.$store.state.cartarr=[];
+				this.$store.state.cartid=newcartmain.cartId;
 				for(var a=0;a<newcartmain.cartproduct.length;a++){
 					this.namerepeat=false;
 					this.objindex=0;
@@ -453,11 +473,18 @@
 					}else {
 						this.addobjdata(a);	
 						this.cartobj.storename=newcartmain.cartproduct[a].store.storeName;	
+						this.cartobj.storeid=newcartmain.cartproduct[a].storeId;	
 						this.cartobj.goods=[];	
 						this.cartobj.goods.push(this.cartobj2);
 						this.cartarr.push(this.cartobj);
 					};
 				};
+			},
+			updatestatus:function(newstatus,old){
+				this.axiosgetcart();
+			},
+			deletestatus:function(newstatus,old){
+				this.axiosgetcart();
 			}
 		}
 				    

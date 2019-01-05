@@ -1,17 +1,18 @@
 <template>
-<div id='root'><a href='#' @click='deleteone' style='color:blue'>删除</a></div>
+<div id='root'><Button @click='deleteone' style='color:blue' >删除</Button></div>
 </template>
 
 <script>
     export default {
-    	props:['items','spids'],
+    	props:['items'],
        data(){
 			return{
 			}
 		},
 		methods:{
 			deleteone(){
-				},
+				this.$emit('deleteone',this.items.productid);
+			}
 		}
 	}
 </script>

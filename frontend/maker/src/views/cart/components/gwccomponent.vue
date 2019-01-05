@@ -7,12 +7,12 @@
 						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:14px;' v-for='(items,index) in item.goods' :key='200' :items='items' :index='index'>
+						<div class='container' style='font-size:14px;' v-for='(items,index) in item.goods' :key='index' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-none d-lg-block'>
 						<div class='row gwc-main map-lg2'>
 						<div class='col-2 d-none d-lg-block'>
-						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<input type='checkbox' :checked='spids.indexOf(items.productid) > -1' @click='checkone(items.productid)' style='vertical-align: top'>
 						<img :src='items.img' id='gwc-lg-img'>
 						</div>
 						<div class='col-2 d-none d-lg-block text-left align-self-center'>
@@ -28,13 +28,11 @@
 						<div class='col-1  d-none d-lg-block align-self-center'>
 						<div class='row'>
 						<div class='col-12 text-left'>
-						<a href='###'>收藏</a></div>
+						<Button style='color:blue'>收藏</Button></div>
 						<div class='col-12 text-left'>
-						<delete-one :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></delete-one>
+						<delete-one :items='items' @deleteone='deleteproduct'></delete-one>
 						</div>
-						<div class='col-12'>
-						<a href='###'>类似商品</a>
-						</div></div></div></div></div></div>
+						</div></div></div></div></div>
 						</div></div>
 						
 						<div style='margin-bottom:10px;margin-top:-20px;'>
@@ -44,12 +42,12 @@
 						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='300' :items='items' :index='index'>
+						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='index' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-none d-md-block d-lg-none'>
 						<div class='row gwc-main map-md2'>
 						<div class='col-2 d-none d-md-block d-lg-none'>
-						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<input type='checkbox' :checked='spids.indexOf(items.productid) > -1' @click='checkone(items.productid)' style='vertical-align: top'>
 						<img :src='items.img' id='gwc-md-img'>
 						</div>
 						<div class='col-3 d-none d-md-block d-lg-none text-left align-self-center'>
@@ -65,13 +63,11 @@
 						<div class='col-2 d-none d-md-block d-lg-none align-self-center' style='padding-left: 40px;'>
 						<div class='row'>
 						<div class='col-12 text-left'>
-						<a href='###'>收藏</a></div>
+						<Button style='color:blue'>收藏</Button></div>
 						<div class='col-12 text-left'>
-						<delete-one :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></delete-one>
+						<delete-one :items='items' @deleteone='deleteproduct'></delete-one>
 						</div>
-						<div class='col-12'>
-						<a href='###'>类似商品</a>
-						</div></div></div></div></div></div>
+						</div></div></div></div></div>
 						</div></div>
 						
 						<div style='margin-bottom:10px;margin-top:-20px;'>
@@ -81,14 +77,14 @@
 						{{item.storename}}
 						</div>
 						</div>
-						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='400' :items='items' :index='index'>
+						<div class='container' style='font-size:12px;' v-for='(items,index) in item.goods' :key='index' :items='items' :index='index'>
 						<div class='row'>
 						<div class='col-12 d-block d-md-none'>
 						<div class='row gwc-main map-md2'>
 						<div class='col-12 d-block d-md-none'>
 						<div class='row'>
 						<div class='col-5 d-block d-md-none' style='margin-top: 3px;'>
-						<input type='checkbox' :checked='spids.indexOf(items.productname) > -1' @click='checkone(items.productname)' style='vertical-align: top'>
+						<input type='checkbox' :checked='spids.indexOf(items.productid) > -1' @click='checkone(items.productid)' style='vertical-align: top'>
 						<img :src='items.img' id='gwc-xs-img'>
 						</div>
 						<div class='col-7 d-block d-md-none text-left' style='margin-left: -25px;'>
@@ -106,12 +102,11 @@
 						<div class='col-12 d-block d-md-none'>
 						<div class='row'>
 						<div class='col-4 text-left d-block d-md-none'>
-						<a href='###'>收藏</a></div>
+						<Button style='color:blue'>收藏</Button></div>
 						<div class='col-4 d-block d-md-none text-center'>
-						<a href='###'>类似商品</a>
 						</div>
 						<div class='col-4 text-right d-block d-md-none'>
-						<delete-one :items='items' @co='checkone' @kong='kong' @full='full' :spids='spids'></delete-one>
+						<delete-one :items='items' @deleteone='deleteproduct'></delete-one>
 						</div>
 						</div></div></div></div></div>
 						</div></div>
@@ -132,6 +127,10 @@
 				spckall:false,
 				spisallcheck: false,
 				spids:[],
+				deleteids:{
+				storeid:0,
+				productid:0
+				},
 				ids:[],
 				nsum:0,
 				psum:0,
@@ -139,6 +138,21 @@
 				}
 			},
 			methods:{
+				deleteproduct(id){
+					this.$emit('deleteone',{storeid:this.item.storeid,productid:id});
+					this.item.goods.forEach(function (items) {
+						if(items.productid==id){
+						this.item.goods.splice(items,1);
+						}
+					},this);
+					if(this.spids.indexOf(id)>=0){
+					this.spids.splice(this.spids.indexOf(id),1);
+					}else{
+						if((this.item.goods.length)==this.spids.length){
+						this.checkall();				
+						};
+					};
+				},
 				full(count){
 					if(!this.spckall){
 						if(this.spids.length==(this.item.goods.length-count)){
@@ -150,12 +164,11 @@
 					for(var e=0;e<=this.item.goods.length;e++){
 					this.$refs.two[e].onevf();
 					}
-					this.$emit('gwcko',1);
 				},
 				sum(){
 					this.nsum=0;
 					this.item.goods.forEach(function (items) {
-					if(this.spids.indexOf(items.productname)>=0){
+					if(this.spids.indexOf(items.productid)>=0){
 					this.nsum=this.nsum+parseInt(items.quantity);}
 					},this);
 					this.$emit('ns',this.nsum);
@@ -163,7 +176,7 @@
 				pricesum(){
 					this.psum=parseFloat(0);
 					this.item.goods.forEach(function (items) {
-					if(this.spids.indexOf(items.productname)>=0){
+					if(this.spids.indexOf(items.productid)>=0){
 					this.psum=parseFloat(this.psum)+parseFloat(items.quantity*parseFloat(items.price));}
 					},this);
 					this.$emit('ps',this.psum);
@@ -172,7 +185,7 @@
 					this.spckall=true;
 					this.spids = [];
 					this.item.goods.forEach(function (items) {
-					this.spids.push(items.productname)
+					this.spids.push(items.productid)
 					},this);
 					this.sum();
 					this.pricesum();
@@ -181,10 +194,10 @@
 					this.spids = [];
 					this.spckall=false;
 				},
-				inchange(info){
-					let idindex=this.spids.indexOf(info);
+				inchange(msg){
+					let idindex=this.spids.indexOf(msg.id);
 					if(idindex<0){
-					this.spids.push(info);
+					this.spids.push(msg.id);
 					if(this.item.goods.length==this.spids.length){
 						this.ids.push(this.item.storename);
 						this.spckall=true;
@@ -194,6 +207,7 @@
 					}
 					this.sum();
 					this.pricesum();
+					this.$emit('updatequantity',{storeid:this.item.storeid,productid:msg.id,quantity:msg.quantity})
 				},
 				checkone(id){
 					let idindex=this.spids.indexOf(id);
@@ -232,7 +246,7 @@
 					if (this.spisallcheck) {
 					this.spids = [];
 					this.item.goods.forEach(function (items) {
-					this.spids.push(items.productname)
+					this.spids.push(items.productid)
 					},this);
 					this.ids.push(this.item.storename);
 					this.spckall=true;
@@ -246,7 +260,33 @@
 					this.sum();
 					this.pricesum();
 				},
+				setdeleteids(storeid,productid){
+					this.deleteids.storeid=storeid;
+					this.deleteids.productid=productid;
+				},
+				resetdeleteids(){
+					this.deleteids={
+					storeid:0,
+					productid:0
+					}
+				},
 			},
+			watch:{
+				spids: function(news, old){
+					this.$store.state.cartchecked.forEach(function (ids){
+						if(ids.storeid==this.item.storeid){
+						this.$store.state.cartchecked.splice(this.$store.state.cartchecked.indexOf(ids),1);
+						}
+					},this);
+					this.item.goods.forEach(function (items) {
+						if(this.spids.indexOf(items.productid)>=0){
+							this.resetdeleteids();
+							this.setdeleteids(this.item.storeid,items.productid);
+							this.$store.state.cartchecked.push(this.deleteids);							
+						}
+					},this);
+				}
+			}
     }
 </script>
 
