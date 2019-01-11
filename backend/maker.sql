@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 27/12/2018 23:41:02
+ Date: 11/01/2019 22:29:02
 */
 
 SET NAMES utf8mb4;
@@ -79,16 +79,19 @@ DROP TABLE IF EXISTS `group_collections`;
 CREATE TABLE `group_collections`  (
   `user_id` int(55) NOT NULL COMMENT '用户ID',
   `collect_group_id` int(55) NOT NULL COMMENT '收藏商品ID',
-  PRIMARY KEY (`user_id`) USING BTREE,
+  `store_id` int(55) NOT NULL COMMENT '创客店ID',
+  PRIMARY KEY (`user_id`, `store_id`, `collect_group_id`) USING BTREE,
   INDEX `fk[group_collections]collect_group_id`(`collect_group_id`) USING BTREE,
+  INDEX `[group_collections]store_id`(`store_id`) USING BTREE,
   CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `[group_collections]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of group_collections
 -- ----------------------------
-INSERT INTO `group_collections` VALUES (1, 1);
+INSERT INTO `group_collections` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for order_detail
