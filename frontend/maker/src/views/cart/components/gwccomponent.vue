@@ -28,7 +28,7 @@
 						<div class='col-1  d-none d-lg-block align-self-center'>
 						<div class='row'>
 						<div class='col-12 text-left'>
-						<Button style='color:blue'>收藏</Button></div>
+						<collect-one :items='items' @collectone='collectproduct'></collect-one></div>
 						<div class='col-12 text-left'>
 						<delete-one :items='items' @deleteone='deleteproduct'></delete-one>
 						</div>
@@ -63,7 +63,7 @@
 						<div class='col-2 d-none d-md-block d-lg-none align-self-center' style='padding-left: 40px;'>
 						<div class='row'>
 						<div class='col-12 text-left'>
-						<Button style='color:blue'>收藏</Button></div>
+						<collect-one :items='items' @collectone='collectproduct'></collect-one></div>
 						<div class='col-12 text-left'>
 						<delete-one :items='items' @deleteone='deleteproduct'></delete-one>
 						</div>
@@ -102,7 +102,7 @@
 						<div class='col-12 d-block d-md-none'>
 						<div class='row'>
 						<div class='col-4 text-left d-block d-md-none'>
-						<Button style='color:blue'>收藏</Button></div>
+						<collect-one :items='items' @collectone='collectproduct'></collect-one></div>
 						<div class='col-4 d-block d-md-none text-center'>
 						</div>
 						<div class='col-4 text-right d-block d-md-none'>
@@ -115,10 +115,12 @@
 
 <script>
 	import DeleteOne from './deleteone'
+	import CollectOne from './collectone'
 	import GwcComponent2 from './gwccomponent2'
     export default {
     	components:{
     		DeleteOne,
+    		CollectOne,
     		GwcComponent2
     },
     props:['item'],
@@ -127,9 +129,10 @@
 				spckall:false,
 				spisallcheck: false,
 				spids:[],
-				deleteids:{
+				checkedids:{
 				storeid:0,
-				productid:0
+				productid:0,
+				groupid:0
 				},
 				ids:[],
 				nsum:0,
@@ -138,6 +141,9 @@
 				}
 			},
 			methods:{
+				collectproduct(id){
+					this.$emit('collectone',{storeid:this.item.storeid,groupid:id});
+				},
 				deleteproduct(id){
 					this.$emit('deleteone',{storeid:this.item.storeid,productid:id});
 					this.item.goods.forEach(function (items) {
@@ -260,16 +266,18 @@
 					this.sum();
 					this.pricesum();
 				},
-				setdeleteids(storeid,productid){
-					this.deleteids.storeid=storeid;
-					this.deleteids.productid=productid;
+				setcheckedids(storeid,productid,groupid){
+					this.checkedids.storeid=storeid;
+					this.checkedids.productid=productid;
+					this.checkedids.groupid=groupid;
 				},
-				resetdeleteids(){
-					this.deleteids={
+				resetcheckedids(){
+					this.checkedids={
 					storeid:0,
-					productid:0
+					productid:0,
+					groupid:0
 					}
-				},
+				}
 			},
 			watch:{
 				spids: function(news, old){
@@ -280,9 +288,9 @@
 					},this);
 					this.item.goods.forEach(function (items) {
 						if(this.spids.indexOf(items.productid)>=0){
-							this.resetdeleteids();
-							this.setdeleteids(this.item.storeid,items.productid);
-							this.$store.state.cartchecked.push(this.deleteids);							
+							this.resetcheckedids();
+							this.setcheckedids(this.item.storeid,items.productid,items.groupid);
+							this.$store.state.cartchecked.push(this.checkedids);						
 						}
 					},this);
 				}

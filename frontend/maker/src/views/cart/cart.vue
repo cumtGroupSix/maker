@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<gwc-component v-for='(item,index) in cartarr' :key='index' :item='item' @aallck='allck' ref="one" @ns='nums' @ps='prices' @updatequantity='axiosupdate' @deleteone='axiosdelete'></gwc-component>
+		<gwc-component v-for='(item,index) in cartarr' :key='index' :item='item' @aallck='allck' ref="one" @ns='nums' @ps='prices' @updatequantity='axiosupdate' @deleteone='axiosdelete' @collectone='axioscollect'></gwc-component>
 		<div class="container" style='margin-top:15px;'> 
 			<div class="row">
 			<div class="col-12 d-none d-lg-block">
@@ -45,7 +45,7 @@
 			<div class="col-3">
 			<div class="row">
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
-			<div class="col-4 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 		    </div>
 			</div>
@@ -68,7 +68,7 @@
 			<div class="col-4">
 			<div class="row">
 			<div class="col-3 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
-			<div class="col-4 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 		    </div>
 			</div>
@@ -90,7 +90,7 @@
 			<div class="col-12">
 			<div class="row">
 			<div class="col-3 d-block d-md-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
-			<div class="col-4 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 			<div class="col-2 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
 		    </div>
@@ -286,6 +286,7 @@
 					goods:[],
 				},
 				cartobj2:{
+					groupid:0,
 					productid:0,
 					productname:'',
 					img:'',
@@ -305,9 +306,10 @@
 				gwck:false,
 				updatestatus:0,
 				deletestatus:0,
-				img1:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
-				img2:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
-				img3:'http://img5.imgtn.bdimg.com/it/u=2568026399,3213333382&fm=15&gp=0.jpg',
+				collectstatus:0,
+				img1:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
+				img2:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
+				img3:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
 				submithref:'',
 				spsum:0,
 				pricesum:(0).toFixed(2),
@@ -317,22 +319,25 @@
 			this.axiosgetcart()
 			},
 			methods:{
+			// 根据用户ID获取购物车信息
 			axiosgetcart(){
 			this.axios.get('/api/cart/get',{
 				params:{
-					id:1
+					id:this.$store.state.userid
 				}
 			})
 			.then((response)=>{this.$store.state.cartmain=response.data})
 			.catch((error)=>{console.log(error);});
 			},
+			// 更新商品数量
 			axiosupdate(msg){
 			this.axios.post('/api/cart/updateQuantity?cartId='+ this.$store.state.cartid + '&storeId='+ msg.storeid+'&productId='+msg.productid+'&productQuantity='+msg.quantity)
 			.then((response)=>{this.updatestatus=response.data})
 			.catch((error)=>{console.log(error);});
 			},
+			// 删除商品
 			axiosdelete(msg){
-			this.axios.get('/api/cart/deleteCartProduct',{
+			this.axios.delete('/api/cart/deleteCartProduct',{
 				params:{
 					cartId:this.$store.state.cartid,
 					storeId:msg.storeid,
@@ -342,9 +347,16 @@
 			.then((response)=>{this.deletestatus=response.data})
 			.catch((error)=>{console.log(error);});
 			},
+			// 收藏商品
+			axioscollect(msg){
+			this.axios.put('/api/cart/collectCartProduct?userId='+this.$store.state.userid+'&storeId='+msg.storeid+'&groupId='+msg.groupid)
+			.then((response)=>{this.collectstatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
 			addobjdata(index){
 				this.cartobj2.productid=this.$store.state.cartmain.cartproduct[index].productId,
 				this.cartobj2.productname=this.$store.state.cartmain.cartproduct[index].product.productName,
+				this.cartobj2.groupid=this.$store.state.cartmain.cartproduct[index].product.groupId,
 				this.cartobj2.img=this.$store.state.cartmain.cartproduct[index].product.imgUrl,
 				this.cartobj2.price=this.$store.state.cartmain.cartproduct[index].product.productPrice,
 				this.cartobj2.quantity=this.$store.state.cartmain.cartproduct[index].productQuantity
@@ -358,6 +370,7 @@
 			},
 			resetcartobj2(){
 				this.cartobj2={
+				groupid:0,
 				productid:0,
 				productname:'',
 				img:'',
@@ -439,6 +452,17 @@
 					this.$store.state.cartchecked.forEach(function(msg){
 					this.axiosdelete(msg);	
 					},this);
+					this.$store.state.cartchecked=[];	
+					this.$router.push({path: '/cart'});	
+				}
+			},
+			collecta(){
+				if(this.$store.state.cartchecked.length==0){
+					this.$router.push({path: '/cart'});
+				}else{
+					this.$store.state.cartchecked.forEach(function(msg){
+					this.axioscollect(msg);	
+					},this);
 					this.$store.state.cartchecked=[];		
 				}
 			}
@@ -484,6 +508,9 @@
 				this.axiosgetcart();
 			},
 			deletestatus:function(newstatus,old){
+				this.axiosgetcart();
+			},
+			collectstatus:function(newstatus,old){
 				this.axiosgetcart();
 			}
 		}
