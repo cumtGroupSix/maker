@@ -30,26 +30,26 @@
 			methods:{
 					add(){
 					this.items.quantity=parseInt(this.items.quantity)+1;
-					this.$emit('incg',this.items.productname);
+					this.$emit('incg',{id:this.items.productid,quantity:this.items.quantity});
 					},
 					jian(){
 					if (this.items.quantity>1){
 					this.items.quantity=this.items.quantity-1;
-					this.$emit('incg',this.items.productname);	
+					this.$emit('incg',{id:this.items.productid,quantity:this.items.quantity});	
 					}
 					},
 					blur1(){
 					if(this.items.quantity==''){
 						this.items.quantity=1;
-					}
-					this.$emit('incg',this.items.productname);
+					};
+					this.$emit('incg',{id:this.items.productid,quantity:this.items.quantity});
 					},
 					submitg(){
-					this.items.quantity=this.items.quantity.replace(/^[0]+[0-9]*$/gi,"");
-					this.items.quantity=this.items.quantity.replace(/[^d]/g,'');
+          this.items.quantity=this.items.quantity.replace(/\D/g,'');
+					this.items.quantity=this.items.quantity.replace(/^[0]+[0-9]*$/gi,'');	
 					},
 					inchange(){
-					this.$emit('incg',this.items.productname);
+					this.$emit('incg',{id:this.items.productid,quantity:this.items.quantity});
 					}
 				},
     }

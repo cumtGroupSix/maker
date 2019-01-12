@@ -5,6 +5,7 @@
         <id column="product_id" property="productId" jdbcType="INTEGER"></id>
         <result column="product_name" property="productName" jdbcType="VARCHAR"></result>
         <result column="product_stock" property="productStock" jdbcType="INTEGER"></result>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"></result>
         <result column="product_price" property="productPrice" jdbcType="DECIMAL"></result>
         <result column="category" property="category" jdbcType="VARCHAR"></result>
         <result column="img_url" property="imgUrl" jdbcType="VARCHAR"></result>

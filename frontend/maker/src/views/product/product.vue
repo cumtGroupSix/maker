@@ -2,9 +2,9 @@
     <div>
         <!-- 店铺导航 -->
         <section id="dianpudaohang">
-        	<div class="dianputupian">
-        		<img src="@/assets/img/dianputupian.jpg" width="100%">
-        	</div>
+            <div class="dianputupian">
+                <img src="@/assets/img/dianputupian.jpg" width="100%">
+            </div>
         </section>
         
         <!--购买界面-->
@@ -18,12 +18,11 @@
                 </div>
                 
                 <div class="col-12 col-md-6 col-sm-12">
-                    <div class="shangpinmingcheng"> 
-                        <span>猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子</span>
+                    <div class="shangpinmingcheng" v-for="(Name,index) in Name" :key="index">
+                        <span>{{Name.name}}</span>
                     </div>
-                    
-                    <div class="danjia" style="margin-top: 30px">
-                    <strong>单价：¥20</strong>
+                    <div class="danjia" style="margin-top: 30px" v-for="(Price,index) in Price" :key="index">
+                    <strong>单价：{{Price.price}}</strong>
                     </div>
                     
                     <div class="yansefenlei" style="margin-top: 40px">
@@ -38,9 +37,9 @@
                         <br>
                         <span>数量：</span>
                         <list v-for="(List,idx) in List" :key="idx">
-                        <button class="btn btn-default" @click="cuts(idx)"><</button>
+                        <button class="btn btn-default" @click="cuts(idx)">-</button>
                         <span>{{List.num}}</span>
-                        <button class="btn btn-default" @click="add(idx)">></button>
+                        <button class="btn btn-default" @click="add(idx)">+</button>
                         </list>
                     </div>
                     
@@ -60,21 +59,21 @@
                 <div class="xiangqing  text-center">
                     <p><strong>商品详情</strong></p>
                 </div>
-                <div class="wenzishuoming">
+                <div class="wenzishuoming" v-for="(Detail,index) in Detail" :key="index">
                     <div class="row">
                         <div class="col-12 col-md-4 col-sm-12">
-                            <span>产地：中国大陆<br>流行元素：卡通<br>材质：陶瓷<br>颜色分类：1号哈士奇400ml…</span>
+                            <span>{{Detail.a}}<br>{{Detail.b}}<br>{{Detail.c}}<br>{{Detail.d}}</span>
                         </div>
                         <div class="col-12 col-md-4 col-sm-12">
-                            <span>容量：301ml~400ml<br>适用人群：大众<br>价格区间：15元~30元<br>风格：卡通</span>
+                            <span>{{Detail.e}}<br>{{Detail.f}}<br>{{Detail.g}}<br>{{Detail.h}}</span>
                         </div>
                         <div class="col-12 col-md-4 col-sm-12">
-                            <span>是否手工：是<br>适用对象：成人<br>品牌：诺拉和皮埃诺<br>主图来源：自主实拍图</span>
+                            <span>{{Detail.i}}<br>{{Detail.j}}<br>{{Detail.k}}<br>{{Detail.l}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="xiangqingtupian">
-                    <img src="@/assets/img/xiangqing1.jpg" width="100%" class="img-responsive center-block" alt="">
+                    <img src="@/assets/img/xiangqing1.jpg" width="100%" class="img-responsive center-block">
                     <img src="@/assets/img/xiangqing2.jpg" width="100%" class="img-responsive center-block">
                     <img src="@/assets/img/xiangqing3.jpg" width="100%" class="img-responsive center-block">
                     <img src="@/assets/img/xiangqing4.jpg" width="100%" class="img-responsive center-block">
@@ -121,7 +120,33 @@
             return {
                 List:[{
                     num:1
-                }]
+                }],
+                Name:[
+                    {
+                        name:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
+                    }
+                ],
+                Price:[
+                    {
+                        price:"¥20",
+                    }
+                ],
+                Detail:[
+                    {
+                        a:"产地：中国大陆",
+                        b:"流行元素：卡通",
+                        c:"材质：陶瓷",
+                        d:"颜色分类：1号哈士奇400ml…",
+                        e:"容量：301ml~400ml",
+                        f:"适用人群：大众",
+                        g:"价格区间：15元~30元",
+                        h:"风格：卡通",
+                        i:"是否手工：是",
+                        j:"适用对象：成人",
+                        k:"品牌：诺拉和皮埃诺",
+                        l:"主图来源：自主实拍图",
+                    }
+                ]
             }
         },
         methods: {

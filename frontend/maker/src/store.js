@@ -8,13 +8,13 @@ export default new Vuex.Store({
     hotStore:[],
     checkedProduct:'',
     active:"1",
+    userid:1,
     cartmain:{},
-  	cartarr:[]
+  	cartarr:[],
+    cartid:0,
+    cartchecked:[]
   },
   mutations: {
-  	resetCartarr(state,msg){
-  		state.cartarr=[];
-  	}
   },
   actions: {
 
