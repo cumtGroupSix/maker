@@ -15,6 +15,7 @@ import java.util.List;
 public class StoreController {
     @Autowired
     StoreService storeService;
+    
     @GetMapping("/hot")
     public List<StoreVO> getHotStore(){
         return storeService.getHotStores();
