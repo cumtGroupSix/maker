@@ -1,5 +1,5 @@
 <template>
-<div id='root'><Button style='color:blue'  @click='deleteone'>删除</Button></div>
+<div id='root'><Button style='color:blue' @click='collectone'>收藏</Button></div>
 </template>
 
 <script>
@@ -10,8 +10,8 @@
 			}
 		},
 		methods:{
-			deleteone(){
-				this.$emit('deleteone',this.items.productid);
+			collectone(){
+				this.$emit('collectone',this.items.groupid);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import cn.cumtmaker.maker.service.CartProductService;
 import cn.cumtmaker.maker.service.CartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,16 @@ public class CartController {
     }
 
     @ResponseBody
-    @GetMapping("/deleteCartProduct")
+    @DeleteMapping("/deleteCartProduct")
     @ApiOperation(value = "删除购物车商品")
     public ResponseEntity deleteCartProduct(Integer cartId, Integer storeId, Integer productId){
         return  ResponseEntity.ok(cartProductService.deleteCartProduct(cartId,storeId,productId));
+    }
+
+    @ResponseBody
+    @PutMapping("/collectCartProduct")
+    @ApiOperation(value = "收藏购物车商品")
+    public ResponseEntity collectCartProduct(Integer userId, Integer storeId, Integer groupId){
+        return  ResponseEntity.ok(cartProductService.insertGroup(userId,storeId,groupId));
     }
 }
