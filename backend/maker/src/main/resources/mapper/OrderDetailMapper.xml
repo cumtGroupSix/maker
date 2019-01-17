@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.OrderDetailMapper">
+    <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.model.OrderDetail">
+        <id column="detail_id" property="detailId" jdbcType="INTEGER"></id>
+        <result column="order_id" property="orderId" jdbcType="INTEGER"></result>
+        <result column="product_id" property="productId" jdbcType="INTEGER"></result>
+        <result column="product_price" property="productPrice" jdbcType="DECIMAL"></result>
+        <result column="product_quantity" property="productQuantity" jdbcType="INTEGER"></result>
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"></result>
+        <result column="order_status" property="orderStatus" jdbcType="INTEGER"></result>
+    </resultMap>
+    <insert id="insertOrder" parameterType="cn.cumtmaker.maker.model.OrderDetail">
+        insert into order_detail (detail_id,order_id,product_id,product_price,product_quantity,order_time,order_status)
+        values (#{detailId}, #{orderId}, #{productId},#{productPrice}, #{productQuantity},#{orderTime},#{orderStatus})
+    </insert>
+</mapper>
