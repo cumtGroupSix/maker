@@ -1,6 +1,6 @@
 <template>
-    <div class="bg">
-		<div class="container" id='root'>
+    <div class="bg" id='root'>
+		<div class="container">
 			<div class="row headermain">
 				<div class="col-12 zfzx d-none d-sm-block">支付中心</div>
 				<div class="col-12 zfzx-xs d-block d-sm-none">支付中心</div>
@@ -25,13 +25,13 @@
 						<div class="col-12"><hr></div>
 					</div>
 					<div class="row">
-						<div class="col-7" style='color: #ff6600;margin-top: 10px;'><span>！请在</span><span id='time'>23小时59分钟59秒</span><span>以内支付完成，如未完成此订单将自动关闭。</span></div>
+						<div class="col-7" style='color: #ff6600;margin-top: 10px;'><span>！请在</span><span id='time'>{{`${day}天 ${hr}小时 ${min}分钟 ${sec}秒`}}</span><span>以内支付完成，如未完成此订单将自动关闭。</span></div>
 						<div class="col-5 text-right" style="margin-top: 30px;"><span>应付金额：</span><span class="je">￥</span><span class="je">20</span></div>
 					</div>
 					<div class="row">
 						<div class="col-12 text-right" style="margin-top: 10px;">
-						<button class="btn btn-danger btn-md d-none d-sm-block" style='float: right' @click='zf'><b>立即支付</b></button>
-						<button class="btn btn-danger btn-sm d-block d-sm-none" style='float: right' @click='zf'><b>立即支付</b></button>
+						<button class="btn btn-danger btn-md d-none d-sm-block" style='float: right' @click='axiospay'><b>立即支付</b></button>
+						<button class="btn btn-danger btn-sm d-block d-sm-none" style='float: right' @click='axiospay'><b>立即支付</b></button>
 						</div>
 					</div>
 					<div class="row">
@@ -56,12 +56,42 @@
         	return{
         	zfcg:false,
 			img1:'imgsolid',
-			img2:'imgnone',	
+			img2:'imgnone',
+			day: 0, 
+			hr: 0, 
+			min: 0, 
+			sec: 0,
+			updatestatus:0
         	}	
 		},
+		mounted() {
+    	this.countdown()
+  		},
 		methods:{
-		zf(){
-		this.zfcg=true;
+		// 更新支付状态
+		axiospay(){
+			this.axios.post('/api/payment/updatePayStatus?userId='+ this.$store.state.userid + '&orderId='+this.$store.state.orderid +'&payStatus='+1)
+			.then((response)=>{this.updatestatus=response.data})
+			.catch((error)=>{console.log(error);});
+			this.zfcg=true;
+			},
+		// 倒计时组件
+		countdown() {
+	      const end = Date.parse(new Date('2019-1-20 09:25:20'))
+	      const now = Date.parse(new Date())
+	      const msec = end - now
+	      let day = parseInt(msec / 1000 / 60 / 60 / 24)
+	      let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+	      let min = parseInt(msec / 1000 / 60 % 60)
+	      let sec = parseInt(msec / 1000 % 60)
+	      this.day = day
+	      this.hr = hr > 9 ? hr : '0' + hr
+	      this.min = min > 9 ? min : '0' + min
+	      this.sec = sec > 9 ? sec : '0' + sec
+	      const that = this
+	      setTimeout(function () {
+	        that.countdown()
+	      }, 1000)
 		},
 		imgz(){
 		this.img1='imgsolid';

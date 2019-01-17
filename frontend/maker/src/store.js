@@ -9,6 +9,7 @@ export default new Vuex.Store({
     checkedProduct:'',
     active:"1",
     userid:1,
+    orderid:1,
     cartmain:{},
   	cartarr:[],
     cartid:0,
