@@ -55,17 +55,10 @@
 
         <!-- 商品详情 -->
          <div class="container" style="max-width: 1050px">
-            <div class="row">
-                <div class="col-12 rounded select text-center">
-                    <div class="xiangqing float-left rounded" >
-                        <strong>商品详情</strong>
-                    </div>
-                    <div class="pingjia float-left rounded" >
-                        <strong>评价</strong>
-                    </div>
-                </div>
-            </div>
             <section id="shangpinxiangqing">
+                <div class="xiangqing  text-center">
+                    <p><strong>商品详情</strong></p>
+                </div>
                 <div class="wenzishuoming" v-for="(Detail,index) in Detail" :key="index">
                     <div class="row">
                         <div class="col-12 col-md-4 col-sm-12">
@@ -87,57 +80,12 @@
                     <img src="@/assets/img/xiangqing5.jpg" width="100%" class="img-responsive center-block">
                 </div>
             </section>
-            <section id="evaluation">
-                <div class="row summary">
-                    <div class="col-4 level font-weight-bold">
-                        <span v-for="(item,index) in level">{{item}}</span>
-                    </div>
-                    <div class="col-8 keyword">
-                        <div class="float-left key_content rounded" v-for="(item,index) in keyword">
-                            <span>{{item.content}}</span>
-                            <span>{{item.number}}</span>
-                        </div>
-                    </div>
-                    <hr width="100%" color="#FFAD86" size="50" />
-                    <div class="row comment" v-for="(item,index) in evaluation">
-                        <div class="col-3 nickname">
-                            {{item.nickname}}
-                        </div>
-                        <div class="col-9">
-                            <div class="param_content">
-                                {{item.content}}
-                            </div>
-                            <div class="eva_param rounded">
-                                {{item.eva_date}}
-                                {{item.color}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     </div>
 </template>
 
 <script>
     import $ from 'jquery'
-        $('.xiangqing').click(function(){
-            $(this).css("background-color","white")
-            $(this).css("border-top","1px solid red")
-            $('.pingjia').css("background-color","#dadada")
-            $('.pingjia').css("border-top","none")
-            $('#shangpinxiangqing').css("display","block")
-            $('#evaluation').css("display","none")
-        });
-
-        $('.pingjia').click(function(){
-            $(this).css("background-color","white")
-            $(this).css("border-top","1px solid red")
-            $('.xiangqing').css("background-color","#dadada")
-            $('.xiangqing').css("border-top","none")
-            $('#evaluation').css("display","block")
-            $('#shangpinxiangqing').css("display","none")
-        });
     $(function(){
         $('#beizi1').click(function() {
 		$(this).css('borderStyle','solid')
@@ -198,54 +146,7 @@
                         k:"品牌：诺拉和皮埃诺",
                         l:"主图来源：自主实拍图",
                     }
-                ],
-                level:[4.9],
-                keyword:[
-                    {
-                        content:"包装好",
-                        number:"(3)"
-                    },
-                    {
-                        content:"物流快",
-                        number:"(2)"
-                    },
-                    {
-                        content:"适合送人",
-                        number:"(4)"
-                    },
-                ],
-                evaluation:[
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/1/18",
-                        content:"排在最上面的那个才是哦！！很差物流很快，卖家包装很严实，没有破损，杯子很喜欢，以后还会继续光顾的，赞一分钱一分货，用起来还行吧，不过绝对不是多么好的，想追求性价比的可以考虑下杯子和想象中的一样好看，东西一点破损也没有，很喜欢不错，包装厚实，一点没有破损，礼盒装也特别好看，喜欢，特别是杯子上的猫咪",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"薛之谦的小宝贝",
-                        eva_date:"2018/7/17",
-                        content:"做工没得说，买给我女朋友的，整体感觉不错，物流速度很快，包装也很到位，但是觉得作用不大，排除送人。",
-                        color:"橘色猫咪"
-                    },
-                    {
-                        nickname:"Dorio",
-                        eva_date:"2018/1/3",
-                        content:"挺好的杯子 就是感觉杯盖有点突兀...",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/2/3",
-                        content:"杯子挺好看 包装也很完美 超级喜欢 物流很快 卖家服务态度很好 好评好评～",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/3/3",
-                        content:"质量非常好 我收到了 洗了杯子 倒水的时候盖子重1米多高掉下去竟然没有碎 可以 可以",
-                        color:"橘色猫咪"
-                    },
-                ],
+                ]
             }
         },
         methods: {
@@ -283,26 +184,11 @@
 .goumaixuanxiang{
 	line-height: 150px;
 	color:white;
-}1
-
-.select{
-    background-color: #dadada;
-    margin-bottom: 10px;
-}
-
-.xiangqing,.pingjia{
-    padding: 3px 10px;
-    font-size: 30px;
-    margin-top: 1px;
 }
 
 .xiangqing{
-    background-color:white;
-    border-top:1px solid red
-}
-
-#evaluation{
-    display: none;
+	font-size: 30px;
+	background-color: #dadada;
 }
 
 .xiangqingtupian{
@@ -312,30 +198,6 @@
 
 .yansefenlei{
 	margin-top: 25px;
-}
-
-.level{
-    font-size: 40px;
-    color: orange;
-}
-.key_content{
-    font-size: 15px;
-    background-color: #FFA042;
-    color: white;
-    margin: 10px;
-    padding: 5px;
-}
-.nickname{
-    vertical-align: middle;
-    margin:auto;
-}
-.eva_param{
-    padding-top: 5px;
-}
-.comment{
-    width: 100%;
-    display:flex;
-    padding: 10px;
 }
 
 #beizi1 {

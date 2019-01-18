@@ -14,9 +14,4 @@
         on g.group_id=sp.group_id
         where store_id=#{storeId}
     </select>
-    <insert id="addProduct">
-        insert into store_product
-        (store_id,group_id)
-        values (#{storeId},#{productId})
-    </insert>
 </mapper>

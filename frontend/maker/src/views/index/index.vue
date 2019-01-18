@@ -31,12 +31,26 @@ export default {
         HotStore
     },
     mounted: function() {
-        
+        this.getJsonInfo();
+                var getUrl='/api/store/hot';
+                this.$http.get(getUrl).then(response => {
+        this.$store.state.hotStore=response.body;
+        console.log(this.$store.state.hotStore);
+        }, response => {
+        console.log("error");
+        });
     },
     computed: {
         
     },
     methods:{
+        getJsonInfo() {
+            this.$http.get('js/User.json').then(function(response){
+            this.users=response.body.users;
+            }).catch(function(response){
+            console.log(response);
+            })
+        },
         
     }
 }
