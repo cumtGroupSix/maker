@@ -121,6 +121,8 @@
 
 <script>
     import $ from 'jquery'
+       
+    $(function(){
         $('.xiangqing').click(function(){
             $(this).css("background-color","white")
             $(this).css("border-top","1px solid red")
@@ -129,7 +131,6 @@
             $('#shangpinxiangqing').css("display","block")
             $('#evaluation').css("display","none")
         });
-
         $('.pingjia').click(function(){
             $(this).css("background-color","white")
             $(this).css("border-top","1px solid red")
@@ -138,7 +139,6 @@
             $('#evaluation').css("display","block")
             $('#shangpinxiangqing').css("display","none")
         });
-    $(function(){
         $('#beizi1').click(function() {
 		$(this).css('borderStyle','solid')
 		$('#beizi2').css('borderStyle','none')
