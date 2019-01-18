@@ -2,7 +2,7 @@
 <div class="container" id='root'>
 		<div class="row " id='gwc-row1'>
 			<div class="col-6 text-left gwc-h3"><h3><b>购物车</b></h3></div>
-			<div class="col-6 text-right gwc-h6"><a class='text-right' href="order.html" style='color: #ff9966;'>已完成订单</a></div>
+			<div class="col-6 text-right gwc-h6"><router-link  to="/order" class='text-right' style='color: #ff9966;'>已完成订单</router-link></div>
 		</div>
 		<div class="row">
 			<div class="col-12" id='gwc-row2'><hr class="gwc-hr"></div>	
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<gwc-component v-for='(item,index) in cartarr' :key='100' :item='item' @gwcko='gwckong' @aallck='allck' ref="one" @ns='nums' @ps='prices'></gwc-component>
+		<gwc-component v-for='(item,index) in cartarr' :key='index' :item='item' @aallck='allck' ref="one" @ns='nums' @ps='prices' @updatequantity='axiosupdate' @deleteone='axiosdelete' @collectone='axioscollect'></gwc-component>
 		<div class="container" style='margin-top:15px;'> 
 			<div class="row">
 			<div class="col-12 d-none d-lg-block">
@@ -45,7 +45,7 @@
 			<div class="col-3">
 			<div class="row">
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
-			<div class="col-4 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 		    </div>
 			</div>
@@ -68,7 +68,7 @@
 			<div class="col-4">
 			<div class="row">
 			<div class="col-3 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
-			<div class="col-4 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 		    </div>
 			</div>
@@ -90,7 +90,7 @@
 			<div class="col-12">
 			<div class="row">
 			<div class="col-3 d-block d-md-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
-			<div class="col-4 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'>移入收藏夹</div>
+			<div class="col-4 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 			<div class="col-2 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
 		    </div>
@@ -281,16 +281,18 @@
 				namerepeat:false,
 				objindex:0,
 				cartobj:{
-				storename:'',
-				goods:[],
+					storename:'',
+					storeid:'',
+					goods:[],
 				},
 				cartobj2:{
-				productname:'',
-				img:'',
-				price:0,
-				quantity:0,
+					groupid:0,
+					productid:0,
+					productname:'',
+					img:'',
+					price:0,
+					quantity:0,
 				},
-				gk:true,
 				idslen:0,
 				sum:0,
 				ckall:false,
@@ -302,9 +304,12 @@
 				ggxs2:false,
 				ggxs3:false,
 				gwck:false,
-				img1:'../../assets/img/beizi1.jpg',
-				img2:'../../assets/img/beizi1.jpg',
-				img3:'../../assets/img/beizi1.jpg',
+				updatestatus:0,
+				deletestatus:0,
+				collectstatus:0,
+				img1:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
+				img2:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
+				img3:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547237586988&di=683aa0eaf8f668a384853c6841493c04&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F95%2F63%2F16q58PICdcu_1024.jpg',
 				submithref:'',
 				spsum:0,
 				pricesum:(0).toFixed(2),
@@ -314,17 +319,44 @@
 			this.axiosgetcart()
 			},
 			methods:{
+			// 根据用户ID获取购物车信息
 			axiosgetcart(){
 			this.axios.get('/api/cart/get',{
 				params:{
-					id:1
+					id:this.$store.state.userid
 				}
 			})
 			.then((response)=>{this.$store.state.cartmain=response.data})
 			.catch((error)=>{console.log(error);});
 			},
+			// 更新商品数量
+			axiosupdate(msg){
+			this.axios.post('/api/cart/updateQuantity?cartId='+ this.$store.state.cartid + '&storeId='+ msg.storeid+'&productId='+msg.productid+'&productQuantity='+msg.quantity)
+			.then((response)=>{this.updatestatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
+			// 删除商品
+			axiosdelete(msg){
+			this.axios.delete('/api/cart/deleteCartProduct',{
+				params:{
+					cartId:this.$store.state.cartid,
+					storeId:msg.storeid,
+					productId:msg.productid
+				}
+			})
+			.then((response)=>{this.deletestatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
+			// 收藏商品
+			axioscollect(msg){
+			this.axios.put('/api/cart/collectCartProduct?userId='+this.$store.state.userid+'&storeId='+msg.storeid+'&groupId='+msg.groupid)
+			.then((response)=>{this.collectstatus=response.data})
+			.catch((error)=>{console.log(error);});
+			},
 			addobjdata(index){
+				this.cartobj2.productid=this.$store.state.cartmain.cartproduct[index].productId,
 				this.cartobj2.productname=this.$store.state.cartmain.cartproduct[index].product.productName,
+				this.cartobj2.groupid=this.$store.state.cartmain.cartproduct[index].product.groupId,
 				this.cartobj2.img=this.$store.state.cartmain.cartproduct[index].product.imgUrl,
 				this.cartobj2.price=this.$store.state.cartmain.cartproduct[index].product.productPrice,
 				this.cartobj2.quantity=this.$store.state.cartmain.cartproduct[index].productQuantity
@@ -332,11 +364,14 @@
 			resetcartobj1(){
 				this.cartobj={
 				storename:'',
+				storeid:'',
 				goods:[],
 			}
 			},
 			resetcartobj2(){
 				this.cartobj2={
+				groupid:0,
+				productid:0,
 				productname:'',
 				img:'',
 				price:0,
@@ -411,19 +446,27 @@
 				}
 			},
 			deletea(){
-			for(var d=0;d<this.cartarr.length;d++){
-				if(this.gk){
-				if(this.$refs.one[d].spckall==true){
-				this.$refs.one[d].deleteall=false;
-				this.$refs.one[d].deleteaa();
-				this.$refs.one[d].spcheckall();
+				if(this.$store.state.cartchecked.length==0){
+					this.$router.push({path: '/cart'});
 				}else{
-				this.$refs.one[d].deleteaone();
-				}	
+					this.$store.state.cartchecked.forEach(function(msg){
+					this.axiosdelete(msg);	
+					},this);
+					this.$store.state.cartchecked=[];	
+					this.$router.push({path: '/cart'});	
 				}
-				}
-				},
 			},
+			collecta(){
+				if(this.$store.state.cartchecked.length==0){
+					this.$router.push({path: '/cart'});
+				}else{
+					this.$store.state.cartchecked.forEach(function(msg){
+					this.axioscollect(msg);	
+					},this);
+					this.$store.state.cartchecked=[];		
+				}
+			}
+		},
 		computed: {
 			cartmain(){
 				return this.$store.state.cartmain;
@@ -434,7 +477,8 @@
 		},
 		watch: {
 			cartmain: function(newcartmain, old) {
-				this.$store.commit('resetCartarr',1);
+				this.$store.state.cartarr=[];
+				this.$store.state.cartid=newcartmain.cartId;
 				for(var a=0;a<newcartmain.cartproduct.length;a++){
 					this.namerepeat=false;
 					this.objindex=0;
@@ -453,11 +497,21 @@
 					}else {
 						this.addobjdata(a);	
 						this.cartobj.storename=newcartmain.cartproduct[a].store.storeName;	
+						this.cartobj.storeid=newcartmain.cartproduct[a].storeId;	
 						this.cartobj.goods=[];	
 						this.cartobj.goods.push(this.cartobj2);
 						this.cartarr.push(this.cartobj);
 					};
 				};
+			},
+			updatestatus:function(newstatus,old){
+				this.axiosgetcart();
+			},
+			deletestatus:function(newstatus,old){
+				this.axiosgetcart();
+			},
+			collectstatus:function(newstatus,old){
+				this.axiosgetcart();
 			}
 		}
 				    

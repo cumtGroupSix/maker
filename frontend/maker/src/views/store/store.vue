@@ -37,35 +37,35 @@
 						name:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
 						price:"¥20",
 						browseNum:"100",
-						imageUrl:"@/assets/img/list-1.jpg",
+						imageUrl:require('@/assets/img/list-1.jpg'),
 
 					},
 					{
 						name:"韩国卡通可爱猫咪蓝光苹果7plus手机iphonex/7/8/6s/6全包软壳",
 						price:"¥15",
 						browseNum:"80",
-						imageUrl:"@/assets/img/shoujike.jpg",
+						imageUrl:require('@/assets/img/shoujike.jpg'),
 
 					},
 					{
 						name:"四川蒲江红心猕猴桃新鲜水果5斤包邮30个奇异果红阳泥猴桃",
 						price:"¥35",
 						browseNum:"60",
-						imageUrl:"@/assets/img/shuiguo.jpg",
+						imageUrl:require('@/assets/img/shuiguo.jpg'),
 
 					},
 					{
 						name:"有零有食脆脆每日坚果集混合160g营养代餐能量棒燕麦片零食",
 						price:"¥15",
 						browseNum:"50",
-						imageUrl:"@/assets/img/lingshi.jpg",
+						imageUrl:require('@/assets/img/lingshi.jpg'),
 
 					},
 					{
 						name:"牛津布装棉被子的收纳袋超大搬家神器打包袋衣服物行李箱整理袋子",
 						price:"¥10",
 						browseNum:"35",
-						imageUrl:"@/assets/img/shounadai.jpg",
+						imageUrl:require('@/assets/img/shounadai.jpg'),
 
 					},
 				],
@@ -113,8 +113,4 @@
 		margin-top: 30px;
 	}
 
-	.goumaixuanxiang{
-		margin-left: 10px;
-		margin-bottom: 10px;
-	}
 </style>

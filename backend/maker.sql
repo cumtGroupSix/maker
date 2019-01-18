@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 27/12/2018 23:41:02
+ Date: 17/01/2019 18:39:49
 */
 
 SET NAMES utf8mb4;
@@ -54,7 +54,9 @@ CREATE TABLE `cart_product`  (
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
+INSERT INTO `cart_product` VALUES (1, 1, 1, 2);
 INSERT INTO `cart_product` VALUES (1, 2, 1, 1);
+INSERT INTO `cart_product` VALUES (1, 2, 2, 1);
 
 -- ----------------------------
 -- Table structure for comment
@@ -78,17 +80,21 @@ CREATE TABLE `comment`  (
 DROP TABLE IF EXISTS `group_collections`;
 CREATE TABLE `group_collections`  (
   `user_id` int(55) NOT NULL COMMENT '用户ID',
+  `store_id` int(55) NOT NULL COMMENT '创客店ID',
   `collect_group_id` int(55) NOT NULL COMMENT '收藏商品ID',
-  PRIMARY KEY (`user_id`) USING BTREE,
+  PRIMARY KEY (`user_id`, `store_id`, `collect_group_id`) USING BTREE,
   INDEX `fk[group_collections]collect_group_id`(`collect_group_id`) USING BTREE,
-  CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  INDEX `[group_collections]store_id`(`store_id`) USING BTREE,
+  CONSTRAINT `[group_collections]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of group_collections
 -- ----------------------------
-INSERT INTO `group_collections` VALUES (1, 1);
+INSERT INTO `group_collections` VALUES (1, 1, 1);
+INSERT INTO `group_collections` VALUES (1, 1, 2);
 
 -- ----------------------------
 -- Table structure for order_detail
@@ -100,7 +106,6 @@ CREATE TABLE `order_detail`  (
   `product_id` int(55) NOT NULL COMMENT '产品ID',
   `product_price` decimal(8, 2) NOT NULL COMMENT '产品价格',
   `product_quantity` int(20) NOT NULL COMMENT '产品数量',
-  `order_time` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
   `order_status` int(2) NULL DEFAULT NULL COMMENT '订单状态',
   PRIMARY KEY (`detail_id`) USING BTREE,
   INDEX `fk[order_detail]order_id`(`order_id`) USING BTREE,
@@ -114,8 +119,8 @@ CREATE TABLE `order_detail`  (
 -- ----------------------------
 -- Records of order_detail
 -- ----------------------------
-INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 2, '2018-12-19 20:10:07', 0);
-INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3, '2018-12-13 20:10:11', 0);
+INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 2, 0);
+INSERT INTO `order_detail` VALUES (2, 1, 2, 2.00, 3, 0);
 
 -- ----------------------------
 -- Table structure for order_master
@@ -124,8 +129,9 @@ DROP TABLE IF EXISTS `order_master`;
 CREATE TABLE `order_master`  (
   `order_id` int(55) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
   `user_id` int(55) NOT NULL COMMENT '用户ID',
-  `pay_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '支付状态',
+  `pay_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '支付状态(1代表已支付，0代表未支付)',
   `order_amount` decimal(8, 2) NOT NULL COMMENT '订单总金额',
+  `order_time` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `fk[order]user_id`(`user_id`) USING BTREE,
   CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -134,7 +140,7 @@ CREATE TABLE `order_master`  (
 -- ----------------------------
 -- Records of order_master
 -- ----------------------------
-INSERT INTO `order_master` VALUES (1, 1, 1, 21.00);
+INSERT INTO `order_master` VALUES (1, 1, 0, 21.00, '2019-01-15 01:37:27');
 
 -- ----------------------------
 -- Table structure for product
@@ -256,7 +262,7 @@ CREATE TABLE `store`  (
   PRIMARY KEY (`store_id`) USING BTREE,
   UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE,
   INDEX `store_name`(`store_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of store

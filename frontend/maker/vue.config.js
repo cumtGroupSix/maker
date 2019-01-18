@@ -12,5 +12,7 @@ module.exports = {
                 }
             },
         }
-    }
+    },
+
+    lintOnSave: false
 };

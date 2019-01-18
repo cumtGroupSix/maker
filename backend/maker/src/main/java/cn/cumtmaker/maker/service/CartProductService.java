@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Param;
 public interface CartProductService {
     int updateQuantity(Integer cartId,Integer storeId,Integer productId,Integer productQuantity);
     int deleteCartProduct(Integer cartId,Integer storeId,Integer productId);
+    int insertGroup(Integer userId,Integer storeId,Integer collectGroupId);
 }
