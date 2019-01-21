@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 21/01/2019 18:02:53
+ Date: 21/01/2019 18:16:39
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `cart`  (
   `user_id` int(55) NOT NULL COMMENT '用户ID',
   PRIMARY KEY (`cart_id`) USING BTREE,
   INDEX `fk[cart]user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `fk[cart]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[cart]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -70,8 +70,8 @@ CREATE TABLE `comment`  (
   `star_level` int(1) NULL DEFAULT NULL COMMENT '评价星级',
   PRIMARY KEY (`user_id`, `product_id`) USING BTREE,
   INDEX `fk[product_id]`(`product_id`) USING BTREE,
-  CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[user_id]` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[user_id]` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -87,7 +87,7 @@ CREATE TABLE `group_collections`  (
   INDEX `[group_collections]store_id`(`store_id`) USING BTREE,
   CONSTRAINT `[group_collections]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -134,7 +134,7 @@ CREATE TABLE `order_master`  (
   `order_time` datetime(0) NULL DEFAULT NULL COMMENT '下单时间',
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `fk[order]user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -285,7 +285,7 @@ CREATE TABLE `store_collections`  (
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `fk[store_collections]collect_store_id`(`collect_store_id`) USING BTREE,
   CONSTRAINT `fk[store_collections]collect_store_id` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk[store_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[store_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -318,7 +318,7 @@ INSERT INTO `store_product` VALUES (2, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `user_id` int(55) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `user_id` int(55) NOT NULL COMMENT '用户ID',
   `nickname` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `enable` bit(1) NULL DEFAULT NULL COMMENT '是否可用',
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话号码',
@@ -327,7 +327,7 @@ CREATE TABLE `user`  (
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名称',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[user]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -362,7 +362,7 @@ CREATE TABLE `user_role`  (
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE,
   INDEX `fk[user_role]role_id`(`role_id`) USING BTREE,
   CONSTRAINT `fk[user_role]role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk[user_role]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[user_role]user_id` FOREIGN KEY (`user_id`) REFERENCES `user_password` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
