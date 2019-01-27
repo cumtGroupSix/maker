@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 21/01/2019 18:33:34
+ Date: 27/01/2019 17:19:54
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,7 @@ CREATE TABLE `cart`  (
 -- Records of cart
 -- ----------------------------
 INSERT INTO `cart` VALUES (1, 1);
+INSERT INTO `cart` VALUES (6, 6);
 
 -- ----------------------------
 -- Table structure for cart_product
@@ -57,6 +58,7 @@ CREATE TABLE `cart_product`  (
 INSERT INTO `cart_product` VALUES (1, 1, 1, 2);
 INSERT INTO `cart_product` VALUES (1, 2, 1, 1);
 INSERT INTO `cart_product` VALUES (1, 2, 2, 1);
+INSERT INTO `cart_product` VALUES (6, 1, 1, 1);
 
 -- ----------------------------
 -- Table structure for comment
@@ -93,8 +95,8 @@ CREATE TABLE `group_collections`  (
 -- ----------------------------
 -- Records of group_collections
 -- ----------------------------
-INSERT INTO `group_collections` VALUES (1, 1, 1);
-INSERT INTO `group_collections` VALUES (1, 1, 2);
+INSERT INTO `group_collections` VALUES (5, 1, 1);
+INSERT INTO `group_collections` VALUES (5, 1, 2);
 
 -- ----------------------------
 -- Table structure for order_detail
@@ -291,7 +293,7 @@ CREATE TABLE `store_collections`  (
 -- ----------------------------
 -- Records of store_collections
 -- ----------------------------
-INSERT INTO `store_collections` VALUES (1, 9);
+INSERT INTO `store_collections` VALUES (5, 9);
 
 -- ----------------------------
 -- Table structure for store_product
@@ -322,13 +324,15 @@ CREATE TABLE `user`  (
   `username` varchar(55) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'username', '$10$F8DJhuyZF.xt2elWxkZ0TezCjjQQA.DcOLReN9bGvc80Zu88OnGca');
+INSERT INTO `user` VALUES (1, 'sam', '$2a$10$FRq/a8xtT4eG8XfxlffFde4PHjAhBh1yfTk65EX1YJ71abqkK4IZu');
 INSERT INTO `user` VALUES (2, 'maker', '$10$sT0tVlaWN/rZ5feB1jtRCef0FJLB0dDmK2c6ZmZONYhiAx35UzR3K');
+INSERT INTO `user` VALUES (5, 'username', '$10$F8DJhuyZF.xt2elWxkZ0TezCjjQQA.DcOLReN9bGvc80Zu88OnGca');
+INSERT INTO `user` VALUES (6, 'sam1', '$2a$10$PeOehjt5PEhmTxw2dc.eM.jw88/oBAjx0hwLTl6S/xnwof.kFyFXq');
 
 -- ----------------------------
 -- Table structure for user_info
@@ -343,14 +347,14 @@ CREATE TABLE `user_info`  (
   `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名称',
   PRIMARY KEY (`user_id`) USING BTREE,
-  CONSTRAINT `fk[user]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk[user_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'Tom', b'1', '11122223333', '中国矿业大学松苑', '2018-12-05 18:50:00', '中国矿业大学');
 INSERT INTO `user_info` VALUES (2, 'Jason', b'1', '44455556666', '中国矿业大学桃苑', '2018-12-05 18:47:15', '中国矿业大学（北京）');
+INSERT INTO `user_info` VALUES (5, 'Tom', b'1', '11122223333', '中国矿业大学松苑', '2018-12-05 18:50:00', '中国矿业大学');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -368,8 +372,8 @@ CREATE TABLE `user_role`  (
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
-INSERT INTO `user_role` VALUES (1, 1);
 INSERT INTO `user_role` VALUES (2, 1);
+INSERT INTO `user_role` VALUES (5, 1);
 INSERT INTO `user_role` VALUES (2, 2);
 
 -- ----------------------------

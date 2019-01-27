@@ -31,9 +31,9 @@ public class CartController {
 
     @ResponseBody
     @GetMapping("/get")
-    @ApiOperation(value = "根据UserId获取购物车",response= Cart.class)
+    @ApiOperation(value = "获取购物车",response= Cart.class)
     public Cart getCartProduct(HttpServletRequest request){
-        int id= userService.getUserIdByRequest(request);
+        int id= userService.getUserByRequest(request).getUserId();
         Cart cart = cartService.getCart(id);
         return cart;
     }

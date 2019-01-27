@@ -321,11 +321,7 @@
 			methods:{
 			// 根据用户ID获取购物车信息
 			axiosgetcart(){
-			this.axios.get('/api/cart/get',{
-				params:{
-					id:this.$store.state.userid
-				}
-			})
+			this.axios.get('/api/cart/get')
 			.then((response)=>{this.$store.state.cartmain=response.data})
 			.catch((error)=>{console.log(error);});
 			},
@@ -477,6 +473,7 @@
 		},
 		watch: {
 			cartmain: function(newcartmain, old) {
+				this.$store.state.userid=newcartmain.userId;
 				this.$store.state.cartarr=[];
 				this.$store.state.cartid=newcartmain.cartId;
 				for(var a=0;a<newcartmain.cartproduct.length;a++){

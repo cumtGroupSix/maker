@@ -31,7 +31,7 @@ public class PaymentController {
     @PostMapping("/updatePayStatus")
     @ApiOperation(value = "更新支付状态")
     public ResponseEntity updatePayStatus(HttpServletRequest request, Integer orderId, Integer payStatus){
-        int userId= userService.getUserIdByRequest(request);
+        int userId= userService.getUserByRequest(request).getUserId();
        return  ResponseEntity.ok(paymentService.updatePayStatus(userId,orderId,payStatus));
     }
 }

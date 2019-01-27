@@ -69,8 +69,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     .getBody()
                     .getSubject();
             if (username != null) {
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(username, null,AuthorityUtils.commaSeparatedStringToAuthorityList("user"));
-              return usernamePasswordAuthenticationToken;
+                return new UsernamePasswordAuthenticationToken(username, null,AuthorityUtils.commaSeparatedStringToAuthorityList("user"));
             }
             return null;
         }

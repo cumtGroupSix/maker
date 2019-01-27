@@ -43,9 +43,9 @@
             }
         },
         mounted(){
-            this.axios.get("http://localhost:8090/api/store/hot")
+            this.axios.get("/api/store/hot")
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     this.hotStore = res.data
                 })
         },

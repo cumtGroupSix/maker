@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RequestMapping(value="api/user",produces = {APPLICATION_JSON_UTF8_VALUE})
@@ -28,8 +30,15 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/get")
-    @ApiOperation(value = "根据用户名查询")
-    public ResponseEntity getuser(String username) {
+    @ApiOperation(value = "根据token获取")
+    public ResponseEntity getByToken(HttpServletRequest request) {
+        return ResponseEntity.ok(userService.getUserByRequest(request));
+    }
+
+    @ResponseBody
+    @GetMapping("/getByUserName")
+    @ApiOperation(value = "根据username获取")
+    public ResponseEntity getByUserName(String username) {
         return ResponseEntity.ok(userService.getUserByUserName(username));
     }
 }

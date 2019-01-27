@@ -8,11 +8,13 @@ export default new Vuex.Store({
     hotStore:[],
     checkedProduct:'',
     active:"1",
-    userid:1,
-    orderid:1,
+    loginresponse:null,
+    userid:null,
+    username:null,
+    orderid:null,
     cartmain:{},
   	cartarr:[],
-    cartid:0,
+    cartid:null,
     cartchecked:[]
   },
   mutations: {

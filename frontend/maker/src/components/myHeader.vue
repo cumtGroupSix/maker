@@ -23,7 +23,7 @@
                     <a class="nav-link" @click="loginDialogShow" style="cursor: pointer;">登录</a>
                 </li>
                 <li class="nav-item mx-3" v-if="this.hasLogged">
-                    <a class="nav-link" style="cursor: pointer;">尊贵的{{myUsername}},您好!</a>
+                    <a class="nav-link" style="cursor: pointer;">尊敬的{{this.$store.state.username}},您好!</a>
                 </li>
                 <li class="nav-item mx-3" v-if="this.hasLogged">
                     <a class="nav-link" style="cursor: pointer;" @click="exit">退出</a>
@@ -32,7 +32,7 @@
                     <a class="nav-link" href="/register">注册</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" style='cursor: pointer;'>购物车</a>
+                    <router-link to='/cart' class="nav-link" style='cursor: pointer;'>购物车</router-link>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#">创客中心</a>
@@ -84,25 +84,69 @@
                 isLoginDialog:false
             }
         },
+        mounted(){
+        	this.tokenlogin()
+        },
         methods: {
+        	//根据Token请求数据
+        	tokenlogin(){
+        		if (localStorage.getItem('token')&&localStorage.getItem('token')!="undefined"){
+					this.axios.get('/api/user/get')
+					.then((response)=>{this.$store.state.loginresponse=response})
+					.catch((error)=>{console.log(error);});
+        		}
+        		else{
+        			this.isLoginDialog=true;
+        		}
+        	},
+        	//发送登录请求
+        	login(){
+        		this.axios.post('/loginapi?username='+this.myUsername+'&password='+this.myPassword)
+				.then((response)=>{this.$store.state.loginresponse=response})
+				.catch((error)=>{console.log(error);});
+        	},
             loginDialogShow(){
                 this.isLoginDialog=true;
             },
             loginDialogHide(){
                 this.isLoginDialog=false;
             },
-            login(){
-                var isTrue=false
-                this.hasLogged=true;
-                this.isLoginDialog=false;
-                isTrue=true
-            },
             exit(){
-                this.hasLogged=false
-                this.myUsername=""
-                this.myPassword=""
+	            this.hasLogged=false
+	            this.myUsername=""
+	            this.myPassword=""
+	            localStorage.removeItem('token');
+				localStorage.removeItem('tokenTime');
             }
-        }
+        },
+        computed: {
+			loginresponse(){
+				return this.$store.state.loginresponse;
+			}
+		},
+		watch:{
+			loginresponse:function(news,olds){
+				if(news.headers.authorization && news.headers.authorization !="undefined"){
+					localStorage.setItem('token', JSON.stringify(news.headers.authorization));
+				}
+				if(localStorage.getItem('token') && localStorage.getItem('token')!="undefined"){
+					localStorage.setItem('tokenTime', Date.now());
+				}
+				this.$store.state.userid=null;
+				this.$store.state.username=null;
+				if(news.status==200 && typeof news.data=="object"){
+				this.$store.state.userid=news.data.userId;
+				this.$store.state.username=news.data.username;
+				}			
+				else{
+				alert("登录失败,用户名或密码错误！");
+				};
+				if(this.$store.state.username!=null){
+               	 	this.hasLogged=true;
+                	this.isLoginDialog=false;
+            	}
+			}
+		}
     }
 </script>
 

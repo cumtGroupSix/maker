@@ -17,6 +17,43 @@ import 'iview/dist/styles/iview.css'
 Vue.config.productionTip = false
 // import $ from 'jquery'
 
+router.beforeEach((to, from, next) => {
+  // 验证是否存在 JWT Token
+  var token=localStorage.getItem('token');
+  if(token && token!="undefined"){ 
+  		//如果存在token,验证是否过期(2小时过期)
+		if(Date.now()-localStorage.getItem('tokenTime')>60*60*2*1000){
+			localStorage.removeItem('token');
+			localStorage.removeItem('tokenTime');
+			next('/');
+		}else{
+		//如果没有过期
+      next(); 
+    	} 	
+	}else {
+    	//如果不存在token
+        if(to.path=='/'){ 
+        //如果是主页路径，就直接next()
+            next();
+        } else { 
+        //不然就跳转到主页；
+            next('/');
+        }
+    }
+});
+
+axios.interceptors.request.use(
+  config => {
+  	// 判断是否存在token，如果存在的话，则每个http header都加上token
+    if (localStorage.getItem('token')&&localStorage.getItem('token')!="undefined") {  
+      config.headers.Authorization = JSON.parse(localStorage.getItem('token'));
+    }
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  });
+
 Vue.use(VueAxios, axios)
 Vue.use(iView);
 new Vue({
