@@ -18,4 +18,12 @@
     from user
     where username=#{username}
   </select>
+  <update id="resetPassword">
+    update user
+    <set>
+    password=#{password}
+    </set>
+    where
+    username=#{username}
+  </update>
 </mapper>

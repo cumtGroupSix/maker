@@ -46,28 +46,63 @@
 				<button type="button" class="close m-2" aria-label="Close" @click="loginDialogHide">
 				  <span aria-hidden="true">&times;</span>
 				</button>
-				<div class="login-title px-4 py-4">密码登录</div>
-				<form>
+				<div class="login-title px-4 py-3">密码登录</div>
+				<Form>
 				  <div class="form-group row px-4 py-0">
-					<label for="username" class="col-2 col-form-label py-0 my-0"><div class="usernameIcon"><i class="iconfont ml-1">&#xe683;</i></div></label>
+					<label for="username" class="col-2 col-form-label py-0 my-0"><Icon type="md-person" size="36"/></label>
 					<div class="col-10">
 					  <input type="text" class="form-control justify-content-center" id="username" placeholder="会员名/邮箱号/手机号" v-model="myUsername">
 					</div>
 				  </div>
 				  <div class="form-group row px-4 py-2">
-					<label for="password" class="col-2 col-form-label py-0 my-0"><div class="passwordIcon"><i class="iconfont ml-1">&#xe620;</i></div></label>
+					<label for="password" class="col-2 col-form-label py-0 my-0"><Icon type="ios-keypad" size="36"/></label>
 					<div class="col-10">
 					  <input type="password" class="form-control" id="password" placeholder="密码" v-model="myPassword">
 					</div>
 				  </div>
-				  <div class="form-group row px-4">
+				  <Row type="flex" style="margin-top:0px">
+					<Col span="10" offset="2">
+					<FormItem>
+					<Row>
+					<Col span="4">
+					<Icon type="ios-paper-plane" size="20"/>
+					</Col>
+					<Col span="16" offset="4">
+					<Input name="validateCode" v-model="validatecode" placeholder="请输入验证码" clearable style="width: 120px" />
+					</Col>
+					</Row>
+					</FormItem>
+					</Col>
+					<Col span="10">
+					<FormItem align="right">
+					<img :src="this.$store.state.validateImg" @click="changeimg" style="cursor: pointer;"/>
+					</FormItem>
+					</Col>
+				  </Row>
+				  <div class="form-group row px-4 py-0" style="margin-top:-10px">
+					<div class="col-6">
+						<Checkbox value="rememberpass" v-model:checked.sync="isRemember">
+						<span style="color:#72ACE3;cursor:pointer">记住密码</span>
+						</Checkbox>
+					</div>
+					<div class="col-6" style="text-align:right" >
+						<span style="cursor: pointer;color:#72ACE3" @click="toChangePassword">修改密码</span>
+					</div>
+				  </div>
+				  <div class="form-group row px-4" style="margin-top:-10px">
 					<div class="col-12">
 					  <button type="button" class="btn btn-primary w-100" @click="login">登录</button>
 					</div>
 				  </div>
-				</form>
-				<div class="forget px-4 py-2 float-left"><a href="#">忘记密码</a></div>
-				<div class="registe px-4 py-2 float-right"><a href="#">免费注册</a></div>
+				 <Row>
+				 <Col span="10" offset="2">
+				 <a href="#">忘记密码</a>
+					</Col>
+				 <Col span="10" align="right">
+				 <router-link to="/register" href="#">免费注册</router-link>
+				 </Col> 
+				</Row>
+				</Form>
 			</div>
 		</div>
     </div>
@@ -77,15 +112,19 @@
     export default {
         data() {
             return {
+            	loginFailed:false,
+            	isRemember:false,
                 myUsername:"",
                 myPassword:"",
                 users:"",
                 hasLogged:false,
-                isLoginDialog:false
+                isLoginDialog:false,
+                validatecode:null
             }
         },
         mounted(){
-        	this.tokenlogin()
+        	this.doBefore()
+        	this.tokenlogin()     	
         },
         methods: {
         	//根据Token请求数据
@@ -96,14 +135,56 @@
 					.catch((error)=>{console.log(error);});
         		}
         		else{
-        			this.isLoginDialog=true;
+        	// 只在主页自动弹出登录窗口
+        			if(this.$router.currentRoute.fullPath=="/"){
+        			this.isLoginDialog=true;	
+        			}	
         		}
         	},
         	//发送登录请求
+        	axioslogin(){
+        		localStorage.setItem('username',this.myUsername);
+				this.axios.post('/loginapi?username='+this.myUsername+'&password='+this.myPassword+"&imageCode="+this.validatecode)
+					.then((response)=>{this.$store.state.loginresponse=response})
+					.catch((error)=>{console.log(error);});
+        	},
         	login(){
-        		this.axios.post('/loginapi?username='+this.myUsername+'&password='+this.myPassword)
-				.then((response)=>{this.$store.state.loginresponse=response})
-				.catch((error)=>{console.log(error);});
+				if(this.myUsername=='')
+				{this.$Message.error('用户名不能为空');}
+				else if(this.myPassword=='')
+				{this.$Message.error('密码不能为空');}
+				else if(this.validatecode=='' || this.validatecode==null)
+				{this.$Message.error('验证码不能为空');}
+				else{
+				this.axioslogin();
+				}
+        		
+        	},
+        	// 刷新验证码
+        	changeimg(){
+      		this.$store.state.validateImg="/api/code/image?d="+Math.random();
+      		},
+        	doBefore(){
+        		if(localStorage.getItem('username') && localStorage.getItem('username')!="undefined"){
+        			this.myUsername=localStorage.getItem('username');
+        		}
+        		if(localStorage.getItem('password') && localStorage.getItem('password')!="undefined"){
+        			this.isRemember=true;
+        			this.myPassword=localStorage.getItem('password');
+        		}
+        	},
+        	toChangePassword(){
+        		this.isLoginDialog=false;
+        		this.$router.push({path: '/changepassword'});
+        	},
+        	rememberPassword(){
+        		if(this.isRemember==true){
+        			localStorage.setItem('password',this.myPassword);
+        			this.myPassword=localStorage.getItem('password');
+        		}else {
+        			localStorage.removeItem('password');
+        			this.myPassword="";
+        		}
         	},
             loginDialogShow(){
                 this.isLoginDialog=true;
@@ -113,10 +194,9 @@
             },
             exit(){
 	            this.hasLogged=false
-	            this.myUsername=""
-	            this.myPassword=""
 	            localStorage.removeItem('token');
 				localStorage.removeItem('tokenTime');
+				this.$router.push({path: '/'});
             }
         },
         computed: {
@@ -126,21 +206,32 @@
 		},
 		watch:{
 			loginresponse:function(news,olds){
+				this.$store.state.userid=null;
+				this.$store.state.username=null;
+				if(news.status==200 && typeof news.data=="object"){
+				this.validatecode=null;
+				this.$store.state.userid=news.data.userId;
+				this.$store.state.username=news.data.username;
+				this.myUsername=news.data.username;
+				this.rememberPassword();
+				//只有用户名密码登录时弹出登录成功
+				if (!localStorage.getItem('token') || localStorage.getItem('token')=="undefined")
+				{this.$Message.success('登录成功');}
+				}			
+				else{
+				localStorage.removeItem('password');
+				if(news.data=="坏的凭证"){
+				this.$Message.error('登录失败，用户名或密码错误');	
+				}else{
+				this.$Message.error(news.data);	
+				}	
+				};
 				if(news.headers.authorization && news.headers.authorization !="undefined"){
 					localStorage.setItem('token', JSON.stringify(news.headers.authorization));
 				}
 				if(localStorage.getItem('token') && localStorage.getItem('token')!="undefined"){
 					localStorage.setItem('tokenTime', Date.now());
 				}
-				this.$store.state.userid=null;
-				this.$store.state.username=null;
-				if(news.status==200 && typeof news.data=="object"){
-				this.$store.state.userid=news.data.userId;
-				this.$store.state.username=news.data.username;
-				}			
-				else{
-				alert("登录失败,用户名或密码错误！");
-				};
 				if(this.$store.state.username!=null){
                	 	this.hasLogged=true;
                 	this.isLoginDialog=false;
@@ -151,6 +242,10 @@
 </script>
 
 <style scoped>
+.ivu-icon:before,
+.ivu-icon:after {
+    font-family: Ionicons !important;
+}
 .logo-wraper{
 	display: flex;
 	justify-content: center;
@@ -167,8 +262,9 @@
 	font-family: '微软雅黑';
 }
 .login{
+	border-radius:8px;
 	width: 350px;
-	height: 320px;
+	height: 360px;
 	background-color: #fff;
 	position: fixed;
 	top: 0;
@@ -176,7 +272,7 @@
 	right: 0;
 	bottom: 0;
 	margin: auto;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0,0.2);
     z-index: 1000;
 }
 .login-box{

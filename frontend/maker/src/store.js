@@ -9,6 +9,7 @@ export default new Vuex.Store({
     checkedProduct:'',
     active:"1",
     loginresponse:null,
+    validateImg:"/api/code/image",
     userid:null,
     username:null,
     orderid:null,

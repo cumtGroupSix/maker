@@ -12,6 +12,7 @@ import OrderDetail from './views/orderDetail/orderDetail'
 import OrderSubmit from './views/orderSubmit/orderSubmit'
 import Order from './views/order/order'
 import User from './views/user/user'
+import ChangePassword from './views/changePassword/changePassword'
 import Browse from './views/browse/browse'
 import Evaluate from './views/evaluate/evaluate'
 import MyProduct from './views/myProduct/myProduct'
@@ -41,6 +42,11 @@ export default new Router({
       path: '/store',
       name: 'store',
       component: Store
+    },
+    {
+      path: '/changepassword',
+      name: 'changepassword',
+      component: ChangePassword
     },
     {
       path: '/product',

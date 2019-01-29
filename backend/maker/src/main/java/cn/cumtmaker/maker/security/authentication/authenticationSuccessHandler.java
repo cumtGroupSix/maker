@@ -34,7 +34,7 @@ public class authenticationSuccessHandler implements AuthenticationSuccessHandle
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{
 
-        logger.info("登录成功");
+        logger.info("用户登录成功");
 
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(
@@ -43,6 +43,7 @@ public class authenticationSuccessHandler implements AuthenticationSuccessHandle
         //登录验证成功后，生成JWT的token
         String token = Jwts.builder()
                 .setSubject((((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername()))
+               //设置过期时间（2小时）
                 .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 2 * 1000))
                 .signWith(SignatureAlgorithm.HS512, "GroupSix")
                 .compact();

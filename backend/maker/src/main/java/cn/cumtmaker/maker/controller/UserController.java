@@ -20,7 +20,7 @@ public class UserController {
     UserService userService;
 
 
-    //注册
+    //注册API
     @ResponseBody
     @PostMapping("/signup")
     @ApiOperation(value = "用户注册")
@@ -30,15 +30,22 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/get")
-    @ApiOperation(value = "根据token获取")
+    @ApiOperation(value = "根据token获取用户信息")
     public ResponseEntity getByToken(HttpServletRequest request) {
         return ResponseEntity.ok(userService.getUserByRequest(request));
     }
 
     @ResponseBody
     @GetMapping("/getByUserName")
-    @ApiOperation(value = "根据username获取")
+    @ApiOperation(value = "根据username获取用户信息")
     public ResponseEntity getByUserName(String username) {
         return ResponseEntity.ok(userService.getUserByUserName(username));
+    }
+
+    @ResponseBody
+    @PostMapping("/resetPassword")
+    @ApiOperation(value = "修改密码")
+    public ResponseEntity resetPassword(String username, String oldPassword,String newPassword) {
+        return ResponseEntity.ok(userService.resetPassword(username, oldPassword,newPassword));
     }
 }

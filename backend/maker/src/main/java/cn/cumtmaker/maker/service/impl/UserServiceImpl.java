@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+//    注册方法实现
     @Override
     public int signUp(String username,String password){
         if(userMapper.getUserByUserName(username)==null) {
@@ -30,11 +31,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    //根据用户名返回UserVO
     @Override
     public UserVO getUserByUserName(String username){
         return toUserVO(userMapper.getUserByUserName(username));
     }
 
+    //根据JWT Token 返回User信息
     @Override
     public UserVO getUserByRequest(HttpServletRequest request){
         String token = request.getHeader("Authorization");
@@ -46,6 +49,22 @@ public class UserServiceImpl implements UserService {
         return toUserVO(userMapper.getUserByUserName(username));
     }
 
+    //修改密码方法实现
+    @Override
+    public int resetPassword(String username, String oldPassword,String newPassword){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String password= userMapper.getUserByUserName(username).getPassword();
+        boolean match=bCryptPasswordEncoder.matches(oldPassword,password);
+        if(match==true){
+            String encodePassword = bCryptPasswordEncoder.encode(newPassword);
+            userMapper.resetPassword(username,encodePassword);
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+//将User转化为UserVO
     private UserVO toUserVO(User user){
         UserVO userVO=new UserVO();
         BeanUtils.copyProperties(user,userVO);

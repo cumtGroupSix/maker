@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import './assets/js/jquery.js'
 import './assets/css/style.css'
-import './assets/js/gwc.js'
 import './assets/js/paging.js'
 import './assets/js/qwest.min.js'
 import './assets/js/main.js'
@@ -32,8 +31,9 @@ router.beforeEach((to, from, next) => {
     	} 	
 	}else {
     	//如果不存在token
-        if(to.path=='/'){ 
-        //如果是主页路径，就直接next()
+      //如果是不需要登录的路径
+        if(to.path=='/' || to.path=='/changepassword' || to.path=='/register'){ 
+        //就直接next()
             next();
         } else { 
         //不然就跳转到主页；
