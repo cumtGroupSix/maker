@@ -6,6 +6,9 @@ public class UserVO {
      */
     private Integer userId;
 
+
+    private String role;
+
     /**
      * 用户名
      */
@@ -45,5 +48,13 @@ public class UserVO {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -19,6 +19,7 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   // 验证是否存在 JWT Token
   var token=localStorage.getItem('token');
+  var makertoken=localStorage.getItem('makertoken');
   if(token && token!="undefined"){ 
   		//如果存在token,验证是否过期(2小时过期)
 		if(Date.now()-localStorage.getItem('tokenTime')>60*60*2*1000){
@@ -29,14 +30,24 @@ router.beforeEach((to, from, next) => {
 		//如果没有过期
       next(); 
     	} 	
-	}else {
-    	//如果不存在token
+	}else if(makertoken && makertoken!="undefined"){
+    //如果存在makertoken,验证是否过期(2小时过期)
+    if(Date.now()-localStorage.getItem('makertokenTime')>60*60*2*1000){
+      localStorage.removeItem('makertoken');
+      localStorage.removeItem('makertokenTime');
+      next('/');
+    }else{
+    //如果没有过期
+      next();
+      } 
+  }else{
+    	//如果不存在token也不存在makertoken
       //如果是不需要登录的路径
-        if(to.path=='/' || to.path=='/changepassword' || to.path=='/register'){ 
+        if(to.path=='/' || to.path=='/changepassword' || to.path=='/register' || to.path=='/makerlogin'||to.path=='/makerregister'){ 
         //就直接next()
             next();
         } else { 
-        //不然就跳转到主页；
+        //否则跳转到主页；
             next('/');
         }
     }
@@ -47,6 +58,8 @@ axios.interceptors.request.use(
   	// 判断是否存在token，如果存在的话，则每个http header都加上token
     if (localStorage.getItem('token')&&localStorage.getItem('token')!="undefined") {  
       config.headers.Authorization = JSON.parse(localStorage.getItem('token'));
+    }else if(localStorage.getItem('makertoken')&&localStorage.getItem('makertoken')!="undefined"){
+      config.headers.Authorization = JSON.parse(localStorage.getItem('makertoken'));
     }
     return config;
   },

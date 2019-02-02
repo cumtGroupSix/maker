@@ -26,7 +26,7 @@ public class authenticationFailureHandler implements AuthenticationFailureHandle
     public void onAuthenticationFailure(HttpServletRequest request,HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException{
 
-        logger.info("用户登录失败");
+        logger.info("用户登录失败或验证码校验出错");
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
     }

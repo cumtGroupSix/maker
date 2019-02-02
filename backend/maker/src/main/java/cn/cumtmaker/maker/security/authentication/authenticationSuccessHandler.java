@@ -34,11 +34,12 @@ public class authenticationSuccessHandler implements AuthenticationSuccessHandle
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{
 
-        logger.info("用户登录成功");
+        String username=authentication.getName();
+        logger.info("用户"+username+"登录成功");
 
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(
-                toUserVO(userMapper.getUserByUserName(authentication.getName()))));
+                toUserVO(userMapper.getUserByUserName(username))));
 
         //登录验证成功后，生成JWT的token
         String token = Jwts.builder()

@@ -35,7 +35,7 @@
                     <router-link to='/cart' class="nav-link" style='cursor: pointer;'>购物车</router-link>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" href="#">创客中心</a>
+                    <span @click="toAnotherPath('/makerlogin')" class="nav-link" style='cursor: pointer;'>创客中心</span>
                 </li>
                 </ul>
             </div>	
@@ -51,13 +51,13 @@
 				  <div class="form-group row px-4 py-0">
 					<label for="username" class="col-2 col-form-label py-0 my-0"><Icon type="md-person" size="36"/></label>
 					<div class="col-10">
-					  <input type="text" class="form-control justify-content-center" id="username" placeholder="会员名/邮箱号/手机号" v-model="myUsername">
+					  <input type="text" class="form-control justify-content-center" id="username" placeholder="会员名/邮箱号/手机号" v-model="username">
 					</div>
 				  </div>
 				  <div class="form-group row px-4 py-2">
 					<label for="password" class="col-2 col-form-label py-0 my-0"><Icon type="ios-keypad" size="36"/></label>
 					<div class="col-10">
-					  <input type="password" class="form-control" id="password" placeholder="密码" v-model="myPassword">
+					  <input type="password" class="form-control" id="password" placeholder="密码" v-model="password">
 					</div>
 				  </div>
 				  <Row type="flex" style="margin-top:0px">
@@ -86,7 +86,7 @@
 						</Checkbox>
 					</div>
 					<div class="col-6" style="text-align:right" >
-						<span style="cursor: pointer;color:#72ACE3" @click="toChangePassword">修改密码</span>
+						<span style="cursor: pointer;color:#72ACE3" @click="toAnotherPath('/changepassword')">修改密码</span>
 					</div>
 				  </div>
 				  <div class="form-group row px-4" style="margin-top:-10px">
@@ -99,7 +99,7 @@
 				 <a href="#">忘记密码</a>
 					</Col>
 				 <Col span="10" align="right">
-				 <router-link to="/register" href="#">免费注册</router-link>
+				 <span @click="toAnotherPath('/register')" style="cursor: pointer;color:#72ACE3">免费注册</span>
 				 </Col> 
 				</Row>
 				</Form>
@@ -114,8 +114,8 @@
             return {
             	loginFailed:false,
             	isRemember:false,
-                myUsername:"",
-                myPassword:"",
+                username:"",
+                password:"",
                 users:"",
                 hasLogged:false,
                 isLoginDialog:false,
@@ -123,8 +123,8 @@
             }
         },
         mounted(){
-        	this.doBefore()
-        	this.tokenlogin()     	
+        	this.tokenlogin()
+        	this.doBefore() 	     	
         },
         methods: {
         	//根据Token请求数据
@@ -143,19 +143,23 @@
         	},
         	//发送登录请求
         	axioslogin(){
-        		localStorage.setItem('username',this.myUsername);
-				this.axios.post('/loginapi?username='+this.myUsername+'&password='+this.myPassword+"&imageCode="+this.validatecode)
+				this.axios.post('/loginapi?username='+this.username+'&password='+this.password+"&imageCode="+this.validatecode)
 					.then((response)=>{this.$store.state.loginresponse=response})
 					.catch((error)=>{console.log(error);});
         	},
+        	//登录按钮click事件
         	login(){
-				if(this.myUsername=='')
+				if(this.username=='')
 				{this.$Message.error('用户名不能为空');}
-				else if(this.myPassword=='')
+				else if(this.password=='')
 				{this.$Message.error('密码不能为空');}
 				else if(this.validatecode=='' || this.validatecode==null)
 				{this.$Message.error('验证码不能为空');}
 				else{
+				localStorage.removeItem('makertoken');
+            	localStorage.removeItem('makertokenTime');
+            	this.$store.state.makerloginresponse=null;	
+				localStorage.setItem('username',this.username);
 				this.axioslogin();
 				}
         		
@@ -164,26 +168,28 @@
         	changeimg(){
       		this.$store.state.validateImg="/api/code/image?d="+Math.random();
       		},
+      		//取出记住的用户名和密码
         	doBefore(){
         		if(localStorage.getItem('username') && localStorage.getItem('username')!="undefined"){
-        			this.myUsername=localStorage.getItem('username');
+        			this.username=localStorage.getItem('username');
         		}
         		if(localStorage.getItem('password') && localStorage.getItem('password')!="undefined"){
         			this.isRemember=true;
-        			this.myPassword=localStorage.getItem('password');
+        			this.password=localStorage.getItem('password');
         		}
         	},
-        	toChangePassword(){
+        	toAnotherPath(to){
         		this.isLoginDialog=false;
-        		this.$router.push({path: '/changepassword'});
+        		this.$router.push({path: to});
         	},
+        	//记住密码
         	rememberPassword(){
         		if(this.isRemember==true){
-        			localStorage.setItem('password',this.myPassword);
-        			this.myPassword=localStorage.getItem('password');
+        			localStorage.setItem('password',this.password);
+        			this.password=localStorage.getItem('password');
         		}else {
         			localStorage.removeItem('password');
-        			this.myPassword="";
+        			this.password="";
         		}
         	},
             loginDialogShow(){
@@ -197,6 +203,7 @@
 	            localStorage.removeItem('token');
 				localStorage.removeItem('tokenTime');
 				this.$router.push({path: '/'});
+				this.$router.go(0)
             }
         },
         computed: {
@@ -208,34 +215,41 @@
 			loginresponse:function(news,olds){
 				this.$store.state.userid=null;
 				this.$store.state.username=null;
-				if(news.status==200 && typeof news.data=="object"){
+				if(news.data&&news.data!="undefined"){
+				if(news.status==200 && news.data.role=="USER"){
 				this.validatecode=null;
 				this.$store.state.userid=news.data.userId;
 				this.$store.state.username=news.data.username;
-				this.myUsername=news.data.username;
+				this.username=news.data.username;
 				this.rememberPassword();
 				//只有用户名密码登录时弹出登录成功
-				if (!localStorage.getItem('token') || localStorage.getItem('token')=="undefined")
-				{this.$Message.success('登录成功');}
+					if (!localStorage.getItem('token') || localStorage.getItem('token')=="undefined"){
+						this.$Message.success('登录成功');
+					}
+				//存储Jwt Token
+					if(news.headers.authorization&&news.headers.authorization!="undefined"){
+					localStorage.setItem('token', JSON.stringify(news.headers.authorization));
+					localStorage.setItem('tokenTime', Date.now());	
+					}
 				}			
 				else{
-				localStorage.removeItem('password');
-				if(news.data=="坏的凭证"){
-				this.$Message.error('登录失败，用户名或密码错误');	
+					localStorage.removeItem('password');
+					if(news.data=="坏的凭证"){
+					this.$Message.error('登录失败，用户名或密码错误');	
+					}else if(typeof news.data=="object"){
+					this.$Message.error("用户无此登录权限");	
+					}else{
+					this.$Message.error(news.data);		
+					}	
+				}
 				}else{
-				this.$Message.error(news.data);	
-				}	
-				};
-				if(news.headers.authorization && news.headers.authorization !="undefined"){
-					localStorage.setItem('token', JSON.stringify(news.headers.authorization));
-				}
-				if(localStorage.getItem('token') && localStorage.getItem('token')!="undefined"){
-					localStorage.setItem('tokenTime', Date.now());
-				}
+				this.hasLogged=false;
+                this.$Message.error("此用户不存在");   
+                }
 				if(this.$store.state.username!=null){
                	 	this.hasLogged=true;
                 	this.isLoginDialog=false;
-            	}
+            	};
 			}
 		}
     }
@@ -263,7 +277,7 @@
 }
 .login{
 	border-radius:8px;
-	width: 350px;
+	width: 330px;
 	height: 360px;
 	background-color: #fff;
 	position: fixed;

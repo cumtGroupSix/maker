@@ -1,59 +1,63 @@
 <template>
     <div>
+    <Row justify="center" type="flex">
+    <Col :xs="21" :sm="9" :md="6" :lg="6" class="container">
     <Row justify="center" type="flex" style="margin-bottom:10px;margin-top:10px">
-    <Col span="6" align="left">
+    <Col span="24" align="left">
     	<span style="font-size:25px"><b>修改密码</b></span>
 	</Col>
     </Row>
     <Form>
     	<Row justify="center" type="flex" >
-    	<Col span="6">
+    	<Col span="24">
 		<FormItem>
-    		<Input type="text" name="username" v-model="username" placeholder="用户名" clearable style="width: 300px" ><Icon type="ios-person" slot="prefix"></Icon></Input>
+    		<Input type="text" name="username" v-model="username" placeholder="用户名" :maxlength="15" clearable ><Icon type="md-person" slot="prefix"></Icon></Input>
     	</FormItem>
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
-    	<Col span="6">
+    	<Col span="24">
 		<FormItem>
-    		<Input type="password" name="oldpassword" v-model="oldpassword" placeholder="原密码" clearable style="width: 300px" ><Icon type="ios-lock" slot="prefix"></Icon></Input>
+    		<Input type="password" name="oldpassword" v-model="oldpassword" placeholder="原密码" :maxlength="20" clearable ><Icon type="md-lock" slot="prefix"></Icon></Input>
     	</FormItem>
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
-    	<Col span="6">
+    	<Col span="24">
 		<FormItem>
-    		<Input :type="newpass" name="newpassword" v-model="newpassword" placeholder="新密码" style="width: 300px"><Icon type="ios-lock-outline" slot="prefix"/><Icon v-if="isEyeOff" @click="changeEye" style="cursor:pointer" type="md-eye" slot="suffix" /><Icon v-if="!isEyeOff" type="md-eye-off" slot="suffix" @click="changeEye" style="cursor:pointer" /></Input>
+    		<Input :type="newpass" name="newpassword" v-model="newpassword" placeholder="新密码" :maxlength="20"><Icon type="md-lock" slot="prefix"/><Icon v-if="isEyeOff" @click="changeEye" style="cursor:pointer" type="md-eye" slot="suffix" /><Icon v-if="!isEyeOff" type="md-eye-off" slot="suffix" @click="changeEye" style="cursor:pointer" /></Input>
     	</FormItem>
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
-    	<Col span="6">
+    	<Col span="24">
 		<FormItem>
-    		<Input :type="newpass" name="newpassword2" v-model="newpassword2" placeholder="确认新密码" style="width: 300px" ><Icon type="ios-lock" slot="prefix"/><Icon v-if="isEyeOff" @click="changeEye" style="cursor:pointer" type="md-eye" slot="suffix" /><Icon v-if="!isEyeOff" type="md-eye-off" slot="suffix" @click="changeEye" style="cursor:pointer" /></Input>
+    		<Input :type="newpass" name="newpassword2" v-model="newpassword2" placeholder="确认新密码" :maxlength="20"><Icon type="md-lock" slot="prefix"/><Icon v-if="isEyeOff" @click="changeEye" style="cursor:pointer" type="md-eye" slot="suffix" /><Icon v-if="!isEyeOff" type="md-eye-off" slot="suffix" @click="changeEye" style="cursor:pointer" /></Input>
     	</FormItem>	
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
-    	<Col span="4">
+    	<Col span="12">
     	<FormItem>
-	    	<Input name="validateCode" v-model="validatecode" placeholder="请输入验证码" clearable style="width: 165px" ><Icon type="ios-keypad" slot="prefix" /></Input>
+	    	<Input name="validateCode" v-model="validatecode" placeholder="请输入验证码" :maxlength="4" clearable ><Icon type="ios-keypad" slot="prefix" /></Input>
 	    </FormItem>
     	</Col>
-    	<Col span="2">
+    	<Col span="12">
     	<FormItem align="right">
     	<img :src="this.$store.state.validateImg" @click="changeimg" style="cursor: pointer;"/>
     	</FormItem>
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >	
-    	<Col span="6">
+    	<Col span="24">
 		<FormItem>
     	<Button type="primary" long @click="submitChange">确认修改</Button>
 		</FormItem>	
     	</Col>
     	</Row> 	
-    </Form> 
+    </Form>
+    </Col>
+    </Row> 
     </div>
 </template>
 
@@ -70,8 +74,6 @@
     		validatecode:null,
     		res:null
         	}
-        },
-        mounted(){
         },
         methods:{
         axiosResetPassword(){
@@ -98,6 +100,8 @@
 			{this.$Message.error('新密码不能为空');}
 			else if(this.newpassword2=='')
 			{this.$Message.error('确认新密码不能为空');}
+			else if(this.newpassword.length<6 || this.newpassword.length>20)
+            {this.$Message.error('密码长度应为6-20位');}
 			else if(this.validatecode=='' || this.validatecode==null)
 			{this.$Message.error('验证码不能为空');}
 			else if(this.oldpassword==this.newpassword)
@@ -125,5 +129,10 @@
 </script>
 
 <style scoped>
-
+.container{
+    margin:20px 0px;
+    border: 1px solid rgba(0, 0, 0,0.2);
+    border-radius:6px;
+    padding:5px 25px 0px 25px;
+}
 </style>

@@ -20,6 +20,9 @@ import MyStore from './views/myStore/myStore'
 import GoodsList from './views/goodslist/goodslist'
 import Payment from './views/payment/payment'
 import Chuangke from './views/chuangkeAdministration/chuangkeAdministration'
+import ChuangkeLogin from './views/chuangkeLogin/chuangkeLogin'
+import ChuangkeRegister from './views/chuangkeRegister/chuangkeRegister'
+
 
 
 Vue.use(Router)
@@ -42,6 +45,16 @@ export default new Router({
       path: '/store',
       name: 'store',
       component: Store
+    },
+    {
+      path: '/makerlogin',
+      name: 'makerlogin',
+      component: ChuangkeLogin
+    },
+    {
+      path: '/makerregister',
+      name: 'makerregister',
+      component: ChuangkeRegister
     },
     {
       path: '/changepassword',

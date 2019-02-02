@@ -6,11 +6,16 @@ import cn.cumtmaker.maker.model.User;
 import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public interface UserService {
-    //用户注册方法
-    int signUp(String username,String password);
+    int userSignUp(String role,String username,String password);
     UserVO getUserByUserName(String username);
     UserVO getUserByRequest(HttpServletRequest request);
     int resetPassword(String username, String oldPassword,String newPassword);
+    int setUserSignUpInfo(String username, String nickname, int enable,String telephone,String email,
+                          String address, Timestamp registrationTime,String school);
+    int setMakerSignUpInfo(String username, String storeName, String mobileNumber, String email,
+                           String school, String realName, String studentId, Timestamp registrationTime);
 }

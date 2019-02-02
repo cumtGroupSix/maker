@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RequestMapping(value="api/user",produces = {APPLICATION_JSON_UTF8_VALUE})
@@ -22,10 +26,28 @@ public class UserController {
 
     //注册API
     @ResponseBody
-    @PostMapping("/signup")
+    @PostMapping("/userSignUp")
     @ApiOperation(value = "用户注册")
-    public ResponseEntity signUp(String username,String password) {
-        return ResponseEntity.ok(userService.signUp(username,password));
+    public ResponseEntity signUp(String role,String username,String password) {
+        return ResponseEntity.ok(userService.userSignUp(role,username,password));
+    }
+
+    @ResponseBody
+    @PostMapping("/userSignUpInfo")
+    @ApiOperation(value = "用户注册信息增加")
+    public ResponseEntity setUserSignUpInfo(String username, String nickname, int enable, String telephone,String email, String address, String school){
+        Timestamp registrationTime=Timestamp.valueOf(LocalDateTime.now());
+        return ResponseEntity.ok(userService.setUserSignUpInfo(username,nickname,enable,telephone,email,address,registrationTime,school));
+    }
+
+    @ResponseBody
+    @PostMapping("/makerSignUpInfo")
+    @ApiOperation(value = "创客注册信息增加")
+    public ResponseEntity setMakerSignUpInfo(String username,String storeName,String mobileNumber,String email,
+                                             String school, String realName, String studentId){
+        Timestamp registrationTime=Timestamp.valueOf(LocalDateTime.now());
+        System.out.println(registrationTime);
+        return ResponseEntity.ok(userService.setMakerSignUpInfo(username,storeName,mobileNumber,email,school,realName,studentId,registrationTime));
     }
 
     @ResponseBody

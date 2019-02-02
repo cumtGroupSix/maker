@@ -29,8 +29,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         //如果是 登录注册或修改密码请求 则执行
-        if((StringUtils.equals("/api/user/resetPassword", request.getRequestURI())||StringUtils.equals("/api/user/signup", request.getRequestURI()))
-//        if((StringUtils.equals("/api/user/resetPassword", request.getRequestURI())||StringUtils.equals("/api/user/signup", request.getRequestURI())||StringUtils.equals("/login", request.getRequestURI()))
+        if((StringUtils.equals("/api/user/resetPassword", request.getRequestURI())||StringUtils.equals("/api/user/userSignUp", request.getRequestURI()))
+//        if((StringUtils.equals("/api/user/resetPassword", request.getRequestURI())||StringUtils.equals("/api/user/userSignUp", request.getRequestURI())||StringUtils.equals("/login", request.getRequestURI()))
                 &&StringUtils.equalsIgnoreCase(request.getMethod(), "post")){
             try {
                 validate(new ServletWebRequest(request));

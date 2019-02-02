@@ -56,7 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable().authorizeRequests()
                 //设置注册接口、修改密码接口、验证码接口不需要验证
-                .antMatchers(HttpMethod.POST,"/api/user/signup").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user/userSignUp").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user/userSignUpInfo").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user//makerSignUpInfo").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/user/resetPassword").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/code/image").permitAll()
                 .anyRequest()
@@ -64,8 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().disable()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                ;
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
     }
 
 }
