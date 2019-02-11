@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 02/02/2019 14:03:25
+ Date: 11/02/2019 19:40:08
 */
 
 SET NAMES utf8mb4;
@@ -137,7 +137,7 @@ CREATE TABLE `order_detail`  (
   CONSTRAINT `fk[order_detail]order_id` FOREIGN KEY (`order_id`) REFERENCES `order_master` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[order_detail]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[order_detail]product_price` FOREIGN KEY (`product_price`) REFERENCES `product` (`product_price`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for order_master
@@ -152,7 +152,7 @@ CREATE TABLE `order_master`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `fk[order]user_id`(`user_id`) USING BTREE,
   CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product
@@ -182,11 +182,11 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, 'https://gd1.alicdn.com/imgextra/i1/3200146288/TB2I47ri8fH8KJjy1XbXXbLdXXa_!!3200146288.jpg_400x400.jpg', '好', 1, 0, '', '黑色', 'L', NULL, '');
-INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, 'https://gd4.alicdn.com/imgextra/i3/3200146288/TB2N5LdhQfb_uJjSsrbXXb6bVXa_!!3200146288.jpg_400x400.jpg', '好', 1, 0, '', '灰色', 'XL', NULL, '');
-INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '//gd4.alicdn.com/imgextra/i3/3200146288/TB2N5LdhQfb_uJjSsrbXXb6bVXa_!!3200146288.jpg', '好', 1, 0, '', '白色', 'XXL', NULL, '');
-INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, '//gw.alicdn.com/bao/uploaded/i3/276591537/O1CN011io6mn1NDzE5exQow_!!276591537.jpg_440x440q70.jpg', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
-INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, '//gd4.alicdn.com/imgextra/i2/738455795/O1CN011sg9fwhnsdWCoE6_!!738455795.jpg', 'nice', 1, 0, '', '黑色', 'XL', NULL, '');
+INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0, '', '黑色', 'L', NULL, '');
+INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', '好', 1, 0, '', '灰色', 'XL', NULL, '');
+INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '	https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0, '', '白色', 'XXL', NULL, '');
+INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
+INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', 'nice', 1, 0, '', '黑色', 'XL', NULL, '');
 
 -- ----------------------------
 -- Table structure for product_group
@@ -334,14 +334,15 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `fk[user]role`(`role`) USING BTREE,
   CONSTRAINT `fk[user]role` FOREIGN KEY (`role`) REFERENCES `role` (`role_type`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'USER', 'test', '$2a$10$J5AbCLjnm/MP2/FaQrLdPO1zQ33mkek3MDJzCLLzwghS5a2M57OhC');
-INSERT INTO `user` VALUES (2, 'MAKER', 'makertest', '$2a$10$J5AbCLjnm/MP2/FaQrLdPO1zQ33mkek3MDJzCLLzwghS5a2M57OhC');
-INSERT INTO `user` VALUES (3, 'USER', 'test1', '$2a$10$J5AbCLjnm/MP2/FaQrLdPO1zQ33mkek3MDJzCLLzwghS5a2M57OhC');
+INSERT INTO `user` VALUES (1, 'USER', 'test', '$2a$10$Sx7CAIXKJ/ZzZyMgwpflt.W8OPDFT5GzMSHmuV7RiwJdtN.nL3CXm');
+INSERT INTO `user` VALUES (2, 'MAKER', 'makertest', '$2a$10$Sx7CAIXKJ/ZzZyMgwpflt.W8OPDFT5GzMSHmuV7RiwJdtN.nL3CXm');
+INSERT INTO `user` VALUES (3, 'USER', 'test1', '$2a$10$Sx7CAIXKJ/ZzZyMgwpflt.W8OPDFT5GzMSHmuV7RiwJdtN.nL3CXm');
+INSERT INTO `user` VALUES (4, 'ADMIN', 'admin', '$2a$10$Sx7CAIXKJ/ZzZyMgwpflt.W8OPDFT5GzMSHmuV7RiwJdtN.nL3CXm');
 
 -- ----------------------------
 -- Table structure for user_info
