@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : mysql
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
@@ -11,11 +11,21 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 11/02/2019 19:40:08
+ Date: 12/02/2019 17:30:53
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for brand
+-- ----------------------------
+DROP TABLE IF EXISTS `brand`;
+CREATE TABLE `brand`  (
+  `brand_id` int(11) NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`brand_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for cart
@@ -64,6 +74,21 @@ INSERT INTO `cart_product` VALUES (3, 1, 1, 1);
 INSERT INTO `cart_product` VALUES (3, 2, 1, 1);
 
 -- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category`  (
+  `category_id` int(5) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`category_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of category
+-- ----------------------------
+INSERT INTO `category` VALUES (1, '男装');
+
+-- ----------------------------
 -- Table structure for comment
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
@@ -96,6 +121,25 @@ CREATE TABLE `group_collections`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for group_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `group_specification`;
+CREATE TABLE `group_specification`  (
+  `group_id` int(22) NOT NULL,
+  `specification_id` int(11) NOT NULL,
+  PRIMARY KEY (`group_id`, `specification_id`) USING BTREE,
+  INDEX `fk[group_specification]specification_id`(`specification_id`) USING BTREE,
+  CONSTRAINT `fk[group_specification]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[group_specification]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_specification
+-- ----------------------------
+INSERT INTO `group_specification` VALUES (1, 1);
+INSERT INTO `group_specification` VALUES (1, 2);
+
+-- ----------------------------
 -- Table structure for maker_info
 -- ----------------------------
 DROP TABLE IF EXISTS `maker_info`;
@@ -108,7 +152,7 @@ CREATE TABLE `maker_info`  (
   `school` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学校名称',
   `real_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '真实姓名',
   `student_id` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生学号',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[maker_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -168,11 +212,6 @@ CREATE TABLE `product`  (
   `product_description` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '产品描述',
   `product_status` tinyint(3) NOT NULL DEFAULT 1 COMMENT '产品是否上架，1.上架.2.下架',
   `sales` int(55) NOT NULL DEFAULT 0 COMMENT '销量',
-  `model` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '型号',
-  `color` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '颜色',
-  `size` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '大小尺寸',
-  `date_manufacture` timestamp(0) NULL DEFAULT NULL COMMENT '生产日期',
-  `manufacturer` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '生产厂家',
   PRIMARY KEY (`product_id`) USING BTREE,
   INDEX `product_price`(`product_price`) USING BTREE,
   INDEX `fk[product]group_id`(`group_id`) USING BTREE,
@@ -182,11 +221,11 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0, '', '黑色', 'L', NULL, '');
-INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', '好', 1, 0, '', '灰色', 'XL', NULL, '');
-INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '	https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0, '', '白色', 'XXL', NULL, '');
-INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', 'nice', 1, 0, '', '卡其色', 'L', NULL, '');
-INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', 'nice', 1, 0, '', '黑色', 'XL', NULL, '');
+INSERT INTO `product` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 15, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0);
+INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 111, 2.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', '好', 1, 0);
+INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '	https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0);
+INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', 'nice', 1, 0);
+INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', 'nice', 1, 0);
 
 -- ----------------------------
 -- Table structure for product_group
@@ -195,17 +234,40 @@ DROP TABLE IF EXISTS `product_group`;
 CREATE TABLE `product_group`  (
   `group_id` int(55) NOT NULL AUTO_INCREMENT COMMENT '分组ID',
   `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '产品名称',
-  `category` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '产品目录',
+  `category_id` int(11) NOT NULL COMMENT '产品目录',
   `representative_product_id` int(55) NOT NULL COMMENT '代表产品ID',
-  PRIMARY KEY (`group_id`) USING BTREE
+  PRIMARY KEY (`group_id`) USING BTREE,
+  INDEX `fk[product_group]category_id`(`category_id`) USING BTREE,
+  CONSTRAINT `fk[product_group]category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_group
 -- ----------------------------
-INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', '男装', 1);
-INSERT INTO `product_group` VALUES (2, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', '男装', 4);
-INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', '男装', 5);
+INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 1);
+INSERT INTO `product_group` VALUES (2, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 1, 4);
+INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 1, 5);
+
+-- ----------------------------
+-- Table structure for product_value
+-- ----------------------------
+DROP TABLE IF EXISTS `product_value`;
+CREATE TABLE `product_value`  (
+  `product_id` int(22) NOT NULL,
+  `value_id` int(22) NOT NULL,
+  PRIMARY KEY (`product_id`, `value_id`) USING BTREE,
+  INDEX `fk[product_value]value_id`(`value_id`) USING BTREE,
+  CONSTRAINT `fk[product_value]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk[product_value]value_id` FOREIGN KEY (`value_id`) REFERENCES `specification_value` (`value_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of product_value
+-- ----------------------------
+INSERT INTO `product_value` VALUES (1, 1);
+INSERT INTO `product_value` VALUES (2, 1);
+INSERT INTO `product_value` VALUES (1, 6);
+INSERT INTO `product_value` VALUES (2, 7);
 
 -- ----------------------------
 -- Table structure for resource
@@ -263,6 +325,49 @@ INSERT INTO `role_resource` VALUES ('USER', 1);
 INSERT INTO `role_resource` VALUES ('MAKER', 2);
 
 -- ----------------------------
+-- Table structure for specification
+-- ----------------------------
+DROP TABLE IF EXISTS `specification`;
+CREATE TABLE `specification`  (
+  `specification_id` int(11) NOT NULL AUTO_INCREMENT,
+  `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`specification_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of specification
+-- ----------------------------
+INSERT INTO `specification` VALUES (1, '尺寸');
+INSERT INTO `specification` VALUES (2, '颜色');
+INSERT INTO `specification` VALUES (3, '生产日期');
+INSERT INTO `specification` VALUES (4, '生产厂家');
+
+-- ----------------------------
+-- Table structure for specification_value
+-- ----------------------------
+DROP TABLE IF EXISTS `specification_value`;
+CREATE TABLE `specification_value`  (
+  `value_id` int(22) NOT NULL AUTO_INCREMENT,
+  `specification_id` int(11) NOT NULL,
+  `specification_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`value_id`) USING BTREE,
+  INDEX `fk[specification_value]specification_id`(`specification_id`) USING BTREE,
+  CONSTRAINT `fk[specification_value]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of specification_value
+-- ----------------------------
+INSERT INTO `specification_value` VALUES (1, 1, 'M');
+INSERT INTO `specification_value` VALUES (2, 1, 'L');
+INSERT INTO `specification_value` VALUES (3, 1, 'XL');
+INSERT INTO `specification_value` VALUES (4, 1, 'XXL');
+INSERT INTO `specification_value` VALUES (5, 1, 'XXXL');
+INSERT INTO `specification_value` VALUES (6, 2, '灰色');
+INSERT INTO `specification_value` VALUES (7, 2, '红色');
+INSERT INTO `specification_value` VALUES (8, 2, '卡其色');
+
+-- ----------------------------
 -- Table structure for store
 -- ----------------------------
 DROP TABLE IF EXISTS `store`;
@@ -272,7 +377,7 @@ CREATE TABLE `store`  (
   `store_introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创客店介绍',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片URL',
   `browse_times` int(255) NOT NULL DEFAULT 0 COMMENT '浏览次数',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创立时间',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创立时间',
   PRIMARY KEY (`store_id`) USING BTREE,
   UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE,
   INDEX `store_name`(`store_name`) USING BTREE
@@ -355,7 +460,7 @@ CREATE TABLE `user_info`  (
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话号码',
   `email` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户邮箱',
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名称',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[user_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE

@@ -1,1 +1,91 @@
-﻿
+﻿2019-02-10 17:52:24.908 [main] INFO  cn.cumtmaker.maker.MakerApplication - Starting MakerApplication on LAPTOP-UM137VG1 with PID 3464 (D:\github\maker\backend\maker\out\production\classes started by lenovo in D:\github\maker\backend\maker)
+2019-02-10 17:52:24.911 [main] INFO  cn.cumtmaker.maker.MakerApplication - No active profile set, falling back to default profiles: default
+2019-02-10 17:52:26.049 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7ca48c16] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-10 17:52:26.374 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8090 (http)
+2019-02-10 17:52:26.386 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:52:26.393 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2019-02-10 17:52:26.393 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-02-10 17:52:26.399 [main] INFO  org.apache.catalina.core.AprLifecycleListener - An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2019-02-10 17:52:26.399 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2019-02-10 17:52:26.400 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-10 17:52:26.400 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-10 17:52:27.457 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2019-02-10 17:52:27.566 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-02-10 17:52:27.567 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2585 ms
+2019-02-10 17:52:29.188 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-02-10 17:52:29.440 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2019-02-10 17:52:29.740 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@71369e1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@6bb4cc0e, org.springframework.security.web.header.HeaderWriterFilter@6537ac, org.springframework.security.web.authentication.logout.LogoutFilter@48ccbb32, cn.cumtmaker.maker.filter.ValidateCodeFilter@3cf55e0c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@36551e97, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4bbf38b8, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@ee96866, cn.cumtmaker.maker.filter.JWTAuthenticationFilter@4c04216f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2e3f324e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a814310, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@987a0bb, org.springframework.security.web.session.SessionManagementFilter@ddffa6c, org.springframework.security.web.access.ExceptionTranslationFilter@24691c5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3962ec84]
+2019-02-10 17:52:29.847 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2019-02-10 17:52:29.865 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2019-02-10 17:52:29.883 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2019-02-10 17:52:30.310 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:52:30.323 [main] INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2019-02-10 17:52:30.346 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8090 (http) with context path ''
+2019-02-10 17:52:30.351 [main] INFO  cn.cumtmaker.maker.MakerApplication - Started MakerApplication in 5.935 seconds (JVM running for 8.146)
+2019-02-10 17:52:40.059 [http-nio-8090-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-02-10 17:52:40.060 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2019-02-10 17:52:40.070 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 9 ms
+2019-02-10 17:53:08.983 [http-nio-8090-exec-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2019-02-10 17:53:10.181 [http-nio-8090-exec-4] INFO  c.c.m.s.a.authenticationFailureHandler - 用户登录失败或验证码校验出错
+2019-02-10 17:54:17.018 [main] INFO  cn.cumtmaker.maker.MakerApplication - Starting MakerApplication on LAPTOP-UM137VG1 with PID 9780 (D:\github\maker\backend\maker\out\production\classes started by lenovo in D:\github\maker\backend\maker)
+2019-02-10 17:54:17.024 [main] INFO  cn.cumtmaker.maker.MakerApplication - No active profile set, falling back to default profiles: default
+2019-02-10 17:54:18.125 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7b82e196] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-10 17:54:18.366 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8090 (http)
+2019-02-10 17:54:18.375 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:54:18.382 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2019-02-10 17:54:18.382 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-02-10 17:54:18.387 [main] INFO  org.apache.catalina.core.AprLifecycleListener - An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2019-02-10 17:54:18.388 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2019-02-10 17:54:18.388 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-10 17:54:18.388 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-10 17:54:19.435 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2019-02-10 17:54:19.512 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-02-10 17:54:19.512 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2360 ms
+2019-02-10 17:54:20.198 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-02-10 17:54:20.280 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2019-02-10 17:54:20.453 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69feb4d9, org.springframework.security.web.context.SecurityContextPersistenceFilter@57b9389f, org.springframework.security.web.header.HeaderWriterFilter@17176b18, org.springframework.security.web.authentication.logout.LogoutFilter@2e2f20b8, cn.cumtmaker.maker.filter.ValidateCodeFilter@37c1cfa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@504497fa, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@423f8a73, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2bcda694, cn.cumtmaker.maker.filter.JWTAuthenticationFilter@2cc75b25, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@41f785e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1491cd6c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30036a18, org.springframework.security.web.session.SessionManagementFilter@1ab53860, org.springframework.security.web.access.ExceptionTranslationFilter@7b3cbe6e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@10131289]
+2019-02-10 17:54:20.502 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2019-02-10 17:54:20.514 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2019-02-10 17:54:20.526 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2019-02-10 17:54:20.789 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:54:20.799 [main] INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2019-02-10 17:54:20.815 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8090 (http) with context path ''
+2019-02-10 17:54:20.818 [main] INFO  cn.cumtmaker.maker.MakerApplication - Started MakerApplication in 4.456 seconds (JVM running for 5.591)
+2019-02-10 17:54:26.438 [http-nio-8090-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-02-10 17:54:26.439 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2019-02-10 17:54:26.447 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 8 ms
+2019-02-10 17:54:26.563 [http-nio-8090-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2019-02-10 17:54:26.703 [http-nio-8090-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2019-02-10 17:54:26.758 [http-nio-8090-exec-1] INFO  cn.cumtmaker.maker.security.MyUserDetailsService - 用户名为username的null用户尝试登录
+2019-02-10 17:54:26.848 [http-nio-8090-exec-1] INFO  c.c.m.s.a.authenticationSuccessHandler - 用户username登录成功
+2019-02-10 17:54:37.338 [main] INFO  cn.cumtmaker.maker.MakerApplication - Starting MakerApplication on LAPTOP-UM137VG1 with PID 7176 (D:\github\maker\backend\maker\out\production\classes started by lenovo in D:\github\maker\backend\maker)
+2019-02-10 17:54:37.345 [main] INFO  cn.cumtmaker.maker.MakerApplication - No active profile set, falling back to default profiles: default
+2019-02-10 17:54:38.356 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$36f544af] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-10 17:54:38.613 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8090 (http)
+2019-02-10 17:54:38.622 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:54:38.628 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2019-02-10 17:54:38.628 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-02-10 17:54:38.634 [main] INFO  org.apache.catalina.core.AprLifecycleListener - An older version [1.2.17] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.18]
+2019-02-10 17:54:38.634 [main] INFO  org.apache.catalina.core.AprLifecycleListener - Loaded APR based Apache Tomcat Native library [1.2.17] using APR version [1.6.3].
+2019-02-10 17:54:38.635 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-10 17:54:38.635 [main] INFO  org.apache.catalina.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-10 17:54:39.674 [main] INFO  org.apache.catalina.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.0.2o  27 Mar 2018]
+2019-02-10 17:54:39.760 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-02-10 17:54:39.760 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2316 ms
+2019-02-10 17:54:40.535 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-02-10 17:54:40.617 [main] INFO  o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2019-02-10 17:54:40.772 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6e8f2094, org.springframework.security.web.context.SecurityContextPersistenceFilter@1af677f8, org.springframework.security.web.header.HeaderWriterFilter@713999c2, org.springframework.security.web.authentication.logout.LogoutFilter@72224107, cn.cumtmaker.maker.filter.ValidateCodeFilter@1753475d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@394fb736, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@66d3b881, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@d108406, cn.cumtmaker.maker.filter.JWTAuthenticationFilter@799c8758, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a3cf878, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@795f6681, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6e00837f, org.springframework.security.web.session.SessionManagementFilter@33627576, org.springframework.security.web.access.ExceptionTranslationFilter@7574d4ad, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6e0d16a4]
+2019-02-10 17:54:40.819 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2019-02-10 17:54:40.832 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2019-02-10 17:54:40.843 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2019-02-10 17:54:41.207 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8090"]
+2019-02-10 17:54:41.220 [main] INFO  org.apache.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+2019-02-10 17:54:41.245 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8090 (http) with context path ''
+2019-02-10 17:54:41.250 [main] INFO  cn.cumtmaker.maker.MakerApplication - Started MakerApplication in 4.56 seconds (JVM running for 6.321)
+2019-02-10 17:54:52.580 [http-nio-8090-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-02-10 17:54:52.580 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2019-02-10 17:54:52.594 [http-nio-8090-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 13 ms
+2019-02-10 17:55:02.825 [http-nio-8090-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2019-02-10 17:55:03.034 [http-nio-8090-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2019-02-10 17:55:03.115 [http-nio-8090-exec-2] INFO  cn.cumtmaker.maker.security.MyUserDetailsService - 用户名为maker的null用户尝试登录
+2019-02-10 17:55:03.280 [http-nio-8090-exec-2] INFO  c.c.m.s.a.authenticationSuccessHandler - 用户maker登录成功
