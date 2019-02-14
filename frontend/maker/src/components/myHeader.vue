@@ -158,6 +158,8 @@
 				else{
 				localStorage.removeItem('makertoken');
             	localStorage.removeItem('makertokenTime');
+            	localStorage.removeItem('admintoken');
+            	localStorage.removeItem('admintokenTime');
             	this.$store.state.makerloginresponse=null;	
 				localStorage.setItem('username',this.username);
 				this.axioslogin();
@@ -203,7 +205,7 @@
 	            localStorage.removeItem('token');
 				localStorage.removeItem('tokenTime');
 				this.$router.push({path: '/'});
-				this.$router.go(0)
+				this.$router.go(0);
             }
         },
         computed: {

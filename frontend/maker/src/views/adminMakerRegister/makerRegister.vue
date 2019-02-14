@@ -1,10 +1,10 @@
 <template>
     <div>
     <Row justify="center" type="flex">
-    <Col :xs="22" :sm="9" :md="6" :lg="7" class="container">
+    <Col :xs="21" :sm="10" :md="9" :lg="9" class="container">
     <Row justify="center" type="flex" style="margin-bottom:10px;margin-top:10px">
     <Col span="24" align="left">
-    	<span style="font-size:25px"><b>用户注册</b></span>
+    	<span style="font-size:25px"><b>创客注册</b></span>
 	</Col>
     </Row>
     <Form>
@@ -42,14 +42,14 @@
 		<Row justify="center" type="flex" >
     	<Col span="24">
 		<FormItem>
-    		<Input type="text" name="neckname" v-model="nickname" placeholder="请输入会员名" clearable :maxlength="20" ><Icon type="md-people" slot="prefix" ></Icon></Input>
+    		<Input type="text" name="neckname" v-model="storename" placeholder="请输入店铺名" clearable :maxlength="20" ><Icon type="md-pricetag" slot="prefix" ></Icon></Input>
     	</FormItem>
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
     	<Col span="24">
 		<FormItem>
-    		<Input type="text" name="telephone" v-model="telephone" placeholder="请输入手机号码" clearable  @input="inputnumber" :maxlength="20"><Icon type="ios-call" slot="prefix"></Icon></Input>
+    		<Input type="text" name="mobilenumber" v-model="mobilenumber" placeholder="请输入手机号码" clearable  @input="inputnumber" :maxlength="20"><Icon type="ios-call" slot="prefix"></Icon></Input>
     	</FormItem>
     	</Col>
     	</Row>
@@ -68,41 +68,27 @@
     	</Col>
     	</Row>
     	<Row justify="center" type="flex" >
-    	<Col span="24">
+    	<Col span="11">
 		<FormItem>
-    		<Input type="text" name="address" v-model="address" placeholder="请输入收货地址" clearable :maxlength="50" ><Icon type="md-compass" slot="prefix" ></Icon></Input>
+    		<Input type="text" name="address" v-model="realname" placeholder="请输入真实姓名" clearable :maxlength="10" ><Icon type="md-people" slot="prefix" ></Icon></Input>
+    	</FormItem>
+    	</Col>
+    	<Col span="11" offset="2">
+		<FormItem>
+    		<Input type="text" name="address" v-model="studentid" placeholder="请输入学号" @input="inputnumber" clearable :maxlength="15" ><Icon type="md-send" slot="prefix" ></Icon></Input>
     	</FormItem>
     	</Col>
     	</Row>
-    	<Row justify="center" type="flex" >
-    	<Col span="12" align="left">
-    	<FormItem>
-	    	<Input name="validateCode" v-model="validatecode" placeholder="请输入验证码" clearable :maxlength="4"><Icon type="ios-keypad" slot="prefix"  /></Input>
-	    </FormItem>
-    	</Col>
-    	<Col span="12" align="right">
-    	<FormItem>
-    	<img :src="this.$store.state.validateImg" @click="changeimg" style="cursor: pointer;"/>
-    	</FormItem>
-    	</Col>
-    	</Row>
-    	<Row justify="center" type="flex" >	
-    	<Col span="24">
-		<FormItem>
-    	<Button type="primary" long @click="submit">同意以下协议并注册</Button>
-		</FormItem>	
-    	</Col>
-    	</Row> 
-    	<Row justify="center" type="flex" style="margin-bottom:-10px">
-    	<Col span="24" align="center">
-		<FormItem>
-    	<Checkbox v-model:checked.sync="isAccept"><a href="#" data-toggle="tooltip" title="协议内容">《创客交易网服务协议》</a></Checkbox>
-    	</FormItem>
-    	</Col>
-    	</Row>
+        <Row justify="center" type="flex" > 
+        <Col span="24">
+        <FormItem>
+        <Button type="primary" long @click="submit">确认注册</Button>
+        </FormItem> 
+        </Col>
+    </Row> 
     </Form>
     </Col>
-    </Row> 
+    </Row>
     </div>
 </template>
 
@@ -112,26 +98,25 @@
         	return{
 	        	isEyeOff:true,
 	        	pass:"password",
-	        	role:"USER",
+	        	role:"MAKER",
 	    		username:"",
 	        	password:"",
 	    		password2:"",
-	    		nickname:"",
-	    		telephone:"",
+	    		storename:"",
+	    		mobilenumber:"",
 	    		email:"",
-	    		address:"",
 	    		school:"",
-	    		isAccept:false,
-	    		validatecode:null,
+	    		realname:"",
+	    		studentid:"",
 	    		res:null
         	}
         },
         methods:{
         //用户名密码注册
-        axiosUserRegister(){
-        	this.axios.post("/api/user/userSignUp?role="+this.role+"&username="+this.username+"&password="+this.password+"&imageCode="+this.validatecode)
+        axiosMakerRegister(){
+        	this.axios.post("/api/admin/userSignUp?role="+this.role+"&username="+this.username+"&password="+this.password)
         	.then((response)=>{if(response.status==200&&response.data==1){
-        		this.axiosUserRegisterInfo();
+        		this.axiosMakerRegisterInfo();
         	}else if(response.status==200&&response.data&&response.data!="undefined"){
 				this.$Message.error(response.data);	
         	}else{
@@ -141,15 +126,20 @@
 			.catch((error)=>{console.log(error);});
         },
         //基本信息注册
-        axiosUserRegisterInfo(){
-        	this.axios.post("/api/user/userSignUpInfo?username="+this.username+"&nickname="+this.nickname+"&enable=1&telephone="+this.telephone+"&email="+this.email+"&address="+this.address+"&school="+this.school)
+        axiosMakerRegisterInfo(){
+        	this.axios.post("/api/admin/makerSignUpInfo?username="+this.username+"&storeName="+this.storename+"&mobileNumber="+this.mobilenumber+"&email="+this.email+"&school="+this.school+"&realName="+this.realname+"&studentId="+this.studentid)
         	.then((response)=>{if(response.status==200&&response.data==1){
-                localStorage.setItem('username',this.username);
-                localStorage.setItem('password',this.password);
-                this.$Message.success('注册成功，请登录');
-                this.$router.push({path: '/'});                
+                localStorage.setItem('makerusername',this.username);
+                localStorage.setItem('makerpassword',this.password);
+                this.$Modal.success({
+                            title:"Maker注册成功",
+                            content:"已成功注册Maker账号",
+                            onOk: () => {
+                            this.$router.go(0); 
+                            },
+                        });             
         	}else{
-				this.$Message.error("注册成功，但用户信息添加失败");	
+				this.$Message.error("注册成功，但店铺信息添加失败");	
         	}
         	})
 			.catch((error)=>{console.log(error);});
@@ -162,10 +152,6 @@
       			this.pass="password"
       		}
       	},
-        // 刷新验证码
-      	changeimg(){
-      		this.$store.state.validateImg="/api/code/image?d="+Math.random();
-      	},
       	submit(){
       		if(this.username=='')
 			{this.$Message.error('用户名不能为空');}
@@ -173,32 +159,31 @@
 			{this.$Message.error('密码不能为空');}
 			else if(this.password2=='')
 			{this.$Message.error('确认密码不能为空');}
-			else if(this.neckname=='')
-			{this.$Message.error('会员名不能为空');}
-			else if(this.telephone=='')
+			else if(this.storename=='')
+			{this.$Message.error('店铺名不能为空');}
+			else if(this.mobilenumber=='')
 			{this.$Message.error('手机号码不能为空');}
 			else if(this.email=='')
 			{this.$Message.error('用户邮箱不能为空');}
             else if(this.school=='')
             {this.$Message.error('学校名称不能为空');}
-            else if(this.address=='')
-            {this.$Message.error('收货地址不能为空');}
-			else if(this.isAccept==false)
-			{this.$Message.error('请确认同意服务协议');}
+			else if(this.realname=='')
+			{this.$Message.error('真实姓名不能为空');}
+			else if(this.studentid=='')
+			{this.$Message.error('学生学号不能为空');}
             else if(this.username.length<4 || this.username.length>15)
             {this.$Message.error('用户名长度应为4-15位');}
             else if(this.password.length<6 || this.password.length>20)
             {this.$Message.error('密码长度应为6-20位');}
-			else if(this.validatecode=='' || this.validatecode==null)
-			{this.$Message.error('验证码不能为空');}
 			else if(this.password2!=this.password)
 			{this.$Message.error('两次输入密码不一致');}
 			else{
-			this.axiosUserRegister();
+			this.axiosMakerRegister();
 			}
       	},
         inputnumber(){
-            this.telephone=this.telephone.replace(/\D/g,'');
+            this.mobilenumber=this.mobilenumber.replace(/\D/g,'');
+            this.studentid=this.studentid.replace(/\D/g,'');
         }
        },
         

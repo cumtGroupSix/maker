@@ -28,4 +28,10 @@
     where
     username=#{username}
   </update>
+  <delete id="deleteUser">
+    delete
+    from user
+    where
+    username=#{username}
+  </delete>
 </mapper>

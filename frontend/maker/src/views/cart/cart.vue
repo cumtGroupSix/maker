@@ -323,7 +323,6 @@
 			axiosgetcart(){
 			this.axios.get('/api/cart/get')
 			.then((response)=>{
-				console.log(response);
 				this.$store.state.cartmain=response.data;
 				console.log(this.$store.state.cartmain);	
 

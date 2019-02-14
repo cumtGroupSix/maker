@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * token的校验
@@ -69,7 +72,13 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                     .getBody()
                     .getSubject();
             if (username != null) {
-                return new UsernamePasswordAuthenticationToken(username, null,AuthorityUtils.commaSeparatedStringToAuthorityList("user"));
+                String role=Jwts.parser()
+                        .setSigningKey("GroupSix")
+                        .parseClaimsJws(token.replace("Bearer ", ""))
+                        .getBody()
+                        .getAudience();
+                List<GrantedAuthority> list =AuthorityUtils.createAuthorityList("ROLE_"+role);
+                return new UsernamePasswordAuthenticationToken(username, null,list);
             }
             return null;
         }
