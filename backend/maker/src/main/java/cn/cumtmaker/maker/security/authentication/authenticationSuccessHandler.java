@@ -36,14 +36,14 @@ public class authenticationSuccessHandler implements AuthenticationSuccessHandle
 
         String username=authentication.getName();
         logger.info("用户"+username+"登录成功");
-
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(
                 toUserVO(userMapper.getUserByUserName(username))));
 
         //登录验证成功后，生成JWT的token
         String token = Jwts.builder()
-                .setSubject((((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername()))
+                .setSubject(username)
+                .setAudience(userMapper.getUserByUserName(username).getRole())
                //设置过期时间（2小时）
                 .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 2 * 1000))
                 .signWith(SignatureAlgorithm.HS512, "GroupSix")

@@ -9,4 +9,5 @@ public interface UserMapper {
    int signUp(@Param("role") String role,@Param("username") String username, @Param("password") String password);
    User getUserByUserName(String username);
    int resetPassword(@Param("username") String username, @Param("password") String password);
+   int deleteUser(String username);
 }

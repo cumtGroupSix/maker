@@ -35,7 +35,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/userSignUpInfo")
     @ApiOperation(value = "用户注册信息增加")
-    public ResponseEntity setUserSignUpInfo(String username, String nickname, int enable, String telephone,String email, String address, String school){
+    public ResponseEntity setUserSignUpInfo(String username, String nickname,Integer enable, String telephone,String email, String address, String school){
         Timestamp registrationTime=Timestamp.valueOf(LocalDateTime.now());
         return ResponseEntity.ok(userService.setUserSignUpInfo(username,nickname,enable,telephone,email,address,registrationTime,school));
     }
@@ -46,7 +46,6 @@ public class UserController {
     public ResponseEntity setMakerSignUpInfo(String username,String storeName,String mobileNumber,String email,
                                              String school, String realName, String studentId){
         Timestamp registrationTime=Timestamp.valueOf(LocalDateTime.now());
-        System.out.println(registrationTime);
         return ResponseEntity.ok(userService.setMakerSignUpInfo(username,storeName,mobileNumber,email,school,realName,studentId,registrationTime));
     }
 
@@ -55,13 +54,6 @@ public class UserController {
     @ApiOperation(value = "根据token获取用户信息")
     public ResponseEntity getByToken(HttpServletRequest request) {
         return ResponseEntity.ok(userService.getUserByRequest(request));
-    }
-
-    @ResponseBody
-    @GetMapping("/getByUserName")
-    @ApiOperation(value = "根据username获取用户信息")
-    public ResponseEntity getByUserName(String username) {
-        return ResponseEntity.ok(userService.getUserByUserName(username));
     }
 
     @ResponseBody
