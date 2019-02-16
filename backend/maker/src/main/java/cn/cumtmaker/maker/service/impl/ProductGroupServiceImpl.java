@@ -1,10 +1,13 @@
 package cn.cumtmaker.maker.service.impl;
 
+import cn.cumtmaker.maker.VO.ProductDetailVO;
 import cn.cumtmaker.maker.mapper.ProductGroupMapper;
 import cn.cumtmaker.maker.service.ProductGroupService;
+import cn.cumtmaker.maker.util.ProductDetailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,5 +25,15 @@ public class ProductGroupServiceImpl implements ProductGroupService {
             result += num;
         }
         return result;
+    }
+
+    @Override
+    public List<ProductDetailVO> getDetailByGroupId(Integer groupId) {
+        List<ProductDetailVO> productDetailVOS = new ArrayList<>();
+        List<Integer> productIds = productGroupMapper.getAllProductIdByGroupId(groupId);
+        for (Integer productId : productIds){
+            productDetailVOS.add(ProductDetailUtil.getDetailByProductId(productId));
+        }
+        return productDetailVOS;
     }
 }

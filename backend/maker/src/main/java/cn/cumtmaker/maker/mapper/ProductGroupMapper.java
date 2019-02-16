@@ -11,4 +11,6 @@ public interface ProductGroupMapper {
     List<ProductGroup> selectProductGroupsByStoreId(Integer storeId);
 
     Integer addProduct(@Param("storeId") Integer storeId, @Param("productId") Integer productId);
+
+    List<Integer> getAllProductIdByGroupId(Integer groupId);
 }

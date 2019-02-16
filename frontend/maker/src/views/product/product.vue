@@ -6,24 +6,21 @@
                 <div class="row">
                 <div class="col-12 col-md-6 col-sm-12">
                     <div class="shangpintupian">
-                        <img src="@/assets/img/list-1.jpg" width="450px" class="img-responsive center-block img-thumbnail img-fluid">
+                        <img :src="this.product.imgUrl" width="450px" class="img-responsive center-block img-thumbnail img-fluid">
                     </div>
                 </div>
                 
                 <div class="col-12 col-md-6 col-sm-12">
-                    <div class="shangpinmingcheng" v-for="(Name,index) in Name" :key="index">
-                        <span>{{Name.name}}</span>
+                    <div class="shangpinmingcheng">
+                        <span>{{product.productName}}</span>
                     </div>
-                    <div class="danjia" style="margin-top: 30px" v-for="(Price,index) in Price" :key="index">
-                    <strong>单价：{{Price.price}}</strong>
+                    <div class="danjia" style="margin-top: 30px">
+                        <strong>单价：{{product.price}}</strong>
                     </div>
                     
                     <div class="yansefenlei" style="margin-top: 40px">
                     <span>颜色分类：</span>
-                    <img id="beizi1" class="beizi1" src="@/assets/img/beizi1.jpg" width="20%">
-                    <img id="beizi2" class="beizi2" src="@/assets/img/beizi2.jpg" width="20%">
-                    <img id="beizi3" class="beizi3" src="@/assets/img/beizi3.jpg" width="20%">
-                    <img id="beizi4" class="beizi4" src="@/assets/img/beizi4.jpg" width="20%">
+                    <img id="beizi1" class="beizi1" @click="changeIndex(index)" v-for="(item, index) in productGroup" :key="index" :src="item.imgUrl" width="20%">
                     </div>
                     
                     <div class="shuliang" style="margin-top: 10px">
@@ -59,16 +56,10 @@
                 </div>
             </div>
             <section id="shangpinxiangqing">
-                <div class="wenzishuoming mb-3" v-for="(Detail,index) in Detail" :key="index">
+                <div class="wenzishuoming mb-3">
                     <div class="row">
-                        <div class="col-12 col-md-4 col-sm-12">
-                            <span>{{Detail.a}}<br>{{Detail.b}}<br>{{Detail.c}}<br>{{Detail.d}}</span>
-                        </div>
-                        <div class="col-12 col-md-4 col-sm-12">
-                            <span>{{Detail.e}}<br>{{Detail.f}}<br>{{Detail.g}}<br>{{Detail.h}}</span>
-                        </div>
-                        <div class="col-12 col-md-4 col-sm-12">
-                            <span>{{Detail.i}}<br>{{Detail.j}}<br>{{Detail.k}}<br>{{Detail.l}}</span>
+                        <div class="col-12 col-md-4 col-sm-12" v-for="(item,index) in product.specifications" :key="index">
+                            <span>{{item.specification}}:{{item.specificationValue}}</span>
                         </div>
                     </div>
                 </div>
@@ -156,50 +147,12 @@
     export default {
         data() {
             return {
+                currentIndex:0,
+                productGroup:[],
                 List:[{
                     num:1
                 }],
-                Name:[
-                    {
-                        name:"猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子",
-                    }
-                ],
-                Price:[
-                    {
-                        price:"¥20",
-                    }
-                ],
-                Detail:[
-                    {
-                        a:"产地：中国大陆",
-                        b:"流行元素：卡通",
-                        c:"材质：陶瓷",
-                        d:"颜色分类：1号哈士奇400ml…",
-                        e:"容量：301ml~400ml",
-                        f:"适用人群：大众",
-                        g:"价格区间：15元~30元",
-                        h:"风格：卡通",
-                        i:"是否手工：是",
-                        j:"适用对象：成人",
-                        k:"品牌：诺拉和皮埃诺",
-                        l:"主图来源：自主实拍图",
-                    }
-                ],
                 level:[4.9],
-                keyword:[
-                    {
-                        content:"包装好",
-                        number:"(3)"
-                    },
-                    {
-                        content:"物流快",
-                        number:"(2)"
-                    },
-                    {
-                        content:"适合送人",
-                        number:"(4)"
-                    },
-                ],
                 evaluation:[
                     {
                         nickname:"随心所欲烛",
@@ -241,6 +194,31 @@
             },
             add:function(idx){
                 this.List[idx].num++;    
+            },
+            changeIndex(index){
+                this.currentIndex = index
+            }
+        },
+        mounted(){
+            this.axios.get("/api/product/group/"+this.$store.state.currentProductGroupId)
+                .then(res=>{
+                    this.productGroup = res.data
+                })
+        },
+        computed: {
+            product() {
+                return this.productGroup[this.currentIndex] 
+            },
+            groupId() {
+                return this.$store.state.currentProductGroupId
+            }
+        },
+        watch: {
+            groupId(newValue, oldValue) {
+                this.axios.get("/api/product/group/"+this.$store.state.currentProductGroupId)
+                .then(res=>{
+                    this.productGroup = res.data
+                })
             }
         },
     }
@@ -269,7 +247,7 @@
 .goumaixuanxiang{
 	line-height: 150px;
 	color:white;
-}1
+}
 
 .select{
     background-color: #dadada;

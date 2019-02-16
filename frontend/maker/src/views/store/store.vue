@@ -14,7 +14,7 @@
 						<div class="card" style="width:320px">
 							<img class="card-img-top m-auto py-2" :src="item.productVO.imgUrl" style="width:95%">
 							<div class="card-body">
-								<div class="name my-1"><router-link to="product" class="a1">{{item.productName}}</router-link></div>
+								<div class="name my-1"><router-link to="product" class="a1" @click.native="changeGroupId(item.groupId)">{{item.productName}}</router-link></div>
 								<div class="price my-2">￥{{item.productVO.productPrice}}</div>
 								<div class="browse">销量：{{item.productVO.sales}}</div>
 							</div>
@@ -33,6 +33,11 @@
 		computed: {
 			store() {
 				return this.$store.state.currentStore
+			}
+		},
+		methods: {
+			changeGroupId(groupId) {
+				this.$store.state.currentProductGroupId = groupId
 			}
 		},
 	}

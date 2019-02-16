@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
     Product selectByProductId(Integer productId);
+
+    List<Integer> getValueIdsByProductId(Integer productId);
 }

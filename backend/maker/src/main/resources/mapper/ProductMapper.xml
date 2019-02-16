@@ -16,4 +16,8 @@
         select * from product
         where product_id =#{productId}
     </select>
+    <select id="getValueIdsByProductId" parameterType="INTEGER" resultType="INTEGER">
+        select value_id from product_value
+        where product_id =#{productId}
+    </select>
 </mapper>

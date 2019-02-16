@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cumtmaker.maker.mapper.SpecificationMapper">
+  <resultMap id="BaseResultMap" type="cn.cumtmaker.maker.model.Specification">
+    <id column="specification_id" jdbcType="INTEGER" property="specificationId" />
+    <result column="specification_name" jdbcType="VARCHAR" property="specificationName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    specification_id, specification_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from specification
+    where specification_id = #{specificationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from specification
+    where specification_id = #{specificationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cumtmaker.maker.model.Specification">
+    insert into specification (specification_id, specification_name
+      )
+    values (#{specificationId,jdbcType=INTEGER}, #{specificationName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.Specification">
+    insert into specification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="specificationId != null">
+        specification_id,
+      </if>
+      <if test="specificationName != null">
+        specification_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="specificationId != null">
+        #{specificationId,jdbcType=INTEGER},
+      </if>
+      <if test="specificationName != null">
+        #{specificationName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cumtmaker.maker.model.Specification">
+    update specification
+    <set>
+      <if test="specificationName != null">
+        specification_name = #{specificationName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where specification_id = #{specificationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cumtmaker.maker.model.Specification">
+    update specification
+    set specification_name = #{specificationName,jdbcType=VARCHAR}
+    where specification_id = #{specificationId,jdbcType=INTEGER}
+  </update>
+</mapper>

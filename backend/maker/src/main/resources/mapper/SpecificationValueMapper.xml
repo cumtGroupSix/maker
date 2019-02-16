@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cumtmaker.maker.mapper.SpecificationValueMapper">
+  <resultMap id="BaseResultMap" type="cn.cumtmaker.maker.model.SpecificationValue">
+    <id column="value_id" jdbcType="INTEGER" property="valueId" />
+    <result column="specification_id" jdbcType="INTEGER" property="specificationId" />
+    <result column="specification_value" jdbcType="VARCHAR" property="specificationValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    value_id, specification_id, specification_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from specification_value
+    where value_id = #{valueId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from specification_value
+    where value_id = #{valueId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cumtmaker.maker.model.SpecificationValue">
+    insert into specification_value (value_id, specification_id, specification_value
+      )
+    values (#{valueId,jdbcType=INTEGER}, #{specificationId,jdbcType=INTEGER}, #{specificationValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.SpecificationValue">
+    insert into specification_value
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="valueId != null">
+        value_id,
+      </if>
+      <if test="specificationId != null">
+        specification_id,
+      </if>
+      <if test="specificationValue != null">
+        specification_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="valueId != null">
+        #{valueId,jdbcType=INTEGER},
+      </if>
+      <if test="specificationId != null">
+        #{specificationId,jdbcType=INTEGER},
+      </if>
+      <if test="specificationValue != null">
+        #{specificationValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cumtmaker.maker.model.SpecificationValue">
+    update specification_value
+    <set>
+      <if test="specificationId != null">
+        specification_id = #{specificationId,jdbcType=INTEGER},
+      </if>
+      <if test="specificationValue != null">
+        specification_value = #{specificationValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where value_id = #{valueId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cumtmaker.maker.model.SpecificationValue">
+    update specification_value
+    set specification_id = #{specificationId,jdbcType=INTEGER},
+      specification_value = #{specificationValue,jdbcType=VARCHAR}
+    where value_id = #{valueId,jdbcType=INTEGER}
+  </update>
+</mapper>
