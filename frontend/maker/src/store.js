@@ -17,7 +17,9 @@ export default new Vuex.Store({
     cartmain:{},
   	cartarr:[],
     cartid:null,
-    cartchecked:[]
+    cartchecked:[],
+    currentStore:{},
+    currentProductGroupId:null
   },
   mutations: {
   },

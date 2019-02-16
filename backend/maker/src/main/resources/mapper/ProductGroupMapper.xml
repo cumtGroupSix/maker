@@ -5,7 +5,7 @@
         <id column="group_id" property="groupId" jdbcType="INTEGER"></id>
         <result column="representative_product_id" property="representativeProductId" jdbcType="INTEGER"></result>
         <result column="product_name" property="productName" jdbcType="VARCHAR"></result>
-        <result column="category" property="category" jdbcType="VARCHAR"></result>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"></result>
     </resultMap>
     <select id="selectProductGroupsByStoreId" parameterType="INTEGER" resultMap="ModelResultMap">
         select g.*

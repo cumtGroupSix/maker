@@ -1,12 +1,5 @@
 <template>
     <div>
-        <!-- 店铺导航 -->
-        <section id="dianpudaohang">
-            <div class="dianputupian">
-                <img src="@/assets/img/dianputupian.jpg" width="100%">
-            </div>
-        </section>
-        
         <!--购买界面-->
         <div class="container" style="max-width: 1050px">
             <section id="goumaijiemian">
@@ -66,7 +59,7 @@
                 </div>
             </div>
             <section id="shangpinxiangqing">
-                <div class="wenzishuoming" v-for="(Detail,index) in Detail" :key="index">
+                <div class="wenzishuoming mb-3" v-for="(Detail,index) in Detail" :key="index">
                     <div class="row">
                         <div class="col-12 col-md-4 col-sm-12">
                             <span>{{Detail.a}}<br>{{Detail.b}}<br>{{Detail.c}}<br>{{Detail.d}}</span>
@@ -79,16 +72,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="xiangqingtupian">
-                    <img src="@/assets/img/xiangqing1.jpg" width="100%" class="img-responsive center-block">
-                    <img src="@/assets/img/xiangqing2.jpg" width="100%" class="img-responsive center-block">
-                    <img src="@/assets/img/xiangqing3.jpg" width="100%" class="img-responsive center-block">
-                    <img src="@/assets/img/xiangqing4.jpg" width="100%" class="img-responsive center-block">
-                    <img src="@/assets/img/xiangqing5.jpg" width="100%" class="img-responsive center-block">
-                </div>
             </section>
             <section id="evaluation">
-                <div class="row summary">
+                <div class="row summary mb-3">
                     <div class="col-4 level font-weight-bold">
                         <span v-for="(item,index) in level">{{item}}</span>
                     </div>

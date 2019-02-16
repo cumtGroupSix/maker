@@ -24,7 +24,7 @@
                 <div class="store-introduce my-2 ellipsis">{{store.storeIntroduce}}</div>
                 <div>
                 <div class="browse float-left">{{store.browseTimes}}次浏览</div>
-                <div class="store-link float-right"><router-link to="store">进入店铺</router-link></div>
+                <div class="store-link float-right"><router-link to="store" @click.native="changeCurrentStore(index)">进入店铺</router-link></div>
                 </div>
                 </div>
             </div>
@@ -50,7 +50,9 @@
                 })
         },
         methods: {
-            
+            changeCurrentStore(index){
+                this.$store.state.currentStore = this.hotStore[index]
+            }
         }
     }
 </script>
