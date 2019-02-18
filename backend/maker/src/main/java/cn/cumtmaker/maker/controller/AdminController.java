@@ -8,7 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -70,14 +74,14 @@ public class AdminController {
 
     @ResponseBody
     @GetMapping("/getUserInfoByUserName")
-    @ApiOperation(value = "根据username获取USER信息(管理员权限)")
+    @ApiOperation(value = "根据username获取UserInfo信息(管理员权限)")
     public ResponseEntity getUserInfoByUserName(String username) {
         return ResponseEntity.ok(userService.getUserInfo(username));
     }
 
     @ResponseBody
     @GetMapping("/getMakerInfoByUserName")
-    @ApiOperation(value = "根据username获取Maker信息(管理员权限)")
+    @ApiOperation(value = "根据username获取MakerInfo信息(管理员权限)")
     public ResponseEntity getMakerInfoByUserName(String username) {
         return ResponseEntity.ok(userService.getMakerInfo(username));
     }
@@ -99,5 +103,21 @@ public class AdminController {
         return ResponseEntity.ok(userService.updateMakerInfo(httpServletRequest,username,storeName,mobileNumber,email,school,realName,studentId));
     }
 
-
+    @ResponseBody
+    @GetMapping("/count")
+    @ApiOperation(value = "获取在线人数(管理员权限)")
+    public String number(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        try{  //把sessionId记录在浏览器
+            Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(httpServletRequest.getSession().getId(), "utf-8"));
+            c.setPath("/");
+            //设置cookie有效期
+            c.setMaxAge( 2 * 60 * 60);
+            httpServletResponse.addCookie(c);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        HttpSession session = httpServletRequest.getSession();
+        Object count=session.getServletContext().getAttribute("count");
+        return "当前在线人数: "+count;
+    }
 }
