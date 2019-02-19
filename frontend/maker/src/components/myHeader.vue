@@ -96,7 +96,7 @@
 				  </div>
 				 <Row>
 				 <Col span="10" offset="2">
-				 <a href="#">忘记密码</a>
+				 <span style="cursor: pointer;color:#72ACE3">忘记密码</span>
 					</Col>
 				 <Col span="10" align="right">
 				 <span @click="toAnotherPath('/register')" style="cursor: pointer;color:#72ACE3">免费注册</span>

@@ -1,6 +1,12 @@
 <template>
     <Row>
-    <Col :xs="10" :sm="10" :md="6" :lg="6">
+    <Col :xs="3" :sm="4" :md="6" :lg="6">
+    <Row>
+        <Col :xs="20" :sm="0" :md="0" :lg="0">
+        <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="20"/>
+        </Col>
+    </Row>
+    <Sider breakpoint="sm" ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" style="background:#ffffff">
     <Menu :theme="theme" active-name="1-1" :open-names="['1']" accordion>
                 <MenuItem name="0" disabled>
                 <div><Icon type="md-people" />&nbsp;&nbsp;&nbsp;{{onlineCount}}</div>
@@ -53,8 +59,9 @@
                 <div @click="exit"><Icon type="md-exit" />&nbsp;&nbsp;&nbsp;退出界面</div>
                 </MenuItem>
                 </Menu>
+            </Sider>
         </Col>
-    <Col :xs="14" :sm="14" :md="18" :lg="18">
+    <Col :xs="21" :sm="20" :md="18" :lg="18">
     <keep-alive>
         <router-view></router-view>
     </keep-alive>   
@@ -67,6 +74,7 @@
     export default {
         data(){
             return{
+                isCollapsed: false,
                 theme:'light',
                 onlineCount:"Error"
             }
@@ -75,6 +83,9 @@
             this.getcount();
         },
         methods:{
+            collapsedSider () {
+                this.$refs.side1.toggleCollapse();
+            },
             exit(){
                 this.$Modal.confirm({
                     title: '退出登录:',

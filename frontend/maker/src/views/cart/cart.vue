@@ -324,8 +324,6 @@
 			this.axios.get('/api/cart/get')
 			.then((response)=>{
 				this.$store.state.cartmain=response.data;
-				console.log(this.$store.state.cartmain);	
-
 			})
 			.catch((error)=>{console.log(error);});
 			},
