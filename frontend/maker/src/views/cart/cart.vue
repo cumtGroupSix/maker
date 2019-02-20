@@ -514,7 +514,6 @@
 				this.axiosgetcart();
 			}
 		}
-				    
     }
 </script>
 

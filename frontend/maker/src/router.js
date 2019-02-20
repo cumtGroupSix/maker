@@ -6,6 +6,7 @@ import Store from './views/store/store'
 import Product from './views/product/product'
 import ProductList from './views/productList/productList'
 import Cart from './views/cart/cart'
+import Comment from './views/comment/comment'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
@@ -61,6 +62,11 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component: Cart
+    },
+    {
+      path: '/comment',
+      name: 'comment',
+      component: Comment
     },
     {
       path: '/receiver',
