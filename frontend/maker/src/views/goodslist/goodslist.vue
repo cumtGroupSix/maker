@@ -3,25 +3,13 @@
 	<Layout>
             <Sider breakpoint="md" ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" style="background:#ffffff">
                 <Menu active-name="1-2" theme="light" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
+                    <MenuItem name="1-1" @click="listAll">
                         <Icon type="ios-keypad"></Icon>
                         <span>全部分类</span>
                     </MenuItem>
-                    <MenuItem name="1-2">
+                    <MenuItem v-for="(item, index) in categorys" :key="index">
                         <Icon></Icon>
-                        <span>小吃零食</span>
-                    </MenuItem>
-                    <MenuItem name="1-3">
-                        <Icon></Icon>
-                        <span>电子配件</span>
-                    </MenuItem>
-                    <MenuItem name="1-4">
-                        <Icon></Icon>
-                        <span>生活用品</span>
-                    </MenuItem>
-                    <MenuItem name="1-5">
-                        <Icon></Icon>
-                        <span>阅读书籍</span>
+                        <span @click="changeList(index)">{{item.categoryName}}</span>
                     </MenuItem>
                 </Menu>
             </Sider>
@@ -48,6 +36,7 @@
     export default {
     	 data () {
             return {
+                categorys:[],
                 pageSize:10,
                 showList:[],
             	isCollapsed: false,
@@ -68,6 +57,7 @@
                         key: 'name'
                     },
                     {
+                        type:'html',
                         title: '商品图片',
                         key: 'img'
                     },
@@ -77,113 +67,26 @@
                         key: 'price'
                     },
                     {
-                        title: '商品库存',
-                        width:100,
-                        key: 'number'
-                    },
-                    {
                         title: '商品属性信息',
                         width: 300,
                         key: 'infos'
                     },
                 ],
                 data: [
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 18,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 24,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 26,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    },
-                    {
-                        name: '猫咪杯子情侣动物水杯',
-                        price: 30,
-                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
-                        img: '暂无图片供展示',
-                        number: 18
-                    }
+                    
                 ]
             }
         },
         mounted (){
-        this.setShowList();
+        this.axios.get("/api/product/goodslist/all")
+            .then(res=>{
+                this.data = res.data
+                this.setShowList();
+            })
+        this.axios.get("/api/category/all")
+            .then(res=>{
+                this.categorys = res.data
+            })
         },
         computed: {
             rotateIcon () {
@@ -213,6 +116,20 @@
                 var start = (index-1)*this.pageSize;
                 var end = index*this.pageSize;
                 this.showList=this.data.slice(start,end);
+            },
+            listAll(){
+                this.axios.get("/api/product/goodslist/all")
+                    .then(res=>{
+                        this.data = res.data
+                        this.setShowList();
+                    })
+            },
+            changeList(index){
+                this.axios.get("/api/product/goodslist/"+this.categorys[index].categoryId)
+                    .then(res=>{
+                        this.data = res.data
+                        this.setShowList();
+                    })
             }
         }
     

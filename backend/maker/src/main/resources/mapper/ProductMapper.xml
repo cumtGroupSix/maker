@@ -20,4 +20,9 @@
         select value_id from product_value
         where product_id =#{productId}
     </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="productId" parameterType="cn.cumtmaker.maker.form.ProductFormObject">
+        insert into product
+        (product_name,group_id,product_stock,product_price,img_url,product_description)
+        values (#{productName},#{groupId},#{stock},#{price},#{imageUrl},#{description})
+    </insert>
 </mapper>

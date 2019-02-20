@@ -24,4 +24,28 @@
         from product
         where group_id=#{groupId}
     </select>
+    <select id="getAll" resultMap="ModelResultMap">
+        select *
+        from product_group
+    </select>
+    <select id="getGroupsByCategoryId" parameterType="INTEGER" resultMap="ModelResultMap">
+        select *
+        from product_group
+        where category_id=#{categoryId}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="groupId" parameterType="cn.cumtmaker.maker.form.ProductGroupFormObject">
+        insert into product_group
+        (product_name,category_id)
+        values (#{productName},#{categoryId})
+    </insert>
+    <update id="updateRepresentativeProductId">
+        update product_group
+        set representative_product_id = #{representativeProductId}
+        where group_id = #{groupId}
+    </update>
+    <select id="selectProductGroupsNumByStoreId" parameterType="INTEGER" resultType="INTEGER">
+        select count(*)
+        from store_product
+        where store_id=#{storeId}
+    </select>
 </mapper>

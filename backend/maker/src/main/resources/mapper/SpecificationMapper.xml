@@ -24,7 +24,7 @@
     values (#{specificationId,jdbcType=INTEGER}, #{specificationName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.Specification">
+  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.Specification" useGeneratedKeys="true" keyProperty="specificationId">
     insert into specification
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="specificationId != null">
@@ -57,4 +57,9 @@
     set specification_name = #{specificationName,jdbcType=VARCHAR}
     where specification_id = #{specificationId,jdbcType=INTEGER}
   </update>
+  <select id="selectBySpecificationName" parameterType="STRING" resultMap="BaseResultMap">
+    select *
+    from specification
+    where specification_name=#{specificationName}
+  </select>
 </mapper>

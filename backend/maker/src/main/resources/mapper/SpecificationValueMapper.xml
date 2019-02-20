@@ -25,7 +25,7 @@
     values (#{valueId,jdbcType=INTEGER}, #{specificationId,jdbcType=INTEGER}, #{specificationValue,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.SpecificationValue">
+  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.SpecificationValue" useGeneratedKeys="true" keyProperty="valueId">
     insert into specification_value
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="valueId != null">
@@ -68,4 +68,10 @@
       specification_value = #{specificationValue,jdbcType=VARCHAR}
     where value_id = #{valueId,jdbcType=INTEGER}
   </update>
+  <select id="selectByIdAndValue" resultMap="BaseResultMap">
+    select *
+    from specification_value
+    where specification_id=#{specificationId}
+    and specification_value=#{specificationValue}
+  </select>
 </mapper>

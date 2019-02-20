@@ -16,4 +16,6 @@ public interface SpecificationMapper {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    Specification selectBySpecificationName(String specificationName);
 }

@@ -2,6 +2,7 @@ package cn.cumtmaker.maker.mapper;
 
 import cn.cumtmaker.maker.model.SpecificationValue;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SpecificationValueMapper {
@@ -16,4 +17,6 @@ public interface SpecificationValueMapper {
     int updateByPrimaryKeySelective(SpecificationValue record);
 
     int updateByPrimaryKey(SpecificationValue record);
+
+    SpecificationValue selectByIdAndValue(@Param("specificationId") Integer specificationId,@Param("specificationValue") String specificationValue);
 }
