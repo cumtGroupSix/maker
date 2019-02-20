@@ -3,7 +3,6 @@ package cn.cumtmaker.maker.controller;
 import cn.cumtmaker.maker.model.Cart;
 import cn.cumtmaker.maker.service.CartProductService;
 import cn.cumtmaker.maker.service.CartService;
-import cn.cumtmaker.maker.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Delete;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -24,16 +21,12 @@ public class CartController {
     CartService cartService;
 
     @Autowired
-    UserService userService;
-
-    @Autowired
     CartProductService cartProductService;
 
     @ResponseBody
     @GetMapping("/get")
-    @ApiOperation(value = "获取购物车",response= Cart.class)
-    public Cart getCartProduct(HttpServletRequest request){
-        int id= userService.getUserByRequest(request).getUserId();
+    @ApiOperation(value = "根据UserId获取购物车",response= Cart.class)
+    public Cart getCartProduct(Integer id){
         Cart cart = cartService.getCart(id);
         return cart;
     }

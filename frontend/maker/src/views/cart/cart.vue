@@ -9,7 +9,7 @@
 		</div>
 		<div class="container">
 		<div class="row" style='font-size:12px;margin-bottom: 20px;margin-top: 10px;'>
-			<div class="col-2 d-none d-lg-block" style='padding-left: 0px;'><input :disabled='cartisnull' type="checkbox" style='vertical-align: middle' id='gwc-checkall1' @click='checkall' :checked='ckall'><label for="gwc-checkall1" class='gwc-unselect'>全选</label></div>
+			<div class="col-2 d-none d-lg-block" style='padding-left: 0px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall1' @click='checkall' :checked='ckall'><label for="gwc-checkall1" class='gwc-unselect'>全选</label></div>
 			<div class="col-3 d-none d-lg-block">商品信息</div>
 			<div class="col-2 d-none d-lg-block"></div>
 			<div class="col-1 d-none d-lg-block text-center">单价</div>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="container">
 		<div class="row" style='font-size:12px;padding-top: 10px;margin-bottom: -40px;margin-top: -30px;'>
-			<div class="col-2 d-none d-md-block d-lg-none" style='padding-left: 0px;'><input :disabled='cartisnull' type="checkbox" style='vertical-align: middle' id='gwc-checkall1' @click='checkall' :checked='ckall'><label for="gwc-checkall1" class='gwc-unselect'>全选</label></div>
+			<div class="col-2 d-none d-md-block d-lg-none" style='padding-left: 0px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall1' @click='checkall' :checked='ckall'><label for="gwc-checkall1" class='gwc-unselect'>全选</label></div>
 			<div class="col-3 d-none d-md-block d-lg-none" style='padding-left: 20px;'>商品信息</div>
 			<div class="col-1 d-none d-md-block d-lg-none"></div>
 			<div class="col-1 d-none d-md-block d-lg-none text-center">单价</div>
@@ -29,7 +29,7 @@
 			<div class="col-2 d-none d-md-block d-lg-none" style='padding-left: 40px;'>操作</div>
 		</div>
 		</div>
-		<div class="container" v-if='this.cartisnull' style='margin-top:45px;margin-bottom:15px;'>
+		<div class="container" v-if='this.$store.state.cartmain=={}' style='margin-top:45px;margin-bottom:15px;'>
 			<div class="row kmain">
 				<div class="col-12 text-center align-self-center">
 					<div class='kong'>购物车为空</div>
@@ -41,7 +41,7 @@
 			<div class="row">
 			<div class="col-12 d-none d-lg-block">
 			<div class="row gwc-bar" style='font-size:12px;'>
-			<div class="col-1 d-none d-lg-block text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='cartisnull' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
+			<div class="col-1 d-none d-lg-block text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='this.$store.state.cartmain=={}' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
 			<div class="col-3">
 			<div class="row">
 			<div class="col-3 d-none d-lg-block text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
@@ -64,7 +64,7 @@
 			<div class="row">
 			<div class="col-12 d-none d-md-block d-lg-none">
 			<div class="row gwc-bar" style='font-size:12px;'>
-			<div class="col-1 d-none d-md-block d-lg-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='cartisnull' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
+			<div class="col-1 d-none d-md-block d-lg-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
 			<div class="col-4">
 			<div class="row">
 			<div class="col-3 d-none d-md-block d-lg-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
@@ -89,7 +89,7 @@
 			<div class="row gwc-bar" style='font-size:12px;'>
 			<div class="col-12">
 			<div class="row">
-			<div class="col-3 d-block d-md-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='cartisnull' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
+			<div class="col-3 d-block d-md-none text-left" style='padding-left: 5px;padding-top: 9px;'><input :disabled='gwck' type="checkbox" style='vertical-align: middle' id='gwc-checkall2' @click='checkall'  :checked='ckall'><label for="gwc-checkall2" class='gwc-unselect'>全选</label></div>
 			<div class="col-4 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;cursor:pointer' @click='collecta'>移入收藏夹</div>
 			<div class="col-3 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'>分享</div>
 			<div class="col-2 d-block d-md-none text-left" style='padding-left: 0px;padding-top: 9px;'><div @click='deletea' id='delete-all' class='gwc-unselect' style='cursor:pointer'>删除</div></div>
@@ -293,7 +293,6 @@
 					price:0,
 					quantity:0,
 				},
-				cartisnull:false,
 				idslen:0,
 				sum:0,
 				ckall:false,
@@ -304,6 +303,7 @@
 				ggxs1:true,
 				ggxs2:false,
 				ggxs3:false,
+				gwck:false,
 				updatestatus:0,
 				deletestatus:0,
 				collectstatus:0,
@@ -321,12 +321,12 @@
 			methods:{
 			// 根据用户ID获取购物车信息
 			axiosgetcart(){
-			this.axios.get('/api/cart/get')
-			.then((response)=>{
-				this.$store.state.cartmain=response.data;
-				console.log(this.$store.state.cartmain);	
-
+			this.axios.get('/api/cart/get',{
+				params:{
+					id:this.$store.state.userid
+				}
 			})
+			.then((response)=>{this.$store.state.cartmain=response.data})
 			.catch((error)=>{console.log(error);});
 			},
 			// 更新商品数量
@@ -477,13 +477,8 @@
 		},
 		watch: {
 			cartmain: function(newcartmain, old) {
-				if(newcartmain!={}&&newcartmain&&newcartmain!="undefined"){
-				this.$store.state.userid=newcartmain.userId;
 				this.$store.state.cartarr=[];
 				this.$store.state.cartid=newcartmain.cartId;
-				if(newcartmain.cartproduct.length==0){
-					this.cartisnull=true;
-				}else{
 				for(var a=0;a<newcartmain.cartproduct.length;a++){
 					this.namerepeat=false;
 					this.objindex=0;
@@ -506,13 +501,8 @@
 						this.cartobj.goods=[];	
 						this.cartobj.goods.push(this.cartobj2);
 						this.cartarr.push(this.cartobj);
-						};
-					};	
-				}	
-				}else{
-					this.cartisnull=true;
-				}
-				
+					};
+				};
 			},
 			updatestatus:function(newstatus,old){
 				this.axiosgetcart();
@@ -524,7 +514,6 @@
 				this.axiosgetcart();
 			}
 		}
-				    
     }
 </script>
 

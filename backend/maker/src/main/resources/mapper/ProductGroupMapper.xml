@@ -5,7 +5,7 @@
         <id column="group_id" property="groupId" jdbcType="INTEGER"></id>
         <result column="representative_product_id" property="representativeProductId" jdbcType="INTEGER"></result>
         <result column="product_name" property="productName" jdbcType="VARCHAR"></result>
-        <result column="category_id" property="categoryId" jdbcType="INTEGER"></result>
+        <result column="category" property="category" jdbcType="VARCHAR"></result>
     </resultMap>
     <select id="selectProductGroupsByStoreId" parameterType="INTEGER" resultMap="ModelResultMap">
         select g.*
@@ -14,6 +14,7 @@
         on g.group_id=sp.group_id
         where store_id=#{storeId}
     </select>
+<<<<<<< HEAD
     <insert id="addProduct">
         insert into store_product
         (store_id,group_id)
@@ -48,4 +49,6 @@
         from store_product
         where store_id=#{storeId}
     </select>
+=======
+>>>>>>> d32cc79a215a021487d2338465b01f0131539145
 </mapper>

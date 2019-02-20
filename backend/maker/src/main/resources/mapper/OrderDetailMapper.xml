@@ -6,12 +6,19 @@
         <result column="order_id" property="orderId" jdbcType="INTEGER"></result>
         <result column="product_id" property="productId" jdbcType="INTEGER"></result>
         <result column="product_price" property="productPrice" jdbcType="DECIMAL"></result>
+        <result column="order_amount" property="orderAmount" jdbcType="DECIMAL"></result>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"></result>
         <result column="product_quantity" property="productQuantity" jdbcType="INTEGER"></result>
-        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"></result>
         <result column="order_status" property="orderStatus" jdbcType="INTEGER"></result>
     </resultMap>
     <insert id="insertOrder" parameterType="cn.cumtmaker.maker.model.OrderDetail">
-        insert into order_detail (detail_id,order_id,product_id,product_price,product_quantity,order_time,order_status)
-        values (#{detailId}, #{orderId}, #{productId},#{productPrice}, #{productQuantity},#{orderTime},#{orderStatus})
+        insert into order_detail (detail_id,order_id,product_id,product_price,product_quantity,order_status)
+        values (#{detailId}, #{orderId}, #{productId},#{productPrice}, #{productQuantity},#{orderStatus})
     </insert>
+
+    <select id="getOrder" resultMap="ModelResultMap">
+    select *
+    from order_detail
+    where detail_id=#{detailId}
+   </select>
 </mapper>

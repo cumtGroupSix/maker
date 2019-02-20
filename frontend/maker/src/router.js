@@ -6,13 +6,13 @@ import Store from './views/store/store'
 import Product from './views/product/product'
 import ProductList from './views/productList/productList'
 import Cart from './views/cart/cart'
+import Comment from './views/comment/comment'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
 import OrderSubmit from './views/orderSubmit/orderSubmit'
 import Order from './views/order/order'
 import User from './views/user/user'
-import ChangePassword from './views/changePassword/changePassword'
 import Browse from './views/browse/browse'
 import Evaluate from './views/evaluate/evaluate'
 import MyProduct from './views/myProduct/myProduct'
@@ -20,17 +20,6 @@ import MyStore from './views/myStore/myStore'
 import GoodsList from './views/goodslist/goodslist'
 import Payment from './views/payment/payment'
 import Chuangke from './views/chuangkeAdministration/chuangkeAdministration'
-import ChuangkeLogin from './views/chuangkeLogin/chuangkeLogin'
-import ChuangkeRegister from './views/chuangkeRegister/chuangkeRegister'
-import AdminLogin from './views/adminLogin/adminLogin'
-import AdminManager from './views/adminManager/adminManager'
-import UserRegister from './views/adminUserRegister/userRegister'
-import MakerRegister from './views/adminMakerRegister/makerRegister'
-import DeleteUser from './views/adminDeleteUser/deleteUser'
-import ResetPassword from './views/adminResetPassword/resetPassword'
-import ChangeInfo from './views/adminChangeInfo/changeInfo'
-
-
 
 
 Vue.use(Router)
@@ -55,58 +44,6 @@ export default new Router({
       component: Store
     },
     {
-      path: '/makerlogin',
-      name: 'makerlogin',
-      component: ChuangkeLogin
-    },
-    {
-      path: '/admin',
-      name: 'adminlogin',
-      component: AdminLogin
-    },
-    {
-      path: '/adminmanager',
-      name: 'adminmanager',
-      component: AdminManager,
-      children:[
-      {
-      path: '/adminmanager/deleteuser',
-      name: 'deleteuser',
-      component: DeleteUser
-      },
-      {
-      path: '/adminmanager/userregister',
-      name: 'userregister',
-      component: UserRegister
-      },
-      {
-      path: '/adminmanager/makerregister',
-      name: 'adminmakerregister',
-      component: MakerRegister
-      },
-      {
-      path: '/adminmanager/resetpassword',
-      name: 'resetpassword',
-      component: ResetPassword
-      },
-      {
-      path: '/adminmanager/changeinfo',
-      name: 'changeinfo',
-      component: ChangeInfo
-      },
-      ]
-    },
-    {
-      path: '/makerregister',
-      name: 'makerregister',
-      component: ChuangkeRegister
-    },
-    {
-      path: '/changepassword',
-      name: 'changepassword',
-      component: ChangePassword
-    },
-    {
       path: '/product',
       name: 'product',
       component: Product
@@ -125,6 +62,11 @@ export default new Router({
       path: '/cart',
       name: 'cart',
       component: Cart
+    },
+    {
+      path: '/comment',
+      name: 'comment',
+      component: Comment
     },
     {
       path: '/receiver',

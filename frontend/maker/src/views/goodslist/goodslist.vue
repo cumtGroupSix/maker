@@ -19,10 +19,10 @@
                     <span style='font-size: 22px;'><b>商品选择列表</b></span>
                 </Header>
                 <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                 <Table border  :columns="columns" :data="showList" style="margin:10px"></Table>
+                 <Table border  :columns="columns8" :data="data1" style="margin:10px"></Table>
                  <br>
                  <div style="margin-bottom:30px">
-                 <Page :total="total" :page-size="pageSize" @on-change="changepage" show-elevator show-total style="float:left;margin-left:10px;"/>
+                 <Page :total="100" show-elevator show-total style="float:left;margin-left:10px;"/>
                  <Button style='float:right;margin-right:20px' size="large" type="default">确认选择</Button>
              	 </div>	
                  <br>
@@ -36,11 +36,14 @@
     export default {
     	 data () {
             return {
+<<<<<<< HEAD
                 categorys:[],
                 pageSize:10,
                 showList:[],
+=======
+>>>>>>> d32cc79a215a021487d2338465b01f0131539145
             	isCollapsed: false,
-                columns: [
+                columns8: [
                     {
                         type: 'selection',
                         width: 60,
@@ -72,6 +75,7 @@
                         key: 'infos'
                     },
                 ],
+<<<<<<< HEAD
                 data: [
                     
                 ]
@@ -88,6 +92,82 @@
                 this.categorys = res.data
             })
         },
+=======
+                data1: [
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 18,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 24,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 26,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    },
+                    {
+                        name: '猫咪杯子情侣动物水杯',
+                        price: 30,
+                        infos: '颜色分类：红、黄、蓝；产地：徐州；容量：500ml；材质：陶瓷；风格：彩绘；',
+                        img: '暂无图片供展示',
+                        number: 18
+                    }
+                ]
+            }
+        },
+>>>>>>> d32cc79a215a021487d2338465b01f0131539145
         computed: {
             rotateIcon () {
                 return [
@@ -100,17 +180,12 @@
                     'menu-item',
                     this.isCollapsed ? 'collapsed-menu' : ''
                 ]
-            },
-            total(){
-                return this.data.length;
             }
         },
         methods: {
-            setShowList(){
-               this.showList=this.data.slice(0,this.pageSize); 
-            },
             collapsedSider () {
                 this.$refs.side1.toggleCollapse();
+<<<<<<< HEAD
             },
             changepage(index){
                 var start = (index-1)*this.pageSize;
@@ -130,6 +205,8 @@
                         this.data = res.data
                         this.setShowList();
                     })
+=======
+>>>>>>> d32cc79a215a021487d2338465b01f0131539145
             }
         }
     

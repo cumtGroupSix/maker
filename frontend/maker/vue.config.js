@@ -11,14 +11,6 @@ module.exports = {
                     '^/api': ''  // rewrite path
                 }
             },
-            '/loginapi':{
-                target: 'http://localhost:8090/login',  // target host
-                ws: true,  // proxy websockets 
-                changeOrigin: true,  // needed for virtual hosted sites
-                pathRewrite: {
-                    '^/loginapi': ''  // rewrite path
-                }
-            }
         }
     },
 
