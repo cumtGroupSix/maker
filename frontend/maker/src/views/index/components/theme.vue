@@ -4,7 +4,7 @@
             <div class="text-center my-3 text-danger" style="font-family: '华文彩云';font-size: 28px;font-weight: bold">主题市场</div>				
             <ul class="row">
                 <li class="col-4 col-sm-6 text-center py-3 border-top px-0 " v-for="(item,index) in keys" :key="index" style="font-family: '微软雅黑';"><router-link to="/stores" style="font-weight:bold" class="text-danger">{{item.name}}</router-link></li>
-            </ul>
+            </ul>	
         </div>		
     </div>
 </template>

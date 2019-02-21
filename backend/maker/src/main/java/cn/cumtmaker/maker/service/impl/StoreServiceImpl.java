@@ -50,4 +50,8 @@ public class StoreServiceImpl implements StoreService {
         BeanUtils.copyProperties(product,productVO);
         return productVO;
     }
+
+    public Integer updateStore(Integer storeId,String storeName,String storeIntroduce,String imgUrl){
+        return storeMapper.updateStore(storeId,storeName,storeIntroduce,imgUrl);
+    }
 }

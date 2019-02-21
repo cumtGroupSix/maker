@@ -29,7 +29,7 @@
 							<label for="remark">备注：</label>
 							<textarea class="form-control" rows="6" id="remark" v-model="receiverNote"></textarea>
 						</div>
-						<button class="btn btn-danger btn-lg float-right"><a href="orderSubmit" class="text-white">提交信息</a></button>
+						<button class="btn btn-danger btn-lg float-right"><a href="order_submit" class="text-white">提交信息</a></button>
 					</form>
 				</div>
 			</div>	

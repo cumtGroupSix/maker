@@ -5,7 +5,7 @@ public class ProductGroup {
 
     private String productName;
 
-    private String category;
+    private Integer categoryId;
 
     private Integer representativeProductId;
 
@@ -25,12 +25,12 @@ public class ProductGroup {
         this.productName = productName;
     }
 
-    public String getCategory() {
-        return category;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getRepresentativeProductId() {

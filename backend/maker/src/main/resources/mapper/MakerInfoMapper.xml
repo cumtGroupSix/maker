@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.MakerInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.cumtmaker.maker.model.MakerInfo" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="mobile_number" property="mobileNumber" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="registration_time" property="registrationTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <insert id="makerSignUpInfo">
+    insert into maker_info(user_id,store_id,store_name,mobile_number,email,school,real_name,student_id,registration_time)
+     values(#{userId},#{storeId},#{storeName},#{mobileNumber},#{email},#{school},#{realName},#{studentId},#{registrationTime})
+  </insert>
+  <select id="getMakerInfo" parameterType="INTEGER" resultMap="BaseResultMap">
+    select *
+    from maker_info
+    where user_id=#{userId}
+  </select>
+  <update id="updateMakerInfo">
+    update maker_info
+    <set>
+      store_name=#{storeName},
+      mobile_number=#{mobileNumber},
+      email=#{email},
+      school=#{school},
+      real_name=#{realName},
+      student_id=#{studentId}
+    </set>
+    where
+    user_id=#{userId}
+  </update>
+</mapper>

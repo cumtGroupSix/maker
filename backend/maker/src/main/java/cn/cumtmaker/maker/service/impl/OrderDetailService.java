@@ -13,9 +13,4 @@ public class OrderDetailService {
     public int insertOrder (OrderDetail orderDetail) {
         return orderDetailMapper.insertOrder(orderDetail);
     }
-
-    public OrderDetail getOrder(Integer detailId) {
-        OrderDetail orderDetail = orderDetailMapper.getOrder(detailId);
-        return orderDetailMapper.getOrder(detailId);
-    }
 }

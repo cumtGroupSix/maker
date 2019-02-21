@@ -7,7 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -23,11 +26,5 @@ public class OrderDetailController {
     @ApiOperation(value = "添加订单信息", response = OrderDetail.class, responseContainer = "list")
     public ResponseEntity insertOrder(@RequestBody OrderDetail orderDetail) {
         return ResponseEntity.ok(orderDetailService.insertOrder(orderDetail));
-    }
-
-    @GetMapping("/get")
-    @ApiOperation(value = "根据detailId获取订单信息")
-    public ResponseEntity getOrder(Integer detailId){
-        return  ResponseEntity.ok(orderDetailService.getOrder(detailId));
     }
 }
