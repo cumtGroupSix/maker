@@ -29,7 +29,7 @@ import MakerRegister from './views/adminMakerRegister/makerRegister'
 import DeleteUser from './views/adminDeleteUser/deleteUser'
 import ResetPassword from './views/adminResetPassword/resetPassword'
 import ChangeInfo from './views/adminChangeInfo/changeInfo'
-
+import Userinfo from './views/userinfo/userinfo.vue'
 
 
 
@@ -166,6 +166,11 @@ export default new Router({
       name: 'user',
       component: User,
       children: [
+        {
+          path: '/user',
+          name: 'userinfo',
+          component: Userinfo
+        },
         {
           path: '/user/browse',
           name: 'browse',

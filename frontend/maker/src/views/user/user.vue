@@ -3,7 +3,7 @@
         <Col :md={span:18,offset:3} :lg={span:18,offset:3}>
             <Row>
                 <Col>
-                    <Menu mode="horizontal" :theme="theme1" active-name="1">
+                    <Menu mode="horizontal" :theme="theme1" active-name="0">
                         <MenuItem name="1" to="/user/browse">
                             <Icon type="ios-paper" />
                             浏览记录
