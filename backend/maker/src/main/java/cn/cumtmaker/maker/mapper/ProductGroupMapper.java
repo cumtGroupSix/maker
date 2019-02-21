@@ -21,9 +21,7 @@ public interface ProductGroupMapper {
 
     Integer insert(ProductGroupFormObject productGroupFormObject);
 
-    void updateRepresentativeProductId(@Param("groupId")Integer groupId,@Param("representativeProductId") Integer representativeProductId);
+    void updateRepresentativeProductId(@Param("groupId")Integer groupId, @Param("representativeProductId") Integer representativeProductId);
 
     Integer selectProductGroupsNumByStoreId(Integer storeId);
-=======
->>>>>>> d32cc79a215a021487d2338465b01f0131539145
 }
