@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cumtmaker.maker.mapper.StoreProductMapper">
+  <resultMap id="BaseResultMap" type="cn.cumtmaker.maker.model.StoreProductKey">
+    <id column="store_id" jdbcType="INTEGER" property="storeId" />
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="cn.cumtmaker.maker.model.StoreProductKey">
+    delete from store_product
+    where store_id = #{storeId,jdbcType=INTEGER}
+      and group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cumtmaker.maker.model.StoreProductKey">
+    insert into store_product (store_id, group_id)
+    values (#{storeId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cumtmaker.maker.model.StoreProductKey">
+    insert into store_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="getStoreIdsByGroupId" resultType="INTEGER">
+    select store_id
+    from store_product
+    where group_id=#{groupId}
+  </select>
+</mapper>

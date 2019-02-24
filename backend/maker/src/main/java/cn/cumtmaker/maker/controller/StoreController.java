@@ -20,6 +20,7 @@ public class StoreController {
     StoreService storeService;
 
     @GetMapping("/hot")
+    @ApiOperation(value = "获取热门店铺")
     public List<StoreVO> getHotStore(){
         return storeService.getHotStores();
     }
@@ -29,4 +30,14 @@ public class StoreController {
     public ResponseEntity updateStore(Integer storeId,String storeName,String storeIntroduce,String imgUrl){
         return ResponseEntity.ok(storeService.updateStore(storeId,storeName,storeIntroduce,imgUrl));
     }
+
+    /**
+     * 通过categoryId查找出所有拥有此类型商品的店铺
+     */
+    @GetMapping("/category")
+    @ApiOperation(value = "通过categoryId查找出所有拥有此类型商品的店铺")
+    public List<StoreVO> getStoresByCategoryId(@RequestParam Integer categoryId){
+        return storeService.getStoresByCategoryId(categoryId);
+    }
+
 }

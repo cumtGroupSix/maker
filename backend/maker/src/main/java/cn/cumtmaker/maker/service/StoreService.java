@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface StoreService {
     List<StoreVO> getHotStores();
+
     Integer updateStore(Integer storeId,String storeName,String storeIntroduce,String imgUrl);
+
+    List<StoreVO> getStoresByCategoryId(Integer categoryId);
 }

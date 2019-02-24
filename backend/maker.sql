@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 12/02/2019 17:30:53
+ Date: 24/02/2019 15:21:24
 */
 
 SET NAMES utf8mb4;
@@ -65,10 +65,10 @@ CREATE TABLE `cart_product`  (
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
-INSERT INTO `cart_product` VALUES (1, 1, 1, 1);
+INSERT INTO `cart_product` VALUES (1, 1, 1, 2);
 INSERT INTO `cart_product` VALUES (1, 1, 2, 1);
 INSERT INTO `cart_product` VALUES (1, 1, 3, 1);
-INSERT INTO `cart_product` VALUES (1, 2, 1, 1);
+INSERT INTO `cart_product` VALUES (1, 2, 1, 2);
 INSERT INTO `cart_product` VALUES (1, 2, 2, 1);
 INSERT INTO `cart_product` VALUES (3, 1, 1, 1);
 INSERT INTO `cart_product` VALUES (3, 2, 1, 1);
@@ -81,12 +81,32 @@ CREATE TABLE `category`  (
   `category_id` int(5) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES (1, '男装');
+INSERT INTO `category` VALUES (2, '女装');
+INSERT INTO `category` VALUES (3, '鞋靴');
+INSERT INTO `category` VALUES (4, '特产');
+INSERT INTO `category` VALUES (5, '班服');
+INSERT INTO `category` VALUES (6, '自行车');
+INSERT INTO `category` VALUES (7, '3C产品');
+INSERT INTO `category` VALUES (8, '个人护理');
+INSERT INTO `category` VALUES (9, '美妆');
+INSERT INTO `category` VALUES (10, '零食');
+INSERT INTO `category` VALUES (11, '体育用品');
+INSERT INTO `category` VALUES (12, '周边');
+INSERT INTO `category` VALUES (13, '鲜花园艺');
+INSERT INTO `category` VALUES (14, '宿舍用品');
+INSERT INTO `category` VALUES (15, '书籍');
+INSERT INTO `category` VALUES (16, '文具办公');
+INSERT INTO `category` VALUES (17, 'DIY');
+INSERT INTO `category` VALUES (18, '学业辅导');
+INSERT INTO `category` VALUES (19, '乐器');
+INSERT INTO `category` VALUES (20, '百货');
+INSERT INTO `category` VALUES (21, '户外');
 
 -- ----------------------------
 -- Table structure for comment
@@ -138,6 +158,9 @@ CREATE TABLE `group_specification`  (
 -- ----------------------------
 INSERT INTO `group_specification` VALUES (1, 1);
 INSERT INTO `group_specification` VALUES (1, 2);
+INSERT INTO `group_specification` VALUES (1, 6);
+INSERT INTO `group_specification` VALUES (14, 21);
+INSERT INTO `group_specification` VALUES (14, 22);
 
 -- ----------------------------
 -- Table structure for maker_info
@@ -216,7 +239,7 @@ CREATE TABLE `product`  (
   INDEX `product_price`(`product_price`) USING BTREE,
   INDEX `fk[product]group_id`(`group_id`) USING BTREE,
   CONSTRAINT `fk[product]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
@@ -226,6 +249,12 @@ INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学�
 INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '	https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0);
 INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', 'nice', 1, 0);
 INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', 'nice', 1, 0);
+INSERT INTO `product` VALUES (6, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 4, 16, 48.00, 'https://gd1.alicdn.com/imgextra/i3/2410159931/TB2lyCsXE6FK1Jjy0FpXXbFqVXa_!!2410159931.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (7, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 4, 121, 63.00, 'https://gd4.alicdn.com/imgextra/i4/2410159931/TB2fqJEa8oHL1JjSZFwXXb6vpXa_!!2410159931.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (8, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 5, 16, 169.00, 'https://gd2.alicdn.com/imgextra/i2/0/O1CN01Wr4agp1T7TJJ0TGvH_!!0-item_pic.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (9, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 5, 122, 338.00, 'https://gd1.alicdn.com/imgextra/i1/2808652335/TB2j89RbYSYBuNjSspfXXcZCpXa_!!2808652335.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (24, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 14, 16, 138.00, 'https://gd3.alicdn.com/imgextra/i4/2108032133/O1CN011RcxGikve452LKy_!!2108032133.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (25, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 14, 21, 123.00, 'https://gd2.alicdn.com/imgextra/i2/2108032133/O1CN011RcxGnCnHJCldxX_!!2108032133.jpg_400x400.jpg', '舒服', 1, 0);
 
 -- ----------------------------
 -- Table structure for product_group
@@ -235,11 +264,11 @@ CREATE TABLE `product_group`  (
   `group_id` int(55) NOT NULL AUTO_INCREMENT COMMENT '分组ID',
   `product_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '产品名称',
   `category_id` int(11) NOT NULL COMMENT '产品目录',
-  `representative_product_id` int(55) NOT NULL COMMENT '代表产品ID',
+  `representative_product_id` int(55) NULL DEFAULT NULL COMMENT '代表产品ID',
   PRIMARY KEY (`group_id`) USING BTREE,
   INDEX `fk[product_group]category_id`(`category_id`) USING BTREE,
   CONSTRAINT `fk[product_group]category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_group
@@ -247,6 +276,9 @@ CREATE TABLE `product_group`  (
 INSERT INTO `product_group` VALUES (1, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 1);
 INSERT INTO `product_group` VALUES (2, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 1, 4);
 INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 1, 5);
+INSERT INTO `product_group` VALUES (4, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 3, 6);
+INSERT INTO `product_group` VALUES (5, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 3, 8);
+INSERT INTO `product_group` VALUES (14, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 3, 24);
 
 -- ----------------------------
 -- Table structure for product_value
@@ -268,6 +300,10 @@ INSERT INTO `product_value` VALUES (1, 1);
 INSERT INTO `product_value` VALUES (2, 1);
 INSERT INTO `product_value` VALUES (1, 6);
 INSERT INTO `product_value` VALUES (2, 7);
+INSERT INTO `product_value` VALUES (24, 22);
+INSERT INTO `product_value` VALUES (25, 22);
+INSERT INTO `product_value` VALUES (24, 23);
+INSERT INTO `product_value` VALUES (25, 23);
 
 -- ----------------------------
 -- Table structure for resource
@@ -332,7 +368,7 @@ CREATE TABLE `specification`  (
   `specification_id` int(11) NOT NULL AUTO_INCREMENT,
   `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`specification_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of specification
@@ -341,6 +377,10 @@ INSERT INTO `specification` VALUES (1, '尺寸');
 INSERT INTO `specification` VALUES (2, '颜色');
 INSERT INTO `specification` VALUES (3, '生产日期');
 INSERT INTO `specification` VALUES (4, '生产厂家');
+INSERT INTO `specification` VALUES (5, '适用人群');
+INSERT INTO `specification` VALUES (6, '材质');
+INSERT INTO `specification` VALUES (21, '风格');
+INSERT INTO `specification` VALUES (22, '款式');
 
 -- ----------------------------
 -- Table structure for specification_value
@@ -353,7 +393,7 @@ CREATE TABLE `specification_value`  (
   PRIMARY KEY (`value_id`) USING BTREE,
   INDEX `fk[specification_value]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[specification_value]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of specification_value
@@ -366,6 +406,9 @@ INSERT INTO `specification_value` VALUES (5, 1, 'XXXL');
 INSERT INTO `specification_value` VALUES (6, 2, '灰色');
 INSERT INTO `specification_value` VALUES (7, 2, '红色');
 INSERT INTO `specification_value` VALUES (8, 2, '卡其色');
+INSERT INTO `specification_value` VALUES (9, 5, '青少年');
+INSERT INTO `specification_value` VALUES (22, 21, '欧美');
+INSERT INTO `specification_value` VALUES (23, 22, '单鞋');
 
 -- ----------------------------
 -- Table structure for store
@@ -424,8 +467,18 @@ CREATE TABLE `store_product`  (
 -- Records of store_product
 -- ----------------------------
 INSERT INTO `store_product` VALUES (1, 1);
+INSERT INTO `store_product` VALUES (2, 1);
 INSERT INTO `store_product` VALUES (1, 2);
 INSERT INTO `store_product` VALUES (2, 2);
+INSERT INTO `store_product` VALUES (1, 3);
+INSERT INTO `store_product` VALUES (2, 3);
+INSERT INTO `store_product` VALUES (11, 3);
+INSERT INTO `store_product` VALUES (1, 4);
+INSERT INTO `store_product` VALUES (2, 4);
+INSERT INTO `store_product` VALUES (9, 4);
+INSERT INTO `store_product` VALUES (1, 5);
+INSERT INTO `store_product` VALUES (2, 5);
+INSERT INTO `store_product` VALUES (9, 5);
 
 -- ----------------------------
 -- Table structure for user
