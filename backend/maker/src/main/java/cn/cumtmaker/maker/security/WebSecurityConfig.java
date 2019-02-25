@@ -57,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable().authorizeRequests()
                 //设置注册接口、修改密码接口、验证码等接口不需要验证
                 .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/store/hot","/api/store/category").permitAll()
+                .antMatchers("/api/category/*").permitAll()
                 .antMatchers("/api/code/**").permitAll()
                 //设置管理员下的所有接口需要管理员身份验证
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
