@@ -84,7 +84,7 @@
         <Row justify="center" type="flex" style="margin-top:-15px;margin-bottom:-15px">
         <Col span="12" align="left">
         <FormItem>
-            <span style="color:#72ACE3;cursor:pointer">忘记密码</span>
+            <router-link to="/findpassword">忘记密码</router-link>
         </FormItem>
         </Col>
         <Col span="12" align="right">

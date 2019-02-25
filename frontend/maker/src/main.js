@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
   }else{
     	//如果不存在token也不存在makertoken或admintoken
       //如果是不需要登录的路径
-        var paths=['/','/changepassword','/admin','/register','/makerlogin','/makerregister']
+        var paths=['/','/changepassword','/admin','/register','/makerlogin','/makerregister','/findpassword']
         if(paths.indexOf(to.path)>=0){ 
         //直接next()
             next();

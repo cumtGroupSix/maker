@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     MakerInfoMapper makerInfoMapper;
+
+    @Autowired
+    JavaMailSender jms;
 
     private Logger logger= LoggerFactory.getLogger(getClass());
 
@@ -67,6 +72,34 @@ public class UserServiceImpl implements UserService {
         logger.info("用户名为"+username+"的"+role+"用户添加创客注册信息成功");
         return 1;
 
+    }
+
+    //邮箱发送验证码
+    @Override
+    public int sendEmail(String sender,String username,String title,String text){
+        //建立邮件消息
+        SimpleMailMessage mainMessage = new SimpleMailMessage();
+        //发送者
+        mainMessage.setFrom(sender);
+        //验证用户角色
+        String role = getUserByUserName(username).getRole();
+        if(role.equals("USER")){
+            String receiver=getUserInfo(username).getEmail();
+            mainMessage.setTo(receiver);
+            logger.info("接收者 -- "+receiver);
+        }else if(role.equals("MAKER")){
+            String receiver=getMakerInfo(username).getEmail();
+            mainMessage.setTo(receiver);
+            logger.info("接收者 -- "+receiver);
+        }else{
+            return 0;
+        }
+        //发送的标题
+        mainMessage.setSubject(title);
+        //发送的内容
+        mainMessage.setText(text);
+        jms.send(mainMessage);
+        return 1;
     }
 
     //管理员根据username删除用户
@@ -130,6 +163,20 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
     }
+
+    //找回密码方法实现
+    @Override
+    public int findPassword(String username,String newPassword){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            String encodePassword = bCryptPasswordEncoder.encode(newPassword);
+            int code=userMapper.resetPassword(username,encodePassword);
+            if(code==1){
+                String role=userMapper.getUserByUserName(username).getRole();
+                logger.info("用户名为"+username+"的"+role+"用户重新找回了密码");
+            }
+            return code;
+    }
+
 //管理员修改用户密码
     @Override
     public int adminResetPassword(HttpServletRequest httpServletRequest,String username,String newPassword){

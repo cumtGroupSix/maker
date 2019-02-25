@@ -62,4 +62,11 @@ public class UserController {
     public ResponseEntity resetPassword(String username, String oldPassword,String newPassword) {
         return ResponseEntity.ok(userService.resetPassword(username, oldPassword,newPassword));
     }
+
+    @ResponseBody
+    @PostMapping("/findPassword")
+    @ApiOperation(value = "找回密码")
+    public ResponseEntity findPassword(String username,String newPassword) {
+        return ResponseEntity.ok(userService.findPassword(username,newPassword));
+    }
 }

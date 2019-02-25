@@ -1,6 +1,8 @@
 package cn.cumtmaker.maker.controller;
 
 import cn.cumtmaker.maker.security.validate.ImageCode;
+import cn.cumtmaker.maker.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ import java.util.Random;
 @RestController
 public class ValidateCodeController {
 
+    @Autowired
+    UserService userService;
+
     public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
     private SessionStrategy sessionStrategy=new HttpSessionSessionStrategy();
 
@@ -29,12 +34,25 @@ public class ValidateCodeController {
         ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
     }
 
+    @GetMapping("api/code/email")
+    public int sendEmail(HttpServletRequest request,String username) {
+        String sender="cumtgroupsix@163.com";   //发送人的邮箱
+        ImageCode imageCode =createImageCode(request);
+        sessionStrategy.setAttribute(new ServletWebRequest(request), SESSION_KEY, imageCode);
+        String code=imageCode.getCode();
+        String title="大学生创客联盟";    //标题
+        String text="此邮箱所绑定的大学生创客联盟正在尝试找回密码，验证码:  "+code+"\n有效时间2分钟，如非本人操作，请勿泄露。"; //内容文本
+        int result=userService.sendEmail(sender,username,title,text);
+        return result;
+    }
+
+
 //    生成验证码及对应图片
     private ImageCode createImageCode(HttpServletRequest request) {
         int width = 96;
         int height = 30;
         int length=4;
-        int expireIn=60;
+        int expireIn=120;
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
 

@@ -29,4 +29,6 @@ public interface UserService {
     int updateMakerInfo(HttpServletRequest httpServletRequest,String username,
                         String storeName,String mobileNumber, String email,
                         String school, String realName,String studentId);
+    int sendEmail(String sender,String username,String title,String text);
+    int findPassword(String username,String newPassword);
 }

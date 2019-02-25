@@ -29,7 +29,8 @@ import MakerRegister from './views/adminMakerRegister/makerRegister'
 import DeleteUser from './views/adminDeleteUser/deleteUser'
 import ResetPassword from './views/adminResetPassword/resetPassword'
 import ChangeInfo from './views/adminChangeInfo/changeInfo'
-import Userinfo from './views/userinfo/userinfo.vue'
+import Userinfo from './views/userinfo/userinfo'
+import FindPassword from './views/findPassword/findPassword'
 
 
 
@@ -105,6 +106,11 @@ export default new Router({
       path: '/changepassword',
       name: 'changepassword',
       component: ChangePassword
+    },
+    {
+      path: '/findpassword',
+      name: 'findpassword',
+      component: FindPassword
     },
     {
       path: '/product',
