@@ -61,6 +61,33 @@ public class UserServiceImpl implements UserService {
         logger.info("用户名为"+username+"的"+role+"用户添加用户注册信息成功");
         return 1;
     }
+
+    //用户获取USER信息
+    @Override
+    public UserInfo getUserInfoByUser(HttpServletRequest httpServletRequest){
+        //根据请求头获取UserVO
+        UserVO userVO = getUserByRequest(httpServletRequest);
+        logger.info("用户" + userVO.getUsername() + "查询了自己的USER信息");
+        return  userInfoMapper.getUserInfo(userVO.getUserId());
+    }
+
+    //用户更新USER信息
+    @Override
+    public int updateUserInfoByUser(HttpServletRequest httpServletRequest,String username, Integer enable,String nickname,String telephone,
+                                    String email,String address,String school){
+        //根据请求头获取UserVO
+        UserVO userVO = getUserByRequest(httpServletRequest);
+        if (userVO != null && userVO.getUsername().equals(username)) {
+            //认证信息是用户本人
+            Integer userId = userVO.getUserId();
+            int code = userInfoMapper.updateUserInfo(userId,enable,nickname,telephone,email,address,school);
+            if (code == 1)
+                logger.info("用户" + username + "更改了自己的信息");
+            return code;
+        }
+
+        return 0;
+    }
     //创客注册信息
     @Override
     public int setMakerSignUpInfo(String username, String storeName, String mobileNumber, String email,

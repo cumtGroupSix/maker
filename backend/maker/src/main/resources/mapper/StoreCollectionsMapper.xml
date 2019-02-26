@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.StoreCollectionsMapper">
+    <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.model.Store">
+        <id column="store_id" property="storeId" jdbcType="INTEGER"></id>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"></result>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"></result>
+        <result column="store_introduce" property="storeIntroduce" jdbcType="VARCHAR"></result>
+        <result column="browse_times" property="browseTimes" jdbcType="INTEGER"></result>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <insert id="collectStore">
+       insert into store_collections(user_id,collect_store_id)
+       values(#{userId},#{collectStoreId})
+    </insert>
+    <delete id="cancelCollectStore">
+        delete from store_collections
+        where user_id = #{userId} and collect_store_id = #{collectStoreId}
+    </delete>
+    <select id="getCollectStores" resultMap="ModelResultMap">
+        select s.*
+        from store s
+        inner join store_collections sc
+        on sc.collect_store_id = s.store_id
+        where user_id = #{userId}
+    </select>
+</mapper>

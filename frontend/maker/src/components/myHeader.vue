@@ -23,7 +23,7 @@
                     <a class="nav-link" @click="loginDialogShow" style="cursor: pointer;">登录</a>
                 </li>
                 <li class="nav-item mx-3" v-if="this.hasLogged">
-                    <a class="nav-link" style="cursor: pointer;">尊敬的{{this.$store.state.username}},您好!</a>
+					<router-link to='/user' class="nav-link" style='cursor: pointer;'>尊敬的{{this.$store.state.username}},您好!</router-link>
                 </li>
                 <li class="nav-item mx-3" v-if="this.hasLogged">
                     <a class="nav-link" style="cursor: pointer;" @click="exit">退出</a>

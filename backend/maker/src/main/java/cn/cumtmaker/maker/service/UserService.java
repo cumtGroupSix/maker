@@ -29,6 +29,9 @@ public interface UserService {
     int updateMakerInfo(HttpServletRequest httpServletRequest,String username,
                         String storeName,String mobileNumber, String email,
                         String school, String realName,String studentId);
+    int updateUserInfoByUser(HttpServletRequest httpServletRequest,String username, Integer enable,String nickname,String telephone,
+                             String email,String address,String school);
+    UserInfo getUserInfoByUser(HttpServletRequest httpServletRequest);
     int sendEmail(String sender,String username,String title,String text);
     int findPassword(String username,String newPassword);
 }

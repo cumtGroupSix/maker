@@ -69,4 +69,18 @@ public class UserController {
     public ResponseEntity findPassword(String username,String newPassword) {
         return ResponseEntity.ok(userService.findPassword(username,newPassword));
     }
+    @ResponseBody
+    @GetMapping("/userInfo")
+    @ApiOperation(value = "USER信息获取(用户自身权限)")
+    public ResponseEntity getUserInfo(HttpServletRequest httpServletRequest){
+        return ResponseEntity.ok(userService.getUserInfoByUser(httpServletRequest));
+    }
+
+    @ResponseBody
+    @PostMapping("/updateUserInfo")
+    @ApiOperation(value = "USER信息修改(用户自身权限)")
+    public ResponseEntity updateUserInfo(HttpServletRequest httpServletRequest,String username, Integer enable,String nickname,String telephone,
+                                         String email,String address,String school){
+        return ResponseEntity.ok(userService.updateUserInfoByUser(httpServletRequest,username,enable,nickname,telephone,email,address,school));
+    }
 }
