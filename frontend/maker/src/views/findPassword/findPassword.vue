@@ -72,7 +72,6 @@
         axiosFindPassword(){
         	this.axios.post("/api/user/findPassword?username="+this.username+"&newPassword="+this.newpassword+"&imageCode="+this.validatecode)
         	.then((response)=>{
-        		console.log(response);
         		if(response.data==1){
         		this.$Modal.success({
                             title:"重设密码成功",
@@ -83,7 +82,7 @@
                             },
                         }); 
 	        	}else{
-					this.$Message.error('重设密码失败');
+					this.$Message.error(response.data);
 	        	}
         })
 			.catch((error)=>{
@@ -94,7 +93,7 @@
         	this.axios.get("/api/code/email?username="+this.username)
         	.then((response)=>{
         		if(response.data==1){
-        		this.$Message.success("已向此用户所绑定邮箱发送验证码，请注意查收"); 
+        		this.$Message.success("已向绑定邮箱发送验证码，请注意查收"); 
         		}else{
         		this.$Message.error('用户名不存在或不可用'); 
         	}
