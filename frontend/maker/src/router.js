@@ -31,7 +31,10 @@ import ResetPassword from './views/adminResetPassword/resetPassword'
 import ChangeInfo from './views/adminChangeInfo/changeInfo'
 import Userinfo from './views/userinfo/userinfo'
 import FindPassword from './views/findPassword/findPassword'
-
+import Supplier from './views/supplier/supplier.vue'
+import SupplierProduct from './views/supplierProduct/supplierProduct.vue'
+import SupplierAddProduct from './views/supplierAddProduct/supplierAddProduct.vue'
+import SupplierUpdateProduct from './views/supplierUpdateProduct/supplierUpdateProduct.vue'
 
 
 Vue.use(Router)
@@ -197,6 +200,28 @@ export default new Router({
           name: 'myStore',
           component: MyStore
         },
+      ]
+    },
+    {
+      path: '/supplier',
+      name: 'supplier',
+      component: Supplier,
+      children: [
+        {
+          path: '/supplier',
+          name: 'supplierProduct',
+          component: SupplierProduct
+        },
+        {
+          path: '/supplier/addproduct',
+          name: 'addproduct',
+          component: SupplierAddProduct
+        },
+        {
+          path: '/supplier/updateproduct',
+          name: 'updateproduct',
+          component: SupplierUpdateProduct
+        }
       ]
     }
   ]
