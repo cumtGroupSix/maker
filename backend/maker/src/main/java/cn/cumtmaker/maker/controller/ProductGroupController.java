@@ -50,4 +50,8 @@ public class ProductGroupController {
     public List<GoodsListVO> getAll(@PathVariable Integer categoryId){
         return productGroupService.getListByCategoryId(categoryId);
     }
+
+    @GetMapping("/all")
+    @ApiOperation(value = "返回所有类目及groups")
+    public List<>
 }
