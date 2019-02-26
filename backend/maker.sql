@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 24/02/2019 15:21:24
+ Date: 26/02/2019 21:15:51
 */
 
 SET NAMES utf8mb4;
@@ -65,7 +65,7 @@ CREATE TABLE `cart_product`  (
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
-INSERT INTO `cart_product` VALUES (1, 1, 1, 2);
+INSERT INTO `cart_product` VALUES (1, 1, 1, 7);
 INSERT INTO `cart_product` VALUES (1, 1, 2, 1);
 INSERT INTO `cart_product` VALUES (1, 1, 3, 1);
 INSERT INTO `cart_product` VALUES (1, 2, 1, 2);
@@ -117,7 +117,13 @@ CREATE TABLE `comment`  (
   `product_id` int(55) NOT NULL COMMENT '产品ID',
   `comment_content` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '评论内容',
   `comment_time` datetime(0) NULL DEFAULT NULL COMMENT '评论时间',
-  `star_level` int(1) NULL DEFAULT NULL COMMENT '评价星级',
+  `star_level1` int(1) NULL DEFAULT NULL COMMENT '店铺风格评价星级',
+  `star_level2` int(1) NULL DEFAULT NULL COMMENT '商品质量评价星级',
+  `star_level3` int(1) NULL DEFAULT NULL COMMENT '服务态度评价星级',
+  `img_url1` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '评价图片1',
+  `img_url2` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '评价图片2',
+  `img_url3` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '评价图片3',
+  `img_url4` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '评价图片4',
   PRIMARY KEY (`user_id`, `product_id`) USING BTREE,
   INDEX `fk[product_id]`(`product_id`) USING BTREE,
   CONSTRAINT `fk[product_id]` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -139,6 +145,11 @@ CREATE TABLE `group_collections`  (
   CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_collections
+-- ----------------------------
+INSERT INTO `group_collections` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for group_specification
@@ -197,6 +208,8 @@ CREATE TABLE `order_detail`  (
   `product_price` decimal(8, 2) NOT NULL COMMENT '产品价格',
   `product_quantity` int(20) NOT NULL COMMENT '产品数量',
   `order_status` int(2) NULL DEFAULT NULL COMMENT '订单状态',
+  `order_amount` decimal(20, 0) NOT NULL COMMENT '订单总价',
+  `product_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '产品名称',
   PRIMARY KEY (`detail_id`) USING BTREE,
   INDEX `fk[order_detail]order_id`(`order_id`) USING BTREE,
   INDEX `fk[order_detail]product_id`(`product_id`) USING BTREE,
