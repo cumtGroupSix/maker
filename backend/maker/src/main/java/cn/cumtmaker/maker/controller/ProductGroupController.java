@@ -51,7 +51,7 @@ public class ProductGroupController {
         return productGroupService.getListByCategoryId(categoryId);
     }
 
-    @GetMapping("/all")
-    @ApiOperation(value = "返回所有类目及groups")
-    public List<>
+//    @GetMapping("/all")
+//    @ApiOperation(value = "返回所有类目及groups")
+//    public List<>
 }
