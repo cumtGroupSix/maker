@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cumtmaker.maker.mapper.CommentMapper">
+    <resultMap id="ModelResultMap" type="cn.cumtmaker.maker.model.Comment">
+        <id column="user_id" property="userId" jdbcType="INTEGER"></id>
+        <id column="product_id" property="productId" jdbcType="INTEGER"></id>
+        <result column="comment_content" property="commentContent" jdbcType="VARCHAR"></result>
+        <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP"></result>
+        <result column="star_level1" property="starLevel1" jdbcType="INTEGER"></result>
+        <result column="star_level2" property="starLevel2" jdbcType="INTEGER"></result>
+        <result column="star_level3" property="starLevel3" jdbcType="INTEGER"></result>
+        <result column="img_url1" property="imgUrl1" jdbcType="VARCHAR"></result>
+        <result column="img_url2" property="imgUrl2" jdbcType="VARCHAR"></result>
+        <result column="img_url3" property="imgUrl3" jdbcType="VARCHAR"></result>
+        <result column="img_url4" property="imgUrl4" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <insert id="insertComment" parameterType="cn.cumtmaker.maker.model.Comment">
+        insert into comment (user_id,product_id,comment_content,comment_time,star_level1,star_level2,star_level3,img_url1,img_url2,
+        img_url3,img_url4)
+        values (#{userId}, #{productId}, #{commentContent},#{commentTime}, #{starLevel1}, #{starLevel2}, #{starLevel3},
+        #{imgUrl1},#{imgUrl2},#{imgUrl3},#{imgUrl4})
+    </insert>
+
+    <delete id="deleteComment">
+        delete
+        from comment
+        where
+        user_id=#{userId} and
+        product_id=#{productId}
+  </delete>
+</mapper>

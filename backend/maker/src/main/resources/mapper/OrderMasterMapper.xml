@@ -21,4 +21,10 @@
     user_id=#{userId} and
     order_id=#{orderId}
   </update>
+
+  <insert id="insertOrder" parameterType="cn.cumtmaker.maker.model.OrderMaster">
+        insert into order_master (order_id,user_id,pay_status,order_amount,order_time)
+        values (#{orderId}, #{userId},#{payStatus},#{orderAmount},#{orderTime})
+  </insert>
+
 </mapper>
