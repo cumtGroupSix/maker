@@ -30,6 +30,9 @@ public class ProductDetailUtil {
         this.specificationMapper=specificationMapper;
     }
 
+    /**
+     * 通过productId返回产品详情信息
+     */
     public static ProductDetailVO getDetailByProductId(Integer productId){
         Product product = productMapper.selectByProductId(productId);
         ProductDetailVO productDetailVO = new ProductDetailVO();
