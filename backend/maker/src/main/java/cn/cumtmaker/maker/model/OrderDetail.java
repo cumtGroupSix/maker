@@ -15,9 +15,11 @@ public class OrderDetail {
 
     private Integer productQuantity;
 
-    private Date orderTime;
-
     private Integer orderStatus;
+
+    private String productName;
+
+    private BigDecimal orderAmount;
 
     public Integer getDetailId() {
         return detailId;
@@ -59,19 +61,27 @@ public class OrderDetail {
         this.productQuantity = productQuantity;
     }
 
-    public Date getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
-    }
-
     public Integer getOrderStatus() {
         return orderStatus;
     }
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public BigDecimal getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(BigDecimal orderAmount) {
+        this.orderAmount = orderAmount;
     }
 }

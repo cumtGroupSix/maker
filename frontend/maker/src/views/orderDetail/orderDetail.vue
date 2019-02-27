@@ -1,172 +1,172 @@
 <template>
     <div class="container" style="max-width: 1300px">
-			<div class="order-details-title my-2 ml-5">订单详情</div>
-			<hr style="height:3px;border:none;border-top:3px solid #ff6600;" />
-			<div class="border border-danger rounded px-5 py-2" style="background-color: #ffd1b3">
-				<div style="font-family: '黑体';font-size: 20px" class="my-2">当前订单状态：创客平台已发货，请查看页面下方物流信息了解宝贝寄送情况</div>
-				<ul style="font-size: 14px">
-					<li style="list-style-type:disc" class="my-2">您还有<span style="color: #ff6600" class="mx-2">6天23小时59分59秒</span>来完成商品的"确认收货"操作。如果期间您没有"确认收货"，<span class="text-primary mx-2">猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子</span>也没有"申请退款"，以上商品将自动确认收货</li>
-					<li style="list-style-type:disc" class="my-2">如果您已收到货，且对商品满意，您可以<button class="btn btn-sm btn-primary">确认收货</button></li>
-					<li style="list-style-type:disc" class="my-2">如果还未收到货，请注意自动打款时间，您可以<span class="text-primary mx-2">延长收货时间</span>或者<button class="btn btn-sm btn-primary">申请退款</button></li>
-				</ul>
+
+		<div class="logistics-information">
+			<div class="querendingdan">物流信息</div>
+			<div class="logistics-information-content">
+				<div class="my-2">配送方式：平台配送</div>
+				<div class="my-2">运单号码：20851593478516</div>
+				<div class="my-2">订单状态：配送中</div>
+				<div class="my-2">收货地址：******</div>
 			</div>
-			<div class="logistics-information">
-				<div class="logistics-information-title my-3">物流信息</div>
-				<hr/>
-				<div class="logistics-information-content">
-					<div class="my-2">发货方式：平台配送</div>
-					<div class="my-2">运单号码：20851593478516</div>
-					<div>
-						<div class="d-none d-sm-block">
-							<div class="d-flex my-2">
-								<div>配送跟踪：</div>
-								<div>
-									<p>2018-08-05 11:00:00包裹正在等待揽收</p>
-									<p>2018-08-05 11:30:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:00:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:15:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:30:00成功取件</p>
-								</div>
-							</div>
-						</div>
-						<div class="d-block d-sm-none">
-								<div class="my-2">配送跟踪：</div>
-								<div class="my-2 pl-3">
-									<p>2018-08-05 11:00:00包裹正在等待揽收</p>
-									<p>2018-08-05 11:30:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:00:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:15:00包裹已到达（位置信息）</p>
-									<p>2018-08-05 12:30:00成功取件</p>
-								</div>
-						</div>
-					</div>
-					<div class="order-detail">
-						<div class="order-detail-title border border-info rounded-top py-2 px-3">订单详情</div>
-						<div class="order-detail-content border border-info rounded-right rounded-bottom py-4 px-3" style="font-size: 14px;font-family: '黑体'">
-							<div>
-								<div class="d-none d-sm-block">
-									<div class="d-flex my-2">
-										<div class="bold">收货地址：</div>
-										<div>
-											<p>（姓名）</p>
-											<p>（手机号码）</p>
-											<p>（详细地址）</p>
-										</div>
-									</div>
-								</div>
-								<div class="d-block d-sm-none">
-										<div class="my-2 bold">收货地址：</div>
-										<div class="my-2 pl-3">
-											<p>（姓名）</p>
-											<p>（手机号码）</p>
-											<p>（详细地址）</p>
-										</div>
-								</div>
-							</div>
-							<div><span class="bold">配送方式：</span>平台配送</div>
-							<hr>
-							<div class="store-information">
-								<div class="bold">创客店信息</div>
-								<div class="container-fluid">
-									<div class="row my-2">
-										<div class="col-md-12 col-12 col-sm-6 my-1">创客店名称：<span class="text-primary mx-2">***创客店</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">创客店编号：<span class="mx-2">04054805402</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">创客店成立时间：<span class="mx-2">368天</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">创客店星级：<span class="mx-2"></span></div>
-									</div>
-								</div>
-							</div>
-							<hr>
-							<div class="order-information">
-								<div class="bold">订单信息</div>
-								<div class="container-fluid">
-									<div class="row my-2">
-										<div class="col-md-4 col-12 col-sm-6 my-1">订单编号：<span class="mx-2">80082008820</span></div>
-										<div class="col-md-8 col-12 col-sm-6 my-1">交易号：<span class="mx-2">1831982492491821</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">创建时间：<span class="mx-2">2018-08-04 12:23:49</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">发货时间：<span class="mx-2">2018-08-04 12:50:25</span></div>
-										<div class="col-md-4 col-12 col-sm-6 my-1">付款时间：<span class="mx-2">2018-08-04 13:30:41</span></div>
-										
-									</div>
-								</div>
-								<div>
-									<div class="d-none d-md-block">
-										<table class="table table-bordered text-center">
-											<thead style="font-size: 16px;background-color: #ff6600;color: white">
-												<tr>
-													<th scope="col" width="25%">商品</th>
-													<th scope="col">商品属性</th>
-													<th scope="col">状态</th>
-													<th scope="col">服务</th>
-													<th scope="col">单价</th>
-													<th scope="col">数量</th>
-													<th scope="col">优惠</th>
-													<th scope="col">商品总价</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="d-flex align-items-center">
-														<div><img src="@/assets/img/list-1.jpg" alt="" style="width: 70px" class="border border-dark"></div>
-														<div><a href="">猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子</a></div>
-													</td>
-													<td style="vertical-align: middle">2号猫咪</td>
-													<td style="vertical-align: middle">未确认收货</td>
-													<td style="vertical-align: middle"></td>
-													<td style="vertical-align: middle">20.00</td>
-													<td style="vertical-align: middle">1</td>
-													<td style="vertical-align: middle"></td>
-													<td style="vertical-align: middle">20.00 <br>（快递：0.00）</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="d-block d-md-none">
-										<div class="bold">商品信息</div>
-										<div class="container-fluid text-white" style="background-color: #ffab73">
-											<div class="my-2">
-												<div class="my-2">所购商品:</div>
-												<div class="d-flex align-items-center">
-													<img src="@/assets/img/list-1.jpg" alt="" style="width: 100px;">
-													<span><a href="" class="text-white">猫咪杯子情侣动物水杯可爱创意陶瓷马克杯咖啡生日礼物带杯盖勺子</a></span>
-												</div>
-											</div>
-											<div class="my-2">商品属性：<span class="mx-2">2号猫咪</span></div>
-											<div class="my-2">状态：<span class="mx-2">未确认收货</span></div>
-											<div class="my-2">服务：<span class="mx-2"></span></div>
-											<div class="my-2">单价：<span class="mx-2">20.00</span></div>
-											<div class="my-2">数量：<span class="mx-2">1</span></div>
-											<div class="my-2">优惠：<span class="mx-2"></span></div>
-											<div class="my-2">商品总价：<span class="mx-2">20.00</span></div>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex justify-content-end">
-									<div style="font-size: 16px">订单总金额：<span style="color: #FF6600" class="mx-2">20.00</span>元</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		</div>
+
+		<div class="querendingdan">订单详情</div>
+
+		<div class="biankuang">
+		<div class="daohangtiao">
+			<div class="row">
+				<div class="col-12 col-md-1 col-sm-12" >
+					<div class="dianpubaobei" ><strong>订单详情ID</strong></div>
+					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id1}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12" >
+					<div class="dianpubaobei" ><strong>订单ID</strong></div>
+					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id2}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12" >
+					<div class="dianpubaobei" ><strong>商品ID</strong></div>
+					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id3}}</div>
+				</div>
+				<div class="col-12 col-md-4 col-sm-12" >
+					<div class="dianpubaobei" ><strong>商品名称</strong></div>
+					<div style="text-align: center; font-family: 微软雅黑">{{Message1.name}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12">
+					<div class="danjia"><strong>单价</strong></div>
+					<div style="text-align: center">{{Message1.price}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12">
+					<div class="shuliang"><strong>数量</strong></div>
+					<div style="text-align: center">{{Message1.count}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12">
+					<div class="xiaoji"><strong>小计</strong></div>
+					<div style="color:#ff3333;text-align: center"><strong>{{Message1.sum}}</strong></div>
+				</div>
+				<div class="col-12 col-md-2 col-sm-12">
+					<div class="shuliang"><strong>支付状态</strong></div>
+					<div style="text-align: center">{{Message1.pay}}</div>
 				</div>
 			</div>
-			<div>
-				<div style="font-size: 20px;font-family: '黑体';font-weight: bold;" class="my-4">猜你喜欢</div>
-				<hr style="height: 2px;border: 0;border-top: 2px solid #ccc">
-				<div class="row">
-					<div class="col-12 text-center col-sm-6 col-md-3"><a href=""><img src="@/assets/img/list-4.jpg" alt="" class="w-75"></a></div>
-					<div class="col-12 text-center col-sm-6 col-md-3"><a href=""><img src="@/assets/img/list-2.jpg" alt="" class="w-75"></a></div>
-					<div class="col-6 text-center d-none d-md-block"><a href=""><img src="@/assets/img/third-slide.png" alt="" class="w-75"></a></div>
-				</div>
-			</div>
+	</div>
+		</div>
 		</div>
 </template>
 
 <script>
-    export default {
-        
-    }
+	import axios from 'axios'
+	export default {
+		data() {
+			return {
+				Message1:
+					{
+						id1:"",
+						id2:"",
+						id3:"",
+						name:"",
+						price:"",
+						count:"",
+						sum:"",
+						pay:"",
+						res:null,
+						store:"诺拉家",
+						detail1:"运送方式：普通配送 快递 免邮",
+						detail2:"发货时间：卖家承诺订单在买家付款后, 24小时内发货",
+					}
+			}
+		},
+
+		methods:{
+			getMessageInfo(){
+				axios.get('/api/orderDetail/getOrderDetail?detailId=6')
+						.then((res)=> {
+							if (res.status == 200 && res.data) {
+								this.$store.state.message1 = res.data;
+							}
+						})
+						.catch((error)=> {console.log(error)})
+
+			},
+		},
+		computed:{
+			message(){
+				return this.$store.state.message1;
+			}
+		},
+		watch:{
+			message:function(data,olds){
+				this.Message1.id1=data.detailId;
+				this.Message1.id2=data.orderId;
+				this.Message1.id3=data.productId;
+				this.Message1.price=data.productPrice;
+				this.Message1.count=data.productQuantity;
+				this.Message1.pay=data.orderStatus=="1"?"已支付":"未支付";
+				this.Message1.sum=data.orderAmount;
+				this.Message1.name=data.productName;
+			}
+		},
+		mounted(){
+			this.getMessageInfo()
+		}
+	}
 </script>
 
 <style scoped>
+	.daohangtiao{
+		font-family: '黑体';
+		line-height: 40px;
+	}
 
+	.biankuang{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+
+	.dianpubaobei{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		background-color: #fff0e1;
+		text-align: center;
+		color:#ff9966;
+	}
+
+	.shangpinxiangqing{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		background-color: #fff0e1;
+		text-align: center;
+		color:#ff9966;
+	}
+
+	.danjia{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		background-color: #fff0e1;
+		text-align: center;
+		color:#ff9966;
+	}
+
+	.shuliang{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		background-color: #fff0e1;
+		text-align: center;
+		color:#ff9966;
+	}
+
+	.xiaoji{
+		border: 2px solid #dddddd;
+		border-radius: 5px;
+		background-color: #fff0e1;
+		text-align: center;
+		color:#ff9966;
+	}
+
+	.querendingdan{
+		font-family: '隶书';
+		color:#ff9966;
+		font-size: 50px;
+	}
 </style>
