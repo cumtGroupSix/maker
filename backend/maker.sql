@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 24/02/2019 15:21:24
+ Date: 27/02/2019 16:50:31
 */
 
 SET NAMES utf8mb4;
@@ -125,6 +125,11 @@ CREATE TABLE `comment`  (
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of comment
+-- ----------------------------
+INSERT INTO `comment` VALUES (1, 1, '1111', '2019-02-26 23:23:48', 3);
+
+-- ----------------------------
 -- Table structure for group_collections
 -- ----------------------------
 DROP TABLE IF EXISTS `group_collections`;
@@ -135,10 +140,41 @@ CREATE TABLE `group_collections`  (
   PRIMARY KEY (`user_id`, `store_id`, `collect_group_id`) USING BTREE,
   INDEX `fk[group_collections]collect_group_id`(`collect_group_id`) USING BTREE,
   INDEX `[group_collections]store_id`(`store_id`) USING BTREE,
-  CONSTRAINT `[group_collections]store_id` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[group_collections]collect_group_id` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[group_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `group_collections_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `group_collections_ibfk_2` FOREIGN KEY (`collect_group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `group_collections_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_collections
+-- ----------------------------
+INSERT INTO `group_collections` VALUES (3, 9, 1);
+INSERT INTO `group_collections` VALUES (4, 9, 1);
+INSERT INTO `group_collections` VALUES (6, 9, 1);
+INSERT INTO `group_collections` VALUES (7, 9, 1);
+INSERT INTO `group_collections` VALUES (6, 11, 2);
+INSERT INTO `group_collections` VALUES (6, 13, 3);
+
+-- ----------------------------
+-- Table structure for group_evaluations
+-- ----------------------------
+DROP TABLE IF EXISTS `group_evaluations`;
+CREATE TABLE `group_evaluations`  (
+  `user_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `value_disabled` float NOT NULL,
+  PRIMARY KEY (`user_id`, `store_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_evaluations
+-- ----------------------------
+INSERT INTO `group_evaluations` VALUES (1, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 11, 2, 1.5);
+INSERT INTO `group_evaluations` VALUES (7, 12, 4, 5);
+INSERT INTO `group_evaluations` VALUES (7, 13, 3, 3.5);
 
 -- ----------------------------
 -- Table structure for group_specification
@@ -444,11 +480,22 @@ DROP TABLE IF EXISTS `store_collections`;
 CREATE TABLE `store_collections`  (
   `user_id` int(55) NOT NULL COMMENT '用户ID',
   `collect_store_id` int(55) NOT NULL COMMENT '收藏店铺ID',
-  PRIMARY KEY (`user_id`) USING BTREE,
+  PRIMARY KEY (`user_id`, `collect_store_id`) USING BTREE,
   INDEX `fk[store_collections]collect_store_id`(`collect_store_id`) USING BTREE,
-  CONSTRAINT `fk[store_collections]collect_store_id` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk[store_collections]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `store_collections_ibfk_1` FOREIGN KEY (`collect_store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `store_collections_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of store_collections
+-- ----------------------------
+INSERT INTO `store_collections` VALUES (3, 2);
+INSERT INTO `store_collections` VALUES (6, 2);
+INSERT INTO `store_collections` VALUES (3, 9);
+INSERT INTO `store_collections` VALUES (6, 9);
+INSERT INTO `store_collections` VALUES (1, 11);
+INSERT INTO `store_collections` VALUES (3, 11);
+INSERT INTO `store_collections` VALUES (7, 11);
 
 -- ----------------------------
 -- Table structure for store_product
@@ -522,7 +569,8 @@ CREATE TABLE `user_info`  (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'test', b'1', '151', 'abcdefg@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
+INSERT INTO `user_info` VALUES (1, 'test', b'1', '15122', 'abcdefg@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
+INSERT INTO `user_info` VALUES (3, 'test1', b'1', '1', 'fff', 'sss', '2019-02-07 15:27:44', 'ssss');
 
 -- ----------------------------
 -- Procedure structure for sp_select_store_by_store_id

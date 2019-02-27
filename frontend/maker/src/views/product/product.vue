@@ -1,7 +1,10 @@
 <template>
     <div>
+        
         <!--购买界面-->
         <div class="container" style="max-width: 1050px">
+            <button class="btn btn-default" @click="collectProduct()">收藏</button>
+            <button class="btn btn-default" @click="cancelCollectProduct()">取消收藏</button>
             <section id="goumaijiemian">
                 <div class="row">
                 <div class="col-12 col-md-6 col-sm-12">
@@ -35,7 +38,7 @@
                     
                     <div class="goumaixuanxiang">
                         <router-link to="/receiver" class="btn btn-danger btn-lg">立即购买</router-link>
-                        <router-link to="/cart" class="btn btn-warning btn-lg text-white">加入购物车</router-link>
+                        <router-link to="/cart" class="btn btn-warning btn-lg text-white" @click.native="addGroupToCart">加入购物车</router-link>
                     </div>
                 </div>
                 </div>
@@ -117,32 +120,32 @@
             $('#shangpinxiangqing').css("display","none")
         });
         $('#beizi1').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $(this).css('borderStyle','solid')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi2').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $('#beizi2').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi3').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $('#beizi3').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi4').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-	});
+        $('#beizi4').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+    });
     })
     export default {
         data() {
@@ -197,6 +200,18 @@
             },
             changeIndex(index){
                 this.currentIndex = index
+            },
+            collectProduct() {
+                this.axios.post("/api/collect/group" + "?storeId=" + this.$store.state.currentStore.storeId + "&collectGroupId=" + this.$store.state.currentProductGroupId)
+            },
+            cancelCollectProduct() {
+                this.axios.delete("/api/collect/group" + "?storeId=" + this.$store.state.currentStore.storeId + "&collectGroupId=" + this.$store.state.currentProductGroupId)
+            },
+            addGroupToCart() {
+                this.axios.put("api/cart/addProduct" + "?storeId=" + this.$store.state.currentStore.storeId
+                    + "&productId=" + this.product.productId
+                    + "&productQuantity=" + this.List[0].num);
+                    // this.$router.go(0);            
             }
         },
         mounted(){
@@ -226,7 +241,7 @@
 
 <style scoped>
 .shangpintupian{
-	margin-top: 30px;
+    margin-top: 30px;
 }
 .dianpudaohang{
     background-color: #fbe6be;
@@ -234,19 +249,19 @@
 }
 
 .shangpinmingcheng{
-	font-size: 20px;
-	margin-top: 30px;
+    font-size: 20px;
+    margin-top: 30px;
 }
 
 .danjia{
-	background-color: #ffe5e5;
-	font-size: 40px;
-	color:#eb8e8e;
+    background-color: #ffe5e5;
+    font-size: 40px;
+    color:#eb8e8e;
 }
 
 .goumaixuanxiang{
-	line-height: 150px;
-	color:white;
+    line-height: 150px;
+    color:white;
 }
 
 .select{
@@ -270,12 +285,12 @@
 }
 
 .xiangqingtupian{
-	background-color: #eeeeee;
-	margin:0 auto;
+    background-color: #eeeeee;
+    margin:0 auto;
 }
 
 .yansefenlei{
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .level{

@@ -3,6 +3,8 @@
 	<!-- 店铺名 -->
 	<section id="dianpuming">
 		<div class="dianpumingcheng"><strong>{{store.storeName}}</strong><img src="@/assets/img/erweima.png" style="margin-left:30px;width:50px"></div>
+		<button class="btn btn-default" @click="collectStore()">收藏</button>
+		<button class="btn btn-default" @click="cancelCollectStore()">取消收藏</button>
 	</section>
 
 	<!-- 商品展示 -->
@@ -18,6 +20,7 @@
 								<div class="price my-2">￥{{item.productVO.productPrice}}</div>
 								<div class="browse">销量：{{item.productVO.sales}}</div>
 							</div>
+					
 						</div>
 					</div>
 				</div>
@@ -38,6 +41,13 @@
 		methods: {
 			changeGroupId(groupId) {
 				this.$store.state.currentProductGroupId = groupId
+			},
+            collectStore() {
+			    //window.currentStore = this.$store.state.currentStore;
+                this.axios.post("/api/collect/store" + "?collectStoreId=" + this.$store.state.currentStore.storeId);
+			},
+            cancelCollectStore() {
+                this.axios.delete("/api/collect/store" + "?collectStoreId=" + this.$store.state.currentStore.storeId);
 			}
 		},
 	}
