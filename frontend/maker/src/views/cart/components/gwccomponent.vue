@@ -132,7 +132,8 @@
 				checkedids:{
 				storeid:0,
 				productid:0,
-				groupid:0
+				groupid:0,
+				quantity:1
 				},
 				ids:[],
 				nsum:0,
@@ -204,12 +205,14 @@
 					let idindex=this.spids.indexOf(msg.id);
 					if(idindex<0){
 					this.spids.push(msg.id);
-					if(this.item.goods.length==this.spids.length){
+						if(this.item.goods.length==this.spids.length){
 						this.ids.push(this.item.storename);
 						this.spckall=true;
 						this.$emit('aallck',1);
 						this.spisallcheck=true;					
-					}
+						}
+					}else{
+						this.watchspids();
 					}
 					this.sum();
 					this.pricesum();
@@ -266,33 +269,37 @@
 					this.sum();
 					this.pricesum();
 				},
-				setcheckedids(storeid,productid,groupid){
+				setcheckedids(storeid,productid,groupid,quantity){
 					this.checkedids.storeid=storeid;
 					this.checkedids.productid=productid;
 					this.checkedids.groupid=groupid;
+					this.checkedids.quantity=quantity;
 				},
 				resetcheckedids(){
 					this.checkedids={
 					storeid:0,
 					productid:0,
-					groupid:0
+					groupid:0,
+					quantity:0
 					}
+				},
+				watchspids(){
+					this.$store.state.cartchecked=this.$store.state.cartchecked.filter(
+						ids=>
+						(ids.storeid!=this.item.storeid)
+					);
+					this.item.goods.forEach(function (items) {
+						if(this.spids.indexOf(items.productid)>=0){
+							this.resetcheckedids();
+							this.setcheckedids(this.item.storeid,items.productid,items.groupid,items.quantity);
+							this.$store.state.cartchecked.push(this.checkedids);					
+						}
+					},this);
 				}
 			},
 			watch:{
 				spids: function(news, old){
-					this.$store.state.cartchecked.forEach(function (ids){
-						if(ids.storeid==this.item.storeid){
-						this.$store.state.cartchecked.splice(this.$store.state.cartchecked.indexOf(ids),1);
-						}
-					},this);
-					this.item.goods.forEach(function (items) {
-						if(this.spids.indexOf(items.productid)>=0){
-							this.resetcheckedids();
-							this.setcheckedids(this.item.storeid,items.productid,items.groupid);
-							this.$store.state.cartchecked.push(this.checkedids);						
-						}
-					},this);
+					this.watchspids();
 				}
 			}
     }
