@@ -70,14 +70,14 @@
 		methods:{
 		// 更新支付状态
 		axiospay(){
-			this.axios.post('/api/payment/updatePayStatus?userId='+ this.$store.state.userid + '&orderId='+this.$store.state.orderid +'&payStatus='+1)
+			this.axios.post('/api/payment/updatePayStatus?&orderId='+this.$store.state.orderid +'&payStatus='+1)
 			.then((response)=>{this.updatestatus=response.data})
 			.catch((error)=>{console.log(error);});
 			this.zfcg=true;
 			},
 		// 倒计时组件
 		countdown() {
-	      const end = Date.parse(new Date('2019-1-20 09:25:20'))
+	      const end = Date.parse(new Date('2019-2-29 09:25:20'))
 	      const now = Date.parse(new Date())
 	      const msec = end - now
 	      let day = parseInt(msec / 1000 / 60 / 60 / 24)

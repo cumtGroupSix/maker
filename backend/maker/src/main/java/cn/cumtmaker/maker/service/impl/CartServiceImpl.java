@@ -11,6 +11,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     CartMapper cartMapper;
 
+    //根据cartId获取cart
     @Override
     public Cart getCart(Integer id) {
         Cart cart= cartMapper.selectCartByUserId(id);

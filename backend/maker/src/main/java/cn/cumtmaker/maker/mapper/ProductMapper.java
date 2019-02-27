@@ -19,4 +19,6 @@ public interface ProductMapper {
     Integer deleteByProductId(Integer productId);
 
     Integer updatePriceByProductId(@Param("productId") Integer productId,@Param("price") BigDecimal price);
+
+    Integer updateStock(@Param("productId") Integer productId, @Param("productStock") Integer productStock);
 }

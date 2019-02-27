@@ -17,7 +17,7 @@ export default new Vuex.Store({
     validateImg:"/api/code/image",
     userid:null,
     username:null,
-    orderid:null,
+    orderid:1,
     cartmain:{},
   	cartarr:[],
     cartid:null,

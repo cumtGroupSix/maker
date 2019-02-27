@@ -14,14 +14,17 @@ public class CartProductServiceImpl implements CartProductService {
     @Autowired
     GroupCollectionsMapper groupCollectionsMapper;
 
+    //更新购物车数量
     @Override
     public int updateQuantity(Integer cartId,Integer storeId,Integer productId,Integer productQuantity) {
     return cartProductMapper.updateQuantity(cartId,storeId,productId,productQuantity);
     }
+    //删除购物车中商品
     @Override
     public int deleteCartProduct(Integer cartId,Integer storeId,Integer productId){
         return cartProductMapper.deleteCartProduct(cartId,storeId,productId);
     }
+    //购物车中收藏商品
     @Override
     public int insertGroup(Integer userId,Integer storeId,Integer collectGroupId){
         return groupCollectionsMapper.insertGroup(userId,storeId,collectGroupId);

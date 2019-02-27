@@ -4,7 +4,6 @@ import cn.cumtmaker.maker.VO.UserVO;
 import cn.cumtmaker.maker.mapper.MakerInfoMapper;
 import cn.cumtmaker.maker.mapper.UserInfoMapper;
 import cn.cumtmaker.maker.mapper.UserMapper;
-import cn.cumtmaker.maker.model.Cart;
 import cn.cumtmaker.maker.model.MakerInfo;
 import cn.cumtmaker.maker.model.User;
 import cn.cumtmaker.maker.model.UserInfo;
@@ -113,11 +112,11 @@ public class UserServiceImpl implements UserService {
         if(role.equals("USER")){
             String receiver=getUserInfo(username).getEmail();
             mainMessage.setTo(receiver);
-            logger.info("接收者 -- "+receiver);
+            logger.info("邮件接收者 -- "+receiver);
         }else if(role.equals("MAKER")){
             String receiver=getMakerInfo(username).getEmail();
             mainMessage.setTo(receiver);
-            logger.info("接收者 -- "+receiver);
+            logger.info("邮件接收者 -- "+receiver);
         }else{
             return 0;
         }

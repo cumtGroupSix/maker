@@ -34,4 +34,12 @@
         set product_price=#{price}
         where product_id=#{productId}
     </update>
+    <update id="updateStock">
+        update product
+        <set>
+            product_stock=#{productStock}
+        </set>
+        where
+        product_id=#{productId}
+    </update>
 </mapper>
