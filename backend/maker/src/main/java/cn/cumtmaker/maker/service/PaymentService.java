@@ -1,9 +1,9 @@
 package cn.cumtmaker.maker.service;
 
-import cn.cumtmaker.maker.model.Cart;
+import javax.servlet.http.HttpServletRequest;
 
 
 public interface PaymentService {
-    int updatePayStatus(Integer userId,Integer orderId, Integer payStatus);
+    int updatePayStatus(HttpServletRequest httpServletRequest, Integer orderId, Integer payStatus);
 
 }

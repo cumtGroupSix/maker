@@ -11,4 +11,5 @@ public interface CartProductMapper {
     CartProduct getCartByCartId(Integer cartId);
     int updateQuantity(@Param("cartId") Integer cartId,@Param("storeId") Integer storeId,@Param("productId") Integer productId,@Param("productQuantity") Integer productQuantity);
     int deleteCartProduct(@Param("cartId") Integer cartId,@Param("storeId") Integer storeId,@Param("productId") Integer productId);
+    Integer deleteByProductId(Integer productId);
 }

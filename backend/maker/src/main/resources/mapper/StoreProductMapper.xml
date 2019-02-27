@@ -38,4 +38,8 @@
     from store_product
     where group_id=#{groupId}
   </select>
+  <delete id="deleteByGroupId">
+    delete from store_product
+    where group_id = #{groupId}
+  </delete>
 </mapper>

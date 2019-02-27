@@ -36,4 +36,10 @@ public class ProductServiceImpl implements ProductService {
         return ProductDetailUtil.getDetailByProductId(productId);
     }
 
+    //更新商品库存
+    @Override
+    public Integer updateStock(Integer productId,Integer productStock){
+        return productMapper.updateStock(productId,productStock);
+    }
+
 }

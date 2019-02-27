@@ -10,4 +10,6 @@ public interface GroupSpecificationMapper {
     int insert(GroupSpecificationKey record);
 
     int insertSelective(GroupSpecificationKey record);
+
+    Integer deleteByGroupId(Integer groupId);
 }

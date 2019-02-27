@@ -38,6 +38,24 @@ public class ProductGroupServiceImpl implements ProductGroupService {
     @Autowired
     ProductValueMapper productValueMapper;
 
+    @Autowired
+    CategoryMapper categoryMapper;
+
+    @Autowired
+    CartProductMapper cartProductMapper;
+
+    @Autowired
+    CommentMapper commentMapper;
+
+    @Autowired
+    OrderDetailMapper orderDetailMapper;
+
+    @Autowired
+    GroupCollectionsMapper groupCollectionsMapper;
+
+    @Autowired
+    StoreProductMapper storeProductMapper;
+
     /**
      * 创客增加商品事务逻辑
      */
@@ -157,6 +175,75 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
         //修改group中representative_product_id
         productGroupMapper.updateRepresentativeProductId(productGroupFormObject.getGroupId(),representativeProductId);
+        return result;
+    }
+
+    @Override
+    public List<GoodsListVO> getListByCategoryName(String categoryName) {
+        List<GoodsListVO> goodsListVOS = new ArrayList<>();
+        //查出categoryName对应的id
+        Integer categoryId = categoryMapper.getCategoryIdByName(categoryName);
+        //查找出所有group
+        List<ProductGroup> productGroups = productGroupMapper.getGroupsByCategoryId(categoryId);
+        generateGoodsListVO(goodsListVOS,productGroups);
+        return goodsListVOS;
+    }
+
+    @Override
+    public List<ProductDetailVO> getDetailByProductName(String productName) {
+        List<ProductDetailVO> productDetailVOS = new ArrayList<>();
+        //通过productName获取groupId
+        List<Integer> groupIds = productGroupMapper.getGroupIdByProductName(productName);
+        //获取list integer 通过productName
+        if (groupIds.size() != 0){
+            List<Integer> productIds = productGroupMapper.getAllProductIdByGroupId(groupIds.get(0));
+            for(Integer productId : productIds){
+                productDetailVOS.add(ProductDetailUtil.getDetailByProductId(productId));
+            }
+            return productDetailVOS;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
+    public Integer supplierUpdate(ArrayList<ProductDetailVO> productDetailVOS) {
+        Integer result = 0;
+        //TODO 目前仅能修改价格
+        for (ProductDetailVO productDetailVO : productDetailVOS){
+            result += productMapper.updatePriceByProductId(productDetailVO.getProductId(),productDetailVO.getPrice());
+        }
+        return result;
+    }
+
+    @Override
+    public Integer supplierDelete(String productName) {
+        Integer result = 0;
+        //先用productName查出groupId
+        Integer groupId = productGroupMapper.getGroupIdByProductName(productName).get(0);
+        List<Integer> productIds = productGroupMapper.getAllProductIdByGroupId(groupId);
+        for (Integer productId : productIds){
+            //删除cart_product中所有product有关数据
+            result += cartProductMapper.deleteByProductId(productId);
+            //删除comment中所有product有关数据
+            result += commentMapper.deleteByProductId(productId);
+            //删除order_detail中所有product有关数据
+            result += orderDetailMapper.deleteByProductId(productId);
+            //删除product_value中所有product有关数据
+            result += productValueMapper.deleteByProductId(productId);
+            //删除product
+            result += productMapper.deleteByProductId(productId);
+        }
+
+        //删除group_collection中所有groupId有关数据
+        result += groupCollectionsMapper.deleteByGroupId(groupId);
+        //删除group_specification中所有groupId有关数据
+        result += groupSpecificationMapper.deleteByGroupId(groupId);
+        //删除store_group中所有groupId有关数据
+        result += storeProductMapper.deleteByGroupId(groupId);
+        //删除group
+        result += productGroupMapper.deleteByGroupId(groupId);
         return result;
     }
 }

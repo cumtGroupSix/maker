@@ -20,4 +20,6 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
     List<Category> getAll();
+
+    Integer getCategoryIdByName(String categoryName);
 }

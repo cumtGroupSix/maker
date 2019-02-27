@@ -4,6 +4,7 @@ import cn.cumtmaker.maker.VO.GoodsListVO;
 import cn.cumtmaker.maker.VO.ProductDetailVO;
 import cn.cumtmaker.maker.form.ProductGroupFormObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductGroupService {
@@ -18,4 +19,11 @@ public interface ProductGroupService {
     Integer supplierAddProduct(ProductGroupFormObject productGroupFormObject);
 
 
+    List<GoodsListVO> getListByCategoryName(String categoryName);
+
+    List<ProductDetailVO> getDetailByProductName(String productName);
+
+    Integer supplierUpdate(ArrayList<ProductDetailVO> productDetailVOS);
+
+    Integer supplierDelete(String productName);
 }

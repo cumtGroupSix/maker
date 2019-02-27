@@ -12,4 +12,5 @@ public interface GroupCollectionsMapper{
     int insertGroup(@Param("userId") Integer userId, @Param("storeId") Integer storeId, @Param("collectGroupId") Integer collectGroupId);
     List<GroupCollections> getGroupCollectionsByUserId(@Param("userId") Integer userId);
     int deleteGroupCollections(@Param("userId") Integer userId, @Param("storeId") Integer storeId, @Param("collectGroupId") Integer collectGroupId);
+    Integer deleteByGroupId(Integer groupId);
 }

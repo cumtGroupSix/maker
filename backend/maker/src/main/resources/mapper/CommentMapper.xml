@@ -29,4 +29,10 @@
         user_id=#{userId} and
         product_id=#{productId}
   </delete>
+    <delete id="deleteByProductId">
+        delete
+        from comment
+        where
+        product_id=#{productId}
+    </delete>
 </mapper>

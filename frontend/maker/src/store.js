@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     hotStore:[],
     checkedProduct:'',
+    pricesum:0,
+    productsum:0,
     active:"1",
     loginresponse:null,
     inforesponse:{},
@@ -15,7 +17,7 @@ export default new Vuex.Store({
     validateImg:"/api/code/image",
     userid:null,
     username:null,
-    orderid:null,
+    orderid:1,
     cartmain:{},
   	cartarr:[],
     cartid:null,

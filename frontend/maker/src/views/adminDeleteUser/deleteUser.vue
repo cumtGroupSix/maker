@@ -61,7 +61,8 @@
                     this.$Message.error('删除失败,权限不足或此用户不存在');
                     }
                 })
-                .catch((error)=>{console.log(error);});
+                .catch((error)=>{console.log(error);
+                this.$Message.error('删除失败,权限不足或此用户不存在,错误代码:'+error.response.status);});
          },
          confirm() {
                 this.$Modal.confirm({

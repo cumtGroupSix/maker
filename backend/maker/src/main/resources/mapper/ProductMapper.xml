@@ -25,4 +25,21 @@
         (product_name,group_id,product_stock,product_price,img_url,product_description)
         values (#{productName},#{groupId},#{stock},#{price},#{imageUrl},#{description})
     </insert>
+    <delete id="deleteByProductId">
+        delete from product
+        where product_id=#{productId}
+    </delete>
+    <update id="updatePriceByProductId">
+        update product
+        set product_price=#{price}
+        where product_id=#{productId}
+    </update>
+    <update id="updateStock">
+        update product
+        <set>
+            product_stock=#{productStock}
+        </set>
+        where
+        product_id=#{productId}
+    </update>
 </mapper>
