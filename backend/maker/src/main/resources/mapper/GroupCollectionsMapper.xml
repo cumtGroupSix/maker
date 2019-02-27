@@ -13,4 +13,8 @@
     insert into group_collections(user_id,store_id,collect_group_id)
      values(#{userId},#{storeId},#{collectGroupId})
   </insert>
+  <delete id="deleteByGroupId">
+    delete from group_collections
+    where collect_group_id=#{groupId}
+  </delete>
 </mapper>

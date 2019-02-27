@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface OrderDetailMapper {
     int insertOrder(OrderDetail orderDetail);
     OrderDetail getOrder(Integer detailId);
+    Integer deleteByProductId(Integer productId);
 }

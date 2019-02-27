@@ -42,4 +42,10 @@
     store_id=#{storeId} and
     product_id=#{productId}
   </delete>
+  <delete id="deleteByProductId">
+    delete
+    from cart_product
+    where
+    product_id=#{productId}
+  </delete>
 </mapper>

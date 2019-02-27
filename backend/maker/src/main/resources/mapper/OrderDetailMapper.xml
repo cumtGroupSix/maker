@@ -21,4 +21,8 @@
     from order_detail
     where detail_id=#{detailId}
    </select>
+    <delete id="deleteByProductId">
+        delete from order_detail
+        where product_id=#{productId}
+    </delete>
 </mapper>

@@ -51,7 +51,28 @@ public class ProductGroupController {
         return productGroupService.getListByCategoryId(categoryId);
     }
 
-//    @GetMapping("/all")
-//    @ApiOperation(value = "返回所有类目及groups")
-//    public List<>
+    @GetMapping("/goodslist")
+    @ApiOperation(value = "根据categoryName查找list")
+    public List<GoodsListVO> getAllByCategoryName(@RequestParam String categoryName){
+        return productGroupService.getListByCategoryName(categoryName);
+    }
+
+    @GetMapping("/group/detail")
+    @ApiOperation(value = "通过group的productName查出group所有产品详情")
+    public List<ProductDetailVO> getDetailByProductName(@RequestParam String productName){
+        return productGroupService.getDetailByProductName(productName);
+    }
+
+    @PutMapping("/supplier/update")
+    @ApiOperation(value = "供应商修改产品详情接口")
+    public Integer supplierUpdate(@RequestBody ArrayList<ProductDetailVO> productDetailVOS){
+        return productGroupService.supplierUpdate(productDetailVOS);
+    }
+
+    @DeleteMapping("/supplier/delete")
+    @ApiOperation(value = "供应商删除商品接口")
+    public Integer supplierDelete(@RequestParam String productName){
+        return productGroupService.supplierDelete(productName);
+    }
+
 }

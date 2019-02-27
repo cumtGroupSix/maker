@@ -33,4 +33,8 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteByProductId">
+    delete from product_value
+    where product_id = #{productId}
+  </delete>
 </mapper>

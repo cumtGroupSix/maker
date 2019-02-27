@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 26/02/2019 21:15:51
+ Date: 27/02/2019 20:27:38
 */
 
 SET NAMES utf8mb4;
@@ -65,9 +65,9 @@ CREATE TABLE `cart_product`  (
 -- ----------------------------
 -- Records of cart_product
 -- ----------------------------
-INSERT INTO `cart_product` VALUES (1, 1, 1, 7);
+INSERT INTO `cart_product` VALUES (1, 1, 1, 26);
 INSERT INTO `cart_product` VALUES (1, 1, 2, 1);
-INSERT INTO `cart_product` VALUES (1, 1, 3, 1);
+INSERT INTO `cart_product` VALUES (1, 1, 3, 12);
 INSERT INTO `cart_product` VALUES (1, 2, 1, 2);
 INSERT INTO `cart_product` VALUES (1, 2, 2, 1);
 INSERT INTO `cart_product` VALUES (3, 1, 1, 1);
@@ -172,6 +172,14 @@ INSERT INTO `group_specification` VALUES (1, 2);
 INSERT INTO `group_specification` VALUES (1, 6);
 INSERT INTO `group_specification` VALUES (14, 21);
 INSERT INTO `group_specification` VALUES (14, 22);
+INSERT INTO `group_specification` VALUES (15, 23);
+INSERT INTO `group_specification` VALUES (16, 23);
+INSERT INTO `group_specification` VALUES (15, 24);
+INSERT INTO `group_specification` VALUES (16, 24);
+INSERT INTO `group_specification` VALUES (15, 25);
+INSERT INTO `group_specification` VALUES (16, 25);
+INSERT INTO `group_specification` VALUES (15, 26);
+INSERT INTO `group_specification` VALUES (16, 26);
 
 -- ----------------------------
 -- Table structure for maker_info
@@ -252,7 +260,7 @@ CREATE TABLE `product`  (
   INDEX `product_price`(`product_price`) USING BTREE,
   INDEX `fk[product]group_id`(`group_id`) USING BTREE,
   CONSTRAINT `fk[product]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
@@ -262,12 +270,15 @@ INSERT INTO `product` VALUES (2, '港风棉衣男潮流ins情侣棉服青年学�
 INSERT INTO `product` VALUES (3, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ', 1, 21, 2.50, '	https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', '好', 1, 0);
 INSERT INTO `product` VALUES (4, '旋律风车chic羊羔毛外套男翻领冬季棉袄加厚新款格子短款棉衣潮流 ', 2, 211, 122.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes2.jpg', 'nice', 1, 0);
 INSERT INTO `product` VALUES (5, '冬季日系工装棉服外套青年学生潮流立领宽松棉衣保暖加厚面包服男', 3, 12, 222.00, 'https://group-6-1257626148.cos.ap-beijing.myqcloud.com/img/clothes.jpg', 'nice', 1, 0);
-INSERT INTO `product` VALUES (6, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 4, 16, 48.00, 'https://gd1.alicdn.com/imgextra/i3/2410159931/TB2lyCsXE6FK1Jjy0FpXXbFqVXa_!!2410159931.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (6, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 4, 16, 58.00, 'https://gd1.alicdn.com/imgextra/i3/2410159931/TB2lyCsXE6FK1Jjy0FpXXbFqVXa_!!2410159931.jpg_400x400.jpg', '舒服', 1, 0);
 INSERT INTO `product` VALUES (7, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 4, 121, 63.00, 'https://gd4.alicdn.com/imgextra/i4/2410159931/TB2fqJEa8oHL1JjSZFwXXb6vpXa_!!2410159931.jpg_400x400.jpg', '舒服', 1, 0);
 INSERT INTO `product` VALUES (8, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 5, 16, 169.00, 'https://gd2.alicdn.com/imgextra/i2/0/O1CN01Wr4agp1T7TJJ0TGvH_!!0-item_pic.jpg_400x400.jpg', '舒服', 1, 0);
 INSERT INTO `product` VALUES (9, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 5, 122, 338.00, 'https://gd1.alicdn.com/imgextra/i1/2808652335/TB2j89RbYSYBuNjSspfXXcZCpXa_!!2808652335.jpg_400x400.jpg', '舒服', 1, 0);
 INSERT INTO `product` VALUES (24, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 14, 16, 138.00, 'https://gd3.alicdn.com/imgextra/i4/2108032133/O1CN011RcxGikve452LKy_!!2108032133.jpg_400x400.jpg', '舒服', 1, 0);
 INSERT INTO `product` VALUES (25, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 14, 21, 123.00, 'https://gd2.alicdn.com/imgextra/i2/2108032133/O1CN011RcxGnCnHJCldxX_!!2108032133.jpg_400x400.jpg', '舒服', 1, 0);
+INSERT INTO `product` VALUES (26, '三川 云南丽江特产2斤五花腊肉腊味风干腌制咸肉三线肉包邮非烟熏  真空袋装，500g*2 ', 15, 100, 26.00, 'http://blog-1258589922.cos.ap-beijing.myqcloud.com/647622c0-877c-4713-b86b-e5414fc8b3a4.jpg', '商品具有生产许可证编号，符合食品质量安全准入标准。', 1, 0);
+INSERT INTO `product` VALUES (27, '三川 无骨火腿500g云南丽江特产真空包装正宗上方云腿包邮土特产 ', 16, 100, 36.00, 'http://blog-1258589922.cos.ap-beijing.myqcloud.com/209eceb5-2ffd-4152-a587-b71bc0f8b355.jpg', '商品具有生产许可证编号，符合食品质量安全准入标准。', 1, 0);
+INSERT INTO `product` VALUES (28, '三川 无骨火腿500g云南丽江特产真空包装正宗上方云腿包邮土特产 ', 16, 112, 26.00, 'http://blog-1258589922.cos.ap-beijing.myqcloud.com/a644ad4b-ada9-4271-b95b-45192a81420a.jpg', '商品具有生产许可证编号，符合食品质量安全准入标准。', 1, 0);
 
 -- ----------------------------
 -- Table structure for product_group
@@ -281,7 +292,7 @@ CREATE TABLE `product_group`  (
   PRIMARY KEY (`group_id`) USING BTREE,
   INDEX `fk[product_group]category_id`(`category_id`) USING BTREE,
   CONSTRAINT `fk[product_group]category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_group
@@ -292,6 +303,8 @@ INSERT INTO `product_group` VALUES (3, '冬季日系工装棉服外套青年学�
 INSERT INTO `product_group` VALUES (4, 'ulzzang原宿风2019春季新款帆布鞋男女港风ins超火的鞋子韩版潮鞋', 3, 6);
 INSERT INTO `product_group` VALUES (5, '森马板鞋男2018春季新款男鞋潮鞋男士情侣休闲鞋ins超火的鞋子', 3, 8);
 INSERT INTO `product_group` VALUES (14, '婚鞋女水晶2019新款春季尖头成人礼法式少女高跟鞋女细跟性感网红 ', 3, 24);
+INSERT INTO `product_group` VALUES (15, '三川 云南丽江特产2斤五花腊肉腊味风干腌制咸肉三线肉包邮非烟熏  真空袋装，500g*2 ', 4, 26);
+INSERT INTO `product_group` VALUES (16, '三川 无骨火腿500g云南丽江特产真空包装正宗上方云腿包邮土特产 ', 4, 27);
 
 -- ----------------------------
 -- Table structure for product_value
@@ -317,6 +330,18 @@ INSERT INTO `product_value` VALUES (24, 22);
 INSERT INTO `product_value` VALUES (25, 22);
 INSERT INTO `product_value` VALUES (24, 23);
 INSERT INTO `product_value` VALUES (25, 23);
+INSERT INTO `product_value` VALUES (26, 24);
+INSERT INTO `product_value` VALUES (27, 24);
+INSERT INTO `product_value` VALUES (28, 24);
+INSERT INTO `product_value` VALUES (26, 25);
+INSERT INTO `product_value` VALUES (27, 25);
+INSERT INTO `product_value` VALUES (28, 25);
+INSERT INTO `product_value` VALUES (26, 26);
+INSERT INTO `product_value` VALUES (28, 26);
+INSERT INTO `product_value` VALUES (26, 27);
+INSERT INTO `product_value` VALUES (27, 28);
+INSERT INTO `product_value` VALUES (27, 29);
+INSERT INTO `product_value` VALUES (28, 30);
 
 -- ----------------------------
 -- Table structure for resource
@@ -381,7 +406,7 @@ CREATE TABLE `specification`  (
   `specification_id` int(11) NOT NULL AUTO_INCREMENT,
   `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`specification_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of specification
@@ -394,6 +419,13 @@ INSERT INTO `specification` VALUES (5, '适用人群');
 INSERT INTO `specification` VALUES (6, '材质');
 INSERT INTO `specification` VALUES (21, '风格');
 INSERT INTO `specification` VALUES (22, '款式');
+INSERT INTO `specification` VALUES (23, '生产许可证编号');
+INSERT INTO `specification` VALUES (24, '厂名');
+INSERT INTO `specification` VALUES (25, '配料表');
+INSERT INTO `specification` VALUES (26, '保质期');
+INSERT INTO `specification` VALUES (27, 'agr');
+INSERT INTO `specification` VALUES (28, 'dsgag');
+INSERT INTO `specification` VALUES (29, 'as');
 
 -- ----------------------------
 -- Table structure for specification_value
@@ -406,7 +438,7 @@ CREATE TABLE `specification_value`  (
   PRIMARY KEY (`value_id`) USING BTREE,
   INDEX `fk[specification_value]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[specification_value]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of specification_value
@@ -422,6 +454,16 @@ INSERT INTO `specification_value` VALUES (8, 2, '卡其色');
 INSERT INTO `specification_value` VALUES (9, 5, '青少年');
 INSERT INTO `specification_value` VALUES (22, 21, '欧美');
 INSERT INTO `specification_value` VALUES (23, 22, '单鞋');
+INSERT INTO `specification_value` VALUES (24, 23, 'SC10453072232558');
+INSERT INTO `specification_value` VALUES (25, 24, '丽江三川实业集团有限公司');
+INSERT INTO `specification_value` VALUES (26, 25, '鲜猪五花肉、食盐、白酒');
+INSERT INTO `specification_value` VALUES (27, 26, '360 天');
+INSERT INTO `specification_value` VALUES (28, 25, '鲜猪后腿、食盐、白酒');
+INSERT INTO `specification_value` VALUES (29, 26, '365天');
+INSERT INTO `specification_value` VALUES (30, 26, '360天');
+INSERT INTO `specification_value` VALUES (31, 27, 'ag');
+INSERT INTO `specification_value` VALUES (32, 28, 'sdga');
+INSERT INTO `specification_value` VALUES (33, 29, 'a');
 
 -- ----------------------------
 -- Table structure for store

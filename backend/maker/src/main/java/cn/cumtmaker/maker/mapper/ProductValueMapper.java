@@ -10,4 +10,6 @@ public interface ProductValueMapper {
     int insert(ProductValueKey record);
 
     int insertSelective(ProductValueKey record);
+
+    Integer deleteByProductId(Integer productId);
 }

@@ -14,4 +14,6 @@ public interface StoreProductMapper {
     int insertSelective(StoreProductKey record);
 
     List<Integer> getStoreIdsByGroupId(Integer groupId);
+
+    Integer deleteByGroupId(Integer groupId);
 }

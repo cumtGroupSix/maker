@@ -24,4 +24,8 @@ public interface ProductGroupMapper {
     void updateRepresentativeProductId(@Param("groupId")Integer groupId, @Param("representativeProductId") Integer representativeProductId);
 
     Integer selectProductGroupsNumByStoreId(Integer storeId);
+
+    List<Integer> getGroupIdByProductName(String productName);
+
+    Integer deleteByGroupId(Integer groupId);
 }

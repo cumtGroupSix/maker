@@ -2,14 +2,15 @@
     <div class="layout">
         <Layout>
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu theme="dark" width="auto" :class="menuitemClasses">
+                <Menu theme="dark" width="auto" :class="menuitemClasses" active-name="1-1">
                     <Submenu name="1">
                         <template slot="title">
                             <Icon type="ios-navigate"></Icon>
                             <span>商品管理</span>
                         </template>
-                        <MenuItem name="1-1"><router-link to='/supplier/addproduct'>上架商品</router-link></MenuItem>
-                        <MenuItem name="1-2"><router-link to='/supplier/updateproduct'>修改商品</router-link></MenuItem>
+                        <MenuItem name="1-1"><router-link to='/supplier'><Icon type="ios-stats" style="margin-bottom:3px;margin-right:5px" /><span v-if="!isCollapsed">所有商品</span></router-link></MenuItem>
+                        <MenuItem name="1-2"><router-link to='/supplier/addproduct'><Icon type="ios-add-circle-outline" style="margin-bottom:3px;margin-right:5px" /><span v-if="!isCollapsed">上架商品</span></router-link></MenuItem>
+                        <MenuItem name="1-3"><router-link to='/supplier/updateproduct'><Icon type="ios-build-outline" style="margin-bottom:3px;margin-right:5px" /><span v-if="!isCollapsed">修改商品</span></router-link></MenuItem>
                     </Submenu>
 
                     <!-- <MenuItem name="1-2">

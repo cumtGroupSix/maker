@@ -48,4 +48,13 @@
         from store_product
         where store_id=#{storeId}
     </select>
+    <select id="getGroupIdByProductName" resultType="INTEGER">
+        select group_id
+        from product_group
+        where product_name like concat('%',#{productName},'%')
+    </select>
+    <delete id="deleteByGroupId">
+        delete from product_group
+        where group_id = #{groupId}
+    </delete>
 </mapper>

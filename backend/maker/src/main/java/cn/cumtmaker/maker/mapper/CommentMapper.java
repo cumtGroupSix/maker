@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Param;
 public interface CommentMapper {
     int insertComment(Comment comment);
     int deleteComment(@Param("userId") Integer userId, @Param("productId") Integer productId);
+    Integer deleteByProductId(Integer productId);
 }
