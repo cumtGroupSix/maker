@@ -55,7 +55,7 @@
 			<div class="col-7 d-none d-lg-block" style='padding-right: 0px;'>合计(不含运费)：<span class="gwc-number gwc-unselect">{{pricesum}}</span></div></div>
 			</div>
 			<div class="col-1 d-none d-lg-block text-right" style='padding-right: 0px;'>
-			<a :href="spsum==0?'JavaScript:void(0)':'receiver.html'" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;height:40px;border:none;'>结算</button></a>
+			<span  @click="submitcart" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;cursor: pointer;height:40px;border:none;'>结算</span>
 			</div>	
 			</div>
 			</div>
@@ -78,7 +78,7 @@
 			<div class="col-7 d-none d-md-block d-lg-none" style='padding-right: 0px;'>合计(不含运费)：<span class="gwc-number gwc-unselect">{{pricesum}}</span></div></div>
 			</div>
 			<div class="col-2 d-none d-md-block d-lg-none text-right" style='padding-right: 0px;'>
-			<a :href="spsum==0?'JavaScript:void(0)':'receiver.html'" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;height:40px;border:none;'>结算</a></div>
+			<span  @click="submitcart" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;cursor: pointer;height:40px;border:none;'>结算</span></div>
 			</div>	
 			</div>
 			</div>
@@ -98,7 +98,7 @@
 			<div class="col-12 d-block d-md-none" style='padding-left: 0px;'>已选商品：<span class='gwc-number gwc-unselect'>{{spsum}}</span>&nbsp;件</div>
 			<div class="col-12 d-block d-md-none" style='padding-left: 0px;'>合计(不含运费)：<span class="gwc-number gwc-unselect">{{pricesum}}</span></div>
 			<div class="col-6 offset-6 d-block d-md-none text-right" style='padding-right: 0px;'>
-			<a :href="spsum==0?'JavaScript:void(0)':'receiver.html'" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;height:40px;border:none;'>结算</a></div>
+			<span  @click="submitcart" class="btn btn-info btn-js text-center" style='background-color:#ff9966;color:white;width: 100%;cursor: pointer;height:40px;border:none;'>结算</span></div>
 			</div>	
 			</div>
 			</div>
@@ -323,9 +323,7 @@
 			axiosgetcart(){
 			this.axios.get('/api/cart/get')
 			.then((response)=>{
-				this.$store.state.cartmain=response.data;
-				console.log(this.$store.state.cartmain);	
-
+				this.$store.state.cartmain=response.data;	
 			})
 			.catch((error)=>{console.log(error);});
 			},
@@ -442,7 +440,13 @@
 				for(var a=0;a<this.cartarr.length;a++){
 				this.pricesum=parseFloat(this.pricesum)+parseFloat(this.$refs.one[a].psum);
 				this.pricesum=parseFloat(this.pricesum).toFixed(2);
-	
+				}
+			},
+			submitcart(){
+				if(this.spsum!=0){
+					this.$router.push({path:"/ordersubmit"})
+				}else{
+					this.$Message.info("请选择您要结算的商品");
 				}
 			},
 			deletea(){
@@ -522,6 +526,12 @@
 			},
 			collectstatus:function(newstatus,old){
 				this.axiosgetcart();
+			},
+			pricesum:function(newValue,oldValue){
+				this.$store.state.pricesum=newValue;
+			},
+			spsum:function(newValue,oldValue){
+				this.$store.state.productsum=newValue;
 			}
 		}
 				    

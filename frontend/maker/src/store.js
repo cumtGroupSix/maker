@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     hotStore:[],
     checkedProduct:'',
+    pricesum:0,
+    productsum:0,
     active:"1",
     loginresponse:null,
     inforesponse:{},
