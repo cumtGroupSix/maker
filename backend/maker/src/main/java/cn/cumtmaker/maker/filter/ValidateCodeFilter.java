@@ -30,7 +30,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter{
             throws ServletException, IOException {
         //如果是 登录注册或修改密码请求 则执行
         if(StringUtils.equals("/api/user/findPassword", request.getRequestURI())
-//                ||StringUtils.equals("/login", request.getRequestURI())
+                ||StringUtils.equals("/login", request.getRequestURI())
                 ||StringUtils.equals("/api/user/resetPassword", request.getRequestURI())
                 ||StringUtils.equals("/api/user/userSignUp", request.getRequestURI())){
             try {
