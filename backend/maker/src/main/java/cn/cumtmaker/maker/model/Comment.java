@@ -26,6 +26,12 @@ public class Comment {
 
     private String imgUrl4;
 
+    //评价的商品
+    private Product product;
+
+    //评价的用户
+    private User user;
+
     public Integer getUserId() {
         return userId;
     }
@@ -110,5 +116,21 @@ public class Comment {
 
     public void setImgUrl4(String imgUrl4) {
         this.imgUrl4 = imgUrl4;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

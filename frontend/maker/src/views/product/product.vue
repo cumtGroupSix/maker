@@ -1,7 +1,10 @@
 <template>
     <div>
+        
         <!--购买界面-->
         <div class="container" style="max-width: 1050px">
+            <button class="btn btn-default" @click="collectProduct()">收藏</button>
+            <button class="btn btn-default" @click="cancelCollectProduct()">取消收藏</button>
             <section id="goumaijiemian">
                 <div class="row">
                 <div class="col-12 col-md-6 col-sm-12">
@@ -35,7 +38,7 @@
                     
                     <div class="goumaixuanxiang">
                         <router-link to="/receiver" class="btn btn-danger btn-lg">立即购买</router-link>
-                        <router-link to="/cart" class="btn btn-warning btn-lg text-white">加入购物车</router-link>
+                        <router-link to="/cart" class="btn btn-warning btn-lg text-white" @click.native="addGroupToCart">加入购物车</router-link>
                     </div>
                 </div>
                 </div>
@@ -45,53 +48,58 @@
 
         <!-- 商品详情 -->
          <div class="container" style="max-width: 1050px">
-            <div class="row">
-                <div class="col-12 rounded select text-center">
-                    <div class="xiangqing float-left rounded" >
-                        <strong>商品详情</strong>
-                    </div>
-                    <div class="pingjia float-left rounded" >
-                        <strong>评价</strong>
-                    </div>
-                </div>
-            </div>
-            <section id="shangpinxiangqing">
-                <div class="wenzishuoming mb-3">
-                    <div class="row">
-                        <div class="col-12 col-md-4 col-sm-12" v-for="(item,index) in product.specifications" :key="index">
-                            <span>{{item.specification}}:{{item.specificationValue}}</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="evaluation">
-                <div class="row summary mb-3">
-                    <div class="col-4 level font-weight-bold">
-                        <span v-for="(item,index) in level">{{item}}</span>
-                    </div>
-                    <div class="col-8 keyword">
-                        <div class="float-left key_content rounded" v-for="(item,index) in keyword">
-                            <span>{{item.content}}</span>
-                            <span>{{item.number}}</span>
-                        </div>
-                    </div>
-                    <hr width="100%" color="#FFAD86" size="50" />
-                    <div class="row comment" v-for="(item,index) in evaluation">
-                        <div class="col-3 nickname">
-                            {{item.nickname}}
-                        </div>
-                        <div class="col-9">
-                            <div class="param_content">
-                                {{item.content}}
-                            </div>
-                            <div class="eva_param rounded">
-                                {{item.eva_date}}
-                                {{item.color}}
+             <div>
+                 <div class="rounded select text-center row">
+                     <div class="xiangqing float-left rounded col-6" style="background-color: #dadada">
+                         <strong>商品详情</strong>
+                     </div>
+                     <div class="pingjia float-left rounded col-6" style="background-color: #dadada">
+                         <strong>评价</strong>
+                     </div>
+                 </div>
+             </div>
+             <div class="row">
+                <section id="shangpinxiangqing" class="col-6">
+                    <div class="wenzishuoming mb-3">
+                        <div class="row">
+                            <div class="col-12 col-md-4 col-sm-12" v-for="(item,index) in product.specifications" :key="index">
+                                <span>{{item.specification}}:{{item.specificationValue}}</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                 <section id="evaluation" class="col-6">
+                     <div class="row summary mb-3">
+                         <div class="col-4 level font-weight-bold">
+                             <span v-for="(item,index) in level">{{item}}</span>
+                         </div>
+                         <div class="col-8 keyword">
+                             <div class="float-left key_content rounded" v-for="(item,index) in keyword">
+                                 <span>{{item.content}}</span>
+                                 <span>{{item.number}}</span>
+                             </div>
+                         </div>
+                         <hr width="100%" color="#FFAD86" size="50" />
+                         <div class="row comment" v-for="(item,index) in evaluation">
+                             <div class="col-3 nickname">
+                                 <div style="color: red">{{item.user.username}}</div>
+                                 <div>店铺风格：{{item.starLevel1}}</div>
+                                 <div>商品质量：{{item.starLevel2}}</div>
+                                 <div>服务态度：{{item.starLevel3}}</div>
+                             </div>
+                             <div class="col-9">
+                                 <div class="param_content" style="font-size: 15px">
+                                     {{item.commentContent}}
+                                 </div>
+                                 <div class="eva_param rounded">
+                                     <div>{{item.commentTime}}</div>
+                                     <div>{{item.product.productName}}</div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </section>
+             </div>
         </div>
     </div>
 </template>
@@ -100,49 +108,33 @@
     import $ from 'jquery'
        
     $(function(){
-        $('.xiangqing').click(function(){
-            $(this).css("background-color","white")
-            $(this).css("border-top","1px solid red")
-            $('.pingjia').css("background-color","#dadada")
-            $('.pingjia').css("border-top","none")
-            $('#shangpinxiangqing').css("display","block")
-            $('#evaluation').css("display","none")
-        });
-        $('.pingjia').click(function(){
-            $(this).css("background-color","white")
-            $(this).css("border-top","1px solid red")
-            $('.xiangqing').css("background-color","#dadada")
-            $('.xiangqing').css("border-top","none")
-            $('#evaluation').css("display","block")
-            $('#shangpinxiangqing').css("display","none")
-        });
         $('#beizi1').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $(this).css('borderStyle','solid')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi2').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $('#beizi2').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi3').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi4').css('borderStyle','none')
-	});
+        $('#beizi3').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi4').css('borderStyle','none')
+    });
 
-		$('#beizi4').click(function() {
-		$(this).css('borderStyle','solid')
-		$('#beizi1').css('borderStyle','none')
-		$('#beizi2').css('borderStyle','none')
-		$('#beizi3').css('borderStyle','none')
-	});
+        $('#beizi4').click(function() {
+        $(this).css('borderStyle','solid')
+        $('#beizi1').css('borderStyle','none')
+        $('#beizi2').css('borderStyle','none')
+        $('#beizi3').css('borderStyle','none')
+    });
     })
     export default {
         data() {
@@ -153,38 +145,7 @@
                     num:1
                 }],
                 level:[4.9],
-                evaluation:[
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/1/18",
-                        content:"排在最上面的那个才是哦！！很差物流很快，卖家包装很严实，没有破损，杯子很喜欢，以后还会继续光顾的，赞一分钱一分货，用起来还行吧，不过绝对不是多么好的，想追求性价比的可以考虑下杯子和想象中的一样好看，东西一点破损也没有，很喜欢不错，包装厚实，一点没有破损，礼盒装也特别好看，喜欢，特别是杯子上的猫咪",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"薛之谦的小宝贝",
-                        eva_date:"2018/7/17",
-                        content:"做工没得说，买给我女朋友的，整体感觉不错，物流速度很快，包装也很到位，但是觉得作用不大，排除送人。",
-                        color:"橘色猫咪"
-                    },
-                    {
-                        nickname:"Dorio",
-                        eva_date:"2018/1/3",
-                        content:"挺好的杯子 就是感觉杯盖有点突兀...",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/2/3",
-                        content:"杯子挺好看 包装也很完美 超级喜欢 物流很快 卖家服务态度很好 好评好评～",
-                        color:"黑色猫咪"
-                    },
-                    {
-                        nickname:"随心所欲烛",
-                        eva_date:"2018/3/3",
-                        content:"质量非常好 我收到了 洗了杯子 倒水的时候盖子重1米多高掉下去竟然没有碎 可以 可以",
-                        color:"橘色猫咪"
-                    },
-                ],
+                evaluation:[],
             }
         },
         methods: {
@@ -197,12 +158,28 @@
             },
             changeIndex(index){
                 this.currentIndex = index
+            },
+            collectProduct() {
+                this.axios.post("/api/collect/group" + "?storeId=" + this.$store.state.currentStore.storeId + "&collectGroupId=" + this.$store.state.currentProductGroupId)
+            },
+            cancelCollectProduct() {
+                this.axios.delete("/api/collect/group" + "?storeId=" + this.$store.state.currentStore.storeId + "&collectGroupId=" + this.$store.state.currentProductGroupId)
+            },
+            addGroupToCart() {
+                this.axios.put("api/cart/addProduct" + "?storeId=" + this.$store.state.currentStore.storeId
+                    + "&productId=" + this.product.productId
+                    + "&productQuantity=" + this.List[0].num);
+                    // this.$router.go(0);            
             }
         },
         mounted(){
             this.axios.get("/api/product/group/"+this.$store.state.currentProductGroupId)
                 .then(res=>{
                     this.productGroup = res.data
+                    this.axios.get("/api/product/getProductComments/"+this.productGroup[this.currentIndex].productId)
+                        .then(res=>{
+                            this.evaluation = res.data
+                        })
                 })
         },
         computed: {
@@ -219,6 +196,12 @@
                 .then(res=>{
                     this.productGroup = res.data
                 })
+            },
+            currentIndex(newValue, oldValue){
+                this.axios.get("/api/product/getProductComments/"+this.productGroup[newValue].productId)
+                    .then(res=>{
+                        this.evaluation = res.data
+                    })
             }
         },
     }
@@ -226,7 +209,7 @@
 
 <style scoped>
 .shangpintupian{
-	margin-top: 30px;
+    margin-top: 30px;
 }
 .dianpudaohang{
     background-color: #fbe6be;
@@ -234,19 +217,19 @@
 }
 
 .shangpinmingcheng{
-	font-size: 20px;
-	margin-top: 30px;
+    font-size: 20px;
+    margin-top: 30px;
 }
 
 .danjia{
-	background-color: #ffe5e5;
-	font-size: 40px;
-	color:#eb8e8e;
+    background-color: #ffe5e5;
+    font-size: 40px;
+    color:#eb8e8e;
 }
 
 .goumaixuanxiang{
-	line-height: 150px;
-	color:white;
+    line-height: 150px;
+    color:white;
 }
 
 .select{
@@ -262,20 +245,15 @@
 
 .xiangqing{
     background-color:white;
-    border-top:1px solid red
-}
-
-#evaluation{
-    display: none;
 }
 
 .xiangqingtupian{
-	background-color: #eeeeee;
-	margin:0 auto;
+    background-color: #eeeeee;
+    margin:0 auto;
 }
 
 .yansefenlei{
-	margin-top: 25px;
+    margin-top: 25px;
 }
 
 .level{

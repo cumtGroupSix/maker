@@ -29,12 +29,15 @@ import MakerRegister from './views/adminMakerRegister/makerRegister'
 import DeleteUser from './views/adminDeleteUser/deleteUser'
 import ResetPassword from './views/adminResetPassword/resetPassword'
 import ChangeInfo from './views/adminChangeInfo/changeInfo'
-import Userinfo from './views/userinfo/userinfo'
+import userChangeInfo from './views/userChangeInfo/userChangeInfo'
 import FindPassword from './views/findPassword/findPassword'
 import Supplier from './views/supplier/supplier.vue'
 import SupplierProduct from './views/supplierProduct/supplierProduct.vue'
 import SupplierAddProduct from './views/supplierAddProduct/supplierAddProduct.vue'
 import SupplierUpdateProduct from './views/supplierUpdateProduct/supplierUpdateProduct.vue'
+
+
+
 
 
 Vue.use(Router)
@@ -111,11 +114,6 @@ export default new Router({
       component: ChangePassword
     },
     {
-      path: '/findpassword',
-      name: 'findpassword',
-      component: FindPassword
-    },
-    {
       path: '/product',
       name: 'product',
       component: Product
@@ -176,11 +174,6 @@ export default new Router({
       component: User,
       children: [
         {
-          path: '/user',
-          name: 'userinfo',
-          component: Userinfo
-        },
-        {
           path: '/user/browse',
           name: 'browse',
           component: Browse
@@ -200,9 +193,14 @@ export default new Router({
           name: 'myStore',
           component: MyStore
         },
+        {
+            path: '/user/changeInfo',
+            name: 'changeInfo',
+            component: userChangeInfo
+        },
       ]
     },
-    {
+  {
       path: '/supplier',
       name: 'supplier',
       component: Supplier,
@@ -226,3 +224,4 @@ export default new Router({
     }
   ]
 })
+

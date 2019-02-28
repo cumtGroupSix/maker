@@ -3,18 +3,23 @@
         <Col :md={span:18,offset:3} :lg={span:18,offset:3}>
             <Row>
                 <Col>
-                    <Menu mode="horizontal" :theme="theme1" active-name="0">
-                        <MenuItem name="1" to="/user/browse">
+                    <Menu mode="horizontal" :theme="theme1" active-name="1">
+                        <MenuItem name="1" to="/user/changeInfo">
+                            <Icon type="ios-paper" />
+                            个人信息及修改
+                        </MenuItem>
+
+                        <MenuItem name="2" to="/user/browse">
                             <Icon type="ios-paper" />
                             浏览记录
                         </MenuItem>
                     
-                        <MenuItem name="2" to="/user/evaluate">
+                        <MenuItem name="3" to="/user/evaluate">
                             <Icon type="ios-people" />
                             评价记录
                         </MenuItem>
                         
-                        <Submenu name="3">
+                        <Submenu name="4">
                             <template slot="title">
                             <Icon type="ios-basket-outline" />
                             我的收藏

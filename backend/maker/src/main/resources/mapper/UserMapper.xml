@@ -34,4 +34,11 @@
     where
     username=#{username}
   </delete>
+
+  <!--根据用户ID获取用户信息-->
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select *
+    from user
+    where user_id=#{userId}
+  </select>
 </mapper>

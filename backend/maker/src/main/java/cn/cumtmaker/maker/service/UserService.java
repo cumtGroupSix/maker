@@ -34,4 +34,7 @@ public interface UserService {
     UserInfo getUserInfoByUser(HttpServletRequest httpServletRequest);
     int sendEmail(String sender,String username,String title,String text);
     int findPassword(String username,String newPassword);
+
+    //    通过用户ID查找用户
+    User selectByUserId(Integer userId);
 }

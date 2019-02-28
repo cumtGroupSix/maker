@@ -13,6 +13,11 @@
         <result column="img_url2" property="imgUrl2" jdbcType="VARCHAR"></result>
         <result column="img_url3" property="imgUrl3" jdbcType="VARCHAR"></result>
         <result column="img_url4" property="imgUrl4" jdbcType="VARCHAR"></result>
+        <!--多对一-->
+        <association property="product" column="product_id" javaType="cn.cumtmaker.maker.model.Product"
+                     select="cn.cumtmaker.maker.mapper.ProductMapper.selectByProductId"></association>
+        <association property="user" column="user_id" javaType="cn.cumtmaker.maker.model.User"
+                     select="cn.cumtmaker.maker.mapper.UserMapper.selectByUserId"></association>
     </resultMap>
 
     <insert id="insertComment" parameterType="cn.cumtmaker.maker.model.Comment">
@@ -35,4 +40,11 @@
         where
         product_id=#{productId}
     </delete>
+
+    <!--获取评论内容-->
+    <select id="getProductComments" resultMap="ModelResultMap">
+        select *
+        from comment
+        where product_id=#{productId}
+    </select>
 </mapper>

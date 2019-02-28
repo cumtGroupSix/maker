@@ -106,6 +106,7 @@
         mounted(){
             this.axios.get("/api/evaluate")
                 .then(res=>{
+                console.log(res);
                     this.groupEvaluationVOS = res.data
                 })
         },
