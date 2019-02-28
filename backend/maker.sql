@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 28/02/2019 13:01:50
+ Date: 28/02/2019 17:25:15
 */
 
 SET NAMES utf8mb4;
@@ -152,12 +152,33 @@ CREATE TABLE `group_collections`  (
 INSERT INTO `group_collections` VALUES (1, 1, 1);
 
 -- ----------------------------
+-- Table structure for group_evaluations
+-- ----------------------------
+DROP TABLE IF EXISTS `group_evaluations`;
+CREATE TABLE `group_evaluations`  (
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `store_id` int(11) NOT NULL COMMENT '创客店ID',
+  `group_id` int(11) NOT NULL COMMENT '商品分组ID',
+  `value_disabled` float NOT NULL COMMENT '评价等级',
+  PRIMARY KEY (`user_id`, `store_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_evaluations
+-- ----------------------------
+INSERT INTO `group_evaluations` VALUES (1, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 11, 2, 1.5);
+INSERT INTO `group_evaluations` VALUES (7, 12, 4, 5);
+INSERT INTO `group_evaluations` VALUES (7, 13, 3, 3.5);
+
+-- ----------------------------
 -- Table structure for group_specification
 -- ----------------------------
 DROP TABLE IF EXISTS `group_specification`;
 CREATE TABLE `group_specification`  (
-  `group_id` int(22) NOT NULL,
-  `specification_id` int(11) NOT NULL,
+  `group_id` int(22) NOT NULL COMMENT '商品分组ID',
+  `specification_id` int(11) NOT NULL COMMENT '商品规格ID',
   PRIMARY KEY (`group_id`, `specification_id`) USING BTREE,
   INDEX `fk[group_specification]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[group_specification]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -202,7 +223,7 @@ CREATE TABLE `maker_info`  (
 -- ----------------------------
 -- Records of maker_info
 -- ----------------------------
-INSERT INTO `maker_info` VALUES (2, 2, 'makertest', '151', 'a@qq.com', '中国矿业大学', 'test', '5', '2019-02-02 13:57:22');
+INSERT INTO `maker_info` VALUES (2, 2, 'makertest', '151', '814258761@qq.com', '中国矿业大学', 'test', '5', '2019-02-02 13:57:22');
 INSERT INTO `maker_info` VALUES (3, 3, '店铺名', '1', 'a@qq.com', '中国矿业大学', 'test1', '1', '2019-02-02 05:52:29');
 
 -- ----------------------------
@@ -224,7 +245,14 @@ CREATE TABLE `order_detail`  (
   INDEX `fk[order_detail]product_price`(`product_price`) USING BTREE,
   CONSTRAINT `fk[order_detail]order_id` FOREIGN KEY (`order_id`) REFERENCES `order_master` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[order_detail]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_detail
+-- ----------------------------
+INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 1, 1, 2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
+INSERT INTO `order_detail` VALUES (2, 1, 1, 2.00, 2, 1, 4, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
+INSERT INTO `order_detail` VALUES (3, 1, 1, 2.00, 3, 1, 6, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
 
 -- ----------------------------
 -- Table structure for order_master
@@ -239,7 +267,14 @@ CREATE TABLE `order_master`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `fk[order]user_id`(`user_id`) USING BTREE,
   CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_master
+-- ----------------------------
+INSERT INTO `order_master` VALUES (1, 1, 1, 567.00, '2019-02-27 13:40:49');
+INSERT INTO `order_master` VALUES (2, 1, 1, 123.00, '2019-02-28 17:20:54');
+INSERT INTO `order_master` VALUES (3, 1, 1, 245.00, '2019-02-28 17:21:06');
 
 -- ----------------------------
 -- Table structure for product
@@ -310,8 +345,8 @@ INSERT INTO `product_group` VALUES (16, '三川 无骨火腿500g云南丽江特�
 -- ----------------------------
 DROP TABLE IF EXISTS `product_value`;
 CREATE TABLE `product_value`  (
-  `product_id` int(22) NOT NULL,
-  `value_id` int(22) NOT NULL,
+  `product_id` int(22) NOT NULL COMMENT '商品ID',
+  `value_id` int(22) NOT NULL COMMENT '商品规格值ID',
   PRIMARY KEY (`product_id`, `value_id`) USING BTREE,
   INDEX `fk[product_value]value_id`(`value_id`) USING BTREE,
   CONSTRAINT `fk[product_value]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -402,8 +437,8 @@ INSERT INTO `role_resource` VALUES ('MAKER', 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `specification`;
 CREATE TABLE `specification`  (
-  `specification_id` int(11) NOT NULL AUTO_INCREMENT,
-  `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `specification_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '商品规格名称',
   PRIMARY KEY (`specification_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -431,9 +466,9 @@ INSERT INTO `specification` VALUES (29, 'as');
 -- ----------------------------
 DROP TABLE IF EXISTS `specification_value`;
 CREATE TABLE `specification_value`  (
-  `value_id` int(22) NOT NULL AUTO_INCREMENT,
-  `specification_id` int(11) NOT NULL,
-  `specification_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `value_id` int(22) NOT NULL AUTO_INCREMENT COMMENT '商品规格值ID',
+  `specification_id` int(11) NOT NULL COMMENT '商品规格ID',
+  `specification_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '商品规格值',
   PRIMARY KEY (`value_id`) USING BTREE,
   INDEX `fk[specification_value]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[specification_value]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -576,7 +611,7 @@ CREATE TABLE `user_info`  (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'test', b'1', '151', 'abcdefg@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
+INSERT INTO `user_info` VALUES (1, 'test', b'1', '151', '814258761@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
 
 -- ----------------------------
 -- Procedure structure for sp_select_store_by_store_id

@@ -15,38 +15,42 @@
 
 		<div class="biankuang">
 		<div class="daohangtiao">
-			<div class="row">
-				<div class="col-12 col-md-1 col-sm-12" >
-					<div class="dianpubaobei" ><strong>订单详情ID</strong></div>
-					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id1}}</div>
-				</div>
+			<div class="row" v-for="(item, index) of message1" :key="index">
 				<div class="col-12 col-md-1 col-sm-12" >
 					<div class="dianpubaobei" ><strong>订单ID</strong></div>
-					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id2}}</div>
+					<div style="text-align: center; font-family: 微软雅黑">{{item.orderId}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12" >
+					<div class="dianpubaobei" ><strong>订单详情ID</strong></div>
+					<div style="text-align: center; font-family: 微软雅黑">{{item.detailId}}</div>
 				</div>
 				<div class="col-12 col-md-1 col-sm-12" >
 					<div class="dianpubaobei" ><strong>商品ID</strong></div>
-					<div style="text-align: center; font-family: 微软雅黑">{{Message1.id3}}</div>
+					<div style="text-align: center; font-family: 微软雅黑">{{item.productId}}</div>
 				</div>
 				<div class="col-12 col-md-4 col-sm-12" >
 					<div class="dianpubaobei" ><strong>商品名称</strong></div>
-					<div style="text-align: center; font-family: 微软雅黑">{{Message1.name}}</div>
+					<div style="text-align: center; font-family: 微软雅黑">{{item.productName}}</div>
 				</div>
 				<div class="col-12 col-md-1 col-sm-12">
 					<div class="danjia"><strong>单价</strong></div>
-					<div style="text-align: center">{{Message1.price}}</div>
+					<div style="text-align: center">{{item.productPrice}}</div>
 				</div>
 				<div class="col-12 col-md-1 col-sm-12">
 					<div class="shuliang"><strong>数量</strong></div>
-					<div style="text-align: center">{{Message1.count}}</div>
+					<div style="text-align: center">{{item.productQuantity}}</div>
 				</div>
 				<div class="col-12 col-md-1 col-sm-12">
 					<div class="xiaoji"><strong>小计</strong></div>
-					<div style="color:#ff3333;text-align: center"><strong>{{Message1.sum}}</strong></div>
+					<div style="color:#ff3333;text-align: center"><strong>{{item.orderAmount}}</strong></div>
 				</div>
-				<div class="col-12 col-md-2 col-sm-12">
-					<div class="shuliang"><strong>支付状态</strong></div>
-					<div style="text-align: center">{{Message1.pay}}</div>
+				<div class="col-12 col-md-1 col-sm-12">
+					<div class="shuliang"><strong>订单状态</strong></div>
+					<div style="text-align: center">{{item.orderStatus}}</div>
+				</div>
+				<div class="col-12 col-md-1 col-sm-12">
+					<div class="danjia"><strong>操作</strong></div>
+					<div style="text-align: center"><div style="text-align: center" class="button"><router-link to="/comment" class="btn btn-danger btn-small">评价</router-link></div></div>
 				</div>
 			</div>
 	</div>
@@ -59,31 +63,18 @@
 	export default {
 		data() {
 			return {
-				Message1:
-					{
-						id1:"",
-						id2:"",
-						id3:"",
-						name:"",
-						price:"",
-						count:"",
-						sum:"",
-						pay:"",
-						res:null,
-						store:"诺拉家",
-						detail1:"运送方式：普通配送 快递 免邮",
-						detail2:"发货时间：卖家承诺订单在买家付款后, 24小时内发货",
-					}
+				message1:[],
 			}
 		},
 
 		methods:{
 			getMessageInfo(){
-				axios.get('/api/orderDetail/getOrderDetail?detailId=6')
+				axios.get('api/orderDetail/getByOrderId/1')
 						.then((res)=> {
 							if (res.status == 200 && res.data) {
-								this.$store.state.message1 = res.data;
+								this.message1 = res.data;
 							}
+							console.log(this.message1)
 						})
 						.catch((error)=> {console.log(error)})
 
@@ -96,14 +87,14 @@
 		},
 		watch:{
 			message:function(data,olds){
-				this.Message1.id1=data.detailId;
-				this.Message1.id2=data.orderId;
-				this.Message1.id3=data.productId;
-				this.Message1.price=data.productPrice;
-				this.Message1.count=data.productQuantity;
-				this.Message1.pay=data.orderStatus=="1"?"已支付":"未支付";
-				this.Message1.sum=data.orderAmount;
-				this.Message1.name=data.productName;
+				this.message1.detailId=data.detailId;
+				this.message1.orderId=data.orderId;
+				this.message1.productId=data.productId;
+				this.message1.productPrice=data.productPrice;
+				this.message1.productQuantity=data.productQuantity;
+				this.message1.orderStatus=data.orderStatus=="1"?"已发货":"未发货";
+				this.message1.orderAmount=data.orderAmount;
+				this.message1.productName=data.productName;
 			}
 		},
 		mounted(){
@@ -168,5 +159,10 @@
 		font-family: '隶书';
 		color:#ff9966;
 		font-size: 50px;
+	}
+
+	.button{
+		margin-bottom: 5px;
+		margin-top: 5px;
 	}
 </style>
