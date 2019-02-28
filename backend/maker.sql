@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 28/02/2019 17:22:58
+ Date: 28/02/2019 17:25:15
 */
 
 SET NAMES utf8mb4;
@@ -223,7 +223,7 @@ CREATE TABLE `maker_info`  (
 -- ----------------------------
 -- Records of maker_info
 -- ----------------------------
-INSERT INTO `maker_info` VALUES (2, 2, 'makertest', '151', 'a@qq.com', '中国矿业大学', 'test', '5', '2019-02-02 13:57:22');
+INSERT INTO `maker_info` VALUES (2, 2, 'makertest', '151', '814258761@qq.com', '中国矿业大学', 'test', '5', '2019-02-02 13:57:22');
 INSERT INTO `maker_info` VALUES (3, 3, '店铺名', '1', 'a@qq.com', '中国矿业大学', 'test1', '1', '2019-02-02 05:52:29');
 
 -- ----------------------------
@@ -611,7 +611,7 @@ CREATE TABLE `user_info`  (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'test', b'1', '151', 'abcdefg@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
+INSERT INTO `user_info` VALUES (1, 'test', b'1', '151', '814258761@qq.com', '中国矿业大学', '2019-02-02 05:28:27', '中国矿业大学');
 
 -- ----------------------------
 -- Procedure structure for sp_select_store_by_store_id
