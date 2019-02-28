@@ -83,4 +83,12 @@ public class UserController {
                                          String email,String address,String school){
         return ResponseEntity.ok(userService.updateUserInfoByUser(httpServletRequest,username,enable,nickname,telephone,email,address,school));
     }
+
+    //    通过用户ID查找用户
+    @ResponseBody
+    @GetMapping("/selectByUserId/{userId}")
+    @ApiOperation(value = "通过用户ID查找用户")
+    public ResponseEntity selectByUserId(@PathVariable("userId") Integer userId){
+        return ResponseEntity.ok(userService.selectByUserId(userId));
+    }
 }
