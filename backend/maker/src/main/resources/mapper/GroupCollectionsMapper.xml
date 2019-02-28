@@ -10,7 +10,7 @@
      insert into group_collections(user_id,store_id,collect_group_id)
      values(#{userId},#{storeId},#{collectGroupId})
   </insert>
-<<<<<<< HEAD
+
     <select id="getGroupCollectionsByUserId" resultMap="ModelResultMap">
         select * from group_collections
         <where>
@@ -25,10 +25,9 @@
             and collect_group_id = #{collectGroupId}
         </where>
     </delete>
-=======
+
   <delete id="deleteByGroupId">
     delete from group_collections
     where collect_group_id=#{groupId}
   </delete>
->>>>>>> a2ef56324050c3610182d4a6a2af8d01a3858b12
 </mapper>
