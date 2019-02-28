@@ -109,6 +109,11 @@ export default new Router({
       component: ChuangkeRegister
     },
     {
+      path: '/findpassword',
+      name: 'findpassword',
+      component: FindPassword
+    },
+    {
       path: '/changepassword',
       name: 'changepassword',
       component: ChangePassword
