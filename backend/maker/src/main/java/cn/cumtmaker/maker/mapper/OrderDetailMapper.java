@@ -12,4 +12,5 @@ public interface OrderDetailMapper {
     OrderDetail getOrder(Integer detailId);
     Integer deleteByProductId(Integer productId);
     List<OrderDetailProductVO> getProduct(Integer orderId);
+    List<OrderDetail> getByOrderId(Integer orderId);
 }

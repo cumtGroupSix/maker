@@ -13,6 +13,7 @@
         <result column="img_url2" property="imgUrl2" jdbcType="VARCHAR"></result>
         <result column="img_url3" property="imgUrl3" jdbcType="VARCHAR"></result>
         <result column="img_url4" property="imgUrl4" jdbcType="VARCHAR"></result>
+
         <!--多对一-->
         <association property="product" column="product_id" javaType="cn.cumtmaker.maker.model.Product"
                      select="cn.cumtmaker.maker.mapper.ProductMapper.selectByProductId"></association>

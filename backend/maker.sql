@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
- Source Schema         : cf
+ Source Schema         : maker
 
  Target Server Type    : MySQL
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 28/02/2019 16:52:14
+ Date: 28/02/2019 17:22:58
 */
 
 SET NAMES utf8mb4;
@@ -215,7 +215,7 @@ CREATE TABLE `maker_info`  (
   `school` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学校名称',
   `real_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '真实姓名',
   `student_id` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生学号',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[maker_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -245,7 +245,14 @@ CREATE TABLE `order_detail`  (
   INDEX `fk[order_detail]product_price`(`product_price`) USING BTREE,
   CONSTRAINT `fk[order_detail]order_id` FOREIGN KEY (`order_id`) REFERENCES `order_master` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[order_detail]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_detail
+-- ----------------------------
+INSERT INTO `order_detail` VALUES (1, 1, 1, 2.00, 1, 1, 2, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
+INSERT INTO `order_detail` VALUES (2, 1, 1, 2.00, 2, 1, 4, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
+INSERT INTO `order_detail` VALUES (3, 1, 1, 2.00, 3, 1, 6, '港风棉衣男潮流ins情侣棉服青年学生宽松连帽加厚面包服工装外套 ');
 
 -- ----------------------------
 -- Table structure for order_master
@@ -260,7 +267,14 @@ CREATE TABLE `order_master`  (
   PRIMARY KEY (`order_id`) USING BTREE,
   INDEX `fk[order]user_id`(`user_id`) USING BTREE,
   CONSTRAINT `fk[order]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_master
+-- ----------------------------
+INSERT INTO `order_master` VALUES (1, 1, 1, 567.00, '2019-02-27 13:40:49');
+INSERT INTO `order_master` VALUES (2, 1, 1, 123.00, '2019-02-28 17:20:54');
+INSERT INTO `order_master` VALUES (3, 1, 1, 245.00, '2019-02-28 17:21:06');
 
 -- ----------------------------
 -- Table structure for product
@@ -495,7 +509,7 @@ CREATE TABLE `store`  (
   `store_introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创客店介绍',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片URL',
   `browse_times` int(255) NOT NULL DEFAULT 0 COMMENT '浏览次数',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创立时间',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创立时间',
   PRIMARY KEY (`store_id`) USING BTREE,
   UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE,
   INDEX `store_name`(`store_name`) USING BTREE
@@ -588,7 +602,7 @@ CREATE TABLE `user_info`  (
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话号码',
   `email` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户邮箱',
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名称',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[user_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE

@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class OrderMasterService {
@@ -36,6 +37,10 @@ public class OrderMasterService {
 
     public int getOrderId(Integer userId, String orderTime){
         return orderMasterMapper.getOrderId(userId,orderTime);
+    }
+
+    public List<OrderMaster> getByUserId(Integer userId){
+        return orderMasterMapper.getByUserId(userId);
     }
 
 }

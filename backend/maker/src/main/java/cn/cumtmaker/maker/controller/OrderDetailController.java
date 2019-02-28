@@ -5,6 +5,7 @@ import cn.cumtmaker.maker.model.OrderDetail;
 import cn.cumtmaker.maker.service.impl.OrderDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,11 @@ public class OrderDetailController {
     @ApiOperation(value = "根据detailId获取订单信息")
     public ResponseEntity getOrder(Integer detailId){
         return  ResponseEntity.ok(orderDetailService.getOrder(detailId));
+    }
+
+    @GetMapping(path="/getByOrderId/{orderId}")
+    @ApiOperation(value = "根据orderId获取订单详情",response = OrderDetail.class,responseContainer = "list")
+    public ResponseEntity getByOrderId(@ApiParam(value = "detailId",required = true)@PathVariable Integer orderId){
+        return ResponseEntity.ok(orderDetailService.getByOrderId(orderId));
     }
 }

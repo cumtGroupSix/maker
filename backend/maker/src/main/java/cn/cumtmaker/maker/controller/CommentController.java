@@ -20,7 +20,7 @@ public class CommentController {
    CommentService commentService;
 
    @ResponseBody
-    @PostMapping(value = "/insert",consumes="application/json")
+    @PostMapping(value = "/insertComment",consumes="application/json")
     @ApiOperation(value = "添加评论信息", response = Comment.class, responseContainer = "list")
     public ResponseEntity insertComment(@RequestBody Comment comment) {
         return ResponseEntity.ok(commentService.insertComment(comment));

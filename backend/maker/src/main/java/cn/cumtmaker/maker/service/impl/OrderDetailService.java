@@ -26,4 +26,8 @@ public class OrderDetailService {
     public List<OrderDetailProductVO> getProduct(Integer orderId) {
         return orderDetailMapper.getProduct(orderId);
     }
+
+    public List<OrderDetail> getByOrderId(Integer orderId){
+        return orderDetailMapper.getByOrderId(orderId);
+    }
 }

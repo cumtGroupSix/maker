@@ -35,4 +35,9 @@
     order_time=#{orderTime}
   </select>
 
+  <select id="getByUserId" parameterType="cn.cumtmaker.maker.model.OrderMaster" resultMap="BaseResultMap">
+    select * from order_master
+    where user_id=#{userId}
+</select>
+
 </mapper>
