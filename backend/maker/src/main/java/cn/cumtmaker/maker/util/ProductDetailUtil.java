@@ -39,6 +39,7 @@ public class ProductDetailUtil {
         productDetailVO.setProductId(productId);
         productDetailVO.setImgUrl(product.getImgUrl());
         productDetailVO.setPrice(product.getProductPrice());
+        productDetailVO.setStock(product.getProductStock());
         productDetailVO.setProductName(product.getProductName());
         List<Map<String,Object>> specifications = new ArrayList<>();
         //通过productId查找出所有规格值id ——valueId

@@ -2,6 +2,7 @@ package cn.cumtmaker.maker.service.impl;
 
 import cn.cumtmaker.maker.VO.GoodsListVO;
 import cn.cumtmaker.maker.VO.ProductDetailVO;
+import cn.cumtmaker.maker.VO.ProductGroupDetailVO;
 import cn.cumtmaker.maker.form.ProductFormObject;
 import cn.cumtmaker.maker.form.ProductGroupFormObject;
 import cn.cumtmaker.maker.form.SpecificationFormObject;
@@ -208,20 +209,18 @@ public class ProductGroupServiceImpl implements ProductGroupService {
 
     @Override
     @Transactional
-    public Integer supplierUpdate(ArrayList<ProductDetailVO> productDetailVOS) {
+    public Integer supplierUpdate(ProductGroupDetailVO productGroupDetailVO) {
         Integer result = 0;
-        //TODO 目前仅能修改价格
-        for (ProductDetailVO productDetailVO : productDetailVOS){
-            result += productMapper.updatePriceByProductId(productDetailVO.getProductId(),productDetailVO.getPrice());
+        result += productGroupMapper.updateProductNameByGroupId(productGroupDetailVO.getGroupId(),productGroupDetailVO.getName());
+        for (ProductDetailVO productDetailVO : productGroupDetailVO.getProducts()){
+            result += productMapper.updateByProductId(productDetailVO.getProductId(),productDetailVO.getPrice(),productDetailVO.getStock(),productDetailVO.getProductName());
         }
         return result;
     }
 
     @Override
-    public Integer supplierDelete(String productName) {
+    public Integer supplierDelete(Integer groupId) {
         Integer result = 0;
-        //先用productName查出groupId
-        Integer groupId = productGroupMapper.getGroupIdByProductName(productName).get(0);
         List<Integer> productIds = productGroupMapper.getAllProductIdByGroupId(groupId);
         for (Integer productId : productIds){
             //删除cart_product中所有product有关数据
@@ -245,5 +244,25 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         //删除group
         result += productGroupMapper.deleteByGroupId(groupId);
         return result;
+    }
+
+    @Override
+    public List<ProductGroupDetailVO> getGroupDetailByCategoryId(Integer categoryId) {
+        List<ProductGroupDetailVO> productGroupDetailVOS = new ArrayList<>();
+        List<Integer> groupIds = productGroupMapper.getGroupIdsByCategoryId(categoryId);
+        for (Integer groupId: groupIds){
+            ProductGroupDetailVO productGroupDetailVO = new ProductGroupDetailVO();
+            productGroupDetailVO.setGroupId(groupId);
+            productGroupDetailVO.setName(productGroupMapper.getProductNameByGroupId(groupId));
+            List<Integer> productIds = productGroupMapper.getAllProductIdByGroupId(groupId);
+            List<ProductDetailVO> productDetailVOS = new ArrayList<>();
+            for (Integer productId : productIds){
+                ProductDetailVO productDetailVO = ProductDetailUtil.getDetailByProductId(productId);
+                productDetailVOS.add(productDetailVO);
+            }
+            productGroupDetailVO.setProducts(productDetailVOS);
+            productGroupDetailVOS.add(productGroupDetailVO);
+        }
+        return productGroupDetailVOS;
     }
 }

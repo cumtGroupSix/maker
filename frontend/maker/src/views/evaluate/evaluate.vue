@@ -1,13 +1,13 @@
 <template>
     <div>
         <button class="btn btn-default" @click="refresh()">刷新</button>
-        <Row type="flex" align="top" class="code-row-bg mt-3" :gutter="16" v-for="(groupEvaluationVO,index) in groupEvaluationVOS">
+        <Row type="flex" align="top" class="code-row-bg mt-3" :gutter="16" v-for="(groupEvaluationVO,index) in groupEvaluationVOS" :key="index">
             <Col>
                 <Avatar icon="ios-person" size="large" />
                 <span class="mx-1">{{groupEvaluationVO.storeVO.storeName}}</span>
             </Col>
             <Col>
-                <img :src=groupEvaluationVO.storeVO.productGroupVOS[groupEvaluationVO.groupIndex].productVO.imgUrl alt="" class="productImg">
+                <img :src="groupEvaluationVO.storeVO.productGroupVOS[groupEvaluationVO.groupIndex].productVO.imgUrl" alt="" class="productImg">
             </Col>
             <Col>
                 <div class="name my-1"><router-link to="/product" class="a1" @click.native="changeGroupId(groupEvaluationVO)">{{groupEvaluationVO.storeVO.productGroupVOS[groupEvaluationVO.groupIndex].productName}}</router-link></div>

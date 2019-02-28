@@ -57,4 +57,19 @@
         delete from product_group
         where group_id = #{groupId}
     </delete>
+    <select id="getGroupIdsByCategoryId" resultType="INTEGER">
+        select group_id
+        from product_group
+        where category_id=#{categoryId}
+    </select>
+    <select id="getProductNameByGroupId" resultType="STRING">
+        select product_name
+        from product_group
+        where group_id=#{groupId}
+    </select>
+    <update id="updateProductNameByGroupId">
+        update product_group
+        set product_name = #{productName}
+        where group_id = #{groupId}
+    </update>
 </mapper>

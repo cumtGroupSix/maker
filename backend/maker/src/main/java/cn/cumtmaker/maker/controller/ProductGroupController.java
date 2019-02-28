@@ -2,6 +2,7 @@ package cn.cumtmaker.maker.controller;
 
 import cn.cumtmaker.maker.VO.GoodsListVO;
 import cn.cumtmaker.maker.VO.ProductDetailVO;
+import cn.cumtmaker.maker.VO.ProductGroupDetailVO;
 import cn.cumtmaker.maker.form.ProductGroupFormObject;
 import cn.cumtmaker.maker.service.ProductGroupService;
 import io.swagger.annotations.ApiOperation;
@@ -65,14 +66,20 @@ public class ProductGroupController {
 
     @PutMapping("/supplier/update")
     @ApiOperation(value = "供应商修改产品详情接口")
-    public Integer supplierUpdate(@RequestBody ArrayList<ProductDetailVO> productDetailVOS){
-        return productGroupService.supplierUpdate(productDetailVOS);
+    public Integer supplierUpdate(@RequestBody ProductGroupDetailVO productGroupDetailVO){
+        return productGroupService.supplierUpdate(productGroupDetailVO);
     }
 
     @DeleteMapping("/supplier/delete")
     @ApiOperation(value = "供应商删除商品接口")
-    public Integer supplierDelete(@RequestParam String productName){
-        return productGroupService.supplierDelete(productName);
+    public Integer supplierDelete(@RequestParam Integer groupId){
+        return productGroupService.supplierDelete(groupId);
+    }
+
+    @GetMapping("/supplier/group/detail")
+    @ApiOperation(value = "为供应商通过categoryId查找出所有group详情")
+    public List<ProductGroupDetailVO> getGroupDetail(@RequestParam Integer categoryId){
+        return productGroupService.getGroupDetailByCategoryId(categoryId);
     }
 
 }

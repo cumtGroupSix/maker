@@ -4,6 +4,7 @@ import cn.cumtmaker.maker.form.ProductFormObject;
 import cn.cumtmaker.maker.model.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface ProductMapper {
 
     Integer deleteByProductId(Integer productId);
 
-    Integer updatePriceByProductId(@Param("productId") Integer productId,@Param("price") BigDecimal price);
+    Integer updateByProductId(@Param("productId") Integer productId, @Param("price") BigDecimal price, @Param("stock") Integer stock, @Param("productName") String productName);
 
     Integer updateStock(@Param("productId") Integer productId, @Param("productStock") Integer productStock);
 }

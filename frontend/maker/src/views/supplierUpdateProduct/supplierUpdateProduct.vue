@@ -1,21 +1,26 @@
 <template>
     <div>
         <Form :model="formItem" :label-width="200" class="mr-5">
-            <FormItem label="请输入您要搜索的产品名称" class="m-3">
+            <!-- <FormItem label="请输入您要搜索的产品名称" class="m-3">
                 <Input v-model="productName" placeholder="产品名称..."></Input>
-            </FormItem>
+            </FormItem> -->
             <div v-if="show">
-                <FormItem label="产品名称" class="m-3">
-                    <Input v-model="formItem[0].productName" placeholder="产品名称..."></Input>
+                <FormItem label="产品组名称" class="m-3">
+                    <Input v-model="formItem.name" placeholder="产品组名称..."></Input>
                 </FormItem>
-                <Button type="error" icon="md-close" @click="deleteProduct" style="margin:10px auto" class="ml-5">删除此商品</Button>
-                <div v-for="(item, index) in this.formItem" :key="index">
+                <div v-for="(item, index) in this.formItem.products" :key="index">
                     <div style="font-size:20px" class="m-3">第{{index+1}}件商品</div>
+                    <FormItem label="产品名称" class="m-3">
+                        <Input v-model="item.productName" placeholder="产品名称..."></Input>
+                    </FormItem>
                     <FormItem label="产品图片" class="m-3">
                         <img :src="item.imgUrl" alt="" style="height:100px">
                     </FormItem>
                     <FormItem label="产品价格" class="m-3">
                         <Input v-model="item.price" placeholder="产品价格..."></Input>
+                    </FormItem>
+                    <FormItem label="产品库存量" class="m-3">
+                        <Input v-model="item.stock" placeholder="产品库存量..."></Input>
                     </FormItem>
                     <FormItem label="产品规格" class="m-3">
                         <Table :columns="columns" :data="item.specifications"></Table>
@@ -42,11 +47,14 @@
                     }
                 ],
                 productName: '',
-                formItem:[
+                formItem:{
 
-                ],
-                show:false
+                },
+                show:true
             }
+        },
+        mounted(){
+            this.formItem = this.$store.state.currentGroup
         },
         watch: {
             productName(newValue) {
@@ -62,6 +70,9 @@
                 }else{
                     this.show = false
                 }
+            },
+            currentGroup(){
+                this.formItem = this.$store.state.currentGroup
             }
         },
         methods: {
@@ -102,6 +113,12 @@
                         this.$Message.info('Clicked cancel');
                     }
                 });
+            },
+            
+        },
+        computed: {
+            currentGroup() {
+                return this.$store.state.currentGroup 
             }
         },
     }
