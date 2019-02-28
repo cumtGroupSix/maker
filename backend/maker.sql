@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50723
  Source Host           : localhost:3306
- Source Schema         : maker
+ Source Schema         : cf
 
  Target Server Type    : MySQL
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 28/02/2019 13:01:50
+ Date: 28/02/2019 16:52:14
 */
 
 SET NAMES utf8mb4;
@@ -152,12 +152,33 @@ CREATE TABLE `group_collections`  (
 INSERT INTO `group_collections` VALUES (1, 1, 1);
 
 -- ----------------------------
+-- Table structure for group_evaluations
+-- ----------------------------
+DROP TABLE IF EXISTS `group_evaluations`;
+CREATE TABLE `group_evaluations`  (
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `store_id` int(11) NOT NULL COMMENT '创客店ID',
+  `group_id` int(11) NOT NULL COMMENT '商品分组ID',
+  `value_disabled` float NOT NULL COMMENT '评价等级',
+  PRIMARY KEY (`user_id`, `store_id`, `group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_evaluations
+-- ----------------------------
+INSERT INTO `group_evaluations` VALUES (1, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 2, 1, 1);
+INSERT INTO `group_evaluations` VALUES (7, 11, 2, 1.5);
+INSERT INTO `group_evaluations` VALUES (7, 12, 4, 5);
+INSERT INTO `group_evaluations` VALUES (7, 13, 3, 3.5);
+
+-- ----------------------------
 -- Table structure for group_specification
 -- ----------------------------
 DROP TABLE IF EXISTS `group_specification`;
 CREATE TABLE `group_specification`  (
-  `group_id` int(22) NOT NULL,
-  `specification_id` int(11) NOT NULL,
+  `group_id` int(22) NOT NULL COMMENT '商品分组ID',
+  `specification_id` int(11) NOT NULL COMMENT '商品规格ID',
   PRIMARY KEY (`group_id`, `specification_id`) USING BTREE,
   INDEX `fk[group_specification]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[group_specification]group_id` FOREIGN KEY (`group_id`) REFERENCES `product_group` (`group_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -194,7 +215,7 @@ CREATE TABLE `maker_info`  (
   `school` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学校名称',
   `real_name` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '真实姓名',
   `student_id` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生学号',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[maker_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -310,8 +331,8 @@ INSERT INTO `product_group` VALUES (16, '三川 无骨火腿500g云南丽江特�
 -- ----------------------------
 DROP TABLE IF EXISTS `product_value`;
 CREATE TABLE `product_value`  (
-  `product_id` int(22) NOT NULL,
-  `value_id` int(22) NOT NULL,
+  `product_id` int(22) NOT NULL COMMENT '商品ID',
+  `value_id` int(22) NOT NULL COMMENT '商品规格值ID',
   PRIMARY KEY (`product_id`, `value_id`) USING BTREE,
   INDEX `fk[product_value]value_id`(`value_id`) USING BTREE,
   CONSTRAINT `fk[product_value]product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -402,8 +423,8 @@ INSERT INTO `role_resource` VALUES ('MAKER', 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `specification`;
 CREATE TABLE `specification`  (
-  `specification_id` int(11) NOT NULL AUTO_INCREMENT,
-  `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `specification_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `specification_name` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '商品规格名称',
   PRIMARY KEY (`specification_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -431,9 +452,9 @@ INSERT INTO `specification` VALUES (29, 'as');
 -- ----------------------------
 DROP TABLE IF EXISTS `specification_value`;
 CREATE TABLE `specification_value`  (
-  `value_id` int(22) NOT NULL AUTO_INCREMENT,
-  `specification_id` int(11) NOT NULL,
-  `specification_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `value_id` int(22) NOT NULL AUTO_INCREMENT COMMENT '商品规格值ID',
+  `specification_id` int(11) NOT NULL COMMENT '商品规格ID',
+  `specification_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '商品规格值',
   PRIMARY KEY (`value_id`) USING BTREE,
   INDEX `fk[specification_value]specification_id`(`specification_id`) USING BTREE,
   CONSTRAINT `fk[specification_value]specification_id` FOREIGN KEY (`specification_id`) REFERENCES `specification` (`specification_id`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -474,7 +495,7 @@ CREATE TABLE `store`  (
   `store_introduce` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '创客店介绍',
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片URL',
   `browse_times` int(255) NOT NULL DEFAULT 0 COMMENT '浏览次数',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创立时间',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创立时间',
   PRIMARY KEY (`store_id`) USING BTREE,
   UNIQUE INDEX `ui[store]store_id`(`store_id`) USING BTREE,
   INDEX `store_name`(`store_name`) USING BTREE
@@ -567,7 +588,7 @@ CREATE TABLE `user_info`  (
   `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电话号码',
   `email` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户邮箱',
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `registration_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
   `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学校名称',
   PRIMARY KEY (`user_id`) USING BTREE,
   CONSTRAINT `fk[user_info]user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
