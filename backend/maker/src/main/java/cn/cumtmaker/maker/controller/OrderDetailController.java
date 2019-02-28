@@ -20,7 +20,7 @@ public class OrderDetailController {
    OrderDetailService orderDetailService;
 
     @PostMapping(value = "/insertOrderDetail",consumes="application/json")
-    @ApiOperation(value = "添加订单信息", response = OrderDetail.class, responseContainer = "list")
+    @ApiOperation(value = "添加订单信息")
     public ResponseEntity insertOrder(@RequestBody OrderDetail orderDetail) {
         return ResponseEntity.ok(orderDetailService.insertOrder(orderDetail));
     }

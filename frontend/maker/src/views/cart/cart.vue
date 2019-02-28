@@ -319,11 +319,11 @@
 			this.axiosgetcart()
 			},
 			methods:{
-			// 根据用户ID获取购物车信息
+			// 根据token获取购物车信息
 			axiosgetcart(){
 			this.axios.get('/api/cart/get')
 			.then((response)=>{
-				this.$store.state.cartmain=response.data;	
+				this.$store.state.cartmain=response.data;		
 			})
 			.catch((error)=>{console.log(error);});
 			},

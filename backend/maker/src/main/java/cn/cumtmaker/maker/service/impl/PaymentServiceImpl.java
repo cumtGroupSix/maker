@@ -42,6 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
         int userId= userService.getUserByRequest(request).getUserId();
         int code=orderMasterMapper.updatePayStatus(userId,orderId,payStatus);
         if(code==1){
+            logger.info("UserID为"+userId+"的用户支付订单成功");
             //支付成功后，发送订单支付成功邮件
             String sender="cumtgroupsix@163.com";   //发送人的邮箱
             String username=userService.getUserByRequest(request).getUsername();

@@ -27,4 +27,12 @@
         values (#{orderId}, #{userId},#{payStatus},#{orderAmount},#{orderTime})
   </insert>
 
+
+  <select id="getOrderId" resultType="int">
+    select order_id
+    from order_master
+    where user_id=#{userId} and
+    order_time=#{orderTime}
+  </select>
+
 </mapper>

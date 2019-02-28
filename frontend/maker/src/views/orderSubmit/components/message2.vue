@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <center><a href="payment.html" type="button" class="btn btn-danger btn-lg">提交订单</a></center>
+                    <center><router-link to="payment" @click.native="postOrderMasterInfo" type="button" class="btn btn-danger btn-lg">提交订单</router-link></center>
                 </div>
             </div>
             <div class="col-md-4"></div>
@@ -35,9 +35,56 @@
                         location:"江苏省 徐州市 泉山区 中国矿业大学南湖校区XXXX",
                         owner:"XXX 151XXXXXXXX",
                     }
-                ]
+                ],
+                orderid:null,
             }
         },
+        methods:{
+            //向订单管理中添加记录
+            postOrderMasterInfo(){
+                this.axios.post('/api/orderMaster/insertOrderMaster', {
+                    orderId:null,
+                    userId:this.$store.state.userid,
+                    payStatus:0,
+                    orderAmount:this.$store.state.pricesum,
+                    orderTime:((new Date()).valueOf()/1000).toFixed(0)*1000
+                })
+                    .then((response)=>{
+                        this.$store.state.orderid=response.data;
+                        this.postdetail();
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+
+            },
+            //向订单详情中添加记录
+            postOrderDetailInfo(productId,productQuantity){
+                this.axios.post('/api/orderDetail/insertOrderDetail', {
+                    detailId:null,
+                    orderId:this.$store.state.orderid,
+                    productId:productId,
+                    productQuantity:productQuantity,
+                    productPrice:1,
+                    orderStatus:0,
+                    orderAmount:this.$store.state.pricesum,
+                    productName:'null'
+                })
+                    .then((response)=>{
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    });
+            },
+            postdetail(){
+                this.$store.state.cartchecked.forEach(
+                    (item)=>{
+
+                    this.postOrderDetailInfo(item.productid,item.quantity);
+                    },this);  
+            }
+
+        }
     }
 </script>
 
