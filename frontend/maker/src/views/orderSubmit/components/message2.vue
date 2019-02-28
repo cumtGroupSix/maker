@@ -76,11 +76,23 @@
                         console.log(error);
                     });
             },
+            // 删除商品
+            axiosdelete(storeid,productid){
+            this.axios.delete('/api/cart/deleteCartProduct',{
+                params:{
+                    cartId:this.$store.state.cartid,
+                    storeId:storeid,
+                    productId:productid
+                }
+            })
+            .then((response)=>{this.deletestatus=response.data})
+            .catch((error)=>{console.log(error);});
+            },
             postdetail(){
                 this.$store.state.cartchecked.forEach(
                     (item)=>{
-
                     this.postOrderDetailInfo(item.productid,item.quantity);
+                    this.axiosdelete(item.storeid,item.productid);
                     },this);  
             }
 
