@@ -112,6 +112,9 @@
                 })
             }
         },
+        mounted () {
+            this.axios.get('api/comment/getComment/1')
+        }
     }
 </script>
 

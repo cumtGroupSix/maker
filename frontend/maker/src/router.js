@@ -35,6 +35,7 @@ import Supplier from './views/supplier/supplier.vue'
 import SupplierProduct from './views/supplierProduct/supplierProduct.vue'
 import SupplierAddProduct from './views/supplierAddProduct/supplierAddProduct.vue'
 import SupplierUpdateProduct from './views/supplierUpdateProduct/supplierUpdateProduct.vue'
+import Comment from './views/comment/comment.vue'
 
 
 
@@ -226,6 +227,11 @@ export default new Router({
           component: SupplierUpdateProduct
         }
       ]
+    },
+    {
+      path: '/comment' ,
+      name: 'comment',
+      component: Comment
     }
   ]
 })

@@ -12,4 +12,5 @@ public interface CommentMapper {
     int deleteComment(@Param("userId") Integer userId, @Param("productId") Integer productId);
     List<Comment> getProductComments(Integer productId);
     Integer deleteByProductId(Integer productId);
+    Comment getComments(int productId);
 }

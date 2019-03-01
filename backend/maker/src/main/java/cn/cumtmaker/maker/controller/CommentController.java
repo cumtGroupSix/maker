@@ -32,4 +32,11 @@ public class CommentController {
     public ResponseEntity deleteComment(Integer userId, Integer productId){
         return  ResponseEntity.ok(commentService.deleteComment(userId,productId));
     }
+
+    @ResponseBody
+    @GetMapping(value = "/getComments/{productId}")
+    @ApiOperation(value = "获取评论信息", response = Comment.class, responseContainer = "list")
+    public ResponseEntity getComments(@PathVariable int productId) {
+        return ResponseEntity.ok(commentService.getComments(productId));
+    }
 }

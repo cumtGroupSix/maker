@@ -48,4 +48,10 @@
         from comment
         where product_id=#{productId}
     </select>
+
+    <select id="getComments" resultMap="ModelResultMap">
+        select user_id,product_id,comment_content,comment_time,img_url1,img_url2,img_url3,img_url4
+        from comment
+        where product_id = #{productId}
+    </select>
 </mapper>

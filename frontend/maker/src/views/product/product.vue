@@ -179,6 +179,7 @@
                     this.axios.get("/api/product/getProductComments/"+this.productGroup[this.currentIndex].productId)
                         .then(res=>{
                             this.evaluation = res.data
+                            console.log(res.data)
                         })
                 })
         },

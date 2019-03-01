@@ -24,4 +24,8 @@ public class CommentService {
     public List<Comment> getProductComments(Integer productId) {
         return commentMapper.getProductComments(productId);
     }
+
+    public Comment getComments (int productId) {
+        return commentMapper.getComments(productId);
+    }
 }
