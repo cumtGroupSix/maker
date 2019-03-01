@@ -39,6 +39,11 @@ public class OrderMasterService {
         return orderMasterMapper.getOrderId(userId,orderTime);
     }
 
+    /**
+     * 根据用户ID获取订单管理列表
+     * @param userId
+     * @return 0/1
+     */
     public List<OrderMaster> getByUserId(Integer userId){
         return orderMasterMapper.getByUserId(userId);
     }
