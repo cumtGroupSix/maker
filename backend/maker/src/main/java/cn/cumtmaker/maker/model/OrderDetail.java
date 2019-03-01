@@ -5,45 +5,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderDetail {
-    /**
-     * 订单详情ID
-     */
     private Integer detailId;
 
-    /**
-     * 订单ID
-     */
     private Integer orderId;
 
-    /**
-     * 商品ID
-     */
     private Integer productId;
 
-
-    /**
-     * 商品价格
-     */
     private BigDecimal productPrice;
 
-    /**
-     * 商品数量
-     */
     private Integer productQuantity;
 
-    /**
-     * 订单状态
-     */
     private Integer orderStatus;
 
-    /**
-     * 商品名称
-     */
     private String productName;
 
-    /**
-     * 订单总价
-     */
     private BigDecimal orderAmount;
 
     public Integer getDetailId() {

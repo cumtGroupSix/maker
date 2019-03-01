@@ -4,59 +4,26 @@ import java.util.Date;
 
 public class Comment {
 
-    /**
-     * 用户ID
-     */
     private Integer userId;
 
-    /**
-     * 商品ID
-     */
     private Integer productId;
 
-    /**
-     * 评论内容
-     */
     private String commentContent;
 
-    /**
-     * 评论时间
-     */
     private Date commentTime;
 
-    /**
-     * 评价星级1
-     */
     private Integer starLevel1;
 
-    /**
-     * 评价星级2
-     */
     private Integer starLevel2;
 
-    /**
-     * 评价星级3
-     */
     private Integer starLevel3;
 
-    /**
-     * 图片1
-     */
     private String imgUrl1;
 
-    /**
-     * 图片2
-     */
     private String imgUrl2;
 
-    /**
-     * 评价图片3
-     */
     private String imgUrl3;
 
-    /**
-     * 评价图片4
-     */
     private String imgUrl4;
 
     //评价的商品

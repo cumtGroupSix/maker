@@ -19,11 +19,6 @@ public class CommentController {
    @Autowired
    CommentService commentService;
 
-    /**
-     * 添加评论信息
-     * @param comment
-     * @return 0/1
-     */
    @ResponseBody
     @PostMapping(value = "/insertComment",consumes="application/json")
     @ApiOperation(value = "添加评论信息", response = Comment.class, responseContainer = "list")
@@ -31,12 +26,6 @@ public class CommentController {
         return ResponseEntity.ok(commentService.insertComment(comment));
     }
 
-    /**
-     *删除评论
-     * @param userId
-     * @param productId
-     * @return 0/1
-     */
     @ResponseBody
     @DeleteMapping("/deleteComment")
     @ApiOperation(value = "删除评论")

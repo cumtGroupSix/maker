@@ -28,22 +28,12 @@ public class OrderMasterController {
     @Autowired
     UserService userService;
 
-    /**
-     * 添加订单信息
-     * @param orderMaster
-     * @return 0/1
-     */
     @PostMapping(value = "/insertOrderMaster")
     @ApiOperation(value = "添加订单信息")
     public ResponseEntity insertOrder(@RequestBody OrderMaster orderMaster) {
         return ResponseEntity.ok(orderMasterService.insertOrder(orderMaster));
     }
 
-    /**
-     * 根据用户ID获取订单详情
-     * @param request
-     * @return 0/1
-     */
     @GetMapping("/getByUserId")
     @ApiOperation(value = "根据userId获取订单信息")
     public ResponseEntity getByUserId(HttpServletRequest request){
