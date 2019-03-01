@@ -21,6 +21,9 @@ public class CommentService {
         return commentMapper.deleteComment(userId,productId);
     }
 
+    /**
+     * 通过productId获取评价
+     */
     public List<Comment> getProductComments(Integer productId) {
         return commentMapper.getProductComments(productId);
     }

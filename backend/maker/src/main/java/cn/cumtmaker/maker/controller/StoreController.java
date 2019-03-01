@@ -25,6 +25,9 @@ public class StoreController {
         return storeService.getHotStores();
     }
 
+    /**
+     * 更新店铺信息
+     */
     @PutMapping(value = "/updateStore")
     @ApiOperation(value = "更新店铺信息",response = Store.class,responseContainer = "list")
     public ResponseEntity updateStore(Integer storeId,String storeName,String storeIntroduce,String imgUrl){

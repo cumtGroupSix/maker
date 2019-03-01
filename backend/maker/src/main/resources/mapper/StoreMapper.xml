@@ -29,6 +29,7 @@
         order by browse_times DESC
         limit 0,3
     </select>
+    <!--更新店铺信息-->
     <update id="updateStore">
         update store
         <set>

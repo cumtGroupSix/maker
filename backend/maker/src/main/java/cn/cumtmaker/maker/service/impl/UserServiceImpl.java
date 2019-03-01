@@ -327,7 +327,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //    通过用户ID查找用户
+    /**
+     * 通过用户ID查找用户
+     */
     public User selectByUserId(Integer userId){
         return userMapper.selectByUserId(userId);
     }
