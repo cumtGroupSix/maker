@@ -38,6 +38,8 @@ public interface UserService {
     int findPassword(String username,String newPassword);
     List<UserInfoVO> getAllUser();
 
-    //    通过用户ID查找用户
+    /**
+     * 通过用户ID查找用户
+     */
     User selectByUserId(Integer userId);
 }

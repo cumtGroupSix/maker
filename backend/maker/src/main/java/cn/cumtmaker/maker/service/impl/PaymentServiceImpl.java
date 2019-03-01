@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+/**
+ * PaymentService实现类，用于实现支付功能
+ */
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
     OrderMasterMapper orderMasterMapper;
@@ -35,7 +38,14 @@ public class PaymentServiceImpl implements PaymentService {
     private Logger logger= LoggerFactory.getLogger(getClass());
 
     private int[] soldSum  = new int[100];
-    //更新支付状态并向用户发送邮件
+
+    /**
+     * 更新支付状态并向用户发送邮件
+     * @param request
+     * @param orderId
+     * @param payStatus
+     * @return 0/1
+     */
     @Override
     public int updatePayStatus(HttpServletRequest request,Integer orderId, Integer payStatus)
     {

@@ -11,6 +11,10 @@ import java.util.List;
 public interface StoreMapper {
     Store selectById(Integer storeId);
     Store selectByCartId(Integer storeId);
+
+    /**
+     * 更新店铺信息
+     */
     int updateStore(@Param("storeId") Integer storeId, @Param("storeName") String storeName, @Param("storeIntroduce")String storeIntroduce, @Param("imgUrl") String imgUrl);
 
     List<Store> getHotStores();

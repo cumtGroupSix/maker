@@ -60,6 +60,9 @@ public class StoreServiceImpl implements StoreService {
         return productVO;
     }
 
+    /**
+     * 更新店铺信息
+     */
     public Integer updateStore(Integer storeId,String storeName,String storeIntroduce,String imgUrl){
         return storeMapper.updateStore(storeId,storeName,storeIntroduce,imgUrl);
     }
