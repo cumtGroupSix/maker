@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Mapper
 public interface UserInfoMapper {
@@ -15,4 +16,5 @@ public interface UserInfoMapper {
     UserInfo getUserInfo(int userId);
     int updateUserInfo(@Param("userId") int userId,@Param("enable") Integer enable, @Param("nickname") String nickname, @Param("telephone") String telephone,
                        @Param("email") String email, @Param("address") String address, @Param("school") String school);
+    List<UserInfo> getAllUser();
 }

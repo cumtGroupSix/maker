@@ -1,8 +1,11 @@
 package cn.cumtmaker.maker.mapper;
 
 import cn.cumtmaker.maker.model.User;
+import cn.cumtmaker.maker.model.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {

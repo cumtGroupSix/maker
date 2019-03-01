@@ -14,7 +14,7 @@ public class CartProductServiceImpl implements CartProductService {
     @Autowired
     GroupCollectionsMapper groupCollectionsMapper;
 
-    //更新购物车数量
+//    更新购物车数量
     @Override
     public int updateQuantity(Integer cartId,Integer storeId,Integer productId,Integer productQuantity) {
     return cartProductMapper.updateQuantity(cartId,storeId,productId,productQuantity);

@@ -1,6 +1,7 @@
 package cn.cumtmaker.maker.service.impl;
 
 import cn.cumtmaker.maker.VO.ProductDetailVO;
+import cn.cumtmaker.maker.VO.ProductStockVO;
 import cn.cumtmaker.maker.mapper.ProductMapper;
 import cn.cumtmaker.maker.mapper.SpecificationMapper;
 import cn.cumtmaker.maker.mapper.SpecificationValueMapper;
@@ -8,6 +9,7 @@ import cn.cumtmaker.maker.model.Product;
 import cn.cumtmaker.maker.model.SpecificationValue;
 import cn.cumtmaker.maker.service.ProductService;
 import cn.cumtmaker.maker.util.ProductDetailUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,23 @@ public class ProductServiceImpl implements ProductService {
 
     //更新商品库存
     @Override
-    public Integer updateStock(Integer productId,Integer productStock){
-        return productMapper.updateStock(productId,productStock);
+    public Integer updateStock(Integer productId,Integer productStock,Integer sales){
+        return productMapper.updateStock(productId,productStock,sales);
     }
 
+    @Override
+    public List<ProductStockVO> selectAll(){
+        List<Product> list=productMapper.selectAll();
+        return toProductStockVO(list);
+    }
+
+    private List<ProductStockVO> toProductStockVO(List<Product> productlist){
+        List<ProductStockVO> productStockVOS=new ArrayList<>();
+        for(Product product : productlist){
+            ProductStockVO productStockVO=new ProductStockVO();
+            BeanUtils.copyProperties(product,productStockVO);
+            productStockVOS.add(productStockVO);
+        }
+        return productStockVOS;
+    }
 }

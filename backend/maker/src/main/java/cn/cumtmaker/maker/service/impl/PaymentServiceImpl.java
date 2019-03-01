@@ -60,7 +60,7 @@ public class PaymentServiceImpl implements PaymentService {
                 soldSum[productId]=soldSum[productId]+boughtQuantity;
                 logger.info("ProductID为"+productId+"的商品总售出"+soldSum[productId]+"件");
                 logger.info("ProductID为"+productId+"的商品实时库存为"+newStock+"件");
-                productService.updateStock(productId,newStock);
+                productService.updateStock(productId,newStock,soldSum[productId]);
             }
         }
         return code;

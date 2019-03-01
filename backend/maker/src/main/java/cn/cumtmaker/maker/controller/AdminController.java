@@ -1,5 +1,6 @@
 package cn.cumtmaker.maker.controller;
 
+import cn.cumtmaker.maker.service.ProductService;
 import cn.cumtmaker.maker.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 public class AdminController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ProductService productService;
 
 
     //注册API
@@ -101,6 +105,20 @@ public class AdminController {
                                           String storeName,String mobileNumber, String email,
                                           String school, String realName,String studentId){
         return ResponseEntity.ok(userService.updateMakerInfo(httpServletRequest,username,storeName,mobileNumber,email,school,realName,studentId));
+    }
+
+    @ResponseBody
+    @GetMapping("/getAllUser")
+    @ApiOperation(value = "获取User信息(管理员权限)")
+    public ResponseEntity getAllUser(){
+        return ResponseEntity.ok(userService.getAllUser());
+    }
+
+    @ResponseBody
+    @GetMapping("/getProduct")
+    @ApiOperation(value = "获取产品库存及销量(管理员权限)")
+    public ResponseEntity selectAll(){
+        return ResponseEntity.ok(productService.selectAll());
     }
 
     @ResponseBody

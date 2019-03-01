@@ -16,6 +16,9 @@
         select * from product
         where product_id =#{productId}
     </select>
+    <select id="selectAll" resultMap="ModelResultMap">
+        select * from product
+    </select>
     <select id="getValueIdsByProductId" parameterType="INTEGER" resultType="INTEGER">
         select value_id from product_value
         where product_id =#{productId}
@@ -37,7 +40,8 @@
     <update id="updateStock">
         update product
         <set>
-            product_stock=#{productStock}
+            product_stock=#{productStock},
+            sales=#{sales}
         </set>
         where
         product_id=#{productId}

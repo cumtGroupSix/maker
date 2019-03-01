@@ -1,5 +1,6 @@
 package cn.cumtmaker.maker.service.impl;
 
+import cn.cumtmaker.maker.VO.UserInfoVO;
 import cn.cumtmaker.maker.VO.UserVO;
 import cn.cumtmaker.maker.mapper.MakerInfoMapper;
 import cn.cumtmaker.maker.mapper.UserInfoMapper;
@@ -19,7 +20,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -233,6 +238,12 @@ public class UserServiceImpl implements UserService {
         return  userInfoMapper.getUserInfo(userId);
     }
 
+    @Override
+    public List<UserInfoVO> getAllUser(){
+        List<UserInfo> list=userInfoMapper.getAllUser();
+        return toUserInfoVO(list);
+    }
+
     //管理员获取MAKER信息
     @Override
     public MakerInfo getMakerInfo(String username){
@@ -294,6 +305,26 @@ public class UserServiceImpl implements UserService {
         UserVO userVO=new UserVO();
         BeanUtils.copyProperties(user,userVO);
         return  userVO;
+    }
+    //将UserInfo转化为UserInfoVO
+    private List<UserInfoVO> toUserInfoVO(List<UserInfo> userInfoList){
+        List<UserInfoVO> list=new ArrayList<>();
+        for(UserInfo userInfo :userInfoList){
+            UserInfoVO userInfoVO=new UserInfoVO();
+            String username=userMapper.selectByUserId(userInfo.getUserId()).getUsername();
+            BeanUtils.copyProperties(userInfo,userInfoVO);
+            //转化时间格式
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp timestamp=new Timestamp(userInfo.getRegistrationTime().getTime()+8*3600*1000);
+            Date date=new Date(timestamp.getTime());
+            String time=simpleDateFormat.format(date);
+            //调用userInfoVO的set方法
+            userInfoVO.setRegistrationTime(time);
+            userInfoVO.setUsername(username);
+            list.add(userInfoVO);
+        }
+        return list;
+
     }
 
     //    通过用户ID查找用户
