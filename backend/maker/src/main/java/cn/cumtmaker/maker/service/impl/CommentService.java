@@ -12,11 +12,21 @@ public class CommentService {
     @Autowired
     CommentMapper commentMapper;
 
+    /**
+     * 添加评论
+     * @param comment
+     * @return 0/1
+     */
     public int insertComment (Comment comment) {
         return commentMapper.insertComment(comment);
     }
 
-
+    /**
+     * 根据用户ID、商品ID删除评论
+     * @param userId
+     * @param productId
+     * @return 0/1
+     */
     public int deleteComment(Integer userId,Integer productId){
         return commentMapper.deleteComment(userId,productId);
     }
