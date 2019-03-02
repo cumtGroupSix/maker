@@ -4,7 +4,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="xinfeng" style="border-radius: 5px">
-                    <div class="zongjia" style="margin-right: 10px"><strong>{{this.$store.state.pricesum}}</strong></div><br><br><br><br>
+                    <div class="zongjia" style="margin-right: 10px"><strong>{{item.sum}}</strong></div><br><br><br><br>
                     <div class="dizhi"><center>寄送至：{{item.location}}</center></div><br><br>
                     <div class="shouhuoren"><center>收货人：{{item.owner}}</center></div><br>
                 </div>

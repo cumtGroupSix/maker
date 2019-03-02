@@ -1,7 +1,7 @@
 <template>
     <Row>
     <Col :xs="10" :sm="10" :md="6" :lg="6">
-    <Menu :theme="theme" active-name="1-1" :open-names="['1']" accordion>
+    <Menu :theme="theme" active-name="1-1" accordion>
                 <MenuItem name="0" disabled>
                 <div><Icon type="md-people" />&nbsp;&nbsp;&nbsp;{{onlineCount}}</div>
                 </MenuItem>
@@ -42,14 +42,28 @@
                 <Submenu name="4">
                     <template slot="title">
                         <Icon type="ios-paper" />
-                        用户信息查询及修改
+                        用户信息展示及修改
                     </template>
-                        <MenuItem name="3-2" to="/adminmanager/changeinfo">
+                        <MenuItem name="4-1" to="/adminmanager/userinfo">
+                        <Icon type="md-list-box" />
+                        用户信息展示表
+                        </MenuItem>
+                        <MenuItem name="4-2" to="/adminmanager/changeinfo">
                         <Icon type="md-cloud-upload" />
                         信息查询及修改
                         </MenuItem>
                 </Submenu>
-                <MenuItem name="4">
+                <Submenu name="5">
+                    <template slot="title">
+                        <Icon type="md-list-box" />
+                        库存销售统计
+                    </template>
+                        <MenuItem name="5-1" to="/adminmanager/soldsum">
+                        <Icon type="md-list-box" />
+                        库存销售统计表
+                        </MenuItem>
+                </Submenu>
+                <MenuItem name="5">
                 <div @click="exit"><Icon type="md-exit" />&nbsp;&nbsp;&nbsp;退出界面</div>
                 </MenuItem>
                 </Menu>

@@ -24,6 +24,14 @@ public class GroupEvaluationController {
     @Autowired
     UserService userService;
 
+    /**
+     * 新增商品评分
+     * @param request
+     * @param storeId
+     * @param groupId
+     * @param valueDisabled
+     * @return
+     */
     @ApiOperation("新增商品评分")
     @PostMapping
     public ResponseEntity addEvaluation(HttpServletRequest request, Integer storeId, Integer groupId, Float valueDisabled) {
@@ -33,6 +41,14 @@ public class GroupEvaluationController {
         )));
     }
 
+    /**
+     * 删除商品评分
+     * @param request
+     * @param storeId
+     * @param groupId
+     * @param valueDisabled
+     * @return
+     */
     @ApiOperation("删除商品评分")
     @DeleteMapping
     public ResponseEntity deleteEvaluation(HttpServletRequest request, Integer storeId, Integer groupId, Float valueDisabled) {
@@ -42,6 +58,11 @@ public class GroupEvaluationController {
         )));
     }
 
+    /**
+     * 获得所有商品评分
+     * @param request
+     * @return
+     */
     @ApiOperation("获得所有商品评分")
     @GetMapping
     public List<GroupEvaluationVO> getEvaluations(HttpServletRequest request) {

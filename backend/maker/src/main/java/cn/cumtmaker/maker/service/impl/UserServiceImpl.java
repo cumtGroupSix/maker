@@ -1,5 +1,6 @@
 package cn.cumtmaker.maker.service.impl;
 
+import cn.cumtmaker.maker.VO.UserInfoVO;
 import cn.cumtmaker.maker.VO.UserVO;
 import cn.cumtmaker.maker.mapper.MakerInfoMapper;
 import cn.cumtmaker.maker.mapper.UserInfoMapper;
@@ -19,9 +20,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
+/**
+ * UserService实现类，用于实现用户登录注册，修改密码等功能
+ */
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
@@ -37,7 +45,14 @@ public class UserServiceImpl implements UserService {
 
     private Logger logger= LoggerFactory.getLogger(getClass());
 
-//    注册方法实现
+
+    /**
+     * 注册方法实现
+     * @param role
+     * @param username
+     * @param password
+     * @return 0/1
+     */
     @Override
     public int userSignUp(String role,String username,String password){
         if(userMapper.getUserByUserName(username)==null) {
@@ -51,7 +66,19 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
     }
-    //用户注册信息
+
+    /**
+     * 用户注册信息增加
+     * @param username
+     * @param nickname
+     * @param enable
+     * @param telephone
+     * @param email
+     * @param address
+     * @param registrationTime
+     * @param school
+     * @return 0/1
+     */
     @Override
     public int setUserSignUpInfo(String username, String nickname, Integer enable, String telephone,String email, String address, Timestamp registrationTime, String school){
         int userId=userMapper.getUserByUserName(username).getUserId();
@@ -61,7 +88,12 @@ public class UserServiceImpl implements UserService {
         return 1;
     }
 
-    //用户获取USER信息
+
+    /**
+     * 用户获取USER信息
+     * @param httpServletRequest
+     * @return UserInfo
+     */
     @Override
     public UserInfo getUserInfoByUser(HttpServletRequest httpServletRequest){
         //根据请求头获取UserVO
@@ -70,7 +102,19 @@ public class UserServiceImpl implements UserService {
         return  userInfoMapper.getUserInfo(userVO.getUserId());
     }
 
-    //用户更新USER信息
+
+    /**
+     * 用户更新USER信息
+     * @param httpServletRequest
+     * @param username
+     * @param enable
+     * @param nickname
+     * @param telephone
+     * @param email
+     * @param address
+     * @param school
+     * @return 0/1
+     */
     @Override
     public int updateUserInfoByUser(HttpServletRequest httpServletRequest,String username, Integer enable,String nickname,String telephone,
                                     String email,String address,String school){
@@ -87,7 +131,19 @@ public class UserServiceImpl implements UserService {
 
         return 0;
     }
-    //创客注册信息
+
+    /**
+     * 创客注册信息增加
+     * @param username
+     * @param storeName
+     * @param mobileNumber
+     * @param email
+     * @param school
+     * @param realName
+     * @param studentId
+     * @param registrationTime
+     * @return 0/1
+     */
     @Override
     public int setMakerSignUpInfo(String username, String storeName, String mobileNumber, String email,
                                   String school, String realName, String studentId, Timestamp registrationTime){
@@ -100,7 +156,15 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //邮箱发送验证码
+
+    /**
+     * 调用邮箱发送验证码
+     * @param sender
+     * @param username
+     * @param title
+     * @param text
+     * @return 0/1
+     */
     @Override
     public int sendEmail(String sender,String username,String title,String text){
         //建立邮件消息
@@ -128,7 +192,13 @@ public class UserServiceImpl implements UserService {
         return 1;
     }
 
-    //管理员根据username删除用户
+
+    /**
+     * 管理员根据username删除用户
+     * @param httpServletRequest
+     * @param username
+     * @return
+     */
     @Override
     public int deleteUser(HttpServletRequest httpServletRequest,String username){
         String token = httpServletRequest.getHeader("Authorization");
@@ -150,13 +220,22 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    //根据用户名返回UserVO
+
+    /**
+     * 根据用户名返回UserVO
+     * @param username
+     * @return UserVO
+     */
     @Override
     public UserVO getUserByUserName(String username){
         return toUserVO(userMapper.getUserByUserName(username));
     }
 
-    //根据JWT Token 返回User信息
+    /**
+     * 根据JWT Token 返回User信息
+     * @param request
+     * @return 0/1
+     */
     @Override
     public UserVO getUserByRequest(HttpServletRequest request){
         String token = request.getHeader("Authorization");
@@ -173,7 +252,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //修改密码方法实现
+
+    /**
+     * 修改密码方法实现
+     * @param username
+     * @param oldPassword
+     * @param newPassword
+     * @return 0/1
+     */
     @Override
     public int resetPassword(String username, String oldPassword,String newPassword){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -190,7 +276,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    //找回密码方法实现
+    /**
+     * 找回密码方法实现
+     * @param username
+     * @param newPassword
+     * @return 0/1
+     */
     @Override
     public int findPassword(String username,String newPassword){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -203,7 +294,14 @@ public class UserServiceImpl implements UserService {
             return code;
     }
 
-//管理员修改用户密码
+
+    /**
+     * 管理员修改用户密码
+     * @param httpServletRequest
+     * @param username
+     * @param newPassword
+     * @return 0/1
+     */
     @Override
     public int adminResetPassword(HttpServletRequest httpServletRequest,String username,String newPassword){
         String token = httpServletRequest.getHeader("Authorization");
@@ -226,21 +324,53 @@ public class UserServiceImpl implements UserService {
             return 0;
         }
     }
-    //管理员获取USER信息
+
+    /**
+     * 管理员获取USER信息
+     * @param username
+     * @return user
+     */
     @Override
     public UserInfo getUserInfo(String username){
         Integer userId=getUserByUserName(username).getUserId();
         return  userInfoMapper.getUserInfo(userId);
     }
 
-    //管理员获取MAKER信息
+    /**
+     * 管理员获取所有User信息用于后台查询
+     * @return List<UserInfoVO>
+     */
+    @Override
+    public List<UserInfoVO> getAllUser(){
+        List<UserInfo> list=userInfoMapper.getAllUser();
+        return toUserInfoVO(list);
+    }
+
+
+    /**
+     * 管理员获取MAKER信息
+     * @param username
+     * @return makerInfo
+     */
     @Override
     public MakerInfo getMakerInfo(String username){
         Integer userId=getUserByUserName(username).getUserId();
         return  makerInfoMapper.getMakerInfo(userId);
     }
 
-    //管理员更新USER信息
+
+    /**
+     * 管理员更新USER信息
+     * @param httpServletRequest
+     * @param username
+     * @param enable
+     * @param nickname
+     * @param telephone
+     * @param email
+     * @param address
+     * @param school
+     * @return 0/1
+     */
     @Override
     public int updateUserInfo(HttpServletRequest httpServletRequest,String username, Integer enable,String nickname,String telephone,
                        String email,String address,String school){
@@ -264,7 +394,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    //管理员更新MAKER信息
+
+    /**
+     * 管理员更新MAKER信息
+     * @param httpServletRequest
+     * @param username
+     * @param storeName
+     * @param mobileNumber
+     * @param email
+     * @param school
+     * @param realName
+     * @param studentId
+     * @return 0/1
+     */
     @Override
     public int updateMakerInfo(HttpServletRequest httpServletRequest,String username,
                         String storeName,String mobileNumber, String email,
@@ -289,14 +431,48 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//将User转化为UserVO
+
+    /**
+     * 将User转化为UserVO
+     * @param user
+     * @return UserVO
+     */
     private UserVO toUserVO(User user){
         UserVO userVO=new UserVO();
         BeanUtils.copyProperties(user,userVO);
         return  userVO;
     }
 
-    //    通过用户ID查找用户
+    /**
+     * 将UserInfo转化为UserInfoVO
+     * @param userInfoList
+     * @return List<UserInfoVO>
+     */
+    private List<UserInfoVO> toUserInfoVO(List<UserInfo> userInfoList){
+        List<UserInfoVO> list=new ArrayList<>();
+        for(UserInfo userInfo :userInfoList){
+            UserInfoVO userInfoVO=new UserInfoVO();
+            String username=userMapper.selectByUserId(userInfo.getUserId()).getUsername();
+            BeanUtils.copyProperties(userInfo,userInfoVO);
+            //转化时间格式
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp timestamp=new Timestamp(userInfo.getRegistrationTime().getTime()+8*3600*1000);
+            Date date=new Date(timestamp.getTime());
+            String time=simpleDateFormat.format(date);
+            //调用userInfoVO的set方法
+            userInfoVO.setRegistrationTime(time);
+            userInfoVO.setUsername(username);
+            list.add(userInfoVO);
+        }
+        return list;
+
+    }
+
+    /**
+     * 通过用户ID查找用户
+     * @param userId
+     * @return user
+     */
     public User selectByUserId(Integer userId){
         return userMapper.selectByUserId(userId);
     }

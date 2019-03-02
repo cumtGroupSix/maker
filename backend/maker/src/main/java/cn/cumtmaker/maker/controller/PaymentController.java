@@ -18,6 +18,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RequestMapping(value="api/payment",produces = {APPLICATION_JSON_UTF8_VALUE})
 @Controller
 @Api(value="api/payment",tags="PaymentApi",description="支付接口")
+/**
+ * 支付Controller
+ */
 public class PaymentController {
     @Autowired
     PaymentService paymentService;
@@ -25,7 +28,13 @@ public class PaymentController {
     @Autowired
     UserService userService;
 
-
+    /**
+     * 更新支付状态
+     * @param request
+     * @param orderId
+     * @param payStatus
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/updatePayStatus")
     @ApiOperation(value = "更新支付状态")

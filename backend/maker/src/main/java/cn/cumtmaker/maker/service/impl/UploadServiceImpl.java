@@ -18,6 +18,12 @@ import java.util.UUID;
 
 @Service
 public class UploadServiceImpl implements UploadService {
+
+    /**
+     * 腾讯云上传文件接口
+     * @param multipartFile
+     * @return
+     */
     @Override
     public String upload(MultipartFile multipartFile) {
         COSCredentials cred = new BasicCOSCredentials("AKID3NTWkcfzDQTmvoddXFvP1vZ4lHmhunX4", "Sjx67zXo38ZHwOY0LjxvlWfwAAxnSBl8");

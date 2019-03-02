@@ -20,6 +20,12 @@ public class StoreCollectionsServiceImpl implements StoreCollectionsService {
     @Autowired
     private StoreCollectionsMapper storeCollectionsMapper;
 
+    /**
+     * 收藏店铺
+     * @param userId
+     * @param collectStoreId
+     * @return
+     */
     @Override
     public int collectStore(int userId, int collectStoreId) {
         int result = storeCollectionsMapper.collectStore(userId, collectStoreId);
@@ -30,6 +36,12 @@ public class StoreCollectionsServiceImpl implements StoreCollectionsService {
         return result;
     }
 
+    /**
+     * 取消收藏店铺
+     * @param userId
+     * @param collectStoreId
+     * @return
+     */
     @Override
     public int cancelCollectStore(int userId, int collectStoreId) {
         int result = storeCollectionsMapper.cancelCollectStore(userId, collectStoreId);
@@ -40,6 +52,11 @@ public class StoreCollectionsServiceImpl implements StoreCollectionsService {
         return result;
     }
 
+    /**
+     * 获取收藏的店铺
+     * @param userId
+     * @return
+     */
     @Override
     public List<StoreVO> getCollectStores(int userId) {
         List<Store> stores= storeCollectionsMapper.getCollectStores(userId);

@@ -19,11 +19,19 @@ public class ProductController {
     @Autowired
     CommentService commentService;
 
+    /**
+     * 通过产品id获取产品详情
+     * @param productId
+     * @return ProductDetailVO 产品详情
+     */
     @GetMapping("/{productId}")
     public ProductDetailVO getDetailByProductId(@PathVariable Integer productId){
         return productService.getDetailByProductId(productId);
     }
 
+    /**
+     * 根据productId获取评论
+     */
     @ResponseBody
     @GetMapping("/getProductComments/{productId}")
     @ApiOperation(value = "根据productId获取评论")

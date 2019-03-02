@@ -17,7 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-//生成验证码Control
+/**
+ * 生成验证码Control
+ */
 @RestController
 public class ValidateCodeController {
 
@@ -27,6 +29,12 @@ public class ValidateCodeController {
     public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
     private SessionStrategy sessionStrategy=new HttpSessionSessionStrategy();
 
+    /**
+     * 图片验证码API
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @GetMapping("api/code/image")
     public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ImageCode imageCode =createImageCode(request);
@@ -34,6 +42,12 @@ public class ValidateCodeController {
         ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
     }
 
+    /**
+     * 找回密码发送短信API
+     * @param request
+     * @param username
+     * @return
+     */
     @GetMapping("api/code/email")
     public int sendEmail(HttpServletRequest request,String username) {
         String sender="cumtgroupsix@163.com";   //发送人的邮箱
@@ -47,7 +61,12 @@ public class ValidateCodeController {
     }
 
 
-//    生成验证码及对应图片
+
+    /**
+     * 生成验证码及对应图片
+     * @param request
+     * @return ImageCode
+     */
     private ImageCode createImageCode(HttpServletRequest request) {
         int width = 96;
         int height = 30;
@@ -85,8 +104,12 @@ public class ValidateCodeController {
         return new ImageCode(image, sRand.toString(), expireIn);
     }
 
-//    生成随机背景条纹
-
+    /**
+     * 生成随机背景条纹
+     * @param fc
+     * @param bc
+     * @return
+     */
     private Color getRandColor(int fc, int bc) {
         int MAX_COLOR_VALUE=255;
         Random random = new Random();

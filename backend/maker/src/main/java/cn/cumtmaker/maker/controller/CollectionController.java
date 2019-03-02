@@ -27,6 +27,12 @@ public class CollectionController {
     @Autowired
     UserService userService;
 
+    /**
+     * 收藏Store
+     * @param request
+     * @param collectStoreId
+     * @return
+     */
     @ApiOperation("收藏Store")
     @PostMapping("/store")
     public ResponseEntity collectStore(HttpServletRequest request, Integer collectStoreId) {
@@ -34,6 +40,13 @@ public class CollectionController {
         return ResponseEntity.ok(storeCollectionsService.collectStore(userId, collectStoreId));
     }
 
+    /**
+     * 收藏Group
+     * @param request
+     * @param storeId
+     * @param collectGroupId
+     * @return
+     */
     @ApiOperation("收藏Group")
     @PostMapping("/group")
     public ResponseEntity collectGroup(HttpServletRequest request, Integer storeId, Integer collectGroupId) {
@@ -41,6 +54,12 @@ public class CollectionController {
         return ResponseEntity.ok(groupCollectionsService.collectGroup(userId, storeId, collectGroupId));
     }
 
+    /**
+     * 取消收藏Store
+     * @param request
+     * @param collectStoreId
+     * @return
+     */
     @ApiOperation("取消收藏Store")
     @DeleteMapping("/store")
     public ResponseEntity cancelCollectStore(HttpServletRequest request, Integer collectStoreId) {
@@ -48,6 +67,13 @@ public class CollectionController {
         return ResponseEntity.ok(storeCollectionsService.cancelCollectStore(userId, collectStoreId));
     }
 
+    /**
+     * 取消收藏Group
+     * @param request
+     * @param storeId
+     * @param collectGroupId
+     * @return
+     */
     @ApiOperation("取消收藏Group")
     @DeleteMapping("/group")
     public ResponseEntity cancelCollectGroup(HttpServletRequest request, Integer storeId, Integer collectGroupId) {
@@ -55,6 +81,11 @@ public class CollectionController {
         return ResponseEntity.ok(groupCollectionsService.cancelCollectGroup(userId, storeId, collectGroupId));
     }
 
+    /**
+     * 获得所有收藏Store
+     * @param request
+     * @return
+     */
     @ApiOperation("获得所有收藏Store")
     @GetMapping("/store")
     public List<StoreVO> getCollectStores(HttpServletRequest request) {
@@ -62,6 +93,11 @@ public class CollectionController {
         return storeCollectionsService.getCollectStores(userId);
     }
 
+    /**
+     * 获得所有收藏Group
+     * @param request
+     * @return
+     */
     @ApiOperation("获得所有收藏Group")
     @GetMapping("/group")
     public List<GroupCollectionVO> getCollectGroups(HttpServletRequest request) {

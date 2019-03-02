@@ -22,6 +22,11 @@ public class OrderMasterService {
 
     private Logger logger= LoggerFactory.getLogger(getClass());
 
+    /**
+     * 添加订单
+     * @param orderMaster
+     * @return
+     */
     public int insertOrder (OrderMaster orderMaster) {
         int code=orderMasterMapper.insertOrder(orderMaster);
         if(code==1){
@@ -39,6 +44,11 @@ public class OrderMasterService {
         return orderMasterMapper.getOrderId(userId,orderTime);
     }
 
+    /**
+     * 根据用户ID获取订单管理列表
+     * @param userId
+     * @return 0/1
+     */
     public List<OrderMaster> getByUserId(Integer userId){
         return orderMasterMapper.getByUserId(userId);
     }

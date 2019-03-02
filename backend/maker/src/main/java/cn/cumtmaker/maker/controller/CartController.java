@@ -19,6 +19,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RequestMapping(value="api/cart",produces = {APPLICATION_JSON_UTF8_VALUE})
 @Controller
 @Api(value="api/cart",tags="CartApi",description="购物车接口")
+/**
+ * 购物车Controller
+ */
 public class CartController {
     @Autowired
     CartService cartService;
@@ -29,6 +32,11 @@ public class CartController {
     @Autowired
     CartProductService cartProductService;
 
+    /**
+     *根据request获取购物车
+     * @param request
+     * @return cartProduct
+     */
     @ResponseBody
     @GetMapping("/get")
     @ApiOperation(value = "获取购物车",response= Cart.class)
@@ -38,6 +46,14 @@ public class CartController {
         return cart;
     }
 
+    /**
+     * 更新购物车商品数量
+     * @param cartId
+     * @param storeId
+     * @param productId
+     * @param productQuantity
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/updateQuantity")
     @ApiOperation(value = "更新购物车商品数量")
@@ -45,6 +61,13 @@ public class CartController {
        return  ResponseEntity.ok(cartProductService.updateQuantity(cartId,storeId,productId,productQuantity));
     }
 
+    /**
+     * 删除购物车商品
+     * @param cartId
+     * @param storeId
+     * @param productId
+     * @return 0/1
+     */
     @ResponseBody
     @DeleteMapping("/deleteCartProduct")
     @ApiOperation(value = "删除购物车商品")
@@ -52,6 +75,13 @@ public class CartController {
         return  ResponseEntity.ok(cartProductService.deleteCartProduct(cartId,storeId,productId));
     }
 
+    /**
+     * 收藏购物车商品
+     * @param userId
+     * @param storeId
+     * @param groupId
+     * @return 0/1
+     */
     @ResponseBody
     @PutMapping("/collectCartProduct")
     @ApiOperation(value = "收藏购物车商品")
