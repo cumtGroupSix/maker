@@ -59,6 +59,9 @@ public class ProductGroupServiceImpl implements ProductGroupService {
 
     /**
      * 创客增加商品事务逻辑
+     * @param storeId
+     * @param products
+     * @return
      */
     @Override
     public Integer addProduct(Integer storeId, List<Integer> products) {
@@ -77,6 +80,8 @@ public class ProductGroupServiceImpl implements ProductGroupService {
 
     /**
      * 通过groupId获取所有group中的产品详情
+     * @param groupId
+     * @return
      */
     @Override
     public List<ProductDetailVO> getDetailByGroupId(Integer groupId) {
@@ -88,6 +93,10 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return productDetailVOS;
     }
 
+    /**
+     * 查找所有产品列表
+     * @return
+     */
     @Override
     public List<GoodsListVO> getAll() {
         List<GoodsListVO> goodsListVOS = new ArrayList<>();
@@ -97,6 +106,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return goodsListVOS;
     }
 
+    /**
+     * 查出该类目所有产品列表
+     * @param categoryId
+     * @return
+     */
     @Override
     public List<GoodsListVO> getListByCategoryId(Integer categoryId) {
         List<GoodsListVO> goodsListVOS = new ArrayList<>();
@@ -124,6 +138,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
     }
 
+    /**
+     * 供应商增添商品逻辑
+     * @param productGroupFormObject
+     * @return
+     */
     @Override
     @Transactional
     public Integer supplierAddProduct(ProductGroupFormObject productGroupFormObject) {
@@ -179,6 +198,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return result;
     }
 
+    /**
+     * 通过类目名查找所有商品
+     * @param categoryName
+     * @return
+     */
     @Override
     public List<GoodsListVO> getListByCategoryName(String categoryName) {
         List<GoodsListVO> goodsListVOS = new ArrayList<>();
@@ -190,6 +214,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return goodsListVOS;
     }
 
+    /**
+     * 通过group的名称查找组内所有产品详情
+     * @param productName
+     * @return
+     */
     @Override
     public List<ProductDetailVO> getDetailByProductName(String productName) {
         List<ProductDetailVO> productDetailVOS = new ArrayList<>();
@@ -207,6 +236,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         }
     }
 
+    /**
+     * 供应商修改商品逻辑
+     * @param productGroupDetailVO
+     * @return
+     */
     @Override
     @Transactional
     public Integer supplierUpdate(ProductGroupDetailVO productGroupDetailVO) {
@@ -218,6 +252,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return result;
     }
 
+    /**
+     * 供应商删除商品接口
+     * @param groupId
+     * @return
+     */
     @Override
     public Integer supplierDelete(Integer groupId) {
         Integer result = 0;
@@ -246,6 +285,11 @@ public class ProductGroupServiceImpl implements ProductGroupService {
         return result;
     }
 
+    /**
+     * 通过类目id获取所有group详情
+     * @param categoryId
+     * @return
+     */
     @Override
     public List<ProductGroupDetailVO> getGroupDetailByCategoryId(Integer categoryId) {
         List<ProductGroupDetailVO> productGroupDetailVOS = new ArrayList<>();

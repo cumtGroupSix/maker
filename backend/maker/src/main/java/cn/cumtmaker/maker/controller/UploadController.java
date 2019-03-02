@@ -13,6 +13,11 @@ public class UploadController {
     @Autowired
     UploadService uploadService;
 
+    /**
+     * 腾讯云上传图片接口
+     * @param file
+     * @return
+     */
     @PostMapping("/upload")
     public String uploadImage(@RequestParam MultipartFile file){
         String uri = uploadService.upload(file);

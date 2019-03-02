@@ -32,6 +32,10 @@ public class StoreServiceImpl implements StoreService {
     @Autowired
     ProductGroupMapper productGroupMapper;
 
+    /**
+     * 获取热门店铺
+     * @return
+     */
     @Override
     public List<StoreVO> getHotStores() {
         List<Store> stores= storeMapper.getHotStores();
@@ -67,6 +71,11 @@ public class StoreServiceImpl implements StoreService {
         return storeMapper.updateStore(storeId,storeName,storeIntroduce,imgUrl);
     }
 
+    /**
+     * 通过类目id获取所有拥有此类产品的商铺
+     * @param categoryId
+     * @return
+     */
     @Override
     public List<StoreVO> getStoresByCategoryId(Integer categoryId) {
         List<StoreVO> storeVOS = new ArrayList<>();

@@ -19,6 +19,10 @@ public class StoreController {
     @Autowired
     StoreService storeService;
 
+    /**
+     * 热门店铺列表
+     * @return List<StoreVO> 热门店铺列表
+     */
     @GetMapping("/hot")
     @ApiOperation(value = "获取热门店铺")
     public List<StoreVO> getHotStore(){
@@ -26,7 +30,12 @@ public class StoreController {
     }
 
     /**
-     * 更新店铺信息
+     *
+     * @param storeId
+     * @param storeName
+     * @param storeIntroduce
+     * @param imgUrl
+     * @return
      */
     @PutMapping(value = "/updateStore")
     @ApiOperation(value = "更新店铺信息",response = Store.class,responseContainer = "list")
@@ -36,6 +45,8 @@ public class StoreController {
 
     /**
      * 通过categoryId查找出所有拥有此类型商品的店铺
+     * @param categoryId
+     * @return List<StoreVO> 店铺列表
      */
     @GetMapping("/category")
     @ApiOperation(value = "通过categoryId查找出所有拥有此类型商品的店铺")

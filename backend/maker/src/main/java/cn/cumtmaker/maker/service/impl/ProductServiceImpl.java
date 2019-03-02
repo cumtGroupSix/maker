@@ -32,13 +32,20 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 通过产品id返回产品主要参数
+     * @param productId
+     * @return
      */
     @Override
     public ProductDetailVO getDetailByProductId(Integer productId) {
         return ProductDetailUtil.getDetailByProductId(productId);
     }
 
-    //更新商品库存
+    /**
+     * 更新商品库存
+     * @param productId
+     * @param productStock
+     * @return
+     */
     @Override
     public Integer updateStock(Integer productId,Integer productStock,Integer sales){
         return productMapper.updateStock(productId,productStock,sales);
