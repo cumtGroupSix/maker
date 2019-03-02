@@ -22,6 +22,11 @@ public class OrderMasterService {
 
     private Logger logger= LoggerFactory.getLogger(getClass());
 
+    /**
+     * 添加订单
+     * @param orderMaster
+     * @return
+     */
     public int insertOrder (OrderMaster orderMaster) {
         int code=orderMasterMapper.insertOrder(orderMaster);
         if(code==1){

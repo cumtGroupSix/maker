@@ -26,6 +26,11 @@ public class GroupCollectionsServiceImpl implements GroupCollectionsService {
     @Autowired
     private StoreMapper storeMapper;
 
+    /**
+     * 获取收藏店铺
+     * @param userId
+     * @return
+     */
     @Override
     public List<GroupCollectionVO> getCollectStores(Integer userId) {
         List<GroupCollectionVO> groupCollectionVOS = new ArrayList<>();
@@ -52,6 +57,13 @@ public class GroupCollectionsServiceImpl implements GroupCollectionsService {
         return groupCollectionVOS;
     }
 
+    /**
+     * 收藏店铺
+     * @param userId
+     * @param storeId
+     * @param collectGroupId
+     * @return
+     */
     @Override
     public int collectGroup(Integer userId, Integer storeId, Integer collectGroupId) {
         int result = groupCollectionsMapper.insertGroup(userId, storeId, collectGroupId);
@@ -62,6 +74,13 @@ public class GroupCollectionsServiceImpl implements GroupCollectionsService {
         return result;
     }
 
+    /**
+     * 取消收藏店铺
+     * @param userId
+     * @param storeId
+     * @param collectGroupId
+     * @return
+     */
     @Override
     public int cancelCollectGroup(Integer userId, Integer storeId, Integer collectGroupId) {
         int result = groupCollectionsMapper.deleteGroupCollections(userId, storeId, collectGroupId);

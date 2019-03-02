@@ -51,12 +51,21 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.updateStock(productId,productStock,sales);
     }
 
+    /**
+     * 获取库存销售数量
+     * @return
+     */
     @Override
     public List<ProductStockVO> selectAll(){
         List<Product> list=productMapper.selectAll();
         return toProductStockVO(list);
     }
 
+    /**
+     * 转化为ProductStockVO
+     * @param productlist
+     * @return
+     */
     private List<ProductStockVO> toProductStockVO(List<Product> productlist){
         List<ProductStockVO> productStockVOS=new ArrayList<>();
         for(Product product : productlist){

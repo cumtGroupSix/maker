@@ -46,6 +46,11 @@ public class StoreServiceImpl implements StoreService {
         return storeVOS;
     }
 
+    /**
+     * 转化store为storeVO
+     * @param store
+     * @return
+     */
     private static StoreVO convertStoreToStoreVO(Store store){
         if (store == null){
             return null;
@@ -55,6 +60,11 @@ public class StoreServiceImpl implements StoreService {
         return storeVO;
     }
 
+    /**
+     * 转化Product为ProductVO
+     * @param product
+     * @return
+     */
     private static ProductVO convertProductToProductVO(Product product){
         if (product == null){
             return null;

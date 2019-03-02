@@ -26,16 +26,31 @@ public class GroupEvaluationServiceImpl implements GroupEvaluationService {
     @Autowired
     private StoreMapper storeMapper;
 
+    /**
+     * 添加评论
+     * @param groupEvaluation
+     * @return
+     */
     @Override
     public int addEvaluation(GroupEvaluation groupEvaluation) {
         return groupEvaluationMapper.addEvaluation(groupEvaluation);
     }
 
+    /**
+     * 删除评论
+     * @param groupEvaluation
+     * @return
+     */
     @Override
     public int deleteEvaluation(GroupEvaluation groupEvaluation) {
         return groupEvaluationMapper.deleteEvaluation(groupEvaluation);
     }
 
+    /**
+     * 获取用户评论
+     * @param userId
+     * @return
+     */
     @Override
     public List<GroupEvaluationVO> getEvaluationsOfUser(int userId) {
         List<GroupEvaluation> groupEvaluations = groupEvaluationMapper.getEvaluationsOfUser(userId);
