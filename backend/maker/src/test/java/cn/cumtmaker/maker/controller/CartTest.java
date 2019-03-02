@@ -20,7 +20,7 @@ public class CartTest {
 //    测试根据购物车ID，商店ID，商品ID删除购物车商品
     @Test
     public void deleteCartProduct(){
-        cartController.deleteCartProduct(1,1,1);
+        cartController.deleteCartProduct(1,1,2);
     }
 
 

@@ -1,2 +1,5 @@
 
 backend/maker/logs/error.log
+*.log
+*.log
+*.log

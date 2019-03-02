@@ -21,5 +21,7 @@ public interface ProductMapper {
 
     Integer updateByProductId(@Param("productId") Integer productId, @Param("price") BigDecimal price, @Param("stock") Integer stock, @Param("productName") String productName);
 
-    Integer updateStock(@Param("productId") Integer productId, @Param("productStock") Integer productStock);
+    Integer updateStock(@Param("productId") Integer productId, @Param("productStock") Integer productStock,@Param("sales") Integer sales);
+
+    List<Product> selectAll();
 }

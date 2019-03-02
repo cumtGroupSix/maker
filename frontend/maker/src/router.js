@@ -6,6 +6,7 @@ import Store from './views/store/store'
 import Product from './views/product/product'
 import ProductList from './views/productList/productList'
 import Cart from './views/cart/cart'
+import Comment from './views/comment/comment'
 import Receiver from './views/receiver/receiver'
 import Register from './views/register/register'
 import OrderDetail from './views/orderDetail/orderDetail'
@@ -32,6 +33,8 @@ import ChangeInfo from './views/adminChangeInfo/changeInfo'
 import userChangeInfo from './views/userChangeInfo/userChangeInfo'
 import FindPassword from './views/findPassword/findPassword'
 import Supplier from './views/supplier/supplier.vue'
+import AdminSoldSum from './views/adminSoldSum/adminSoldSum'
+import AdminUserInfo from './views/adminUserInfo/adminUserInfo'
 import SupplierProduct from './views/supplierProduct/supplierProduct.vue'
 import SupplierAddProduct from './views/supplierAddProduct/supplierAddProduct.vue'
 import SupplierUpdateProduct from './views/supplierUpdateProduct/supplierUpdateProduct.vue'
@@ -82,6 +85,16 @@ export default new Router({
       component: DeleteUser
       },
       {
+      path: '/adminmanager/userinfo',
+      name: 'adminuserinfo',
+      component: AdminUserInfo
+      },
+      {
+      path: '/adminmanager/soldsum',
+      name: 'adminsoldsum',
+      component: AdminSoldSum
+      },
+      {
       path: '/adminmanager/userregister',
       name: 'userregister',
       component: UserRegister
@@ -122,6 +135,11 @@ export default new Router({
       path: '/product',
       name: 'product',
       component: Product
+    },
+    {
+      path: '/comment',
+      name: 'comment',
+      component: Comment
     },
     {
       path: '/productList',

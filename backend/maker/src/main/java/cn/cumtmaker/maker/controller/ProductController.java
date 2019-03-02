@@ -29,6 +29,9 @@ public class ProductController {
         return productService.getDetailByProductId(productId);
     }
 
+    /**
+     * 根据productId获取评论
+     */
     @ResponseBody
     @GetMapping("/getProductComments/{productId}")
     @ApiOperation(value = "根据productId获取评论")

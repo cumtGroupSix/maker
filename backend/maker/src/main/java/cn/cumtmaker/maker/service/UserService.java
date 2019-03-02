@@ -1,6 +1,7 @@
 package cn.cumtmaker.maker.service;
 
 
+import cn.cumtmaker.maker.VO.UserInfoVO;
 import cn.cumtmaker.maker.VO.UserVO;
 import cn.cumtmaker.maker.model.MakerInfo;
 import cn.cumtmaker.maker.model.User;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface UserService {
     int userSignUp(String role,String username,String password);
@@ -34,7 +36,10 @@ public interface UserService {
     UserInfo getUserInfoByUser(HttpServletRequest httpServletRequest);
     int sendEmail(String sender,String username,String title,String text);
     int findPassword(String username,String newPassword);
+    List<UserInfoVO> getAllUser();
 
-    //    通过用户ID查找用户
+    /**
+     * 通过用户ID查找用户
+     */
     User selectByUserId(Integer userId);
 }

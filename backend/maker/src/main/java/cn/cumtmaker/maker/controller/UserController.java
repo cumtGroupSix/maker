@@ -19,12 +19,21 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RequestMapping(value="api/user",produces = {APPLICATION_JSON_UTF8_VALUE})
 @Controller
 @Api(value="api/user",tags="UserApi",description="用户登录注册接口")
+/**
+ * 用户登录注册Controller
+ */
 public class UserController {
     @Autowired
     UserService userService;
 
 
-    //注册API
+    /**
+     * 用户注册API
+     * @param role
+     * @param username
+     * @param password
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/userSignUp")
     @ApiOperation(value = "用户注册")
@@ -32,6 +41,17 @@ public class UserController {
         return ResponseEntity.ok(userService.userSignUp(role,username,password));
     }
 
+    /**
+     * 用户注册信息增加API
+     * @param username
+     * @param nickname
+     * @param enable
+     * @param telephone
+     * @param email
+     * @param address
+     * @param school
+     * @return
+     */
     @ResponseBody
     @PostMapping("/userSignUpInfo")
     @ApiOperation(value = "用户注册信息增加")
@@ -40,6 +60,17 @@ public class UserController {
         return ResponseEntity.ok(userService.setUserSignUpInfo(username,nickname,enable,telephone,email,address,registrationTime,school));
     }
 
+    /**
+     * 创客注册信息增加API
+     * @param username
+     * @param storeName
+     * @param mobileNumber
+     * @param email
+     * @param school
+     * @param realName
+     * @param studentId
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/makerSignUpInfo")
     @ApiOperation(value = "创客注册信息增加")
@@ -49,6 +80,11 @@ public class UserController {
         return ResponseEntity.ok(userService.setMakerSignUpInfo(username,storeName,mobileNumber,email,school,realName,studentId,registrationTime));
     }
 
+    /**根据token获取用户信息
+     *
+     * @param request
+     * @return USER
+     */
     @ResponseBody
     @GetMapping("/get")
     @ApiOperation(value = "根据token获取用户信息")
@@ -56,6 +92,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByRequest(request));
     }
 
+    /**
+     * 修改密码API
+     * @param username
+     * @param oldPassword
+     * @param newPassword
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/resetPassword")
     @ApiOperation(value = "修改密码")
@@ -63,12 +106,24 @@ public class UserController {
         return ResponseEntity.ok(userService.resetPassword(username, oldPassword,newPassword));
     }
 
+    /**
+     * 找回密码API
+     * @param username
+     * @param newPassword
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/findPassword")
     @ApiOperation(value = "找回密码")
     public ResponseEntity findPassword(String username,String newPassword) {
         return ResponseEntity.ok(userService.findPassword(username,newPassword));
     }
+
+    /**
+     * USER信息获取(用户自身权限)API
+     * @param httpServletRequest
+     * @return UserInfo
+     */
     @ResponseBody
     @GetMapping("/userInfo")
     @ApiOperation(value = "USER信息获取(用户自身权限)")
@@ -76,6 +131,18 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserInfoByUser(httpServletRequest));
     }
 
+    /**
+     * USER信息修改(用户自身权限)
+     * @param httpServletRequest
+     * @param username
+     * @param enable
+     * @param nickname
+     * @param telephone
+     * @param email
+     * @param address
+     * @param school
+     * @return 0/1
+     */
     @ResponseBody
     @PostMapping("/updateUserInfo")
     @ApiOperation(value = "USER信息修改(用户自身权限)")
@@ -84,7 +151,11 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUserInfoByUser(httpServletRequest,username,enable,nickname,telephone,email,address,school));
     }
 
-    //    通过用户ID查找用户
+    /**
+     * 通过用户ID查找用户
+     * @param userId
+     * @return userInfo
+     */
     @ResponseBody
     @GetMapping("/selectByUserId/{userId}")
     @ApiOperation(value = "通过用户ID查找用户")
