@@ -51,7 +51,7 @@
         },
         methods: {
             changeCurrentStore(index){
-                this.$store.state.currentStore = this.hotStore[index]
+                this.$store.commit('changeCurrentStore',this.hotStore[index]) 
             }
         }
     }

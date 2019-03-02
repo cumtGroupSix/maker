@@ -1,6 +1,5 @@
 <template>
     <div>
-        
         <!--购买界面-->
         <div class="container" style="max-width: 1050px">
             <button class="btn btn-default" @click="collectProduct()">收藏</button>
@@ -147,6 +146,15 @@
                 level:[4.9],
                 evaluation:[],
             }
+        },
+        created(){
+            if(sessionStorage.getItem("store")){
+				// this.$store.commit('changeCurrentStore',window.sessionStorage.getItem('currentStore'))
+				this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
+			}
+			window.addEventListener("beforeunload",()=>{
+				sessionStorage.setItem("store",JSON.stringify(this.$store.state))
+			})
         },
         methods: {
             cuts:function(idx){

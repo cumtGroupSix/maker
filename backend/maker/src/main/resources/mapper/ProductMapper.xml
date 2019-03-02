@@ -29,9 +29,9 @@
         delete from product
         where product_id=#{productId}
     </delete>
-    <update id="updatePriceByProductId">
+    <update id="updateByProductId">
         update product
-        set product_price=#{price}
+        set product_price=#{price},product_stock=#{stock},product_name=#{productName}
         where product_id=#{productId}
     </update>
     <update id="updateStock">

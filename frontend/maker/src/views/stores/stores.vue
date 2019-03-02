@@ -39,6 +39,15 @@
                 isShow:true
             }
         },
+        // created(){
+        //     if(sessionStorage.getItem("store")){
+		// 		// this.$store.commit('changeCurrentStore',window.sessionStorage.getItem('currentStore'))
+		// 		this.$store.replaceState(Object.assign({}, this.$store.state,JSON.parse(sessionStorage.getItem("store"))))
+		// 	}
+		// 	window.addEventListener("beforeunload",()=>{
+		// 		sessionStorage.setItem("store",JSON.stringify(this.$store.state))
+		// 	})
+        // },
         mounted(){
             this.axios.get("/api/store/category?categoryId="+this.$store.state.currentCategoryId)
                 .then(res=>{

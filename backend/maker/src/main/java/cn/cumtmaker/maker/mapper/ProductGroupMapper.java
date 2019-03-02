@@ -28,4 +28,10 @@ public interface ProductGroupMapper {
     List<Integer> getGroupIdByProductName(String productName);
 
     Integer deleteByGroupId(Integer groupId);
+
+    List<Integer> getGroupIdsByCategoryId(Integer categoryId);
+
+    String getProductNameByGroupId(Integer groupId);
+
+    Integer updateProductNameByGroupId(@Param("groupId") Integer groupId,@Param("productName") String productName);
 }

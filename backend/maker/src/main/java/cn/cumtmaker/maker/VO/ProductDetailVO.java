@@ -12,6 +12,8 @@ public class ProductDetailVO {
 
     String productName;
 
+    Integer stock;
+
     String imgUrl;
 
     List<Map<String,Object>> specifications;
@@ -54,5 +56,13 @@ public class ProductDetailVO {
 
     public void setSpecifications(List<Map<String, Object>> specifications) {
         this.specifications = specifications;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }
