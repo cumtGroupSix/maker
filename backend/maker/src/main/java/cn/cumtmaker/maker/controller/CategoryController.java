@@ -18,6 +18,10 @@ public class CategoryController {
     @Autowired
     CategoryMapper categoryMapper;
 
+    /**
+     * 返回所有类目
+     * @return
+     */
     @GetMapping("/all")
     public List<Category> getAll(){
         return categoryMapper.getAll();
