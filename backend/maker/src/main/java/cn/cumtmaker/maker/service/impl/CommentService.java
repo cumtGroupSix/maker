@@ -38,6 +38,11 @@ public class CommentService {
         return commentMapper.getProductComments(productId);
     }
 
+    /**
+     * 获取评价
+     * @param productId
+     * @return
+     */
     public Comment getComments (int productId) {
         return commentMapper.getComments(productId);
     }

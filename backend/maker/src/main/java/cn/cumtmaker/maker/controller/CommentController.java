@@ -44,6 +44,11 @@ public class CommentController {
         return  ResponseEntity.ok(commentService.deleteComment(userId,productId));
     }
 
+    /**
+     * 获取评论信息
+     * @param productId
+     * @return Comment.class
+     */
     @ResponseBody
     @GetMapping(value = "/getComments/{productId}")
     @ApiOperation(value = "获取评论信息", response = Comment.class, responseContainer = "list")

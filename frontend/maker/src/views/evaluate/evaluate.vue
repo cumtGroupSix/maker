@@ -24,7 +24,7 @@
                </div>
            </div>
 
-        <Row type="flex" align="top" class="code-row-bg mt-3" :gutter="16" v-for="(groupEvaluationVO,index) in groupEvaluationVOS" :key="index">
+        <!-- <Row type="flex" align="top" class="code-row-bg mt-3" :gutter="16" v-for="(groupEvaluationVO,index) in groupEvaluationVOS" :key="index">
             <Col>
                 <Avatar icon="ios-person" size="large" />
                 <span class="mx-1">{{groupEvaluationVO.storeVO.storeName}}</span>
@@ -40,7 +40,7 @@
                 <Rate disabled allow-half v-model="groupEvaluationVO.valueDisabled" />
             </Col>
             <Divider />
-        </Row>
+        </Row> -->
 
     </div>
 </template>

@@ -38,7 +38,6 @@ import AdminUserInfo from './views/adminUserInfo/adminUserInfo'
 import SupplierProduct from './views/supplierProduct/supplierProduct.vue'
 import SupplierAddProduct from './views/supplierAddProduct/supplierAddProduct.vue'
 import SupplierUpdateProduct from './views/supplierUpdateProduct/supplierUpdateProduct.vue'
-import Comment from './views/comment/comment.vue'
 
 
 
